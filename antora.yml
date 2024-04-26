@@ -1,9 +1,6 @@
-name: placeholder-course-name
-title: Placeholder Course Title
+name: rhoso-arch
+title: Red Hat OpenStack Services on OpenShift Architecture
 version: 1
 nav:
 - modules/ROOT/nav.adoc
-- modules/chapter1/nav.adoc
-- modules/chapter2/nav.adoc
-- modules/chapter3/nav.adoc
-- modules/appendix/nav.adoc
+- modules/ch1-architecture/nav.adoc

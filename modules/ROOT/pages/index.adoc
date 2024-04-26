@@ -1,6 +1,30 @@
-= An Example Quick Course
+= Red Hat OpenStack Services on OpenShift Architecture
 :navtitle: Home
 
 == Introduction
 
-This is an example quick course demonstrating the usage of Antora for authoring and publishing quick courses.
+This is the first course for IT professionals who are already experienced OpenStack Operators but are new to administration of Red Hat OpenStack Services on OpenShift. It requires no previous knowledge of Red Hat OpenShift, Kubernetes, and containers, but it requires familiarity with managing application workloads running as virtual machines (VM) on OpenStack, and managing associated resources such as storage volumes and tenant or provider networks.
+
+This course helps both experienced OpenStack Administrators and OpenStack Operators who are growing into OpenStack Administrators understanding the Red Hat OpenStack Services on OpenShift product and how managing it may be different than managing other incarnations of Red Hat OpenStack Platform.
+
+== Course Objective
+
+As a result of taking this course, Administrators of Red Hat OpenStack clusters will be able to describe the architecture of OpenStack Services on OpenShift, including its control and data planes, the usage of OpenShift networking and storage services by the control plane, and how the control plane and data plane connect to network and storage services external to OpenShift.
+
+== Audience
+
+Platform Engineers, Cloud Administrators, and System Administrators interested in deploying and managing Red Hat OpenStack clusters.
+
+== Pre-requisites
+
+* Basic administration of RHEL: https://www.redhat.com/en/services/training/rh124-red-hat-system-administration-i[RH124]
+
+* Basic operation of OpenStack Services on OpenShift: https://redhatquickcourses.github.io/rhoso-intro/[OSP-Operations-I-1] and OSP-Operations-I-2, or the equivalent courses from prevuious releases of Red Hat OpenStack, such as https://www.redhat.com/en/services/training/cl110-red-hat-openstack-administration-i[CL110] and https://www.redhat.com/en/services/training/cl210-red-hat-openstack-administration-ii[CL210].
+
+* Basic data center storage concepts: storage protocols, NAS, and SAN.
+
+* Data center networking concepts: ISO model, VLANs, firewalls, and Internet protocols, including but not limited to ICMP, IP, and HTTP.
+
+* Basic object storage concepts, such as experience with AWS S3, are useful but not required.
+
+* Ceph administration skills are useful but not required.

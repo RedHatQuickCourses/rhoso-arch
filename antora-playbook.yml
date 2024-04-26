@@ -1,6 +1,6 @@
 site:
-  title: Placeholder Course Title
-  start_page: placeholder-course-name::index.adoc
+  title: Red Hat OpenStack Services on OpenShift Architecture
+  start_page: rhoso-arch::index.adoc
 
 content:
   sources:

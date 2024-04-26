@@ -1,0 +1,17 @@
+= Components of Red Hat OpenStack on OpenShift
+
+Objective::
+
+Describe the architecture of Red Hat OpenStack on OpenShift clusters and its control plane components running on OpenShift.
+
+WARNING: Work in Progress
+
+== Review of OpenStack Clusters, Control Plane, and Compute Nodes
+
+Red Hat OpenStack Services on OpenShift clusters are composed of a control planes, which runs OpenStack services as containers on Red Hat OpenShift, and a data plane which consists of compute nodes running Red Hat Enterprise Linux (RHEL).
+
+// It is possible to refer to figures from other courses directly, but for now this is a copy of rhoso-intro/modules/ch1-intro/images/s1-rhoso-lecture-fig-2.png
+
+image::s1-components-lecture-fig1.png[]
+
+WIP
