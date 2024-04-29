@@ -121,10 +121,10 @@ Work in Progress
 </div>
 </div>
 <div class="sect1">
-<h2 id="_review_of_openstack_clusters_control_plane_and_compute_nodes"><a class="anchor" href="#_review_of_openstack_clusters_control_plane_and_compute_nodes"></a>Review of OpenStack Clusters, Control Plane, and Compute Nodes</h2>
+<h2 id="_review_of_openstack_clusters"><a class="anchor" href="#_review_of_openstack_clusters"></a>Review of OpenStack Clusters</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat OpenStack Services on OpenShift clusters are composed of a control planes, which runs OpenStack services as containers on Red Hat OpenShift, and a data plane which consists of compute nodes running Red Hat Enterprise Linux (RHEL).</p>
+<p>Red Hat OpenStack Services on OpenShift clusters are composed of a control planes, which runs OpenStack services as containers on Red Hat OpenShift, and a data plane which consists of compute nodes running Red Hat Enterprise Linux (RHEL). An OpenStack control plane manages compute nodes using Ansible playbooks which also run as containers on OpenShift.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -132,7 +132,162 @@ Work in Progress
 </div>
 </div>
 <div class="paragraph">
-<p>WIP</p>
+<p>The use of Red Ceph Storage is fully supported but optional: any storage solution certified for Red Hat OpenStack could be used in its place. The use of RHEL, OVN, and KVM, as well as of OpenShift, are <strong>not</strong> optional: they are core to the way Red Hat builds, deploys, and supports Red Hat OpenStack Services on OpenShift.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openstack_as_a_services_oriented_workload_and_openshift"><a class="anchor" href="#_openstack_as_a_services_oriented_workload_and_openshift"></a>OpenStack as a Services-Oriented Workload and OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An OpenStack control plane runs a number of user-facing and internal infrastructure services. The user-facing services provide the OpenStack APIs that OpenStack Operators are familiar with, and enable managing application workloads running as VMs. The internal infrastructure services, on the other side, provide storage, connectivity, and other services for the user-facing services.</p>
+</div>
+<div class="paragraph">
+<p>[ figure of OpenStack user-facing and internal infrastructure services ]</p>
+</div>
+<div class="paragraph">
+<p>The OpenStack community provides a number of user-facing services with different stages of maturity, a number alternatives for internal infrastructure services, and multiple ways of deploying those services together. The Red Hat OpenStack Services on OpenShift product is very prescriptive on the way you deploy those services, using Red Hat OpenShit, and which internal infrastruture services support a selection of user-facing services. It is not meant to support all experimental components that the OpenStack community has to offer but to provide a stable, reliable, and scalable Infrastructure-as-a-Service (IaaS) private cloud platform.</p>
+</div>
+<div class="paragraph">
+<p>Nowdays, Kubernetes is firmly established as the preferred platform for running both service-oriented and microservices-based workloads. Even users of public clouds such as AWS prefer running these applications on Kubernetes, and same reasons apply to OpenStack services.</p>
+</div>
+<div class="paragraph">
+<p>While an OpenStack Operator can mostly ignore how their OpenStack services are deployed and managed, and focus on OpenStack APIs, an OpenStack Administrator must know those details because they will affect their daily jobs. Most of this course is about how Red Hat OpenStack Services on OpenShift uses Kubernetes and other componentes of Red Hat OpenShift to OpenStack services so an OpenStack Administrator understands where to act to configure, monitor, and troubleshoot OpenStack services and keep an OpenStack cluster healthy and reliable.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift is an application platform based on Kubernetes. It adds to Kubernetes container orchestration capabilities a number of features to build, deploy, and manage application workloads. Those features are usually provided as <strong>add-on operators</strong>. Red Hat OpenStack Services on OpenShift is itself an add-on operator for OpenShift, so you manage OpenStack cluster in a similar way that you would manage any other application or feature running on OpenShift.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+An OpenStack Operator is a job role performed by a human, while an add-on operator is a software component running in a Kubernetes cluster.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Kubenetes add-on operators extend the Kubernetes API with <strong>custom resources</strong> and Red Hat OpenStack Services on OpenShift defines custom resources to manage OpenStack services and compute nodes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openstack_administators_and_openshift"><a class="anchor" href="#_openstack_administators_and_openshift"></a>OpenStack Administators and OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An OpenStack Administrator might also be an OpenShift Administrator or work close to a dedicated team of OpenShift Administrators, but in any case an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be an OpenShift Operator in teh sense that OpenStack Administrators manage OpenStack services which run as application workloads on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>Kubernetes manages workloads as containers, while OpenStack manages workloads as virtual Machines (VMs). Kubernetes excels at orchestrating multiple containers and their required compute, storage, and networking resources, which seems, on the surface, very similar to what OpenStack does for VMs.</p>
+</div>
+<div class="paragraph">
+<p>The following table performs a brief comparision of the Kubernetes and OpenStack views of the world, from the point of view of their respective operator personas. It servers as a quick overfiew for experienced OpenStack Operators which must start their journeys to become also OpenShift Operators.</p>
+</div>
+<div class="paragraph">
+<p>For now, let&#8217;s focus on the Kubernetes base feature set. Do not try to understand all terms of that table right, later during this course we introduce each of the Kubernetes concepts mentioned on it and we also introduce all features from OpenShift that are required by Red Hat OpenStack Services on OpenShift.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 37.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Characteristic / Platform</th>
+<th class="tableblock halign-left valign-top">OpenStack</th>
+<th class="tableblock halign-left valign-top">Kubernetes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">CLI</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenStack client</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">kubectl and the OpenShift client (oc)</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Web UI</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Horizon Dashboard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenShift Web Console</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Scheduling unit</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Virtual Machine</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Application packaging</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cinder VM images, Heat templates.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OCI Container images, Helm charts, Add-on Operators.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Core features</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of independent services discoverable by Keystone. Compute, storage, and network functionality provided by independent OpenStack services.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Core set of Kubernetes API resources which includes basic compute, storage, and networking capabilities.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API style</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imperative: API requests perform actions which change workloads directly but asynchronously.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declarative: API requests change the state of API resources and a resource controller later reconcilles workloads to match the new state.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API entry points</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service provides its own API server.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes provides a single API server that fronts all add-on operators.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">APIs resource types</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service defines its own API resource types.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each add-on operator optionally extends the Kubernetes API with custom resources that define new API resource types.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API resource identifiers</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUIDs + optional non-unique names, references to domains and projects are just regular attributes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique resource name scoped for an entire Kubernetes cluster or to a single namespace. OpenShift adds projects as self-service namespaces for Kubernetes API resources.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API verbs</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All add-on operators are constrained by the Kubernetes API verbs and optionally define subresources to offer a more varied set of operations.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service defines its own API verbs and possibly different verbs for each API resources managed by the same service.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Storage</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cinder Volumes + Cinder Volume Types.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persistent Volume Clains (PVCs) + storage classes.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Internal Networking</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple isolated Neutron tenant networks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single, flat network for all containers. OpenShift adds secondary networks with Multus.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">External Networking</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple provider networks + routers and Network Address Translation (NAT).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node port and cloud-provider load-balancer services + bring your own reverse HTTP proxy (ingress) + transparent Network Address Translation. OpenShift adds load-balancer services for physical servers and an ingress controller.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Authentication</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keystone local users and integration with external identity systems.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trusted signers of OAuth tokens and TLS certificates. OpenShift includes an internal OAuth server to manage local users and integration with external identity systems.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Authorization</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each service defines its own policies based on user identity, domain, and roles from Keystone.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Kubernetes API server enforces Role-Based Access Control (RBAC) for all API requests and all API resource types.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As you can see from the previous table, Kubernetes is more monolithic than OpenStack, with its single API server fronting all add-on operators. Kubernetes was designed for simplicity, and originally to support microservices-based cloud-native applications and the concepts of add-on operators and custom resources makes Kuberentes extensible to support other features and a larger variety of workloads.</p>
+</div>
+<div class="paragraph">
+<p>The monolithic nature of Kubernetes enables more consistency in areas such as access control (authorization) to API resources and API requests and discoverability of available API resource types and their attribute schemas.</p>
+</div>
+<div class="paragraph">
+<p>The simple approach from Kubernetes proved so versatile that the Kubernetes community developed abstraction, based on Kubernetes custom resources, to offer more sophisticated compute, storage, and networking features. Red Hat leads many of those community efforts and includes the result in Red Hat OpenShift. In fact, the basic feature set of Kubernetes would not be good enough for OpenStack and Red Hat OpenStack Services on OpenShift depends on a number of add-on Operators included with Red Hat OpenShift.</p>
 </div>
 </div>
 </div>
