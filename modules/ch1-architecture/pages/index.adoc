@@ -8,7 +8,7 @@ WARNING: Work in Progress
 
 == Introduction
 
-This chapter reviews the high-level architecture of Red Hat OpenStack Services on OpenShift and zooms into the generic internal architecture of individual OpenStack services, focusin on how OpenShift and Kubernetes make a good platform for running OpenStack services.
+This chapter reviews the high-level architecture of Red Hat OpenStack Services on OpenShift and zooms into the generic internal architecture of individual OpenStack services, focusing on how OpenShift and Kubernetes make a good platform for running OpenStack services.
 
 This chapter also reviews two OpenStack user personas: the *OpenStack Administrator*, which is the focus of this course, and the OpenStack Operator, so you understand which OpenShift skills are required from administrators of OpenStack clusters running Red Hat OpenStack Services on OpenShift.
 
