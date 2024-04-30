@@ -1,2 +1,8 @@
 * xref:index.adoc[]
 ** xref:s1-components-lecture.adoc[]
+** xref:s2-components-quiz.adoc[]
+*** xref:s2-components-quiz-answers.adoc[]
+** xref:s3-tasks-lecture.adoc[]
+** xref:s4-tasks-quiz.adoc[]
+*** xref:s4-tasks-quiz-answers.adoc[]
+** xref:s5-openshift-demo.adoc[]

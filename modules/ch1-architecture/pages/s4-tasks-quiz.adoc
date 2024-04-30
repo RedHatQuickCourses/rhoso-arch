@@ -1,0 +1,14 @@
+= Quiz: OpenStack Administrator Tasks and Tools
+
+Objective:: 
+
+Identify tasks and Administrator of Red Hat OpenStack on OpenShift clusters performs and the required tools for each task.
+
+WARNING: Work in Progress
+
+== Questions
+
+1. Question
+
+* [ ] Answer 1
+* [ ] Answer 2

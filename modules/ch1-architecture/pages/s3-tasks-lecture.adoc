@@ -1,0 +1,234 @@
+= OpenStack Administrator Tasks and Tools
+
+Objective::
+
+Describe the role and typical tasks performed by Red Hat OpenStack Administration personnel, how they interact with other IT Operations roles, and the tools they use.
+
+WARNING: Work In Progress
+
+== OpenStack Administrator Tasks
+
+An OpenStack Administrator concerns with the OpenStack cluster itself, instead of with the workloads running on the cluster. OpenStack Administrators deal with the security, reliability, and performance of an OpenStack cluster control plane and its compute nodes.
+
+image::s3-tasks-lecture-fig-1.png[]
+
+To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs to understand Kubernetes API resources.
+
+If you were used to manage OpenStack cluster control planes running directly on RHEL, on either physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level, by making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.
+
+OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack External Data Plane Operator, which run Ansible playbooks on OpenShift. As an OpenStack Administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.
+
+== OpenStack Administrator Tools
+
+When working as an OpenShift Operator, to manage OpenStack services which run as containerized workloads on OpenShift, an OpenStack Administrator uses the following tools:
+
+The OpenShift client::
+
+It is a command line tool which native ports for Linux, MacOS, and Windows. The *oc* command is an extension of the standard Kubernetes client *kubectl* which adds helpers for interacting with OpenShift addtitions, such as the OAuth server and projects.
+
+The OpenShift web console::
+
+It is a web application which offers functionality for OpenShift Administrators, OpenShift Operators, and application developers. Besides the standard set of pages from the OpenShift web console, add-on operators may add custom pages and monitoring dashboards.
+
+The OpenShift web console is richer, compared to the OpenStack Horizon web UI, to the point you can expect to be able to perform almost all OpenShift operations and administration tasks using it. But OpenShift Operators are also expected to be adept of GitOps practices, which require managing Kubernetes API resources directly from code, using YAML files and the OpenShift client.
+
+OpenStack Administrators also use the same tools OpenStack Operator uses, because some OpenStack administration tasks require managing OpenStack API resources such as provider networks and server flavors. These tasks are performed using the OpenStack client and Horizon. But, when OpenStack Administrators need to inspect or change the configuration of an OpenStack service, they must use Kubernetes APIs thus they must use OpenShift tools.
+
+== Using The OpenShift Client
+
+The OpenShift client `oc` offers two sets of commands with full compatibility with the Kubernetes client `kubectl`:
+
+1. Generic operations on API resource types and instances. Those commands work with the same syntax for any API resource type and support declarative style API resource management.
+
+2. Helper commands which perform common operations on specific API resource types. Most of these commands are alternatives to the generic commands and support an imperative style of API resource management.
+
+The OpenShift client `oc` adds commands (and sometimes subcommands) to the comand set from `kubectl`. These additional commands are either helpers for custom resources from OpenShift or helpers from other OpenShift features, such as its internal OAuth server.
+
+=== General Syntax of OpenShift Client Commands
+
+Follows the general syntax of the `oc` command. The dollar sign ($) represents an operating system shell prompt and is not part of the command.
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc* [_global options_] _command_ [_subcommand_] [_arguments_]
+--
+
+Many OpenShift client commands follow a hierarchical structure where a command may define subcommands, subcommands may define their own subcommands, and so on, leading to multi-word commands. Sometimes a subcommand is not required at all, for example all of the following would be valid `create` commands after you add their required arguments:
+
+* `create`
+* `create job`
+* `create secret generic`
+
+Most OpenShift client commands require, as arguments, either the name of an API resource type or an API resource instance. Sometimes a resource instance must be named together with its namespace, as a single argument: `_type/resource_`. Other times, the API resourse type and instance name must be provided as different arguments: `_type resource_`. Some commands may accept both formats and some will require one of them.
+
+Some commands can take the resource instance name from a YAML file and many commands require either a partial or a complete resource definition in an YAML file.
+
+Sometimes a command argument may look similar to a subcommand, especially when the name of an API resource type is used as the name of a subcommand. In the following examples, `job` is a subcommand of the `create` command but an argument of the `get` command.
+
+* `create job`
+* `get job`
+
+OpenShift client commands which require additional arguments beyond resource type or instance names usually take those arguments as GNU GetOpts options, which make them look like global options. A global option must come before the command, and a command argument must come after the command words, but the order of arguments doesn't matter.
+
+=== Generic Commands to Manipulate Kubernetes API Resources
+
+The simplest of OpenShift client commands provide the basic operations of creating, editing, deleting, and retrieving Kubernetes API resource instances of any kind:
+
+* `create`
+* `edit`
+* `delete`
+* `get`
+
+The `get` command can either retrieve an API resource instance or list all instances of an API resource type in an OpenShift cluster.
+
+Multiple commands may perform similar operations, for example all: of the following commands make changes to Kubernetes API resource instances: 
+
+* `edit`
+* `apply`
+* `patch`
+
+The `edit` command retrieves a resource instance and starts a local text editor, them replaces the resource instance in an OpenShift cluster with the definition from the text editor; The `apply` command replaces a resource instance with the complete definition in the YAML file; and finally, the `patch` merges the partial resource definition from the YAML file with the resource instance in an OpenShift cluster.
+
+=== Helper Commands for Specific Kubernetes API Resources
+
+As examples of helper commands from the OpenShift client, the `create` command accepts subcommands for a few Kubernetes API resource types.
+
+NOTE: The examples in this section are not supposed to be complete command examples you could try. They are partial examples of the command syntax of the OpenShift client.
+
+These following commands create API resource instances with minimal required attributes which may not be good enough for production usage but enable quick experimentation:
+
+* `create namespace`
+* `create job`
+* `create secret generic`
+
+Another example of helper command is the `set` command, which can set a subset of attributes from pods and workload controllers such as jobs and deployments.
+
+* `set env`
+* `set probe`
+* `set resources`
+
+Later in this course we will learn about pods and workload controllers. They are API resources that manage containers running on Kubernetes.
+
+=== OpenShift Client Examples
+
+Very few of the OpenShift client commands work with no arguments. Here are a couple examples:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc project*
+$ *oc whoami*
+--
+
+Follows examples of generic API resource management comands which the name of an API resource type, API resource instance, or a YAML file:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc create -f _file.yaml_*
+$ *oc edit deployment _mywebapp_*
+$ *oc delete svc _mywebapp_*
+$ *oc get deployment _mywebapp_*
+$ *oc get svc*
+--
+
+In the previous examples, `deployment` and `svc` are API resource types; `_mywebapp_` is an API resource name; and `_file.yaml_` is a file name.
+
+WARNING: Do not try these commands on your OpenShift cluster, unless you know which resource names to use and appropriate values for other arguments. 
+
+And now some examples using helper commands:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc create secret generic ca-cert --from-file _ca.crt_*
+$ *oc set env deployment _mywebapp_ _DATABASE=pages_*
+$ *oc set limit deployment/_mywebapp_ --limits memory=_512Ki_ --requests memory=_256Ki_*
+$ *oc set probe deployment/_mywebapp_ --startup --get-url _http://:8080/healthz_*
+$ *oc expose svc _mywebapp_*
+--
+
+=== Online Help From the OpenShift Client
+
+The OpenShift client shows the first level of commands as the output of the `help` command:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc help*
+--
+
+To see subcommands from the second, third, and so on command levels, you must use the `--help` option with a first-level command, for example:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc create --help*
+$ *oc create job --help*
+$ *oc create secret --help*
+$ *oc create secret generic --help*
+--
+
+The `--help` option also displays the arguments and options for a command, if that command requires no subcommands:
+
+
+=== Introspection of API Resources
+
+An OpenShift cluster can list all available API resource types, be they standard Kubernetes API resources or custom resources from add-on operators:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc api-resources*
+--
+
+That list can be quite large, but you can filter it by API group:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc api-resources --api-group route.openshift.io*
+--
+
+All Kubernetes API resource types have a composed name, which when fully qualified includes the API resource type, the API resource group, and the API version:
+
+`name.group/version`
+
+For example:
+
+`route.route.openshift.io/v1`
+
+If there are no other API resource types with the same name, you can ommit the API resource group, so the following two commands list instances of the same API resource type:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc get route*
+$ *oc get route.route.openshift.io*
+--
+
+Notice that, when listing or referring to API resource instances you *must* ommit the API version.
+
+The output of the `oc api-resources` command also shows that some API resource types have short names, which can save a bit of typing. For example, the following two commands lis the same API resource instances:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc get service*
+$ *oc get svc*
+--
+
+And most API resource types accept a plural form, so the following two commands again list the same API resource instances:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc get service*
+$ *oc get services*
+--
+
+Once you find the name of the API resource type you need, you can retrieve a description of its purposes and attributes. But, if you need to include the API group, because the same resource type exists in multiple groups, you also need to include the API version:
+
+[source,subs="verbatim,quotes"]
+--
+$ *oc explain route*
+$ *oc explain oc explain route --api-version route.openshift.io/v1*
+--
+
+== Using the OpenShift Web Console
+
+WIP
+
+WARNING: These screen shots need update at Red Hat OpenStack on OpenShift GA to match the required Red Hat OpenShift release.
+
+

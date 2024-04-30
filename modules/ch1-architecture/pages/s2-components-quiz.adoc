@@ -1,0 +1,14 @@
+= Quiz: Components of Red Hat OpenStack on OpenShift
+
+Objective:: 
+
+Identify components of the Red Hat OpenStack on OpenShift product and how a Red Hat OpenStack cluster runs user-facing OpenStack services.
+
+WARNING: Work in Progress
+
+== Questions
+
+1. Question
+
+* [ ] Answer 1
+* [ ] Answer 2
