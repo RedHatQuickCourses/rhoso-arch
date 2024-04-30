@@ -1,4 +1,8 @@
+:time_estimate: 9
+
 = OpenStack User-Facing Services and Internal Services
+
+_Estimated reading time: *{time_estimate} minutes*._
 
 Objective::
 
@@ -62,7 +66,7 @@ The services-oriented architecture of OpenStack does not forces all its services
 
 Some internal services of a Red Hat OpenStack Services on OpenShift cluster are shared by multiple OpenStack user-facing server. They do not need to share those services, but it is simpler to manage fewer instances of each service. For example, you could have different database servers for each OpenStack service, but there is no reason to not share the same database server for all of them, at least until the database itself becomes overload with too many queries.
 
-Other OpenStack services may require specialized internal services to fulfill their funcionality. We already mentioned that Nova needs remote desktop protocol servers to enable access to server instance consoles. Neutron needs a software-defined networking layer. And OpenStack clusters also need at least clients for networked file, block, and object storage.
+Other OpenStack services may require specialized internal services to fulfill their funcionality, for example: we already mentioned that Nova needs remote desktop protocol servers to enable access to server instance consoles. Neutron needs a software-defined networking layer. And multiple OpenStack services need, at least, clients for networked file or block storage.
 
 === OpenStack compute cell services
 

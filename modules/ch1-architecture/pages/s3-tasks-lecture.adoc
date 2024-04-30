@@ -1,4 +1,8 @@
+:time_estimate: 16
+
 = OpenStack Administrator Tasks and Tools
+
+_Estimated reading time: *{time_estimate} minutes*._
 
 Objective::
 

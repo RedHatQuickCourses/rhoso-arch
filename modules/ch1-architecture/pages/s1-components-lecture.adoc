@@ -1,4 +1,8 @@
+:time_estimate: 11
+
 = Components of Red Hat OpenStack on OpenShift
+
+_Estimated reading time: *{time_estimate} minutes*._
 
 Objective::
 
