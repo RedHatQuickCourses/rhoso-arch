@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Architecture of Red Hat OpenStack Services on OpenShift :: Red Hat OpenStack Services on OpenShift Architecture</title>
-    <link rel="prev" href="../index.html">
-    <link rel="next" href="s1-components-lecture.html">
+    <title>Demo: OpenShift Web Console and Client :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <link rel="prev" href="s4-tasks-quiz-answers.html">
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -46,7 +45,7 @@
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a>
 <ul class="nav-list">
@@ -74,7 +73,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="s5-openshift-demo.html">Demo: OpenShift Web Console and Client</a>
   </li>
 </ul>
@@ -111,6 +110,7 @@
   <ul>
     <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
     <li><a href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a></li>
+    <li><a href="s5-openshift-demo.html">Demo: OpenShift Web Console and Client</a></li>
   </ul>
 </nav>
 </div>
@@ -119,14 +119,14 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Architecture of Red Hat OpenStack Services on OpenShift</h1>
+<h1 class="page">Demo: OpenShift Web Console and Client</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Goal</dt>
+<dt class="hdlist1">Objective</dt>
 <dd>
-<p>Describe the role of OpenShift, add-on operators, and Kubernetes custom resources on the tasks of an OpenStack Administrator.</p>
+<p>Navigate the OpenShift web console and OpenShift client to find the OpenStack add-on operator, its custom resources, and a sample of workloads from OpenStack services.</p>
 </dd>
 </dl>
 </div>
@@ -137,7 +137,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Work in Progress
+Work In Progress
 </td>
 </tr>
 </table>
@@ -145,22 +145,68 @@ Work in Progress
 </div>
 </div>
 <div class="sect1">
-<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<h2 id="_recording"><a class="anchor" href="#_recording"></a>Recording</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This chapter reviews the high-level architecture of Red Hat OpenStack Services on OpenShift and zooms into the generic internal architecture of individual OpenStack services, focusing on how OpenShift and Kubernetes make a good platform for running OpenStack services.</p>
+<p>This demonstration will be recorded and the video linked from here, so learners can watch the video and optionally try to replicate it by themselves.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment"><a class="anchor" href="#_environment"></a>Environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully funcitonal Red Hat OpenStack on OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.</p>
 </div>
 <div class="paragraph">
-<p>This chapter also reviews two OpenStack user personas: the <strong>OpenStack Administrator</strong>, which is the focus of this course, and the OpenStack Operator, so you understand which OpenShift skills are required from administrators of OpenStack clusters running Red Hat OpenStack Services on OpenShift.</p>
+<p>For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating ips, tenant networks, etc. That may not be fine for other demonstrations of this course.</p>
 </div>
 <div class="paragraph">
-<p>If this is your first exposure to Red Hat OpenStack Services on OpenShift and this way of characterising OpenStack Administrator and Operator personas, it is recommended that you review at least the beginning og chapter 1 of <a href="https://redhatquickcourses.github.io/rhoso-intro/rhoso-intro/1/ch1-intro/index.html">Introduction to Red Hat OpenStack Services on OpenShift</a> before proceeding.</p>
+<p>The demo environment must also provide a user workstation preconfigured with the OpenShift client and a web browser to access the OpenShift web console.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_demonstration"><a class="anchor" href="#_demonstration"></a>Demonstration</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in on OpenShift, using its web console. Switch the Developer and Administrator perspectives.</p>
+</li>
+<li>
+<p>Using the Administrator perspective, show the installed operators page and highlight that the OpenStack oeprator is already installed.</p>
+</li>
+<li>
+<p>Show the Administration &gt; Compute &gt; Nodes page and remark these are OpenShift cluster node and it does <strong>not</strong> include OpenStack compute nodes.</p>
+</li>
+<li>
+<p>Show the two OpenStack projects (operator and cluster) on the Workloads page. Point to the workload and pods of an OpenStack user-facing service, such as Nova, and of an internal infrastructure service, such as RabbitMQ.</p>
+</li>
+<li>
+<p>Back to the Operators &gt; Installed Operators page, enter the OpenStack operator and show its custom resource types. Show that there is only one instance of the control plane resource and only one of the data plane per cluster. Ignore node sets for now.</p>
+</li>
+<li>
+<p>Open a terminal and login using the CLI using the token workflow. Remark that, depending on the authentication settings of OpenShift, it might be possible to provide an OpenShift username and password directly on the CLI, but many authentication providers will require control of the user interface, for example to enfore MFA, and the token login is the only one that works every time.</p>
+</li>
+<li>
+<p>Show the API Resources types and identify on it the custom resources from the OpenStack operator and show its spec. Do not try to explain individual attributes.</p>
+</li>
+<li>
+<p>Repeat a subset of tasks already done using the web console, but using the CLI: show the openstack operator is installed; sample workloads from user-facing and internal infrastructure OpenStack services; and custom resource instances from the OpenStack operator.</p>
+</li>
+<li>
+<p>Show the on-line help of the OpenShift CLI, list API resource types, filter to the OpenStack API group, and show the spec (oc explain) of the control plane custom resource.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This ends the demonstration.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="../index.html">Home</a></span>
-  <span class="next"><a href="s1-components-lecture.html">Components of Red Hat OpenStack on OpenShift</a></span>
+  <span class="prev"><a href="s4-tasks-quiz-answers.html">Answers to the Quiz</a></span>
 </nav>
 </article>
   </div>
