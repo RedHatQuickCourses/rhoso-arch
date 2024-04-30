@@ -227,8 +227,68 @@ $ *oc explain oc explain route --api-version route.openshift.io/v1*
 
 == Using the OpenShift Web Console
 
-WIP
+The OpenShift web console features a user interface divided into three areas:
 
-WARNING: These screen shots need update at Red Hat OpenStack on OpenShift GA to match the required Red Hat OpenShift release.
+1. A menu bar at the top;
+2. A side menu the left;
+3. A page body at the center, which could include multiple tabs.
 
+The following screen shot shows the appearance of the web console on first access of a newly installed OpenShift cluster. It displays the Cluster Overview dashboard.
 
+image::s3-tasks-lecture-fig-2.png[]
+
+It common to hide the "Getting started resources" pane, to give more room to the many information panes from the Cluster Overview dashboard.
+
+WARNING: These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to match the required Red Hat OpenShift release.
+
+=== The Top Menu
+
+The horizontal menu at the top includes, to the right, icons for varying information functions such as notifications and help, and the name of the currently logged in user, which is "Administrator" in the previous screen shot. Click the user name to log out if you need to log in as a different user.
+
+image::s3-tasks-lecture-fig-3.png[]
+
+To the left of the top menu there is menu icon which hides and shows the side menu. Sometimes it may be convenient to hide the side menu to give more screen width to the page in the center.
+
+=== The Side Menu
+
+The vertical menu to the left is the main navigation interface of the OpenShift web console.
+
+The item to the top of the side menu switches the web console perspectice between the *Developer* and *Administrator* perspectives. During the OpenStack administration learning journey we should stay in the Administrator perspective.
+
+image::s3-tasks-lecture-fig-4.png[]
+
+The remaining items of the side menu can be collapsed and expand independently of each other. If the side menu is too tall, it displays a vertical scroll bar which is independent of the scroll bars of the page at the center.
+
+image::s3-tasks-lecture-fig-5.png[]
+
+During the OpenStack administration learning journey we will present the most frequently used pages of the OpenShift web console, at least from the perspective of an OpenStack Administrator managing an OpenStack cluster. For now, there is no need to explore and understand each and every page of the side menu.
+
+=== Navigating the OpenShift Web Console
+
+The two-level path on the side menu, plus the name of the corrent tab of the center page, uniquely identifies a page in the OpenShift web console as a three-level path. For example, the Cluser Overview dashboard page from the first screen shot is *Home > Overview > Cluster*.
+
+OpenShift add-on operators can add menu items and pages to the web console, so the layout is not fixed: it depends on the add-on operators installed on your OpenShift cluster. Not all pages include tabs, and in that case the path to the page is only two levels.
+
+=== Finding Kubernetes API resources
+
+Many pages display lists of Kubernetes resource instances of a single API resource type, such as the *Workloads > Deployments* page in the following screen shot. Those pages display, at the top, filters by project and resource instance name and, to the left, buttons to create new resource instances. 
+
+image::s3-tasks-lecture-fig-6.png[]
+
+If there is no web console page dedicated to a given API resource type, you can use either the *Home > Search* or *Home > API Explorer* pages. None of those pages will display all API resources in a cluster because the list is quite large, even in "empty" clusters, because Red Hat OpenShift itself runs its internal components as containers on Kubernetes and uses custom resources to manage them.
+
+On the *Home > Search* you can choose one or more API resource types, and also add filters on resource instance name and labels. The following screen shot is an example of displaying all Deployment resources:
+
+image::s3-tasks-lecture-fig-7.png[]
+
+=== The API Explorer
+
+The *Home > API Explorer* page lists all API resource types available on your cluster and can filter the list by API resource group and API version. The following screen shot shows the list of all Deployment resources:
+
+image::s3-tasks-lecture-fig-8.png[]
+
+Once you click a resource type, its *Resource Details* page displays an overview of the API resource type, such as a description, API verbs, and its attributes. Other tabs on that page show detailed information about the attributes of the API resource type and its API resource instances.
+
+image::s3-tasks-lecture-fig-9.png[]
+
+The API Explorer will be useful to OpenStack Administrators when they need information about attributes of custom resources from the OpenStack add-on operator and standard Kubernetes API resources used by the OpenStack add-on operator to manage OpenStack services.

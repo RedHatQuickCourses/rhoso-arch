@@ -22,7 +22,7 @@ The demo environment must also provide a user workstation preconfigured with the
 
 == Demonstration
 
-1. Log in on OpenShift, using its web console. Switch the Developer and Administrator perspectives.
+1. Log in on OpenShift, using its web console. Switch between the Developer and Administrator perspectives.
 
 2. Using the Administrator perspective, show the installed operators page and highlight that the OpenStack oeprator is already installed.
 
