@@ -11,6 +11,10 @@ Figures on this course were designed using Google Slides, and are also avialble 
 
 * ADD LINKS HERE
 
+Reading time estimation was done by running the reading-time.sh script on individual adoc files prior to commiting them, for example:
+
+$ bash ./reading-time.sh modules/ch1-architecture/pages/s3-tasks-lecture.adoc
+
 Refer to the [Red Hat Quick Courses Contributor Guide](https://redhatquickcourses.github.io/welcome/1/guide/overview.html) for instructions about collaborating in this repository.
 
 TODO: Copy the simplifed contributor guide from the OpenShift AI courses to this readme and to the readmes from other RHOSO courses.
