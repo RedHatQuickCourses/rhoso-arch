@@ -175,7 +175,7 @@ Work In Progress
 </div>
 </div>
 <div class="paragraph">
-<p>To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs to understand Kubernetes API resources.</p>
+<p>To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs knowledge about Kubernetes API resources.</p>
 </div>
 <div class="paragraph">
 <p>If you were used to manage OpenStack cluster control planes running directly on RHEL, on either physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level, by making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.</p>
@@ -183,11 +183,23 @@ Work In Progress
 <div class="paragraph">
 <p>OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which run Ansible playbooks on OpenShift. As an OpenStack Administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.</p>
 </div>
+<div class="sect2">
+<h3 id="_openstack_administrators_and_openshift_administrators"><a class="anchor" href="#_openstack_administrators_and_openshift_administrators"></a>OpenStack Administrators and OpenShift Administrators</h3>
+<div class="paragraph">
+<p>OpenStack Administrators usually work close to other IT professionals dedicated to infrastructure management. Most of the times they have to work under the guidance and constraints imposed by network and storage administration teams.</p>
+</div>
+<div class="paragraph">
+<p>OpenStack Administrators are frequently Linux System Administrator themselves and take full charge of managing RHEL compute nodes of their OpenStack clusters, but they could also work with a team of System Administrators who takes care of all physical servers in a data center.</p>
+</div>
+<div class="paragraph">
+<p>OpenStack Administrators must be OpenShift Operators, because they manage an application workload running as containers on OpenShift, which is the OpenStack add-on operator and its OpenStack services.</p>
+</div>
+<div class="paragraph">
+<p>They could use an OpenShift cluster which is dedicated to their OpenStack cluster and be the OpenShift Administrators of that OpenShift cluster or they could work close to an OpenShift Administration team, especially if the same OpenShift cluster which runs Red Hat OpenStack Services on OpenShift also runs other workloads and add-on operators, such as Ansible Automation Platform or OpenShift Pipelines.</p>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_openstack_administrator_tools"><a class="anchor" href="#_openstack_administrator_tools"></a>OpenStack Administrator Tools</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_openstack_administrator_tools"><a class="anchor" href="#_openstack_administrator_tools"></a>OpenStack Administrator Tools</h3>
 <div class="paragraph">
 <p>When working as an OpenShift Operator, to manage OpenStack services which run as containerized workloads on OpenShift, an OpenStack Administrator uses the following tools:</p>
 </div>
@@ -208,6 +220,7 @@ Work In Progress
 </div>
 <div class="paragraph">
 <p>OpenStack Administrators also use the same tools OpenStack Operator uses, because some OpenStack administration tasks require managing OpenStack API resources such as provider networks and server flavors. These tasks are performed using the OpenStack client and Horizon. But, when OpenStack Administrators need to inspect or change the configuration of an OpenStack service, they must use Kubernetes APIs thus they must use OpenShift tools.</p>
+</div>
 </div>
 </div>
 </div>
