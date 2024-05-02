@@ -1,4 +1,4 @@
-:time_estimate: 1
+:time_estimate: 2
 
 = Quiz: Components of Red Hat OpenStack on OpenShift
 

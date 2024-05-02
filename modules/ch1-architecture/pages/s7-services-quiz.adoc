@@ -1,12 +1,12 @@
 :time_estimate: 11
 
-= Quiz: OpenStack Administrator Tasks and Tools
+= Quiz: OpenStack Internal Services on OpenShift
 
 _Estimated reading time: *{time_estimate} minutes*._
 
 Objective:: 
 
-Identify tasks and Administrator of Red Hat OpenStack on OpenShift clusters performs and the required tools for each task.
+Identify OpenShift features required by OpenStack services for internal communication, data storage, or connectivity with compute nodes.
 
 WARNING: Work in Progress
 
