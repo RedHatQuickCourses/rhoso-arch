@@ -10,9 +10,37 @@ Identify components of the Red Hat OpenStack on OpenShift product and how a Red 
 
 WARNING: Work in Progress
 
+//Q1-3 are lame, just memorization questions, but I'm not inspired today. :-(
+// Guess that, as this course introduces OpenShift basics to an OpenStack Administrator, it'll require a lot of memorization on new terms and new concepts.
+
+//Q4 is tricky: it plains on operator persona vs add-on operator software
+
 == Questions
 
-1. Question
+1. Which of the following are internal infrastructure services of Red Hat OpenStack Services on OpenShift?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] Nova
+* [ ] OVN
+* [ ] Kubernetes
+* [ ] RabbitMQ
+* [ ] Ansible
+
+2. What is the purpose of the OpenStack add-on operator?
+
+* [ ] Manage an OpenStack cluster, including all its user-facing and internal infrastructure services, and also its compute nodes.
+* [ ] Manage the user-facing services on the control plane of an Openstack cluster.
+* [ ] Manage the internal infrastructure services on the control plane of an Openstack cluster.
+* [ ] Manage the data plane, that is, the compute nodes of an OpenStack cluster.
+
+3. Which resources and APIs an OpenStack Administrator must use to configure OpenStack services with Red Hat OpenStack Services on OpenShift?
+
+* [ ] standard resources from the OpenStack APIs
+* [ ] standard resources from the Kubernetes APIs
+* [ ] Custom resoruces from the OpenStack add-on operator
+* [ ] Custom resoruces from the External Data Plane Management add-on operator
+
+4. Is an OpenStack Operator also an OpenShift Operator?
+
+* [ ] Yes
+* [ ] No
+

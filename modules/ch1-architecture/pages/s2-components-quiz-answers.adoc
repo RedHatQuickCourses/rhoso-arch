@@ -4,10 +4,56 @@ WARNING: Work in Progress
 
 == Components of Red Hat OpenStack on OpenShift
 
-1. Question
+1. Which of the following are internal infrastructure services of Red Hat OpenStack Services on OpenShift?
 
-* [x] *Answer 1* +
-_Correct: Explain_
+* [ ] Nova +
+_Incorrect: Nova is a user-facing service of OpenStack_
 
-* [ ] Answer 2 +
-_Incorrect: Explain_
+* [x] *OVN* +
+_Correct: OVN provides the software-defined networking layer behind OpenStack Neutron._
+
+* [ ] Kubernetes +
+_Incorrect: Kubernetes is the container orchestration platform which runs both user-facing and internal-infrastructure services of OpenStack._
+
+* [x] *RabbitMQ* +
+_Correct: RabbitMQ is the AMQP server which enables assynchronous message-passing between internal components of each OpenStack service._
+
+* [ ] Ansible +
+_Incorrect: Ansible is used by the External Data Plane Management add-on operator to manage RHEL compute nodes._
+
+2. What is the purpose of the OpenStack add-on operator?
+
+* [x] *Manage an OpenStack cluster, including all its user-facing and internal infrastructure services, and also its compute nodes.* +
+_Correct: The OpenStack add-on operator manages, either directly, or by means of a child add-on operator, all of an OpenStack cluster, including compute nodes outside of its OpenShift cluster._
+
+* [ ] Manage the user-facing services on the control plane of an Openstack cluster. +
+_Incorrect: The OpenStack add-on operator also manages internal infrastructure services of an OpenStack cluster and its data plane (compute nodes)._
+
+* [ ] Manage the internal infrastructure services on the control plane of an Openstack cluster. +
+_Incorrect: The OpenStack add-on operator also manages user-facing services of an OpenStack cluster and its data plane (compute nodes)._
+
+* [ ] Manage the data plane, that is, the compute nodes of an OpenStack cluster. +
+_Incorrect: The OpenStack add-on operator manages both the control and data planes of an OpenStack cluster._
+
+3. Which APIs an OpenStack Administrator must use to configure OpenStack services with Red Hat OpenStack Services on OpenShift?
+
+* [ ] standard resources from the OpenStack APIs +
+_Incorrect: It is true that OpenStack Administrator performs some tasks using standard OpenStack APIs, but these APIs do not configure OpenStack services themselves._
+
+* [ ] standard resources from the Kubernetes APIs +
+_Incorrect: The OpenStack add-on operator adds custom resources to manage Kubernetes workloads from OpenStack services at a higher level of abstraction._
+
+* [x] *Custom resources from the OpenStack add-on operator* +
+_Correct: The OpenStack add-on operator defines custom resources to manage OpenStack control and data planes._
+
+* [ ] Custom resources from the External Data Plane Management add-on operator +
+_Incorrect: The External Data Plane Management add-on operator only manages compute nodes of an OpenStack cluster, its custom resources do not manage OpenStack services on the control plane._
+
+4. Is an OpenStack Operator also an OpenShift Operator?
+
+* [ ] Yes +
+_Incorrect: An OpenStack Operator persona only needs OpenStack APIs and OpenStack tools, they do not care that OpenStack runs its control plane as containers on OpenShift._
+
+* [x] *No* +
+_Correct: An OpenStack Operator persona is not an OpenShift Operator persona because an OpenStack Operator does not manage application workloads running as containers on OpenShift. An OpenStack Administrator, on the other side, would be an OpenShift Operator._
+
