@@ -126,7 +126,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Estimated reading time: <strong>9 minutes</strong>.</em></p>
+<p><em>Estimated reading time: <strong>12 minutes</strong>.</em></p>
 </div>
 <div class="dlist">
 <dl>
@@ -290,6 +290,70 @@ Work in Progress
 </div>
 <div class="paragraph">
 <p>OpenShift add-on operators have the concept of meta-operator, which is an add-on operator that manages a set of child add-on operators. The OpenStack add-on operator is a meta-operator, and the External Data Plane Management add-on operator, which uses Ansible to manage OpenStack compute nodes, is also a child operator of the OpenStack add-on operator.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift_storage_and_networking_for_openstack_services"><a class="anchor" href="#_openshift_storage_and_networking_for_openstack_services"></a>OpenShift Storage and Networking for OpenStack Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The storage and networking services of OpenStack such as Cinder and Neutron, provide capabilities for workloads running as VMs on OpenStack compute node. They do not provide such capabilities for other OpenStack services. OpenStack services, at least their components running on OpenShift, must use networking and storage capabiliteis from Kubernetes.</p>
+</div>
+<div class="sect2">
+<h3 id="_data_storage_requirements_of_openstack_services"><a class="anchor" href="#_data_storage_requirements_of_openstack_services"></a>Data Storage Requirements of OpenStack Services</h3>
+<div class="paragraph">
+<p>Kubernetes storage requirements from Red Hat OpenStack Services on OpenShift come mainly from internal infrastructure services. User-facing services focus on data storage for compute nodes, which run outside of OpenShift.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Only MariaDB, Galera, and RabbitMQ actually store control plane data on disk, so only these three OpenStack services use Kubernetes persistent storage from OpenShift.</p>
+</li>
+<li>
+<p>Cinder and Glance run components in RHEL compute nodes which manage connectivity from compute nodes (and their VMs) to storage backends for storing and retrieving data.</p>
+</li>
+<li>
+<p>Cinder also runs storage clients on their own containers on OpenShift, to perform storage management, for example creating disk volumes and snapshot. Cinder containers make no use of Kuberentes storage services to manage storage backends.</p>
+</li>
+<li>
+<p>Cinder also runs storage clients on their own containers on OpenShift to store data from new VM images it receives from OpenStack APIs.</p>
+</li>
+<li>
+<p>Swift may use Kubernetes storage in simple implementations, but most of the time Swift APIs are taken over by external storage, for example Red Hat Ceph Storage.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_network_connectivity_requirements_of_openstack_services"><a class="anchor" href="#_network_connectivity_requirements_of_openstack_services"></a>Network Connectivity Requirements of OpenStack Services</h3>
+<div class="paragraph">
+<p>Kuberentes networking requirements from Red Hat OpenStack Services on OpenShift come from the necessity of exposing OpenStack APIs to OpenStack Operators and Administators, and from the necessity of exposing those APIs and also exposing AMQP messaging (RabbitMQ) to compute plane nodes.</p>
+</div>
+<div class="paragraph">
+<p>Additional requirements come from the common data center design patterns of network isolation, which require that components of OpenStack services running on OpenShift have connectivity to multiple isolated networks, something that standard Kuberntes alone cannot provide.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All user-facing OpenStack services expose their APIs using standard kubernetes ingress controllers, which are reverse HTTP proxies and also handle load-balancing of multiple API component instances.</p>
+</li>
+<li>
+<p>OpenStack services invoke APIs of other services using kubernetes internal load balancers.</p>
+</li>
+<li>
+<p>Each compute cell exposes its AMQP endpoints (from RabbitMQ) using Kubernetes load-balancer services, which would work only on cloud providers, but OpenShift includes MetalLB which enables load balancer services on physical servers.</p>
+</li>
+<li>
+<p>OpenStack services may expose additional API end points as internal cluster end points for use by compute nodes using Kubernetes load-balancer services.</p>
+</li>
+<li>
+<p>OpenStack containers attach to isolated networks using Multus secondary networks from OpenShift. Those connections exist for a variety of reasons, for example to access storage data and storage management networks, or for initiating SSH sessions to compute nodes on behalf of Ansible playbooks.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An OpenStack Administrator needs to understand how Kubernetes provides storage and network connectivity for containerized applications and how to expose OpenStack services, both user-facing services and internal infrastructure services, to RHEL compute nodes. In the next chapter we will present the required Kubernetes APIs and concepts.</p>
+</div>
 </div>
 </div>
 </div>
