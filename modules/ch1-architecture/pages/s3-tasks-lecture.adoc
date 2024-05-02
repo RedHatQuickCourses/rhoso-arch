@@ -16,13 +16,23 @@ An OpenStack Administrator concerns with the OpenStack cluster itself, instead o
 
 image::s3-tasks-lecture-fig-1.png[]
 
-To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs to understand Kubernetes API resources.
+To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs knowledge about Kubernetes API resources.
 
 If you were used to manage OpenStack cluster control planes running directly on RHEL, on either physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level, by making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.
 
 OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which run Ansible playbooks on OpenShift. As an OpenStack Administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.
 
-== OpenStack Administrator Tools
+=== OpenStack Administrators and OpenShift Administrators
+
+OpenStack Administrators usually work close to other IT professionals dedicated to infrastructure management. Most of the times they have to work under the guidance and constraints imposed by network and storage administration teams.
+
+OpenStack Administrators are frequently Linux System Administrator themselves and take full charge of managing RHEL compute nodes of their OpenStack clusters, but they could also work with a team of System Administrators who takes care of all physical servers in a data center.
+
+OpenStack Administrators must be OpenShift Operators, because they manage an application workload running as containers on OpenShift, which is the OpenStack add-on operator and its OpenStack services.
+
+They could use an OpenShift cluster which is dedicated to their OpenStack cluster and be the OpenShift Administrators of that OpenShift cluster or they could work close to an OpenShift Administration team, especially if the same OpenShift cluster which runs Red Hat OpenStack Services on OpenShift also runs other workloads and add-on operators, such as Ansible Automation Platform or OpenShift Pipelines. 
+
+=== OpenStack Administrator Tools
 
 When working as an OpenShift Operator, to manage OpenStack services which run as containerized workloads on OpenShift, an OpenStack Administrator uses the following tools:
 

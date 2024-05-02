@@ -10,14 +10,36 @@ Identify tasks and Administrator of Red Hat OpenStack on OpenShift clusters perf
 
 WARNING: Work in Progress
 
+//Q1 and Q2 feel like memorization questions.
+
+//Q3 may be a stretch, because we didn't discuss any specific administration tasks not how to perform them, but students should be able to figure the right answers by the scope of the task as it related to control plane, compute node, or application workload.
+
 == Questions
 
-1. Which of the following are tasks an OpenStack Administrator must perform using the OpenShift client or the OpenShift web console?
+1. How is an OpenStack Administrator expected to manage OpenStack services with Red Hat OpenStack Services on OpenShift?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] By opening SSH sessions to OpenShift cluster nodes to make edits to configuration files of OpenStack containers.
+* [ ] By opening SSH sessions to OpenShift cluster nodes to make edits to configuration files of Kubernetes add-on operators.
+* [ ] By using Kubernetes APIs to make edits to configuration files of the Kubernetes add-on operators.
+* [ ] By using Kubernetes APIs to make edits to custom resources of Kubernetes add-on operators.
 
-2. Question
+2. How is an OpenStack Administrator expected to manage RHEL compute nodes of an OpenStack cluster with Red Hat OpenStack Services on OpenShift?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] By opening SSH sessions to OpenStack compute nodes to make edits to configuration files of OpenStack containers.
+* [ ] By opening SSH sessions to OpenStack compute nodes to make edits to configuration files of Kubernetes add-on operators.
+* [ ] By using Kubernetes APIs to make edits to configuration files of the Kubernetes add-on operators on OpenStack compute nodes.
+* [ ] By using Kubernetes APIs to make edits to custom resources of Kubernetes add-on operators.
+
+3. Which of the following are tasks an OpenStack Administrator must perform using either the OpenShift client or the OpenShift web console?
+
+* [ ] Create Glance images for booting new server instances.
+* [ ] Create a new backend storage for Cinder volumes.
+* [ ] Configure a VLAN on OpenStack compute nodes for use as a Neutron provider network.
+* [ ] Configure an LDAP authentication backend for Keysone.
+
+4. Which access level, or permissions, does an OpenStack Administator require on the OpenShift cluster which runs an OpenStack control plane to perform his daily tasks?
+
+* [ ] Full administration of the OpenShift cluster, as an OpenShift Administrator.
+* [ ] Administration of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer.
+* [ ] View or monitoring permissions of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer.
+* [ ] An OpenStack Administrator requires no permissions on the OpenShift cluster.
