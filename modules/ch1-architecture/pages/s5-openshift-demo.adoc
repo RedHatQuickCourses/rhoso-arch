@@ -26,7 +26,7 @@ The demo environment must also provide a user workstation preconfigured with the
 
 2. Using the Administrator perspective, show the installed operators page and highlight that the OpenStack oeprator is already installed.
 
-3. Show the Administration > Compute > Nodes page and remark these are OpenShift cluster node and it does *not* include OpenStack compute nodes.
+3. Show the Administration > Compute > Nodes page and remark these are OpenShift cluster nodes and it does *not* include OpenStack compute nodes.
 
 4. Show the two OpenStack projects (operator and cluster) on the Workloads page. Point to the workload and pods of an OpenStack user-facing service, such as Nova, and of an internal infrastructure service, such as RabbitMQ.
 

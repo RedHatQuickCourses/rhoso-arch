@@ -24,7 +24,7 @@ image::s1-components-lecture-fig1.png[]
 
 The use of Red Ceph Storage is fully supported but optional: any storage solution certified for Red Hat OpenStack could be used in its place. The use of RHEL, OVN, and KVM, as well as of OpenShift, are *not* optional: they are core to the way Red Hat builds, deploys, and supports Red Hat OpenStack Services on OpenShift.
 
-For now, let's ignore the Data Plane services, which are required on compute nodes to act on behalf of OpenStack services. These data plane services run as podman containers on RHEL compute nodes and are started as systemd units. Let's focus on the control plane and how it runs on Red Hat OpenShift.
+For now, we will not focus on data plane services, which are required on compute nodes to act on behalf of OpenStack services. These data plane services run as podman containers on RHEL compute nodes and are started as systemd units. Let's focus on the control plane and how it runs on Red Hat OpenShift.
 
 == OpenStack User-Facing and Internal Infrastructure Services
 
@@ -74,7 +74,7 @@ A Kubernetes add-on operator is itself an application running as a container on 
 
 It's very common that add-on operators be designed to manage other software running on Kubernetes, for example a database server management operator. A basic database add-on operator would manage just the deployment of a database server and its continued availability. A more sopisticated database add-on operator wold also manage backups of database data, replication of such data from a read-write to multiple read-only replicas, and promotion of a read-only replica to a read-write one in case the the old read-write replica fails.
 
-The purpose of an add-on operator is encoding and automating all operational knowledge necessary to manage an application of other IT infrastructure, hence the name "operator" for this piece of software.
+The purpose of an add-on operator is encoding and automating all operational knowledge necessary to manage an application or other piece of IT infrastructure, hence the name "operator" for this class of software.
 
 == The OpenStack Add-On Operator
 
@@ -88,11 +88,11 @@ Kubenetes add-on operators extend the Kubernetes API with *custom resources* and
 
 == OpenStack Administators and OpenShift
 
-OpenStack Administrators might either be OpenShift Administrators themselves or work close to a dedicated team of OpenShift Administrators. In any case, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be a capable OpenShift Operator, because OpenStack Administrators manage a very specific set of application workloads running on OpenShift: the OpenStack control plane.
+OpenStack Administrators might either be OpenShift Administrators themselves or work close to a dedicated team of OpenShift Administrators. In any case, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be a capable OpenShift Operator, because OpenStack Administrators manage a very specific set of application workloads running on OpenShift: an OpenStack control plane.
 
-Kubernetes manages workloads as containers, while OpenStack manages workloads as virtual Machines (VMs). Kubernetes orchestrates running nmultiple containers over a cluster of compute nodes and provides these containers with basic storage, and networking resources. What Kubernetes does for containers seems, on the surface, very similar to what OpenStack does for VMs.
+Kubernetes manages workloads as containers, while OpenStack manages workloads as virtual Machines (VMs). Kubernetes orchestrates running nmultiple containers over a cluster of compute nodes and provides these containers with basic storage and networking resources. What Kubernetes does for containers seems, on the surface, very similar to what OpenStack does for VMs.
 
-The following table compares the Kubernetes and OpenStack from the point of view of their respective operator personas. It servers as a quick overfiew for experienced OpenStack Operators which must start their journeys to become also OpenShift Operators.
+The following table compares the Kubernetes and OpenStack from the point of view of their respective operator personas. It servers as a quick overview for experienced OpenStack Operators which are starting their journey to also become OpenShift Operators.
 
 Do not try to understand all terms of that table right, later during this course we introduce each of the Kubernetes concepts mentioned on it and we also introduce all features from OpenShift that are required by Red Hat OpenStack Services on OpenShift.
 
@@ -112,7 +112,7 @@ h| Web UI
 
 h| Scheduling unit
 | Virtual Machine
-| Container
+| Pod (a group of containers)
 
 h| Application packaging
 | Cinder VM images, Heat templates.
@@ -120,11 +120,11 @@ h| Application packaging
 
 h| Core features
 | Set of independent services discoverable by Keystone. Compute, storage, and network functionality provided by independent OpenStack services.
-| Core set of Kubernetes API resources which includes basic compute, storage, and networking capabilities.
+| Set of Kubernetes API resources which includes basic compute, storage, and networking capabilities.
 
 h| Extensibility
 | New OpenStack services
-| New custom resources
+| New Kubernetes custom resources
 
 h| API style
 | Imperative: API requests perform actions which change workloads directly but asynchronously.
@@ -132,7 +132,7 @@ h| API style
 
 h| API entry points
 | Each OpenStack service provides its own API server.
-| Kubernetes provides a single API server that fronts all add-on operators.
+| Kubernetes provides a single API server that fronts all resource controllers and add-on operators.
 
 h| APIs resource types
 | Each OpenStack service defines its own API resource types.
@@ -140,11 +140,11 @@ h| APIs resource types
 
 h| API resource identifiers
 | UUIDs and optional non-unique names. References to domains and projects are just regular attributes.
-| Unique resource name scoped for an entire Kubernetes cluster or to a single namespace. OpenShift adds projects as self-service namespaces.
+| Unique resource names scoped to either an entire Kubernetes cluster or to a single namespace. OpenShift adds projects for self-service namespace management.
 
 h| API verbs
-| All add-on operators are constrained by the Kubernetes API verbs and optionally define subresources to offer a more varied set of operations.
 | Each OpenStack service defines its own API verbs and possibly different verbs for each API resources managed by the same service.
+| All add-on operators are constrained by the Kubernetes API verbs and optionally define subresources to offer a more varied set of operations.
 
 h| Storage
 | Cinder Volumes, Cinder Volume Types.
@@ -170,6 +170,6 @@ h| Authorization
 
 As you can see from the previous table, Kubernetes is more monolithic than OpenStack, with its single API server fronting all add-on operators. The monolithic nature of Kubernetes enables more consistency in areas such as access control (authorization) to API resources and API requests and discoverability of available API resource types and their attribute schemas.
 
-On the other side, OpenStack provides stronger and more feature-rich management of multitenancy and quality of service (QoS) of and storage, networking, and compute capacity. In fact, some organizations run OpenShift clusters for their end-user containerized workloads on VMs managed by OpenStack. That is: An OpenShift cluster runs OpenStack, which runs VM that in turn run "child" OpenShift clusters.
+On the other side, OpenStack provides more features for the management of multitenancy and quality of service (QoS) for storage, networking, and compute capacity. In fact, some organizations run OpenShift clusters for their end-user containerized workloads on VMs managed by OpenStack. That is: An OpenShift cluster runs OpenStack, which runs VM that in turn run "child" OpenShift clusters.
 
 

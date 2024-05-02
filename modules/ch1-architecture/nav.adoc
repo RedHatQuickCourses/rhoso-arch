@@ -7,3 +7,4 @@
 *** xref:s4-tasks-quiz-answers.adoc[]
 ** xref:s5-openshift-demo.adoc[]
 ** xref:s6-services-lecture.adoc[]
+** xref:s7-summary.adoc[]
