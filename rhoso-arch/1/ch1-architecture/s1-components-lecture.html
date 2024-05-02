@@ -80,6 +80,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s7-summary.html">Summary</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -169,7 +172,7 @@ Work in Progress
 <p>The use of Red Ceph Storage is fully supported but optional: any storage solution certified for Red Hat OpenStack could be used in its place. The use of RHEL, OVN, and KVM, as well as of OpenShift, are <strong>not</strong> optional: they are core to the way Red Hat builds, deploys, and supports Red Hat OpenStack Services on OpenShift.</p>
 </div>
 <div class="paragraph">
-<p>For now, let&#8217;s ignore the Data Plane services, which are required on compute nodes to act on behalf of OpenStack services. These data plane services run as podman containers on RHEL compute nodes and are started as systemd units. Let&#8217;s focus on the control plane and how it runs on Red Hat OpenShift.</p>
+<p>For now, we will not focus on data plane services, which are required on compute nodes to act on behalf of OpenStack services. These data plane services run as podman containers on RHEL compute nodes and are started as systemd units. Let&#8217;s focus on the control plane and how it runs on Red Hat OpenShift.</p>
 </div>
 </div>
 </div>
@@ -261,7 +264,7 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <p>It&#8217;s very common that add-on operators be designed to manage other software running on Kubernetes, for example a database server management operator. A basic database add-on operator would manage just the deployment of a database server and its continued availability. A more sopisticated database add-on operator wold also manage backups of database data, replication of such data from a read-write to multiple read-only replicas, and promotion of a read-only replica to a read-write one in case the the old read-write replica fails.</p>
 </div>
 <div class="paragraph">
-<p>The purpose of an add-on operator is encoding and automating all operational knowledge necessary to manage an application of other IT infrastructure, hence the name "operator" for this piece of software.</p>
+<p>The purpose of an add-on operator is encoding and automating all operational knowledge necessary to manage an application or other piece of IT infrastructure, hence the name "operator" for this class of software.</p>
 </div>
 </div>
 </div>
@@ -286,13 +289,13 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <h2 id="_openstack_administators_and_openshift"><a class="anchor" href="#_openstack_administators_and_openshift"></a>OpenStack Administators and OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenStack Administrators might either be OpenShift Administrators themselves or work close to a dedicated team of OpenShift Administrators. In any case, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be a capable OpenShift Operator, because OpenStack Administrators manage a very specific set of application workloads running on OpenShift: the OpenStack control plane.</p>
+<p>OpenStack Administrators might either be OpenShift Administrators themselves or work close to a dedicated team of OpenShift Administrators. In any case, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be a capable OpenShift Operator, because OpenStack Administrators manage a very specific set of application workloads running on OpenShift: an OpenStack control plane.</p>
 </div>
 <div class="paragraph">
-<p>Kubernetes manages workloads as containers, while OpenStack manages workloads as virtual Machines (VMs). Kubernetes orchestrates running nmultiple containers over a cluster of compute nodes and provides these containers with basic storage, and networking resources. What Kubernetes does for containers seems, on the surface, very similar to what OpenStack does for VMs.</p>
+<p>Kubernetes manages workloads as containers, while OpenStack manages workloads as virtual Machines (VMs). Kubernetes orchestrates running nmultiple containers over a cluster of compute nodes and provides these containers with basic storage and networking resources. What Kubernetes does for containers seems, on the surface, very similar to what OpenStack does for VMs.</p>
 </div>
 <div class="paragraph">
-<p>The following table compares the Kubernetes and OpenStack from the point of view of their respective operator personas. It servers as a quick overfiew for experienced OpenStack Operators which must start their journeys to become also OpenShift Operators.</p>
+<p>The following table compares the Kubernetes and OpenStack from the point of view of their respective operator personas. It servers as a quick overview for experienced OpenStack Operators which are starting their journey to also become OpenShift Operators.</p>
 </div>
 <div class="paragraph">
 <p>Do not try to understand all terms of that table right, later during this course we introduce each of the Kubernetes concepts mentioned on it and we also introduce all features from OpenShift that are required by Red Hat OpenStack Services on OpenShift.</p>
@@ -324,7 +327,7 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Scheduling unit</p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Virtual Machine</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Container</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pod (a group of containers)</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Application packaging</p></th>
@@ -334,12 +337,12 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Core features</p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set of independent services discoverable by Keystone. Compute, storage, and network functionality provided by independent OpenStack services.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Core set of Kubernetes API resources which includes basic compute, storage, and networking capabilities.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of Kubernetes API resources which includes basic compute, storage, and networking capabilities.</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Extensibility</p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock">New OpenStack services</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">New custom resources</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New Kubernetes custom resources</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">API style</p></th>
@@ -349,7 +352,7 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">API entry points</p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service provides its own API server.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes provides a single API server that fronts all add-on operators.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes provides a single API server that fronts all resource controllers and add-on operators.</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">APIs resource types</p></th>
@@ -359,12 +362,12 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">API resource identifiers</p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UUIDs and optional non-unique names. References to domains and projects are just regular attributes.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique resource name scoped for an entire Kubernetes cluster or to a single namespace. OpenShift adds projects as self-service namespaces.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique resource names scoped to either an entire Kubernetes cluster or to a single namespace. OpenShift adds projects for self-service namespace management.</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">API verbs</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All add-on operators are constrained by the Kubernetes API verbs and optionally define subresources to offer a more varied set of operations.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service defines its own API verbs and possibly different verbs for each API resources managed by the same service.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All add-on operators are constrained by the Kubernetes API verbs and optionally define subresources to offer a more varied set of operations.</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Storage</p></th>
@@ -397,7 +400,7 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <p>As you can see from the previous table, Kubernetes is more monolithic than OpenStack, with its single API server fronting all add-on operators. The monolithic nature of Kubernetes enables more consistency in areas such as access control (authorization) to API resources and API requests and discoverability of available API resource types and their attribute schemas.</p>
 </div>
 <div class="paragraph">
-<p>On the other side, OpenStack provides stronger and more feature-rich management of multitenancy and quality of service (QoS) of and storage, networking, and compute capacity. In fact, some organizations run OpenShift clusters for their end-user containerized workloads on VMs managed by OpenStack. That is: An OpenShift cluster runs OpenStack, which runs VM that in turn run "child" OpenShift clusters.</p>
+<p>On the other side, OpenStack provides more features for the management of multitenancy and quality of service (QoS) for storage, networking, and compute capacity. In fact, some organizations run OpenShift clusters for their end-user containerized workloads on VMs managed by OpenStack. That is: An OpenShift cluster runs OpenStack, which runs VM that in turn run "child" OpenShift clusters.</p>
 </div>
 </div>
 </div>

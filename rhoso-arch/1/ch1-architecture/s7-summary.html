@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Answers to the Quiz :: Red Hat OpenStack Services on OpenShift Architecture</title>
-    <link rel="prev" href="s2-components-quiz.html">
-    <link rel="next" href="s3-tasks-lecture.html">
+    <title>Summary :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <link rel="prev" href="s6-services-lecture.html">
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -57,7 +56,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s2-components-quiz-answers.html">Answers to the Quiz</a>
   </li>
 </ul>
@@ -80,7 +79,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="s7-summary.html">Summary</a>
   </li>
 </ul>
@@ -117,8 +116,7 @@
   <ul>
     <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
     <li><a href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a></li>
-    <li><a href="s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a></li>
-    <li><a href="s2-components-quiz-answers.html">Answers to the Quiz</a></li>
+    <li><a href="s7-summary.html">Summary</a></li>
   </ul>
 </nav>
 </div>
@@ -127,50 +125,37 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Answers to the Quiz</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Work in Progress
-</td>
-</tr>
-</table>
+<h1 class="page">Summary</h1>
+<div class="paragraph">
+<p>In this chapter, you learned:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_components_of_red_hat_openstack_on_openshift"><a class="anchor" href="#_components_of_red_hat_openstack_on_openshift"></a>Components of Red Hat OpenStack on OpenShift</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Question</p>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-check-square-o"></i> <strong>Answer 1</strong><br>
-<em>Correct: Explain</em></p>
+<p>An OpenStack control plane is composed of multiple user-facing and internal infrastructure serviced which run as containers on Red Hat OpenShift.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2<br>
-<em>Incorrect: Explain</em></p>
+<p>OpenStack user-facing services provide the usual OpenStack services and their APIs, such as Nova, Cinder, Neutron, Keystone, etc.</p>
+</li>
+<li>
+<p>OpenStack internal infrastructure services provide storage, connectivity, and other capabilities for OpenStack user-facing services.</p>
+</li>
+<li>
+<p>Red Hat OpenStack Services on OpenShift includes three main internal infrastructure services: Galera, which clusters MariaDB relational databases; RabbitMQ, which provides AMQP messaging; and OVN, which provides a software-defined network layer.</p>
+</li>
+<li>
+<p>Each OpenStack service may be composed of multiple components, which communicate with each other using AMQP, and store data (API Resource instances) on MariaDB. Components running on compute nodes never access MariaDB directly, but they access the HTTP APIs of other OpenStack services and the AMQP messages of other components of the same service.</p>
+</li>
+<li>
+<p>OpenStack Administrators must use Kubernetes APIs and custom resources the from OpenStack add-on operator to manage their OpenStack services, both user-facing and internal infrastructure, and for that they must use either the OpenShift client or the OpenShift web console.</p>
+</li>
+<li>
+<p>Components of OpenStack services which run on OpenShift must use Kubernetes storage and network capabilities, but they must also access external storage and network resources, not managed by Kubernetes, which are required by RHEL compute nodes.</p>
 </li>
 </ul>
 </div>
-</li>
-</ol>
-</div>
-</div>
-</div>
 <nav class="pagination">
-  <span class="prev"><a href="s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a></span>
-  <span class="next"><a href="s3-tasks-lecture.html">OpenStack Administrator Tasks and Tools</a></span>
+  <span class="prev"><a href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a></span>
 </nav>
 </article>
   </div>

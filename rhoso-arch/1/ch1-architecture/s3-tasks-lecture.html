@@ -80,6 +80,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s7-summary.html">Summary</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -169,7 +172,7 @@ Work In Progress
 <p>If you were used to manage OpenStack cluster control planes running directly on RHEL, on either physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level, by making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.</p>
 </div>
 <div class="paragraph">
-<p>OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack External Data Plane Operator, which run Ansible playbooks on OpenShift. As an OpenStack Administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.</p>
+<p>OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which run Ansible playbooks on OpenShift. As an OpenStack Administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.</p>
 </div>
 </div>
 </div>
@@ -203,15 +206,18 @@ Work In Progress
 <h2 id="_using_the_openshift_client"><a class="anchor" href="#_using_the_openshift_client"></a>Using The OpenShift Client</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The OpenShift client <code>oc</code> offers two sets of commands with full compatibility with the Kubernetes client <code>kubectl</code>:</p>
+<p>The OpenShift client <code>oc</code> offers tree kinds of commands with full compatibility with the Kubernetes client <code>kubectl</code>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Generic operations on API resource types and instances. Those commands work with the same syntax for any API resource type and support declarative style API resource management.</p>
+<p>Generic commands for any API resource type and instance. Those commands work with the same syntax for all API resource types and support declarative style API resource management.</p>
 </li>
 <li>
-<p>Helper commands which perform common operations on specific API resource types. Most of these commands are alternatives to the generic commands and support an imperative style of API resource management.</p>
+<p>Helper commands which perform common operations on frequently used API resource types. and support an imperative style of API resource management. Most times, these helper commands could be replaced with generic commands.</p>
+</li>
+<li>
+<p>Helper commands that enable usage of very specific features of the Kubernetes APIs and which would be very hard to use without a custom command. For example, forwarding local TCP ports to a container on a Kubernetes cluster, or starting a shell session inside a container on a Kubernetes cluster.</p>
 </li>
 </ol>
 </div>
@@ -251,7 +257,7 @@ Work In Progress
 <p>Some commands can take the resource instance name from a YAML file and many commands require either a partial or a complete resource definition in an YAML file.</p>
 </div>
 <div class="paragraph">
-<p>Sometimes a command argument may look similar to a subcommand, especially when the name of an API resource type is used as the name of a subcommand. In the following examples, <code>job</code> is a subcommand of the <code>create</code> command but an argument of the <code>get</code> command.</p>
+<p>Sometimes a command argument may look similar to a subcommand, especially when the name of an API resource type is used as the name of a subcommand. In the following examples, <code>job</code> is a subcommand of the <code>create</code> command but a resource type argument of the <code>get</code> command.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -268,7 +274,7 @@ Work In Progress
 </div>
 </div>
 <div class="sect2">
-<h3 id="_generic_commands_to_manipulate_kubernetes_api_resources"><a class="anchor" href="#_generic_commands_to_manipulate_kubernetes_api_resources"></a>Generic Commands to Manipulate Kubernetes API Resources</h3>
+<h3 id="_generic_commands_for_declarative_kubernetes_api_resource_management"><a class="anchor" href="#_generic_commands_for_declarative_kubernetes_api_resource_management"></a>Generic Commands For Declarative Kubernetes API Resource Management</h3>
 <div class="paragraph">
 <p>The simplest of OpenShift client commands provide the basic operations of creating, editing, deleting, and retrieving Kubernetes API resource instances of any kind:</p>
 </div>
@@ -289,7 +295,7 @@ Work In Progress
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>get</code> command can either retrieve an API resource instance or list all instances of an API resource type in an OpenShift cluster.</p>
+<p>The <code>get</code> command can either retrieve an API resource instance by its name or list all instances of an API resource type in an OpenShift cluster.</p>
 </div>
 <div class="paragraph">
 <p>Multiple commands may perform similar operations, for example all: of the following commands make changes to Kubernetes API resource instances:</p>
@@ -308,11 +314,11 @@ Work In Progress
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>edit</code> command retrieves a resource instance and starts a local text editor, them replaces the resource instance in an OpenShift cluster with the definition from the text editor; The <code>apply</code> command replaces a resource instance with the complete definition in the YAML file; and finally, the <code>patch</code> merges the partial resource definition from the YAML file with the resource instance in an OpenShift cluster.</p>
+<p>The <code>edit</code> command retrieves a resource instance and starts a local text editor, them replaces the resource instance in an OpenShift cluster with the definition from the text editor; The <code>apply</code> command replaces a resource instance with the complete definition in the YAML file; and finally, the <code>patch</code> command merges the partial resource definition from the YAML file with the resource instance in an OpenShift cluster.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_helper_commands_for_specific_kubernetes_api_resources"><a class="anchor" href="#_helper_commands_for_specific_kubernetes_api_resources"></a>Helper Commands for Specific Kubernetes API Resources</h3>
+<h3 id="_helper_commands_for_imperative_kubernetes_api_resource_management"><a class="anchor" href="#_helper_commands_for_imperative_kubernetes_api_resource_management"></a>Helper Commands For Imperative Kubernetes API Resource Management</h3>
 <div class="paragraph">
 <p>As examples of helper commands from the OpenShift client, the <code>create</code> command accepts subcommands for a few Kubernetes API resource types.</p>
 </div>
@@ -437,7 +443,7 @@ $ <strong>oc create secret generic --help</strong></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>--help</code> option also displays the arguments and options for a command, if that command requires no subcommands:</p>
+<p>The <code>--help</code> option also displays the arguments and options for a command, if that command requires no subcommands.</p>
 </div>
 </div>
 <div class="sect2">
