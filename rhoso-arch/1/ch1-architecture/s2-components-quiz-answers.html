@@ -81,7 +81,16 @@
     <a class="nav-link" href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="s7-summary.html">Summary</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s7-services-quiz.html">Quiz: OpenStack Internal Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s7-services-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s8-summary.html">Summary</a>
   </li>
 </ul>
   </li>
@@ -150,16 +159,89 @@ Work in Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Question</p>
+<p>Which of the following are internal infrastructure services of Red Hat OpenStack Services on OpenShift?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-check-square-o"></i> <strong>Answer 1</strong><br>
-<em>Correct: Explain</em></p>
+<p><i class="fa fa-square-o"></i> Nova<br>
+<em>Incorrect: Nova is a user-facing service of OpenStack</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2<br>
-<em>Incorrect: Explain</em></p>
+<p><i class="fa fa-check-square-o"></i> <strong>OVN</strong><br>
+<em>Correct: OVN provides the software-defined networking layer behind OpenStack Neutron.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Kubernetes<br>
+<em>Incorrect: Kubernetes is the container orchestration platform which runs both user-facing and internal-infrastructure services of OpenStack.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>RabbitMQ</strong><br>
+<em>Correct: RabbitMQ is the AMQP server which enables assynchronous message-passing between internal components of each OpenStack service.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Ansible<br>
+<em>Incorrect: Ansible is used by the External Data Plane Management add-on operator to manage RHEL compute nodes.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>What is the purpose of the OpenStack add-on operator?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Manage an OpenStack cluster, including all its user-facing and internal infrastructure services, and also its compute nodes.</strong><br>
+<em>Correct: The OpenStack add-on operator manages, either directly, or by means of a child add-on operator, all of an OpenStack cluster, including compute nodes outside of its OpenShift cluster.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Manage the user-facing services on the control plane of an Openstack cluster.<br>
+<em>Incorrect: The OpenStack add-on operator also manages internal infrastructure services of an OpenStack cluster and its data plane (compute nodes).</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Manage the internal infrastructure services on the control plane of an Openstack cluster.<br>
+<em>Incorrect: The OpenStack add-on operator also manages user-facing services of an OpenStack cluster and its data plane (compute nodes).</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Manage the data plane, that is, the compute nodes of an OpenStack cluster.<br>
+<em>Incorrect: The OpenStack add-on operator manages both the control and data planes of an OpenStack cluster.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which APIs an OpenStack Administrator must use to configure OpenStack services with Red Hat OpenStack Services on OpenShift?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> standard resources from the OpenStack APIs<br>
+<em>Incorrect: It is true that OpenStack Administrator performs some tasks using standard OpenStack APIs, but these APIs do not configure OpenStack services themselves.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> standard resources from the Kubernetes APIs<br>
+<em>Incorrect: The OpenStack add-on operator adds custom resources to manage Kubernetes workloads from OpenStack services at a higher level of abstraction.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Custom resources from the OpenStack add-on operator</strong><br>
+<em>Correct: The OpenStack add-on operator defines custom resources to manage OpenStack control and data planes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Custom resources from the External Data Plane Management add-on operator<br>
+<em>Incorrect: The External Data Plane Management add-on operator only manages compute nodes of an OpenStack cluster, its custom resources do not manage OpenStack services on the control plane.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Is an OpenStack Operator also an OpenShift Operator?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Yes<br>
+<em>Incorrect: An OpenStack Operator persona only needs OpenStack APIs and OpenStack tools, they do not care that OpenStack runs its control plane as containers on OpenShift.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>No</strong><br>
+<em>Correct: An OpenStack Operator persona is not an OpenShift Operator persona because an OpenStack Operator does not manage application workloads running as containers on OpenShift. An OpenStack Administrator, on the other side, would be an OpenShift Operator.</em></p>
 </li>
 </ul>
 </div>
