@@ -144,4 +144,6 @@ Additional requirements come from the common data center design patterns of netw
 
 * OpenStack containers attach to isolated networks using Multus secondary networks from OpenShift. Those connections exist for a variety of reasons, for example to access storage data and storage management networks, or for initiating SSH sessions to compute nodes on behalf of Ansible playbooks.
 
-An OpenStack Administrator needs to understand how Kubernetes provides storage and network connectivity for containerized applications and how to expose OpenStack services, both user-facing services and internal infrastructure services, to RHEL compute nodes. In the next chapter we will present the required Kubernetes APIs and concepts.
+An OpenStack Administrator needs to understand how Kubernetes provides storage and network connectivity for containerized applications and how to expose OpenStack services, both user-facing services and internal infrastructure services, to RHEL compute nodes.
+
+Later in this course, we will present the required Kubernetes APIs and concepts, including the usage and high-level overview of MetalLB and Multus, which extend Kubernetes networking with external load balancer services for non-HTTP ingress and enable attaching containers to multiple isolated networks.

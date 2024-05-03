@@ -10,14 +10,36 @@ Identify OpenShift features required by OpenStack services for internal communic
 
 WARNING: Work in Progress
 
+//Q3: students may not know enough at this point... and we didn't discuss how OVN components on data and control plane communicate with each other, it's not using mariadb nor amqp.
+
+//Q4 is a stretch and based on a single paragraph of the lecture... memorization. :-(
+
 == Questions
 
-1. Which of the following are tasks an OpenStack Administrator must perform using the OpenShift client or the OpenShift web console?
+1. Which of the following requires communication between containers inside an OPenShift cluster and processes outside of that OpenShift cluster?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] An OpenStack service invokes APIs of another OpenStack service.
+* [ ] An OpenStack service component on a compute node sends messages to another component of the same OpenStack service which runs on the control plane.
+* [ ] An OpenStack service component on the control plane sends messages to another component of the same OpenStack service which also runs on the control plane.
+* [ ] An OpenStack user-facing service using an internal infrastructure service.
 
-2. Question
+2. Which of the following OpenStack services require persistent storage managed by Kubernetes?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] Nova
+* [ ] RabbitMQ
+* [ ] MariaDB
+* [ ] OVN
+
+3. Which of the following OpenStack services require ingress connectivity, from outside of an OpenShift cluster, using a protocol other than HTTP?
+
+* [ ] Nova
+* [ ] Swift
+* [ ] RabbitMQ
+* [ ] MariaDB
+
+4. Which of the following requires that components of OpenStack services, running on the control node, attach to Multus secondary networks?
+
+* [ ] SSH access to compute nodes by Ansible playbooks.
+* [ ] AMQP access from compute nodes to RabbitMQ instances.
+* [ ] HTTP access from one OpenStack service to another OpenStack service.
+* [ ] SSH access to server instances from a developer's workstation.

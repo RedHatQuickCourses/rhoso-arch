@@ -10,6 +10,8 @@ Identify tasks and Administrator of Red Hat OpenStack on OpenShift clusters perf
 
 WARNING: Work in Progress
 
+// Avoid memorization questions on the OpenShift CLI or web console, these are better reinforced by the demonstration than by a quiz.
+
 //Q1 and Q2 feel like memorization questions.
 
 //Q3 may be a stretch, because we didn't discuss any specific administration tasks not how to perform them, but students should be able to figure the right answers by the scope of the task as it related to control plane, compute node, or application workload.
