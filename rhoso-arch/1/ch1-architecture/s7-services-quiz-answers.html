@@ -159,16 +159,93 @@ Work in Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Question</p>
+<p>Which of the following requires communication between containers inside an OPenShift cluster and processes outside of that OpenShift cluster?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-check-square-o"></i> <strong>Answer 1</strong><br>
-<em>Correct: Explain</em></p>
+<p><i class="fa fa-square-o"></i> An OpenStack service invokes APIs of another OpenStack service.<br>
+<em>Incorrect: This is communication between containers inside an OpenShift cluster.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2<br>
-<em>Incorrect: Explain</em></p>
+<p><i class="fa fa-check-square-o"></i> <strong>An OpenStack service component on a compute node sends messages to another component of the same OpenStack service which runs on the control plane.</strong><br>
+<em>Correct: This is communication between something which runs outside an OpenShift cluster, on an OpenStack compute node, and a container of an OpenStack control plane which runs inside an OpenShift cluster.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> An OpenStack service component on the control plane sends messages to another component of the same OpenStack service which also runs on the control plane.
+<em>Incorrect: This is communication between containers inside an OpenShift cluster.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> An OpenStack user-facing service using an internal infrastructure service.
+<em>Incorrect: This is communication between containers inside an OpenShift cluster.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following OpenStack services require persistent storage managed by Kubernetes?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Nova<br>
+<em>Incorrect: Nova, as most other user-facing services, only needs a relational database and an AMQP server on the OpenStack control plane.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>RabbitMQ</strong><br>
+<em>Correct: RabbitMQ runs entirely on the OpenStack control plane and requires Kubernetes persistent storage to ensure guaranteed delivery of messages.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>MariaDB</strong><br>
+<em>Correct: MariaDB runs entirely on the OpenStack control plane and requires Kubernetes persistent storage to store OpenStack API resource instances.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> OVN<br>
+<em>Incorrect: OVN stores network flow databases in memory and replicates the databases with other OVN instances running on compute nodes and the OpenStack control plane.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following OpenStack services require ingress connectivity, from outside of an OpenShift cluster, using a protocol other than HTTP?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Nova<br>
+<em>Incorrect: Nova itself requires only ingress HTTP for its own API and egress AMQP from its conducutor component on compute nodes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Swift<br>
+<em>Incorrect: all access to object storage, using either the Swift or S3 APIs, use the HTTP protocol.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>RabbitMQ</strong><br>
+<em>Correct: RabbitMQ requires ingress using AMQP from compute nodes to its messaging server instances on the control plane.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> MariaDB<br>
+<em>Incorrect: No OpenStack service component running on compute nodes should access the cell database directly.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following requires that components of OpenStack services, running on the control node, attach to Multus secondary networks?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>SSH access to compute nodes by Ansible playbooks.</strong><br>
+<em>Correct: this is eggress from a container in OpenShift to an isolated network outside of OpenShift.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP access from compute nodes to RabbitMQ instances.<br>
+<em>Incorrect: This is ingress from a compute node to a container in OpenShift, you use an external load balancer service</em>.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> HTTP access from one OpenStack service to another OpenStack service.<br>
+<em>Incorrect: This is communication inside an OpenShift cluster, from one container to another container, and uses internal cluster load balancers.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH access to server instances from a developer&#8217;s workstation.<br>
+<em>Incorrect: This is requires only OpenStack provider networks and routers, which are standard features of Neutron, and that network traffic goes directly from the developer&#8217;s workstation to the compute node, without passing through any container of an OpenStack control plane.</em></p>
 </li>
 </ul>
 </div>

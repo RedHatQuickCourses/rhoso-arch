@@ -169,27 +169,77 @@ Work in Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Which of the following are tasks an OpenStack Administrator must perform using the OpenShift client or the OpenShift web console?</p>
+<p>Which of the following requires communication between containers inside an OPenShift cluster and processes outside of that OpenShift cluster?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Answer 1</p>
+<p><i class="fa fa-square-o"></i> An OpenStack service invokes APIs of another OpenStack service.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2</p>
+<p><i class="fa fa-square-o"></i> An OpenStack service component on a compute node sends messages to another component of the same OpenStack service which runs on the control plane.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> An OpenStack service component on the control plane sends messages to another component of the same OpenStack service which also runs on the control plane.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> An OpenStack user-facing service using an internal infrastructure service.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Question</p>
+<p>Which of the following OpenStack services require persistent storage managed by Kubernetes?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Answer 1</p>
+<p><i class="fa fa-square-o"></i> Nova</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2</p>
+<p><i class="fa fa-square-o"></i> RabbitMQ</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> MariaDB</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> OVN</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following OpenStack services require ingress connectivity, from outside of an OpenShift cluster, using a protocol other than HTTP?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Nova</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Swift</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> RabbitMQ</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> MariaDB</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following requires that components of OpenStack services, running on the control node, attach to Multus secondary networks?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> SSH access to compute nodes by Ansible playbooks.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP access from compute nodes to RabbitMQ instances.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> HTTP access from one OpenStack service to another OpenStack service.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH access to server instances from a developer&#8217;s workstation.</p>
 </li>
 </ul>
 </div>
