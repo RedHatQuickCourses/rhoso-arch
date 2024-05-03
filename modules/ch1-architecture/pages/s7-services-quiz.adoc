@@ -1,4 +1,4 @@
-:time_estimate: 11
+:time_estimate: 2
 
 = Quiz: OpenStack Internal Services on OpenShift
 
