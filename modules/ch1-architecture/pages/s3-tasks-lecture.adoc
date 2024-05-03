@@ -8,7 +8,7 @@ Objective::
 
 Describe the role and typical tasks performed by Red Hat OpenStack Administration personnel, how they interact with other IT Operations roles, and the tools they use.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == OpenStack Administrator Tasks
 

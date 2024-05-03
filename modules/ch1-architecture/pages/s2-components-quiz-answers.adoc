@@ -1,6 +1,6 @@
 = Answers to the Quiz
 
-WARNING: Work in Progress
+WARNING: Pending Review
 
 == Components of Red Hat OpenStack on OpenShift
 

@@ -8,7 +8,7 @@ Objective::
 
 Describe the architecture of Red Hat OpenStack on OpenShift clusters and its control plane components running on OpenShift.
 
-WARNING: Work in Progress
+WARNING: Pending Review
 
 == The Red Hat OpenStack Services on OpenShift Product
 

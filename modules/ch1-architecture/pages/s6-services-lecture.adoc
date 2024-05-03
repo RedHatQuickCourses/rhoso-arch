@@ -8,7 +8,7 @@ Objective::
 
 Describe the generic internal architecture of OpenStack services and how they use Kubernetes networking and storage.
 
-WARNING: Work in Progress
+WARNING: Pending Review
 
 == General Architecture of OpenStack Services
 

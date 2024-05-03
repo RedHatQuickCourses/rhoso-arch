@@ -1,6 +1,6 @@
 = Answers to the Quiz
 
-WARNING: Work in Progress
+WARNING: Pending Review
 
 == OpenStack Internal Services on OpenShift
 

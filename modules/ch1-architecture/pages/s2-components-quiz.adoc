@@ -8,7 +8,7 @@ Objective::
 
 Identify components of the Red Hat OpenStack on OpenShift product and how a Red Hat OpenStack cluster runs user-facing OpenStack services.
 
-WARNING: Work in Progress
+WARNING: Pending Review
 
 //Q1-3 are lame, just memorization questions, but I'm not inspired today. :-(
 // Guess that, as this course introduces OpenShift basics to an OpenStack Administrator, it'll require a lot of memorization on new terms and new concepts.

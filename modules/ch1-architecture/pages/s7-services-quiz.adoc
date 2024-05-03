@@ -8,7 +8,7 @@ Objective::
 
 Identify OpenShift features required by OpenStack services for internal communication, data storage, or connectivity with compute nodes.
 
-WARNING: Work in Progress
+WARNING: Pending Review
 
 //Q3: students may not know enough at this point... and we didn't discuss how OVN components on data and control plane communicate with each other, it's not using mariadb nor amqp.
 

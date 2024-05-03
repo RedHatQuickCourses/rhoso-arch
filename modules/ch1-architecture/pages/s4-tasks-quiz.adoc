@@ -8,7 +8,7 @@ Objective::
 
 Identify tasks and Administrator of Red Hat OpenStack on OpenShift clusters performs and the required tools for each task.
 
-WARNING: Work in Progress
+WARNING: Pending Review
 
 // Avoid memorization questions on the OpenShift CLI or web console, these are better reinforced by the demonstration than by a quiz.
 
