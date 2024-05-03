@@ -1,0 +1,18 @@
+:time_estimate: 2
+
+= Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift
+
+_Estimated reading time: *{time_estimate} minutes*._
+
+Objective:: 
+
+Relate individual operators and custom resources from Red Hat OpenStack Services on OpenShift to their purpose.
+
+WARNING: Work In Progress
+
+== Questions
+
+1. Question?
+
+* [ ] Answer 1
+* [ ] Answer 2
