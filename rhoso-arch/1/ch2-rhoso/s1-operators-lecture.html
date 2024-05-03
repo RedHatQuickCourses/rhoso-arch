@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>OpenStack Services on OpenShift Operators :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <title>Add-on Operators of Red Hat OpenStack Services on OpenShift :: Red Hat OpenStack Services on OpenShift Architecture</title>
     <link rel="prev" href="index.html">
+    <link rel="next" href="s2-operators-quiz.html">
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -102,7 +103,16 @@
     <a class="nav-link" href="index.html">The OpenStack Operator by Red Hat</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="s1-operators-lecture.html">OpenStack Services on OpenShift Operators</a>
+    <a class="nav-link" href="s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s2-operators-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -138,7 +148,7 @@
   <ul>
     <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
     <li><a href="index.html">The OpenStack Operator by Red Hat</a></li>
-    <li><a href="s1-operators-lecture.html">OpenStack Services on OpenShift Operators</a></li>
+    <li><a href="s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a></li>
   </ul>
 </nav>
 </div>
@@ -147,14 +157,17 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">OpenStack Services on OpenShift Operators</h1>
+<h1 class="page">Add-on Operators of Red Hat OpenStack Services on OpenShift</h1>
 <div id="preamble">
 <div class="sectionbody">
+<div class="paragraph">
+<p><em>Estimated reading time: <strong>11 minutes</strong>.</em></p>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Goal</dt>
 <dd>
-<p>Describe the OpenStack meta-operator and its dependent operators.</p>
+<p>Describe the OpenStack meta-operator and its child operators.</p>
 </dd>
 </dl>
 </div>
@@ -176,15 +189,234 @@ Work In Progress
 <h2 id="_the_openstack_meta_operator"><a class="anchor" href="#_the_openstack_meta_operator"></a>The OpenStack Meta-Operator</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Red Hat OpenStack Services on OpenShift product is packaged as a single an add-on operator which manages a set of child add-on operators. Because of this it is called a meta operator.</p>
+<p>The Red Hat OpenStack Services on OpenShift product is delivered as a top level add-on operator which manages a set of child add-on operators. Because it manages other add-on operators, it is called a meta operator.</p>
 </div>
 <div class="paragraph">
-<p>WIP</p>
+<p>[ Simplified Figure of OpenStack operators and its managed services, without their custom resources ]</p>
+</div>
+<div class="paragraph">
+<p>Most of these child add-on operators are dedicated to managing indidual OpenStack services, both user-facing (such as Nova and Keystone) and internal infrastrucutre (such as RabbitMQ and OVN). Among the child add-on operators, the External Data Plane Management add-on operator manages RHEL compute nodes of an OpenStack cluster.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+During this course we qualify references to "Kubernetes operators", which reffer to a kind of software, as "add-on operators" to avoid confusion with the OpenStack Operator and OpenShift Operator personas, which represent human users of OpenStack and OpenShift clusters.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The OpenStack add-on operator is designed to be installed and managed by the Operator Lifecycle Manager (OLM), similar to they way you deploy other Red Hat products and features in Red Hat OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>Before we can detail the purpose of each of the add-on operators from Red Hat OpenStack Services on OpenShift and their respective custom resource types, we must understand some basic concepts of Kubernetes add-on operators and how Red Hat OpenShift uses them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_on_operators_in_red_hat_openshift"><a class="anchor" href="#_add_on_operators_in_red_hat_openshift"></a>Add-on Operators in Red Hat OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift was architected, since its 4.0 release, around Kuberbetes add-on operators. Add-on operators manage all aspects if an OpenShift cluster, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Kubernetes cluster iself, its nodes, API end points, standard resource controllers, scheduler, and Etcd storage;</p>
+</li>
+<li>
+<p>The host operating system on OpenShift cluster nodes: Red Hat CoreOS, wich is a container-optimzed variant of Red Hat Enterprise Linux;</p>
+</li>
+<li>
+<p>Integration with external authentication and storage services;</p>
+</li>
+<li>
+<p>Varying types of hardware accelerators, such as GPUs and SR-IOV network cards.</p>
+</li>
+<li>
+<p>DevOps services, such as CI/CD pipelines and observability signals collection and visualization.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Other Red Hat products which runs on OpenShift are also architected as add-on operators, icluding Red Hat Ansible Platform and Red Hat OpenShift AI.</p>
+</div>
+<div class="sect2">
+<h3 id="_what_is_a_kubernetes_add_on_operator"><a class="anchor" href="#_what_is_a_kubernetes_add_on_operator"></a>What is a Kubernetes Add-on Operator</h3>
+<div class="paragraph">
+<p>A Kubernetes add-on operator is a containerized applications which run on Kubernetes and  provides custom resource types for the Kubenetes API. Instances of these custom API resouces configure the add-on operator itself and the entity (other application, hardware, or external service) that the add-on operator manages.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of generic kubernetes add-on operators ]</p>
+</div>
+<div class="paragraph">
+<p>No programming language runtime constrains the development of add-on operators: they could be programmed in any programming language. Their only requirement is invoking Kubernetes APIs to monitor and change Kubernetes API resource instances.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat supports the <a href="https://sdk.operatorframework.io/">Operator SDK</a> for building add-on operators using Go, Java, and Ansible, besides re-packaging helm charts as add-on operators. The Kubernetes community provide additional frameworks and libraries for building Kubernetes add-on operators in a variety of languages, including Python.</p>
+</div>
+<div class="paragraph">
+<p>You package an add-on operator for distribution as a container image. What really differentiates an add-on operator container image from a regular container image is not the contents of container image itself, but what the application inside it does:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add-on operators require access to Kubernetes APIs.</p>
+</li>
+<li>
+<p>Add-on operators provides custom resources.</p>
+</li>
+<li>
+<p>Add-on operators manage something external to their running container.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An add-on operator is not itself an end-user application workload, but it could manage an end-user application workload.</p>
+</div>
+<div class="paragraph">
+<p>Add-on operators are also a way of packaging an application for deployment on Kubernetes. The difference between packaging an application as an add-on operator and other ways of packaging applications, such as helm charts or OpenStack Heat templates, are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add-on operators do more than just install an application: they also configure the application in an oppinionated way, to account for its most common usage scenarios</p>
+</li>
+<li>
+<p>Add-on operators provide a higher-level configuration syntax for the application they manage (as custom resources), which should be easier than using the raw configuration files from the original application.</p>
+</li>
+<li>
+<p>Add-on operators keep managing the application after its initial deployment, to enable configuration changes, software upgrades, data migration, and other day-2 activities.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An add-on operator could manage a single instance of an application, meaning there could be only one instance running in the same Kubernetes cluster, or it could manage multiple instances of that application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_installing_an_add_on_operator_versus_deploying_a_managed_application"><a class="anchor" href="#_installing_an_add_on_operator_versus_deploying_a_managed_application"></a>Installing an Add-on Operator Versus Deploying a Managed Application</h3>
+<div class="paragraph">
+<p>Most times, installing an add-on operator does not deploy its managed application. It requires that someone creates a custom resource instance that represents the application, and only in response to that instance creation that the add-on operators starts the application.</p>
+</div>
+<div class="paragraph">
+<p>It could be an empty custom resource instance, meaning the application runs will defaults from the add-on operator, but it could set very specific configuration values. If you need multiple independent instances of the same application, and the add-on operator supports it, you create multiple custom resource instances, each one with different settings (or not).</p>
+</div>
+<div class="paragraph">
+<p>Notet that installing an add-on operator in OpenShift is a task for an OpenShift Administrator user, while deploying an application using a custom resouce instance is, most of the times, a task for an OpenShift Operator user.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_operator_lifecycle_manager"><a class="anchor" href="#_the_operator_lifecycle_manager"></a>The Operator Lifecycle Manager</h3>
+<div class="paragraph">
+<p>Kubernetes add-on operators could be deployed in a Kubernetes clusters the same way as any other application, by creating Kubernetes API resource instances to represent the containers, storage, and networking requirements of the add-on operator. Some vendors provide these API resources as YAML files or helm charts for tweaking and deployment on any Kuberntes cluster.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift provides a better way of deploying Kubernetes add-on operators, by using the Operator Lifecycle Manager (OLM). The OLM adds the concept of operator catalog, which is a container image containing only metadata about add-on operators. Using the metadata from operator catalogs and the metadata from add-on operator images themselves, the Operator Lifecycle Manager can track upgrades of an add-on operator and dependencies between multiple add-on operators.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of the OLM, operators, and catalogs ]</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift also recognizes additional metadata which enables integration with the OpenShift web console and with OpenShift monitoring metrics and alert, enabling add-on operators to fully integrate with OpenShift cluster management.</p>
+</div>
+<div class="paragraph">
+<p>The OLM defines a number of Kubernetes API custom resources to manage operator catalogs, available operators for installation, and installed operators in a cluster. And, using its metadata, the OLM can list which API custom resource types belong to which add-on operator.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat manages a number of operator catalogs, as part of the Red Hat Marketplace, which provide add-on operators from Red Hat and partner products. Red Hat OpenShift also comes preconfigured with community operator catalogs, which offer a number of unsupported open source software.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_openshift_cluster_operators"><a class="anchor" href="#_openshift_cluster_operators"></a>OpenShift Cluster Operators</h3>
+<div class="paragraph">
+<p>Not all add-on operators in Red Hat OpenShift are deployed and managed by the Operator Licefycle Manager. A few, selected add-on operators are required by the OpenShift platform itself. They must be installed at OpenShift installation time and upgraded together to newer OpenShift product releases when you upgrade an OpenShift cluster.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of cluster vs add-on operators in OpenShift ]</p>
+</div>
+<div class="paragraph">
+<p>These add-on operators are called cluster operators and managed by the Cluster Version Operator (CVO). In a sense, cluster operators provide the core of Red Hat OpenShift, while add-on operators provide optional features and additional layered products.</p>
+</div>
+<div class="paragraph">
+<p>The OLM itself is a cluster operator in Red Hat OpenShift, which means all OpenShift clusters are already enabled for installing and managing add-on operators from community and commercial operator catalogs. The CVO manages the deployment and upgrades of an entire Red Hat OpenShift cluster, while the OLM manages the deployment and upgrades of individual add-on operators.</p>
+</div>
+<div class="paragraph">
+<p>It may happen than an add-on operator release is not compatible with a specific release of Red Hat OpenShift, for a number of reason. Fortunately, the compatibility information is among the metadata of an add-on operator, and both the CVO and OLM will use this metadata: the first, to prevent OpenShift cluster upgrades with would make it incompatible with installed add-on operators; the second, to only install new add-on operators which are compatible with the current OpenShift release of the cluster.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_resources_of_the_openstack_add_on_operator"><a class="anchor" href="#_custom_resources_of_the_openstack_add_on_operator"></a>Custom Resources of the OpenStack Add-on Operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Back to the OpenStack add-on operator, an OpenStack Administrator is not expected to deal with its child add-on operators, other than for troubleshooting purposes, except for the External Data Plane Management add-on operator.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of the OpenStack operator, child operators, and their custom resources, which represent one cluster with possibly multiple node sets ]</p>
+</div>
+<div class="paragraph">
+<p>Once you install the OpenStack add-on operator in an OpenShift cluster, all child add-on operators are automatically installed by the OLM and the next step is creating API resource instances which represent OpenStack control and data planes. The OpenStack add-on operator manages the first of these API resources itself, and the Extended Data Plane Management add-on operator manages the other two:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">OpenStack Control Plane</dt>
+<dd>
+<p>The OpenStack Control Plane resource type represents all OpenStack services of an OpenStack cluster. It sets not only which individual services are enabled but also the specific configurations of each service, including their dependencies on Kubernetes storage and networking.</p>
+</dd>
+<dt class="hdlist1">OpenStack Data Plane Deployment</dt>
+<dd>
+<p>The OpenStack Data Plane Deployment resource type represents the entire dataplane of an OpenStack cluster, by referencing all node sets in the data plane of a cluster.</p>
+</dd>
+<dt class="hdlist1">OpenStack Node Set</dt>
+<dd>
+<p>Each OpenStack Node Set resource instance represents a group of compute nodes with similar hardware and also similar network attachments, that receive the same operating system configurations. It lists the individual compute nodes with their host names, IP addresses, and network interfaces, plus a set of Ansible variables for the Ansible playbooks which configure each compute node.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>An instance of the OpenStack Control Plane custom resource can be quite large, even on a minimally configured cluster, because each individual service will include references to its cell database, external load balancers, and other settings which are, most times, replicated between multiple services. Unfortunately, The OpenStack Control Plane custom resource type does not define global default values for most of these common configurations, so you cannot configure them only one.</p>
+</div>
+<div class="paragraph">
+<p>Instances of the OpenStack Data Plane custom resource can also be quite large, because sometimes the value of an Ansible vars is a multi-line Jinja2 template, especially for configuring host network interfaces.</p>
+</div>
+<div class="paragraph">
+<p>On the other side, an instance of the OpenStack Data Plane custom resource instance is expected to be short, because it have very few attributes of its own, other than the list of all node sets in an OpenStack cluster.</p>
+</div>
+<div class="paragraph">
+<p>Each of these custom resource instances also provide status information on the healty of OpenStack services and compute nodes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_projects_of_the_openstack_add_on_operator"><a class="anchor" href="#_projects_of_the_openstack_add_on_operator"></a>Projects of the OpenStack add-on operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The recommended way of deploying Red Hat OpenStack Services on OpenShift uses two OpenShift projects:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>openstack-operators</code> project, where you install the OpenStack add-on operator and the OLM installs all its child add-on operators.</p>
+</li>
+<li>
+<p>The <code>openstack</code> project, where you create resource instances for the control plane, data plane, and node sets.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This means that the containers from the OpenStack add-on operator and its child operators run on the first project, and the containers which run componentes of Nova, Neutron, RabbitMQ, and other OpenStack services, run on the second project.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="index.html">The OpenStack Operator by Red Hat</a></span>
+  <span class="next"><a href="s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a></span>
 </nav>
 </article>
   </div>

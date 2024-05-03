@@ -103,7 +103,16 @@
     <a class="nav-link" href="index.html">The OpenStack Operator by Red Hat</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="s1-operators-lecture.html">OpenStack Services on OpenShift Operators</a>
+    <a class="nav-link" href="s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s2-operators-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -176,16 +185,22 @@ Work In Progress
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This chapter presents the OpenStack add-on operator, its child operators, and custom resources, and OpenShift concepts related to add-on operator management with the Operator Life Cycle Manager (OLM).</p>
+<p>This chapter introduces the OpenShift and Kubernetes concepts required to manage application workloads and how Red Hat OpenStack Services on OpenShift uses these concepts to manage OpenStack control and data planes.</p>
 </div>
 <div class="paragraph">
-<p>This chapter also presents the many Kubernetes workloads managed by the OpenStack add-on operator, which in turn manage OpenStack user-facing and internal infrastructure services as Kubernetes workloads, and Kubernetes concepts to application workload management.</p>
+<p>OpenShift and Kubernetes concepts are explaind in a top-down fashion, starting with add-on operators, passing though workload controllers, and ending up in containers.</p>
+</div>
+<div class="paragraph">
+<p>This chapter also presents the custom resources of the OpenStack add-on operator and its child add-on operators, which contain all configuration settings of an OpenSack cluster.</p>
+</div>
+<div class="paragraph">
+<p>This chapter focuses on the concepts required for running and managing OpenStack services as containers on OpenShift, leaving their networking and storage requirements for the next chapter.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="../ch1-architecture/s8-summary.html">Summary</a></span>
-  <span class="next"><a href="s1-operators-lecture.html">OpenStack Services on OpenShift Operators</a></span>
+  <span class="next"><a href="s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a></span>
 </nav>
 </article>
   </div>
