@@ -1,0 +1,13 @@
+= OpenStack Services on OpenShift Operators
+
+Goal::
+
+Describe the OpenStack meta-operator and its dependent operators.
+
+WARNING: Work In Progress
+
+== The OpenStack Meta-Operator
+
+The Red Hat OpenStack Services on OpenShift product is packaged as a single an add-on operator which manages a set of child add-on operators. Because of this it is called a meta operator.
+
+WIP

@@ -1,0 +1,13 @@
+= The OpenStack Operator by Red Hat
+
+Goal::
+
+Describe the high-level architecture of Red Hat OpenStack Services on OpenShift operators and its Kubernetes workloads.
+
+WARNING: Work In Progress
+
+== Introduction
+
+This chapter presents the OpenStack add-on operator, its child operators, and custom resources, and OpenShift concepts related to add-on operator management with the Operator Life Cycle Manager (OLM).
+
+This chapter also presents the many Kubernetes workloads managed by the OpenStack add-on operator, which in turn manage OpenStack user-facing and internal infrastructure services as Kubernetes workloads, and Kubernetes concepts to application workload management.
