@@ -361,35 +361,39 @@ During this course we qualify references to "Kubernetes operators", which reffer
 <p>[ Figure of the OpenStack operator, child operators, and their custom resources, which represent one cluster with possibly multiple node sets ]</p>
 </div>
 <div class="paragraph">
-<p>Once you install the OpenStack add-on operator in an OpenShift cluster, all child add-on operators are automatically installed by the OLM and the next step is creating API resource instances which represent OpenStack control and data planes. The OpenStack add-on operator manages the first of these API resources itself, and the Extended Data Plane Management add-on operator manages the other two:</p>
+<p>Once you install the OpenStack add-on operator in an OpenShift cluster, all child add-on operators are automatically installed by the OLM and the next step is creating API resource instances which represent OpenStack control and data planes. The OpenStack add-on operator manages the first of these API resources itself, and the Extended Data Plane Management add-on operator manages the other three:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">OpenStack Control Plane</dt>
 <dd>
-<p>The OpenStack Control Plane resource type represents all OpenStack services of an OpenStack cluster. It sets not only which individual services are enabled but also the specific configurations of each service, including their dependencies on Kubernetes storage and networking.</p>
-</dd>
-<dt class="hdlist1">OpenStack Data Plane Deployment</dt>
-<dd>
-<p>The OpenStack Data Plane Deployment resource type represents the entire dataplane of an OpenStack cluster, by referencing all node sets in the data plane of a cluster.</p>
+<p>One instance represents all OpenStack services of an OpenStack cluster. It sets not only which individual services are enabled but also the specific configurations of each service, including their dependencies on Kubernetes storage and networking.</p>
 </dd>
 <dt class="hdlist1">OpenStack Node Set</dt>
 <dd>
-<p>Each OpenStack Node Set resource instance represents a group of compute nodes with similar hardware and also similar network attachments, that receive the same operating system configurations. It lists the individual compute nodes with their host names, IP addresses, and network interfaces, plus a set of Ansible variables for the Ansible playbooks which configure each compute node.</p>
+<p>Each instance represents a group of compute nodes with similar hardware and purpose, that will receive similar operating system configurations. It lists the individual compute nodes with their host names, IP addresses, and network interfaces, plus a set of Ansible variables for the Data Plane Services which run on those compute nodes.</p>
+</dd>
+<dt class="hdlist1">OpenStack Data Plane Service</dt>
+<dd>
+<p>Each instance represents one Ansible playbook which runs against all compute nodes in a Node Set. The External Data Plane Management add-on operator comes with many predefined Data Plane Services, which configure RHEL servers to be OpenStack compute nodes, and an OpenStack Administrator can create more instances to run custom Ansible playbooks to further configure their compute nodes.</p>
+</dd>
+<dt class="hdlist1">OpenStack Data Plane Deployment</dt>
+<dd>
+<p>One instance represents the entire dataplane of an OpenStack cluster, by referencing all Node Sets and Data Plane Services in the data plane of a cluster. Each instance actually represents one run of all Ansible playbooks, from each of the Data Plane Services, on all compute nodes from all Node Sets. When an OpenStack Administrator needs to change configurations of compute nodes, they first make changes to their Node Sets and Data Services, and them they create new instances of the Data Plane Deployment custom resource, which triggers a new run of Ansible playbooks.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>An instance of the OpenStack Control Plane custom resource can be quite large, even on a minimally configured cluster, because each individual service will include references to its cell database, external load balancers, and other settings which are, most times, replicated between multiple services. Unfortunately, The OpenStack Control Plane custom resource type does not define global default values for most of these common configurations, so you cannot configure them only one.</p>
+<p>An instance of the OpenStack Control Plane custom resource can be quite long, even on a minimally configured cluster, because each individual service will include references to its cell database, external load balancers, and other settings which are, most times, replicated between multiple services. Unfortunately, The OpenStack Control Plane custom resource type does not define global default values for most of these common configurations, so you cannot configure them only one.</p>
 </div>
 <div class="paragraph">
-<p>Instances of the OpenStack Data Plane custom resource can also be quite large, because sometimes the value of an Ansible vars is a multi-line Jinja2 template, especially for configuring host network interfaces.</p>
+<p>Instances of the OpenStack Node Set custom resource can also be quite long, because sometimes the value of an Ansible vars is a multi-line Jinja2 template, especially for configuring host network interfaces.</p>
 </div>
 <div class="paragraph">
-<p>On the other side, an instance of the OpenStack Data Plane custom resource instance is expected to be short, because it have very few attributes of its own, other than the list of all node sets in an OpenStack cluster.</p>
+<p>On the other side, an instance of the OpenStack Data Plane Deployment custom resource instance is expected to be short, or at least simpler to read, because it only requires a list of all node sets in an OpenStack cluster. The list of Data Plane Services to run on those node sets is optional, and the External Data Plane Management add-on operator will use a predefined list of services if the list on a Data Plane Deployment instance is empty.</p>
 </div>
 <div class="paragraph">
-<p>Each of these custom resource instances also provide status information on the healty of OpenStack services and compute nodes.</p>
+<p>Instances of the Control Plane, Node Set, and Data Plane Deployment resources also provide runtime status information on the healty of OpenStack services and compute nodes.</p>
 </div>
 </div>
 </div>
@@ -405,7 +409,7 @@ During this course we qualify references to "Kubernetes operators", which reffer
 <p>The <code>openstack-operators</code> project, where you install the OpenStack add-on operator and the OLM installs all its child add-on operators.</p>
 </li>
 <li>
-<p>The <code>openstack</code> project, where you create resource instances for the control plane, data plane, and node sets.</p>
+<p>The <code>openstack</code> project, where you create resource instances for the control plane, data plane deployment, and node sets custom resources.</p>
 </li>
 </ol>
 </div>
