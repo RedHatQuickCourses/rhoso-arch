@@ -394,19 +394,29 @@ During this course we qualify references to "Kubernetes operators", which reffer
 <p>Instances of the Node Set custom resource can also be quite long, because sometimes the value of an Ansible vars is a multi-line Jinja2 template, especially for configuring host network interfaces.</p>
 </div>
 <div class="paragraph">
-<p>On the other side, instances of the Network Configuration custom resource are expected to be short, they only require a list of all external networks connected to compute nodes of an OpenStack cluster.</p>
+<p>On the other side, instances of the Network Configuration custom resource are expected to be short, because they only require a list of all external networks connected to compute nodes of an OpenStack cluster.</p>
 </div>
 <div class="paragraph">
 <p>Similarly, instances of the Network Configuration custom resources are expected to be short, or at least simpler to read, because they only requires a list of node sets in an OpenStack cluster. The list of Data Plane Services to run on those node sets is optional, and the External Data Plane Management add-on operator will use a predefined list of services if the list on a Data Plane Deployment instance is empty.</p>
 </div>
+<div class="sect2">
+<h3 id="_health_status_of_the_openstack_clusters"><a class="anchor" href="#_health_status_of_the_openstack_clusters"></a>Health Status of the OpenStack clusters</h3>
 <div class="paragraph">
-<p>Instances of the Control Plane, Node Set, and Data Plane Deployment resources also provide detailed runtime status information on the healty of OpenStack services and compute nodes in the form of resource conditions. The main way of assessing the healhy of an OpenStack cluster is by querying the status attribute of those resource instances. For example, the status conditions of a Node Set resource instance will specify the status of each of its data plane services, meaning the respective Ansible playbook executed to successful completion or not.</p>
+<p>Instances of the Control Plane, Node Set, and Data Plane Deployment resources also provide detailed runtime status information on the healty of OpenStack services and compute nodes in the form of resource conditions. The main way of assessing the healhy of an OpenStack cluster is by querying the status attribute of those resource instances, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The status conditions of a Control Plane resource specifies the status of each of the enabled user-facing and internal infrastructure services of OpenStack.</p>
+</li>
+<li>
+<p>The status conditions of a Node Set resource instance specifies the status of each of its data plane services, meaning the respective Ansible playbook executed to successful completion or not.</p>
+</li>
+</ul>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_projects_of_the_openstack_add_on_operator"><a class="anchor" href="#_projects_of_the_openstack_add_on_operator"></a>Projects of the OpenStack add-on operator</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_projects_of_openstack_clusters"><a class="anchor" href="#_projects_of_openstack_clusters"></a>Projects of OpenStack clusters</h3>
 <div class="paragraph">
 <p>The recommended way of deploying Red Hat OpenStack Services on OpenShift uses two OpenShift projects or Kubernetes namespaces:</p>
 </div>
@@ -416,12 +426,13 @@ During this course we qualify references to "Kubernetes operators", which reffer
 <p>The <code>openstack-operators</code> project, where you install the OpenStack add-on operator and the OLM installs all its child add-on operators.</p>
 </li>
 <li>
-<p>The <code>openstack</code> project, where you create resource instances for the control plane, data plane deployment, and node sets custom resources.</p>
+<p>The <code>openstack</code> project, where you create resource instances for the control plane, data plane deployment, and other custom resources which describe an OpenStack cluster.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>This means that the containers from the OpenStack add-on operator and its child operators run on the first project, and the containers which run componentes of Nova, Neutron, RabbitMQ, and other OpenStack services, run on the second project.</p>
+<p>This means that the containers from the OpenStack add-on operator and its child operators themselves run on the first project, and the containers which run componentes of Nova, Neutron, RabbitMQ, and other OpenStack services run on the second project.</p>
+</div>
 </div>
 </div>
 </div>
