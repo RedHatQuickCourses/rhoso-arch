@@ -1,0 +1,145 @@
+:time_estimate: 5
+
+= OpenStack Services as OpenShift Workloads
+
+_Estimated reading time: *{time_estimate} minutes*._
+
+Goal::
+
+Describe how OpenStack services run as Kubernetes workloads and pods.
+
+WARNING: Work In Progress
+
+== OpenStack Services as Containers
+
+Packaging and running OpenStack services as containers is not a new idea from Red Hat OpenStack Services on OpenShift. The OpenStack community was already experimenting with different ways of doing that using local container runtimes, with and without Kubernetes. Previous incarnations of Red Hat OpenStack Platform would run OpenStack services as containers and manage these containers using Linux systemd, podman, and Ansible.
+
+Despite all advantages of packaging and running individual applications as containers, the fact is: complex service-oriented applications, such as an OpenStack control plane, and even individual services of OpenStack and their many components, such as Nova, benefit from an orchestration layer, and this is Kubernetes.
+
+OpenStack itself has a multi-layered architecture: from its user-facing and infrastructure services, to the individual components of each service, and the operating system processes of each component. Red Hat OpenStack Services on OpenShift maps this multi-layered architecture to Kubernetes add-on operators, Kubernetes workloads, Kubernetes pods, and containers.
+
+== Kubernetes Application Resources
+
+Kubernetes represents a containerized application using many API resource types, and the main one is the *Pod*, which represents a group of containers sharing Linux kernel namespaces. Pods are managed by a workload controller, such as a Deployment or a Job. Pods usually need confirmation data, which is represented by Secrets and Configuration Maps. Connectivity between Pods, or from outside of a Kubernetes cluster and Pods, come from Services and Ingress. Finally, storage for Pods is represented by Persistent Volume Claims.
+
+[ Figure of Kubernetes application resources ]
+
+=== Kubernetes Namespaces and OpenShift Projects
+
+Kubernetes organanizes API resource instances in Namespaces, and users are granted access to projects using Role-Based Access Control (RBAC). Kubernetes Operators are granted the `edit` role in a project, meaning they can create and manage resource instances of a restricted set of resource types, which allows them to deploy and manage applications. Kubernetes Administrators get the `admin` role, which alows them to create and manage instaces or a larger set of resource types, including RBAC resources and compute resource quotas.
+
+Most Kubernetes API resource types are namespaced resources, meaning they must exist inside a Kubernetes Namespace, and their names would not collide with resources of the same type in different Namespaces. A few API resource types are non-namespaced, meaning they exist outside any Namespace. Kubernetes Cluster Administrators get the `cluster-admin` role to manage those non-namespaced resources, and also instances of all resource type in all namespaces.
+
+A Kubernetes Operators may get `admin` in some namespaces but not in others, meaning they are namespace administrators instead of cluster administrators. An OpenStack Administrator may either be an administrator of the two projects of the OpenStack add-on operator or they may be just Operators of those projects, getting the `edit` role.
+
+With standard Kubernetes, only Cluster Administrators can create namespaces, which is too restrictive for application developers: they must either ask an administrator to create and configure projects for them, or pile too many unrelated applications in the namespaces they already have access to.
+
+Red Hat OpenShift extends Kubernetes with Projects, which are, for most practical purposes, the same as Kubernetes namespaces. Any user of OpenShift, of a selected group of users granded the `self-service` role, can create new Projects and these become Kuberentes namespaces.
+
+Those self-service namespaces are created with a default set of API resources, which is predefined by Red Hat to grant the project creator `admin` on their new projects, and can be further customized by cluster administrators to include more resource instances or give fewer privileges to the projet creator.
+
+=== Kubernetes Workloads
+
+The concept of "application" varies with programming language, architecture style, and other factors, so Kubernetes offer a number of resource types to represent applications. These same resource types could represent only a piece of a larger application, such as a component of an OpenStack service. These resource types are part of the Kubernetes Workloads API.
+
+Kubernetes workload resources types, also known as Kubernetes workload controllers, represent the scalability and availability requirements of an application or component, for example: a network server application, such an OpenStack API endpoint, must be running continously. If, by any reason, that API edpoint stops running, a workload controller will start another instance, so users can always invoke those APIs.
+
+Not all applications must run continously, and sometimes you must run many copies of the same application, no matter in which node of a Kubernetes cluster. Other times, it does matter which node, and you may need exactly one instance per cluster node, but not more nor less. The different types of Kubernetes workload controllers deal with those varying application requirements:
+
+Replica Set::
+
+Represents a stateless application which runs multiple Pods that are copies, or replicas, of each other, in the sense that any user request could be processed by any of the replicas and these Pods do not interact among themselves in any direct way. It is the workload controller that provide horizontal scalability for applications, but it is rarelly used directly: Kubernetes Operators typically create, Deployments which in turn create Replica Sets.
+
+Deployment::
+
+Represents a stateless application and manages its upgrade process, by either rolling out new Pods, while deleting old Pods, or by deleting all old pods at once by new pods. If the application design supports it, progressive rolling out new Pods is better than deleting all at one, because it avoids downtime as perceived by end users. Old and new pods are managed as two Replica Sets. Deployments are the most common workload controllers with cloud-native applications and they manage OpenStack API service endpoints.
+
+Job:: 
+
+Represents an application which runs once through completion. A Job can retry a number of times, and whatever the end result, and a Job resource instance keeps the status of completion, either successful or not (after attempting all retries). You may see many jobs that fire at OpenStack add-on operator installation, or at significant events such as adding new compute nodes to an OpenStack cluster.
+
+Cron Job::
+
+Represents an application which runs with a recurrent schedule. Each indivdual execution of the schedule is a Job resource. Cron Jobs fits nicely periodic tasks, such as purging old OpenStack API resources from the cell database.
+
+Stateful Set::
+
+Represents an application which may require multiple Pods, similar to a Replica Set, but that are not replicas of each other, in the sense that each Pod of the set performs different tasks and all Pods must somehow syncronize state between themselves. Primary/secondary databases, such as OVN north and south bound databases, or relational databases with one read-write and multiple read-only replicas, are examples of workloads running as stateful sets.
+
+Daemon Set::
+
+Represents an application which must run in all cluster node or a subset of those nodes. It ensures there is always one and only one Pod of that workload running in each and all of the elligible Kubernetes cluster nodes. 
+
+It's common with Kubernetes that multiple API resource types work in layers, or as different abstraction levels, to manage the one application or a piece of a larger application. For example:
+
+* A Deployment instance manages one or two Replica Set instances, which in turn manage one or more Pod instances each.
+
+* A Cron Job instance which creates new Job instances, everytime its schedule requires, and each Job instance manages one Pod instance, or multiple Pod instances if there were retries.
+
+That design pattern of resource instances which manage other resource instances is extended to Kubernetes add-on operators, where each add-on operator instance may manage multiple workload controllers.
+
+=== Containers and Linux Kernel Namespaces in Kubernetes
+
+As a Linux System Administrator, an OpenStack Administrator is expected to have basic knowledge of https://www.redhat.com/en/topics/containers/whats-a-linux-container[Linux Containers], or simply containers, and how they differ from Virtual Machines (VMs). If you are new to containers, we suggest that you pause to review the relevant sections of https://www.redhat.com/en/services/training/rh134-red-hat-system-administration-ii[RH134] and https://www.redhat.com/en/services/training/do080-deploying-containerized-applications-technical-overview[DO080].
+
+All isolation between containers come from starting them inside different Linux Kernel namespaces. There are many types of Kernel namespaces: uid namespaces, mount namespaces, process namespaces, network namespaces, and so on. Containers do not require all types of namespaces, and containers may belong to different namespaces which interscet with other containers.
+
+Unlike virtual machines, which are always completely isolated, at the hardware level, from their host operating system, a container may be only partially isolated, depending on its namespaces. This enables containers to perform privileged operations on a node of an OpenStack or OpenShift cluster.
+
+For example, a container may run on its isolated process and mount namespace, but run on the network namespace of its host, and this way manage host networking. Like NMState and MetalLB add-on operators to.
+
+Another example, a container may run on its isolated process and network namespaces, but not on the mount namespaces, and thus control storage devices and mount points of its host. Like any CSI driver such as the LVMS add-on operator or OpenShift Data Foundation do.
+
+WARNING: Kubernetes currently does not take advantage of all types of Kernel namespaces available in Linux, and some of these namespaces are very tricky to use together, such as the uid or user namespace versus the mount namespace. The tricky part comes from managing file and group ownership of files, thus current releases of Kubernetes run all containers without user namespace isolation: a container running in Kubernetes as the Linux root user has all root user privileges on its host, unless constrained by other Linux features such as SELinux and Kernel capabilities.
+
+=== Kubernetes Pods
+
+A Pod in Kubernetes is a group of containers which share some Kernel namespaces, especially the network namespace, but run isolated from each other in other kernel namespaces, such as the process and mount namespaces. Once kubernetes schedules a Pod to a cluster node, all containers from the Pod run in the same node. Else, they would not be able to share Kernel namespaces.
+
+Some containers from a Pod may run sequentially, for example the init containers, which perform whatever initialization its required before starting the main application container, and multiple initialization tasks may be required in strict order.
+
+Other containers from a pod may run in parallel, for example the side-car containers, which complements the main application container with support tasks such as network proxying.
+
+It is common having Pods which run a single container, but the possibility of running multiple containers on the same Pod enables reusing container images as building blocks or larger application components.
+
+It is a recommended practice to avoid joining large applicaiton components in the same Pod, for example: running a web application and its database on the same Pod is considered an anti-pattern.
+
+It may seem intuitive running a web application and its database on the same Pod, especially if that application used to connect to its database on localhost, but it also impacts Kubernetes ability to manage the performance and high availability of those components, because they must run together, in the same Kubernetes cluster node, and be scaled together.
+
+For that example of an application and its database, it would be better having the ability to spread the web application and its database on different nodes, and being able to run scale Pods of the web application independently of their database Pods.
+
+=== References to Pods and Their Workload Controllers
+
+It is common to see Pod resource instances named with a random hash as part of their names: this is usually a sign that the Pod instance was created by a workload controller, such as a Replica Set. The resource controller may leave old Pods around, so a Kubernetes Operator may inspect its termination state and configuration settings, or may purge (delete) them as soon as they are not needed anymore. Each resource controller will have different policies for keeping or purging their old pods.
+
+Most workload controllers do not refer to Pods directly by their names. They refer to pods by their https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[labels]. Any Kubernetes resource type can include multiple labels, and Kubernetes Operators can search resource instances by label.
+
+This way, any workload controller can manage multiple pods, such as replicas in a Replica Set or retries of a Job. And, by the labels, you can identify which workload controller instance manages (or owns) a Pod instance.
+
+Other Kubernetes API resource types use labels in a similar way, for example:
+
+* Kubernetes Services, which are network load balancers, refer to Pods by label instead of by IP address or by name.
+
+* Kubernetes Network Policies are network firewalls that control network traffic between Pods in the same or different Namespaces by labels on the Pods and Namespaces instead of by IP address range.
+
+Whenever a Kubernetes API resource instance manages another resource instance, it is expected that it sets an https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/[owner reference] in the managed instance. For example, a Replica Set instance sets itself as the owner of all Pod instances it creates, and a Deployment instance sets itself as the owner of all Replica Sets it creates. 
+
+Well-designed add-on operators will set owner references all the way, so you could track any Pod and other resources to the add-on operator which ultimately manages them.
+
+== Other Kubernetes Application Resources
+
+Workload controllers and Pods are not sufficient to describe typical cloud-native and other kinds of applications or components. At the beginning of this section we mentioned other application resources from Kubernetes, such as Services, Configuration Maps, and Persistent Volume Claims. Add-on operators could add more application resource types or add more functionality over standard Kubernetes resource types.
+
+The next chapter will present Kubernetes standard API resources and OpenShift custom resources which deal with persistent storage and networking, but here we introduce two resource types which provide applications with their configuration settings:
+
+Configuration Maps::
+
+A configuration map (or `ConfigMap`) provides key/value pairs. Pods refer to those keys to initialize operating system environment variables on containers, or to initialize configuration files which are mounted on their containers.
+
+Secrets::
+
+Secrets are similar to configuration maps, except that their values can be binary data, and they are never stored on disk on compute nodes. These differences make Secrets a bit better suited for sensitive data such as passwords and digital certificates.
+
+Red Hat OpenShift enforces encryption of data from Secrets, as they are on transit from an OpenShift control plane to its compute nodes, and can be configured for encryption at rest, for secret data stored in an OpenShift control plane. Add-on operators, such as the https://www.redhat.com/en/blog/how-to-setup-external-secrets-operator-eso-as-a-service[External Secrets] add-on operator and the https://www.redhat.com/en/blog/introducing-the-secret-store-csi-driver-in-openshift[Secrets Store CSI driver] add-on operator can be enabled improve the security of secrets at rest and on transit.
+
+Most application workloads, and OpenStack services are not exception, expect configuration data stored in Kubernetes configuration maps and secrets resource instances. Some of them are mandatory when deploying Red Hat OpenStack Services on OpenShift, and you will see them in the `openstack` namespace; others are generated at runtime by the OpenStack add-on operators and its child operators, which produce complete and raw configuration files, as expected by OpenStack services.

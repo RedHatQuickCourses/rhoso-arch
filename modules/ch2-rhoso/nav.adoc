@@ -2,3 +2,4 @@
 ** xref:s1-operators-lecture.adoc[]
 ** xref:s2-operators-quiz.adoc[]
 *** xref:s2-operators-quiz-answers.adoc[]
+** xref:s3-workloads-lecture.adoc[]
