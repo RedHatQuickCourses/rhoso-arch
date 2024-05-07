@@ -1,0 +1,19 @@
+:time_estimate: 2
+
+= Quiz: OpenStack Services as OpenShift Workloads
+
+_Estimated reading time: *{time_estimate} minutes*._
+
+Objective:: 
+
+Relate workloads and configurations of OpenStack services with the OpenShift and Kubernetes API resources that represent them.
+
+WARNING: Work In Progress
+
+== Questions
+
+1. Given the following description of an OpenStack service, which Kubernetes workload controller best fits its needs?
+
+
+* [ ] Answer 1
+* [ ] Answer 2

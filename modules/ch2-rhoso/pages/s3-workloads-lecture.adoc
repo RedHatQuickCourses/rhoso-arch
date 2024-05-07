@@ -52,11 +52,11 @@ Represents a stateless application which runs multiple Pods that are copies, or 
 
 Deployment::
 
-Represents a stateless application and manages its upgrade process, by either rolling out new Pods, while deleting old Pods, or by deleting all old pods at once by new pods. If the application design supports it, progressive rolling out new Pods is better than deleting all at one, because it avoids downtime as perceived by end users. Old and new pods are managed as two Replica Sets. Deployments are the most common workload controllers with cloud-native applications and they manage OpenStack API service endpoints.
+Represents a stateless application and manages its upgrade process, by either rolling out new Pods, while deleting old Pods, little by little, or by replacing all old pods at once with new pods. If the application design supports it, progressive rolling out new Pods is better than replacing all at one, because it avoids downtime as perceived by end users. Old and new pods are managed as two Replica Sets. Deployments are the most common workload controllers with cloud-native applications and they manage OpenStack API service endpoints.
 
 Job:: 
 
-Represents an application which runs once through completion. A Job can retry a number of times, and whatever the end result, and a Job resource instance keeps the status of completion, either successful or not (after attempting all retries). You may see many jobs that fire at OpenStack add-on operator installation, or at significant events such as adding new compute nodes to an OpenStack cluster.
+Represents an application which runs once through completion. A Job can retry a number of times, and whatever the end result, and a Job resource instance keeps the status of completion, either successful or not (after attempting all retries). You may see many jobs that fire at OpenStack add-on operator installation, or at significant events such as adding new compute nodes to an OpenStack cluster. In particular, Ansible playbooks run as Jobs which are managed by the External Data Plane Operator.
 
 Cron Job::
 
@@ -64,7 +64,7 @@ Represents an application which runs with a recurrent schedule. Each indivdual e
 
 Stateful Set::
 
-Represents an application which may require multiple Pods, similar to a Replica Set, but that are not replicas of each other, in the sense that each Pod of the set performs different tasks and all Pods must somehow syncronize state between themselves. Primary/secondary databases, such as OVN north and south bound databases, or relational databases with one read-write and multiple read-only replicas, are examples of workloads running as stateful sets.
+Represents an application which may require multiple Pods, similar to a Replica Set, but that are not replicas of each other, in the sense that each Pod of the set performs different tasks and all Pods must somehow syncronize state between themselves. Primary/secondary databases, such as relational databases with one read-write and multiple read-only replicas, are examples of workloads running as stateful sets.
 
 Daemon Set::
 

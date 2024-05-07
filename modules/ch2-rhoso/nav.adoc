@@ -3,3 +3,6 @@
 ** xref:s2-operators-quiz.adoc[]
 *** xref:s2-operators-quiz-answers.adoc[]
 ** xref:s3-workloads-lecture.adoc[]
+** xref:s4-workloads-quiz.adoc[]
+*** xref:s4-workloads-quiz-answers.adoc[]
+** xref:s5-workloads-demo.adoc[]
