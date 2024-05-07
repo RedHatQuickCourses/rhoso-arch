@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift :: Red Hat OpenStack Services on OpenShift Architecture</title>
-    <link rel="prev" href="s1-operators-lecture.html">
-    <link rel="next" href="s2-operators-quiz-answers.html">
+    <title>Demo: OpenStack Pods and Workloads :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <link rel="prev" href="s4-workloads-quiz-answers.html">
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -105,7 +104,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
 <ul class="nav-list">
@@ -126,7 +125,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="s5-workloads-demo.html">Demo: OpenStack Pods and Workloads</a>
   </li>
 </ul>
@@ -163,7 +162,7 @@
   <ul>
     <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
     <li><a href="index.html">The OpenStack Operator by Red Hat</a></li>
-    <li><a href="s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a></li>
+    <li><a href="s5-workloads-demo.html">Demo: OpenStack Pods and Workloads</a></li>
   </ul>
 </nav>
 </div>
@@ -172,17 +171,14 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</h1>
+<h1 class="page">Demo: OpenStack Pods and Workloads</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p><em>Estimated reading time: <strong>2 minutes</strong>.</em></p>
-</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Objective</dt>
 <dd>
-<p>Relate individual operators and custom resources from Red Hat OpenStack Services on OpenShift to their purpose.</p>
+<p>Identify Kubernetes workloads managed by the OpenStack add-on operator and their application resources.</p>
 </dd>
 </dl>
 </div>
@@ -201,30 +197,68 @@ Work In Progress
 </div>
 </div>
 <div class="sect1">
-<h2 id="_questions"><a class="anchor" href="#_questions"></a>Questions</h2>
+<h2 id="_recording"><a class="anchor" href="#_recording"></a>Recording</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This demonstration will be recorded and the video linked from here, so learners can watch the video and optionally try to replicate it by themselves.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment"><a class="anchor" href="#_environment"></a>Environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully funcitonal Red Hat OpenStack on OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.</p>
+</div>
+<div class="paragraph">
+<p>For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating ips, tenant networks, etc. That may not be fine for other demonstrations of this course.</p>
+</div>
+<div class="paragraph">
+<p>The demo environment must also provide a user workstation preconfigured with the OpenShift client and a web browser to access the OpenShift web console.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_demonstration"><a class="anchor" href="#_demonstration"></a>Demonstration</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Question?</p>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-square-o"></i> Answer 1</p>
+<p>Log in on OpenShift, using its web console. Ensure you&#8217;re in the Administrators perspective.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2</p>
+<p>Enter the Installed Operators page, show the OpenStack operator, and its custom reosurce types. Show the instances of the control plane and node set resources.</p>
 </li>
-</ul>
-</div>
+<li>
+<p>Show the detailed status of the control plane and node set resources and highlioght the individual status conditions which relate to individual OpenStack services and dataplane services.</p>
+</li>
+<li>
+<p>Enter the openstack projects on the Workloads page. Show illustrative examples of different workload types and explain how they make sense for the specific OpenStack service and component.</p>
+</li>
+<li>
+<p>Pick one pod (ideally an easily recognizable one) and show its logs. It should be a pod from one of the workloads used as example on the previous step.</p>
+</li>
+<li>
+<p>Pick a pod (same or different than previous step) and show that it mounts a configmap or secret. Enter the pod and show the resulting file inside the container&#8217;s mount namespace.</p>
+</li>
+<li>
+<p>Pick a pod with multiple containers and mention why that particular pod needs init containers and sidecar containers. May need different pods for each.</p>
+</li>
+<li>
+<p>Pick a job from an dataplane service and its pod. Relate it to the previous conditions of the node set resource. Show the logs of the pod with easily recognizable ansible playbook output.</p>
+</li>
+<li>
+<p>Repeat a subset of tasks already done using the web console, but using the CLI: show conditions from the control plane and node set resources, sample workloads and their pods.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>This ends the demonstration.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a></span>
-  <span class="next"><a href="s2-operators-quiz-answers.html">Answers to the Quiz</a></span>
+  <span class="prev"><a href="s4-workloads-quiz-answers.html">Answers to the Quiz</a></span>
 </nav>
 </article>
   </div>

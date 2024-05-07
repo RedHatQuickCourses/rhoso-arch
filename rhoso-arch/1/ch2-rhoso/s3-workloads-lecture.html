@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>OpenStack Services as OpenShift Workloads :: Red Hat OpenStack Services on OpenShift Architecture</title>
     <link rel="prev" href="s2-operators-quiz-answers.html">
+    <link rel="next" href="s4-workloads-quiz.html">
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -115,6 +116,18 @@
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="s3-workloads-lecture.html">OpenStack Services as OpenShift Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s4-workloads-quiz.html">Quiz: OpenStack Services as OpenShift Workloads</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s4-workloads-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s5-workloads-demo.html">Demo: OpenStack Pods and Workloads</a>
   </li>
 </ul>
   </li>
@@ -250,11 +263,11 @@ Work In Progress
 </dd>
 <dt class="hdlist1">Deployment</dt>
 <dd>
-<p>Represents a stateless application and manages its upgrade process, by either rolling out new Pods, while deleting old Pods, or by deleting all old pods at once by new pods. If the application design supports it, progressive rolling out new Pods is better than deleting all at one, because it avoids downtime as perceived by end users. Old and new pods are managed as two Replica Sets. Deployments are the most common workload controllers with cloud-native applications and they manage OpenStack API service endpoints.</p>
+<p>Represents a stateless application and manages its upgrade process, by either rolling out new Pods, while deleting old Pods, little by little, or by replacing all old pods at once with new pods. If the application design supports it, progressive rolling out new Pods is better than replacing all at one, because it avoids downtime as perceived by end users. Old and new pods are managed as two Replica Sets. Deployments are the most common workload controllers with cloud-native applications and they manage OpenStack API service endpoints.</p>
 </dd>
 <dt class="hdlist1">Job</dt>
 <dd>
-<p>Represents an application which runs once through completion. A Job can retry a number of times, and whatever the end result, and a Job resource instance keeps the status of completion, either successful or not (after attempting all retries). You may see many jobs that fire at OpenStack add-on operator installation, or at significant events such as adding new compute nodes to an OpenStack cluster.</p>
+<p>Represents an application which runs once through completion. A Job can retry a number of times, and whatever the end result, and a Job resource instance keeps the status of completion, either successful or not (after attempting all retries). You may see many jobs that fire at OpenStack add-on operator installation, or at significant events such as adding new compute nodes to an OpenStack cluster. In particular, Ansible playbooks run as Jobs which are managed by the External Data Plane Operator.</p>
 </dd>
 <dt class="hdlist1">Cron Job</dt>
 <dd>
@@ -262,7 +275,7 @@ Work In Progress
 </dd>
 <dt class="hdlist1">Stateful Set</dt>
 <dd>
-<p>Represents an application which may require multiple Pods, similar to a Replica Set, but that are not replicas of each other, in the sense that each Pod of the set performs different tasks and all Pods must somehow syncronize state between themselves. Primary/secondary databases, such as OVN north and south bound databases, or relational databases with one read-write and multiple read-only replicas, are examples of workloads running as stateful sets.</p>
+<p>Represents an application which may require multiple Pods, similar to a Replica Set, but that are not replicas of each other, in the sense that each Pod of the set performs different tasks and all Pods must somehow syncronize state between themselves. Primary/secondary databases, such as relational databases with one read-write and multiple read-only replicas, are examples of workloads running as stateful sets.</p>
 </dd>
 <dt class="hdlist1">Daemon Set</dt>
 <dd>
@@ -405,6 +418,7 @@ Kubernetes currently does not take advantage of all types of Kernel namespaces a
 </div>
 <nav class="pagination">
   <span class="prev"><a href="s2-operators-quiz-answers.html">Answers to the Quiz</a></span>
+  <span class="next"><a href="s4-workloads-quiz.html">Quiz: OpenStack Services as OpenShift Workloads</a></span>
 </nav>
 </article>
   </div>
