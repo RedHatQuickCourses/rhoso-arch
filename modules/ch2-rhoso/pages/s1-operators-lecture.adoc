@@ -1,4 +1,4 @@
-:time_estimate: 11
+:time_estimate: 12
 
 = Add-on Operators of Red Hat OpenStack Services on OpenShift
 
@@ -116,11 +116,13 @@ Once you install the OpenStack add-on operator in an OpenShift cluster, all chil
 
 // Using printable name instead of their "kind" attributes
 
-//TODO Add somewhere a note about "Kubernetes API resource type" and "resource type"
-
 OpenStack Control Plane::
 
 One instance represents all OpenStack services of an OpenStack cluster. It sets not only which individual services are enabled but also the specific configurations of each service, including their dependencies on Kubernetes storage and networking.
+
+OpenStack Network Configuration::
+
+One instance represents the isolated network configuration of an OpenStack cluster. It relates the names of networks, as seen by its RHEL compute nodes, to the names of those networks as seen by containers in OpenShift, to enable connectivity between OpenStack service components running in containers with components running in compute nodes.
 
 OpenStack Node Set::
 
@@ -135,17 +137,19 @@ OpenStack Data Plane Deployment::
 One instance represents the entire dataplane of an OpenStack cluster, by referencing all Node Sets and Data Plane Services in the data plane of a cluster. Each instance actually represents one run of all Ansible playbooks, from each of the Data Plane Services, on all compute nodes from all Node Sets. When an OpenStack Administrator needs to change configurations of compute nodes, they first make changes to their Node Sets and Data Services, and them they create new instances of the Data Plane Deployment custom resource, which triggers a new run of Ansible playbooks.
 
 
-An instance of the OpenStack Control Plane custom resource can be quite long, even on a minimally configured cluster, because each individual service will include references to its cell database, external load balancers, and other settings which are, most times, replicated between multiple services. Unfortunately, The OpenStack Control Plane custom resource type does not define global default values for most of these common configurations, so you cannot configure them only one.
+An instance of the Control Plane custom resource can be quite long, even on a minimally configured cluster, because each individual service will include references to its cell database, external load balancers, and other settings which are, most times, replicated between multiple services. Unfortunately, The OpenStack Control Plane custom resource type does not define global default values for most of these common configurations, so you cannot configure them only one.
 
-Instances of the OpenStack Node Set custom resource can also be quite long, because sometimes the value of an Ansible vars is a multi-line Jinja2 template, especially for configuring host network interfaces.
+Instances of the Node Set custom resource can also be quite long, because sometimes the value of an Ansible vars is a multi-line Jinja2 template, especially for configuring host network interfaces.
 
-On the other side, an instance of the OpenStack Data Plane Deployment custom resource instance is expected to be short, or at least simpler to read, because it only requires a list of all node sets in an OpenStack cluster. The list of Data Plane Services to run on those node sets is optional, and the External Data Plane Management add-on operator will use a predefined list of services if the list on a Data Plane Deployment instance is empty.
+On the other side, instances of the Network Configuration custom resource are expected to be short, they only require a list of all external networks connected to compute nodes of an OpenStack cluster.
 
-Instances of the Control Plane, Node Set, and Data Plane Deployment resources also provide runtime status information on the healty of OpenStack services and compute nodes.
+Similarly, instances of the Network Configuration custom resources are expected to be short, or at least simpler to read, because they only requires a list of node sets in an OpenStack cluster. The list of Data Plane Services to run on those node sets is optional, and the External Data Plane Management add-on operator will use a predefined list of services if the list on a Data Plane Deployment instance is empty.
+
+Instances of the Control Plane, Node Set, and Data Plane Deployment resources also provide detailed runtime status information on the healty of OpenStack services and compute nodes in the form of resource conditions. The main way of assessing the healhy of an OpenStack cluster is by querying the status attribute of those resource instances. For example, the status conditions of a Node Set resource instance will specify the status of each of its data plane services, meaning the respective Ansible playbook executed to successful completion or not.
 
 == Projects of the OpenStack add-on operator
 
-The recommended way of deploying Red Hat OpenStack Services on OpenShift uses two OpenShift projects:
+The recommended way of deploying Red Hat OpenStack Services on OpenShift uses two OpenShift projects or Kubernetes namespaces:
 
 1. The `openstack-operators` project, where you install the OpenStack add-on operator and the OLM installs all its child add-on operators.
 
