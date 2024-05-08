@@ -196,16 +196,132 @@ Work In Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Question?</p>
+<p>Which of the following is the best description of the OpenStack add-on operator from Red Hat OpenStack Services on OpenShift?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-check-square-o"></i> <strong>Answer 1</strong><br>
-<em>Correct: Explain</em></p>
+<p><i class="fa fa-square-o"></i> It is a Kubernetes add-on operator that manages VMs running in OpenStack clusters.<br>
+<em>Incorrect: OpenStack services, such as Nova and Heat, manage VMs running in OpenStack clusters.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2<br>
-<em>Incorrect: Explain</em></p>
+<p><i class="fa fa-check-square-o"></i> <strong>It is a Kubernetes add-on operator that manages the control and data planes of OpenStack clusters.</strong><br>
+<em>Correct: Directly, or though its child add-on operators, the OpenStack add-on operator manages all of an OpenStack cluster.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> It is an OpenShift cluster operator that enables running containerized applications on OpenStack clusters.<br>
+<em>Incorrect: The OpenStack add-on operator is NOT an OpenShift cluster operator.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> It is an OpenShift cluster operator that manages OpenStack compute nodes.
+<em>Incorrect: The OpenStack add-on operator is NOT an OpenShift cluster operator and it also manages an OpenStack control plane, besides its compute nodes.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the child operators of the OpenStack add-on operator runs Ansible playbooks to configure OpenStack compute nodes?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> The Bare Metal add-on operator<br>
+<em>Incorrect: The Bare Metal operator provisions physical servers with BMC management hardware.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>The Data Plane add-on operator</strong><br>
+<em>Correct: The Data Plane add-on operator configures, using Ansible playbooks, both preprovisioned and user provisioned OpenStack compute nodes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The Infrastruture add-on operator<br>
+<em>Incorrect: The Infrastructure add-on operator deals with networking infrastructure for compute nodes, more specifically: IPAM and DNS resolution.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The Ironic add-on operator<br>
+<em>Incorrect: The Ironic add-on operator manages the OpenStack Ironic service, which provisions physical servers with BMC hardware as server instances for an OpenStack project.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The Nova add-on operator<br>
+<em>Incorrect: The Nova add-on operator manages the OpenStack Nova service, which manages virtual machines (VMs) running on OpenStack compute nodes.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which component of Red Hat OpenShift manages add-on operators such as the OpenStack add-on operator from Red Hat OpenStack Services on OpenShift?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Helm<br>
+<em>Incorrect: Helm is a popular tool to install and upgrade containerized applications on Kubernetes, it could be used to install add-on operators, but it is not the best tool for this task and it is not supported by Red Hat for Red Hat OpenStack Services on OpenShift.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> OpenStack Heat<br>
+<em>Incorrect: Heat manages workloads based on VMs on OpenStack, it cannot manage add-on operators in OpenShift.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The Operator SDK<br>
+<em>Incorrect: The Operator SDK is a tool for developing, testing, and packaging add-on operators, but it does not manage add-on operators installed in a Kuberentes cluster.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>The Operator Lifecycle Manager (OLM)</strong><br>
+<em>Correct: The OLM is the tool recommended and supported by Red Hat for installing Red Hat OpenStack Services on OpenShift and other add-on operators from Red Hat and third party vendors.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The Cluster Version Operator (CVO)<br>
+<em>Incorrect: The CVO manages OpenShift installation and upgrades, and OpenShift cluster operators.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following is the best description of Kubernetes add-on operators?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Applications which manage hardware resources, such as GPUs.<br>
+<em>Incorrect: Add-on operators can manage hardware resources, but they could manage other kinds of entities also.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Applications which manage running applications, such as relational databases.<br>
+<em>Incorrect: Add-on operators can manage other applications, but they could manage other kinds of entities also.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Applications which manage networking equipment, such as IP routers.<br>
+<em>Incorrect: Add-on operators can manage hardware appliances, but they could manage other kinds of entities also.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Applications which manage physical servers with BMC hardware.<br>
+<em>Incorrect: Add-on operators can manage server machines, but they could manage other kinds of entities also.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>All of the above could be Kubernetes add-on operators.</strong><br>
+<em>Correct: Kubernetes add-on operators could manage all these kinds of entities and more.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following custom resource types always require customized instances for a specific OpenStack cluster?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Control Plane</strong><br>
+<em>Correct: All OpenStack clusters require a Control Plane resource instance which configures its OpenStack services.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Data Plane Deployment</strong><br>
+<em>Correct: All OpenStack clusters require a Data Plane Deployment resource instance which triggers running the Ansible playbooks which configure its OpenStack compute nodes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Data Plane Service<br>
+<em>Incorrect: OpenStack clusters can use only the predefined Data Plane Services from Red Hat OpenStack Services on OpenShift and be fully functional.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Network Configuration</strong><br>
+<em>Correct: All OpenStack clusters require a Network Configuration instance which configures IP subnet ranges and VLAN IDs for its compute nodes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Node Set</strong><br>
+<em>Correct: All OpenStack clusters require a Node Set resource instance which lists its compute nodes.</em></p>
 </li>
 </ul>
 </div>
