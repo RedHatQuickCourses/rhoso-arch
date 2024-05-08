@@ -38,6 +38,6 @@ The demo environment must also provide a user workstation preconfigured with the
 
 8. Pick a job from an dataplane service and its pod. Relate it to the previous conditions of the node set resource. Show the logs of the pod with easily recognizable ansible playbook output.
 
-9. Repeat a subset of tasks already done using the web console, but using the CLI: show conditions from the control plane and node set resources, sample workloads and their pods.
+9. Repeat a subset of tasks already done using the web console, but using the CLI: show conditions from the control plane and node set resources. Also show sample workload controllers and their pods.
 
 This ends the demonstration.

@@ -1,4 +1,4 @@
-:time_estimate: 15
+:time_estimate: 16
 
 = OpenStack Services as OpenShift Workloads
 
@@ -12,17 +12,23 @@ WARNING: Work In Progress
 
 == OpenStack Services as Containers
 
-Packaging and running OpenStack services as containers is not a new idea from Red Hat OpenStack Services on OpenShift. The OpenStack community was already experimenting with different ways of doing that using local container runtimes, with and without Kubernetes. Previous incarnations of Red Hat OpenStack Platform would run OpenStack services as containers and manage these containers using Linux systemd, podman, and Ansible.
+Packaging and running OpenStack services as containers is not a new idea from Red Hat OpenStack Services on OpenShift. The OpenStack community was already experimenting with different ways of doing that, with and without Kubernetes. In fact, previous incarnations of Red Hat OpenStack Platform run OpenStack services as podman containers and manage these containers using Linux systemd and Ansible.
 
-Despite all advantages of packaging and running individual applications as containers, the fact is: complex service-oriented applications, such as an OpenStack control plane, and even individual services of OpenStack and their many components, such as Nova, benefit from an orchestration layer, and this is Kubernetes.
+Despite all advantages of just packaging and running individual applications as containers, complex service-oriented applications benefit from an orchestration layer and Kubernetes is established as the preferred container ochestration tool. Red Hat OpenShift, as an application platform based on Kubernetes, benefits an OpenStack control plane as a whole and also individual services of OpenStack with their many components, such as Nova.
 
-OpenStack itself has a multi-layered architecture: from its user-facing and infrastructure services, to the individual components of each service, and the operating system processes of each component. Red Hat OpenStack Services on OpenShift maps this multi-layered architecture to Kubernetes add-on operators, Kubernetes workloads, Kubernetes pods, and containers.
+OpenStack itself has a multi-layered architecture: from its user-facing and infrastructure services, passing trhough the individual components of each service, down to the operating system processes of each component. Red Hat OpenStack Services on OpenShift maps this multi-layered architecture to Kubernetes add-on operators, Kubernetes workloads, Kubernetes pods, and containers.
+
+As a Linux System Administrator, an OpenStack Administrator is expected to have basic knowledge of https://www.redhat.com/en/topics/containers/whats-a-linux-container[Linux Containers], or simply containers, and how they differ from Virtual Machines (VMs). If you are new to containers, we suggest that you pause to review the relevant sections of https://www.redhat.com/en/services/training/rh134-red-hat-system-administration-ii[RH134] and https://www.redhat.com/en/services/training/do080-deploying-containerized-applications-technical-overview[DO080].
+
+This section continues the explanation the Kubernetes concepts related to managing containerized applications with a top-down approach: the previous sections presented Kubernets add-on operators, this section presents Kubernetes workloads, pods, and containers.
 
 == Kubernetes Application Resources
 
-Kubernetes represents a containerized application using many API resource types, and the main one is the *Pod*, which represents a group of containers sharing Linux kernel namespaces. Pods are managed by a workload controller, such as a Deployment or a Job. Pods usually need confirmation data, which is represented by Secrets and Configuration Maps. Connectivity between Pods, or from outside of a Kubernetes cluster and Pods, come from Services and Ingress. Finally, storage for Pods is represented by Persistent Volume Claims.
+Kubernetes represents containerized applications using many API resource types, and the main one is the *Pod*, which represents a group of containers sharing Linux kernel namespaces. Pods are managed by a workload controller, such as a Deployment or a Job. Pods need confirmation data, which is represented by Secrets and Configuration Maps. Connectivity between Pods, or from outside of a Kubernetes cluster and its Pods, comes from Services and Ingress or from OpenShift Routes. Finally, persistent storage for Pods is represented by Persistent Volume Claims.
 
-[ Figure of Kubernetes application resources ]
+image::s3-workloads-lecture-fig-1.png[]
+
+The next chapter will focus on the API resources related to storage and networking, including OpenShift custom resources not shown in the figure. This section focus on the API resources required to manage containers and their configuration data.
 
 === Kubernetes Namespaces and OpenShift Projects
 
@@ -78,15 +84,23 @@ It's common with Kubernetes that multiple API resource types work in layers, or 
 
 That design pattern of resource instances which manage other resource instances is extended to Kubernetes add-on operators, where each add-on operator instance may manage multiple workload controllers.
 
-Sometimes there is no clear reason to prefer one type workload controller over another, for continuously running applications. Some applications could fit either a Stateful Set or a Deployment (plus its Replica Set) equally well, and it may become a personal preference of a developer which one to use. Their decision may be based on syntax quirks of each API resource type more than specific functionality of its resource controller.
+=== Stateless and Stateful Componentes of OpenStack Control Planes
+
+OpenStack services use an stateless API design but that does not mean all OpenStack services and their components are stateless. Many factors come in the implementation of individual components which may require internal state and syncronization between instances of that component or with other components of the same service.
+
+Locality is an important factor that affects performance and reliability and few OpenStack services have a pure stateless design, despite all of them delegating persistence of their API resources to relational databases.
+
+For example, the API component of an OpenStack service may also manage data storaed in an external storage backend, which is acessed by workloads running as VMs on compute nodes. Or that API component may use caching to improve its performance.
+
+Many Kubernetes Operators, used to the https://12factor.net/[12-factor] style of cloud-native application design, would expect that OpenStack services run mostly as Kubernetes Deploymetns, and will be surprised that so many services run entirely from Stateful Sets. Most times, the determining factor for the Red Hat OpenStack Services on OpenShift enginnering choice was the need to preserve the network identity of individual pods of a component, which you cannot do with Kubernetes Deployments.
+
+== Kubernetes Pods and Containers
+
+All isolation between containers come from starting them inside different Linux Kernel namespaces. Unlike virtual machines, which are always completely isolated from their host operating system, a container may be only partially isolated, depending on its namespaces. Kubernetes offers control of which namespaces are isolated or not for groups of containers, called Pods, and OpenShift uses that to enable platform-level components which provide advanced networking, storage, and security features.
 
 === Containers and Linux Kernel Namespaces in Kubernetes
 
-As a Linux System Administrator, an OpenStack Administrator is expected to have basic knowledge of https://www.redhat.com/en/topics/containers/whats-a-linux-container[Linux Containers], or simply containers, and how they differ from Virtual Machines (VMs). If you are new to containers, we suggest that you pause to review the relevant sections of https://www.redhat.com/en/services/training/rh134-red-hat-system-administration-ii[RH134] and https://www.redhat.com/en/services/training/do080-deploying-containerized-applications-technical-overview[DO080].
-
-All isolation between containers come from starting them inside different Linux Kernel namespaces. There are many types of Kernel namespaces: uid namespaces, mount namespaces, process namespaces, network namespaces, and so on. Containers do not require all types of namespaces, and containers may belong to different namespaces which interscet with other containers.
-
-Unlike virtual machines, which are always completely isolated, at the hardware level, from their host operating system, a container may be only partially isolated, depending on its namespaces. This enables containers to perform privileged operations on a node of an OpenStack or OpenShift cluster.
+There are many types of Kernel namespaces: uid namespaces, mount namespaces, process namespaces, network namespaces, and so on. Containers do not require all types of namespaces, and containers may belong to different namespaces which interscet with other containers. Containers may run on host namespaces, which enables them to perform privileged operations on a node of an OpenStack or OpenShift cluster.
 
 For example, a container may run on its isolated process and mount namespace, but run on the network namespace of its host, and this way manage host networking. Like NMState and MetalLB add-on operators to.
 
