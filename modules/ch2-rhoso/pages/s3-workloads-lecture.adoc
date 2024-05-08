@@ -1,4 +1,4 @@
-:time_estimate: 16
+:time_estimate: 18
 
 = OpenStack Services as OpenShift Workloads
 
@@ -24,19 +24,25 @@ This section continues the explanation the Kubernetes concepts related to managi
 
 == Kubernetes Application Resources
 
-Kubernetes represents containerized applications using many API resource types, and the main one is the *Pod*, which represents a group of containers sharing Linux kernel namespaces. Pods are managed by a workload controller, such as a Deployment or a Job. Pods need confirmation data, which is represented by Secrets and Configuration Maps. Connectivity between Pods, or from outside of a Kubernetes cluster and its Pods, comes from Services and Ingress or from OpenShift Routes. Finally, persistent storage for Pods is represented by Persistent Volume Claims.
+Kubernetes represents containerized applications using many API resource types, and the main one is the *Pod*, which represents a group of containers sharing Linux kernel namespaces. Pods are managed by a workload controller, such as a Deployment or a Job. Pods need confirmation data, which is represented by Secrets and Configuration Maps. Connectivity between Pods, or from outside of a Kubernetes cluster and its Pods, comes from Services and Ingress or from OpenShift Routes. Finally, persistent storage mounted by Pods is represented by Persistent Volume Claims (PVCs).
 
 image::s3-workloads-lecture-fig-1.png[]
+
+Kubernetes Operators can only create and manage resources inside the projects they have acess to, but they also have read-only access to selected resources outside their projects, such as Storage Classes and Persistent Volumes.
 
 The next chapter will focus on the API resources related to storage and networking, including OpenShift custom resources not shown in the figure. This section focus on the API resources required to manage containers and their configuration data.
 
 === Kubernetes Namespaces and OpenShift Projects
 
-Kubernetes organanizes API resource instances in Namespaces, and users are granted access to projects using Role-Based Access Control (RBAC). Kubernetes Operators are granted the `edit` role in a project, meaning they can create and manage resource instances of a restricted set of resource types, which allows them to deploy and manage applications. Kubernetes Administrators get the `admin` role, which alows them to create and manage instaces or a larger set of resource types, including RBAC resources and compute resource quotas.
+Kubernetes organanizes API resource instances in Namespaces, and users are granted access to projects using Role-Based Access Control (RBAC). Kubernetes Operators are granted the `edit` role in a project, meaning they can create and manage resource instances of a restricted set of resource types, which allows them to deploy and manage applications. Kubernetes Administrators get the `admin` role, which alows them to create and manage instaces or a larger set of resource types, including Role Binding resources and Rresource Quotas.
+
+// With this busy figure, the arrow heads are not very visible as PNG. Need to fix the SVG issue for better quality of diagrams.
+
+image::s3-workloads-lecture-fig-2.png[]
 
 Most Kubernetes API resource types are namespaced resources, meaning they must exist inside a Kubernetes Namespace, and their names would not collide with resources of the same type in different Namespaces. A few API resource types are non-namespaced, meaning they exist outside any Namespace. Kubernetes Cluster Administrators get the `cluster-admin` role to manage those non-namespaced resources, and also instances of all resource type in all namespaces.
 
-A Kubernetes Operators may get `admin` in some namespaces but not in others, meaning they are namespace administrators instead of cluster administrators. An OpenStack Administrator may either be an administrator of the two projects of the OpenStack add-on operator or they may be just Operators of those projects, getting the `edit` role.
+A Kubernetes Operators may get `admin` in some namespaces but not in others, meaning they are namespace administrators instead of cluster administrators. An OpenStack Administrator may either be an administrator of the two projects of the OpenStack add-on operator or be just ab Operator of those projects, getting the `edit` role.
 
 With standard Kubernetes, only Cluster Administrators can create namespaces, which is too restrictive for application developers: they must either ask an administrator to create and configure projects for them, or pile too many unrelated applications in the namespaces they already have access to.
 
@@ -47,6 +53,8 @@ Those self-service namespaces are created with a default set of API resources, w
 === Kubernetes Workloads
 
 The concept of "application" varies with programming language, architecture style, and other factors, so Kubernetes offer a number of resource types to represent applications. These same resource types could represent only a piece of a larger application, such as a component of an OpenStack service. These resource types are part of the Kubernetes Workloads API.
+
+image::s3-workloads-lecture-fig-3.png[]
 
 Kubernetes workload resources types, also known as Kubernetes workload controllers, represent the scalability and availability requirements of an application or component, for example: a network server application, such an OpenStack API endpoint, must be running continously. If, by any reason, that API edpoint stops running, a workload controller will start another instance, so users can always invoke those APIs.
 
@@ -80,9 +88,9 @@ It's common with Kubernetes that multiple API resource types work in layers, or 
 
 * A Deployment instance manages one or two Replica Set instances, which in turn manage one or more Pod instances each.
 
-* A Cron Job instance which creates new Job instances, everytime its schedule requires, and each Job instance manages one Pod instance, or multiple Pod instances if there were retries.
+* A Cron Job instance which creates new Job instances, everytime its schedule requires, and each Job instance manages one Pod instance, or possibly multiple Pod instances, if there were retries.
 
-That design pattern of resource instances which manage other resource instances is extended to Kubernetes add-on operators, where each add-on operator instance may manage multiple workload controllers.
+That design pattern of resource instances which manage other resource instances is extended to Kubernetes add-on operators, where each add-on operator instance may manage multiple workload controllers, and a custom resource from an add-on operator may manage multiple application workloads.
 
 === Stateless and Stateful Componentes of OpenStack Control Planes
 
@@ -112,9 +120,11 @@ WARNING: Kubernetes currently does not take advantage of all types of Kernel nam
 
 A Pod in Kubernetes is a group of containers which share some Kernel namespaces, especially the network namespace, but run isolated from each other in other kernel namespaces, such as the process and mount namespaces. Once kubernetes schedules a Pod to a cluster node, all containers from the Pod run in the same node. Else, they would not be able to share Kernel namespaces.
 
+image::s3-workloads-lecture-fig-4.png[]
+
 Some containers from a Pod may run sequentially, for example the init containers, which perform whatever initialization its required before starting the main application container, and multiple initialization tasks may be required in strict order.
 
-Other containers from a pod may run in parallel, for example the side-car containers, which complements the main application container with support tasks such as network proxying.
+Other containers from a pod may run in parallel, for example the side-car containers, which complements the main application container with support tasks such as network proxying and access control.
 
 It is common having Pods which run a single container, but the possibility of running multiple containers on the same Pod enables reusing container images as building blocks or larger application components.
 
@@ -149,6 +159,8 @@ Well-designed add-on operators will set owner references all the way, so you cou
 == Other Kubernetes Application Resources
 
 Workload controllers and Pods are not sufficient to describe typical cloud-native and other kinds of applications or components. At the beginning of this section we mentioned other application resources from Kubernetes, such as Services, Configuration Maps, and Persistent Volume Claims. Add-on operators could add more application resource types or add more functionality over standard Kubernetes resource types.
+
+image::s3-workloads-lecture-fig-5.png[]
 
 The next chapter will present Kubernetes standard API resources and OpenShift custom resources which deal with persistent storage and networking, but here we introduce two resource types which provide applications with their configuration settings:
 
