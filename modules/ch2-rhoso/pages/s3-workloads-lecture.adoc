@@ -156,7 +156,7 @@ Whenever a Kubernetes API resource instance manages another resource instance, i
 
 Well-designed add-on operators will set owner references all the way, so you could track any Pod and other resources to the add-on operator which ultimately manages them.
 
-== Other Kubernetes Application Resources
+== Kubernetes Application Configuration Resources
 
 Workload controllers and Pods are not sufficient to describe typical cloud-native and other kinds of applications or components. At the beginning of this section we mentioned other application resources from Kubernetes, such as Services, Configuration Maps, and Persistent Volume Claims. Add-on operators could add more application resource types or add more functionality over standard Kubernetes resource types.
 
