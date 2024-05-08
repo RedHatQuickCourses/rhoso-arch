@@ -10,9 +10,45 @@ Relate individual operators and custom resources from Red Hat OpenStack Services
 
 WARNING: Work In Progress
 
+// Given that many new concepts, Im happy with memorization questions. The next quiz, on workloads will require more thought.
+
 == Questions
 
-1. Question?
+1. Which of the following is the best description of the OpenStack add-on operator from Red Hat OpenStack Services on OpenShift?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] It is a Kubernetes add-on operator that manages VMs running in OpenStack clusters.
+* [ ] It is a Kubernetes add-on operator that manages the control and data planes of OpenStack clusters.
+* [ ] It is an OpenShift cluster operator that enables running containerized applications on OpenStack clusters.
+* [ ] It is an OpenShift cluster operator that manages OpenStack compute nodes.
+
+2. Which of the child operators of the OpenStack add-on operator runs Ansible playbooks to configure OpenStack compute nodes?
+
+* [ ] The Bare Metal add-on operator
+* [ ] The Data Plane add-on operator
+* [ ] The Infrastruture add-on operator
+* [ ] The Ironic add-on operator
+* [ ] The Nova add-on operator
+
+3. Which component of Red Hat OpenShift manages add-on operators such as the OpenStack add-on operator from Red Hat OpenStack Services on OpenShift?
+
+* [ ] The Cluster Version Operator (CVO)
+* [ ] The Operator Lifecycle Manager (OLM)
+* [ ] The Operator SDK
+* [ ] Helm
+* [ ] OpenStack Heat
+
+4. Which of the following is the best description of Kubernetes add-on operators?
+
+* [ ] Applications which manage hardware resources, such as GPUs.
+* [ ] Applications which manage running applications, such as relational databases.
+* [ ] Applications which manage networking equipment, such as IP routers.
+* [ ] Applications which manage physical servers with BMC hardware.
+* [ ] All of the above could be Kubernetes add-on operators.
+
+5. Which of the following custom resource types always require customized instances for a specific OpenStack cluster?
+
+* [ ] Control Plane
+* [ ] Data Plane Deployment
+* [ ] Data Plane Service
+* [ ] Network Configuration
+* [ ] Node Set
