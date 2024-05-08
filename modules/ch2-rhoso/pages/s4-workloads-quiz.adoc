@@ -10,10 +10,65 @@ Relate workloads and configurations of OpenStack services with the OpenShift and
 
 WARNING: Work In Progress
 
+
+// I'm not finding easy justifications for running services such as nova-api and glance as stateful sets, not even the hack to use an inline PVC... and based on the inconsistency I cannot present neutron and keystone as good fits for deployments. :-(
+
 == Questions
 
-1. Given the following description of an OpenStack service, which Kubernetes workload controller best fits its needs?
+1. Given the following description of a component of an OpenStack service, which Kubernetes workload controller best fits its needs?
++
+[quote]
+____
+Each node in an OVN virtual network must run an OVN controller, which creates Geneve tunnels between those nodes to encapsulate and forward network packets belonging to OVN virtual networks. With Red Hat OpenStack Services on OpenShift, all OpenShift and OpenStack compute nodes must run an OpenStack OVN controller.
+____
 
+* [ ] Replica Set
+* [ ] Deployment
+* [ ] Job
+* [ ] Cron Job
+* [ ] Stateful Set
+* [ ] Daemon Set
 
-* [ ] Answer 1
-* [ ] Answer 2
+2. Given the following description of a component of an OpenStack service, which Kubernetes workload controller best fits its needs?
++
+[quote]
+____
+RabbitMQ nodes and clusters store information that can be thought of schema, metadata or topology. These definitions are replicated across all cluster nodes.
+
+Each node stores messages for the queues that have their leader replica hosted on that node. Messages can be replicated between nodes if a replicated queue type with multiple replicas is used.
+____
+
+* [ ] Replica Set
+* [ ] Deployment
+* [ ] Job
+* [ ] Cron Job
+* [ ] Stateful Set
+* [ ] Daemon Set
+
+3. Given the following description of a component of an OpenStack service, which Kubernetes workload controller best fits its needs?
++
+[quote]
+____
+Horizon is essentially a stateless application, with the caveat that session information could be considered stateful. The use of signed cookies places the full contents of the session state into an HTTP header rather than relying on an in-memory cache or database tier to provide session state persistence.
+____
+
+* [ ] Replica Set
+* [ ] Deployment
+* [ ] Job
+* [ ] Cron Job
+* [ ] Stateful Set
+* [ ] Daemon Set
+
+4. Given the following description of a component of an OpenStack service, which Kubernetes workload controller best fits its needs?
++
+[quote]
+____
+When you create a Data Plane Deployment resource, the External Data Plane Mangement Operator runs one Ansible playbook for each Data Plane Service configured for each Node Set of the data plane, using a custom Ansible Execution Environment container image. Each playbook runs to completion, and when all playbooks finish, the data plane and all its compute nodes should be fully configured for their OpenStack cluster. To perform any change to compute nodes, an OpenStack Administrator must create a new Data Plane Deployment resource, which triggers a new execution of all Ansible playbooks.
+____
+
+* [ ] Replica Set
+* [ ] Deployment
+* [ ] Job
+* [ ] Cron Job
+* [ ] Stateful Set
+* [ ] Daemon Set
