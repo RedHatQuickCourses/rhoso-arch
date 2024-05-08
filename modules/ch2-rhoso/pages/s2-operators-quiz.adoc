@@ -1,4 +1,4 @@
-:time_estimate: 2
+:time_estimate: 1
 
 = Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift
 

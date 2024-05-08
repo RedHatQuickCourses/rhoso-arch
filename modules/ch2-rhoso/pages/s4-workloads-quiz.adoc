@@ -1,4 +1,4 @@
-:time_estimate: 2
+:time_estimate: 3
 
 = Quiz: OpenStack Services as OpenShift Workloads
 
