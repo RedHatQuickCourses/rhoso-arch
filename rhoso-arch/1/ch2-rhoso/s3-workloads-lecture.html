@@ -227,7 +227,7 @@ Pending Review
 <h2 id="_kubernetes_application_resources"><a class="anchor" href="#_kubernetes_application_resources"></a>Kubernetes Application Resources</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Kubernetes represents containerized applications using many API resource types, and the main one is the <strong>Pod</strong>, which represents a group of containers sharing Linux kernel namespaces. Pods are managed by a workload controller, such as a Deployment or a Job. Pods need confirmation data, which is represented by Secrets and Configuration Maps. Connectivity between Pods, or from outside of a Kubernetes cluster and its Pods, comes from Services and Ingress or from OpenShift Routes. Finally, persistent storage mounted by Pods is represented by Persistent Volume Claims (PVCs).</p>
+<p>Kubernetes represents containerized applications using many API resource types, and the main one is the <strong>Pod</strong>, which represents a group of containers sharing Linux kernel namespaces. Pods are managed by a workload controller, such as a Deployment or a Job. Pods need configuration data, which is represented by Secrets and Configuration Maps. Connectivity between Pods, or from outside of a Kubernetes cluster and its Pods, comes from Services and Ingress or from OpenShift Routes. Finally, persistent storage mounted by Pods is represented by Persistent Volume Claims (PVCs).</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -235,7 +235,7 @@ Pending Review
 </div>
 </div>
 <div class="paragraph">
-<p>Kubernetes Operators can only create and manage resources inside the projects they have acess to, but they also have read-only access to selected resources outside their projects, such as Storage Classes and Persistent Volumes.</p>
+<p>Kubernetes Operator users can only create and manage resources inside the projects they have acess to, but they also have read-only access to selected resources outside their projects, such as Storage Classes and Persistent Volumes.</p>
 </div>
 <div class="paragraph">
 <p>The next chapter will focus on the API resources related to storage and networking, including OpenShift custom resources not shown in the figure. This section focus on the API resources required to manage containers and their configuration data.</p>
@@ -269,7 +269,7 @@ Pending Review
 <div class="sect2">
 <h3 id="_kubernetes_workloads"><a class="anchor" href="#_kubernetes_workloads"></a>Kubernetes Workloads</h3>
 <div class="paragraph">
-<p>The concept of "application" varies with programming language, architecture style, and other factors, so Kubernetes offer a number of resource types to represent applications. These same resource types could represent only a piece of a larger application, such as a component of an OpenStack service. These resource types are part of the Kubernetes Workloads API.</p>
+<p>The concept of application varies with programming language, architecture style, and other factors, so Kubernetes offer a number of resource types to represent applications. These same resource types could represent only a piece of a larger application, such as a component of an OpenStack service. These resource types are part of the Kubernetes Workloads API.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -377,7 +377,7 @@ Kubernetes currently does not take advantage of all types of Kernel namespaces a
 <div class="sect2">
 <h3 id="_kubernetes_pods"><a class="anchor" href="#_kubernetes_pods"></a>Kubernetes Pods</h3>
 <div class="paragraph">
-<p>A Pod in Kubernetes is a group of containers which share some Kernel namespaces, especially the network namespace, but run isolated from each other in other kernel namespaces, such as the process and mount namespaces. Once kubernetes schedules a Pod to a cluster node, all containers from the Pod run in the same node. Else, they would not be able to share Kernel namespaces.</p>
+<p>A Pod in Kubernetes is a group of containers which share some Kernel namespaces, especially the network namespace, and run with other dedicated kernel namespaces, such as the process and mount namespaces. Once kubernetes schedules a Pod to a cluster node, all containers from the Pod run in the same node. Else, they would not be able to share Kernel namespaces.</p>
 </div>
 <div class="imageblock">
 <div class="content">
