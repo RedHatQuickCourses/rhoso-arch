@@ -146,7 +146,13 @@
     <a class="nav-link" href="s1-networking-lecture.html">Kubernetes Networking for OpenStack Services</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="s2-networking-quiz.html">Quiz: Kubernetes Networking for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s2-networking-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -195,7 +201,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Estimated reading time: <strong>5 minutes</strong>.</em></p>
+<p><em>Estimated reading time: <strong>19 minutes</strong>.</em></p>
 </div>
 <div class="dlist">
 <dl>
@@ -220,10 +226,394 @@ Pending Review
 </div>
 </div>
 <div class="sect1">
-<h2 id="_introduction_to_kubernetes_networking"><a class="anchor" href="#_introduction_to_kubernetes_networking"></a>Introduction to Kubernetes Networking</h2>
+<h2 id="_openstack_with_isolated_networks"><a class="anchor" href="#_openstack_with_isolated_networks"></a>OpenStack With Isolated Networks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>WIP</p>
+<p>OpenStack clusters are usually deployed with multiple isolated networks. Isolated networks address data center performance, reliability, and security concerns. It is common to run OpenStack clusters with large physical servers that contains multiple network interfaces.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of a sample isolated networks scenario, only openstack ]</p>
+</div>
+<div class="paragraph">
+<p>Isolated networks can be either physical layer 2 networks, which map to independent network interfaces in a server, or virtual layer 2 networks (VLANs) which are trunked into a single network interfae, or a mix of both. In both scenarios, each network becomes a network interface device on a Linux server.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to provide multiple paths, that is, multiple network interfaces, on the same server, that connect to the same layer 2 network. This enables high availability, in case on of the paths (cables and network gear) fails, and aggregating the capacity of all paths for increased bandwidth. In that case, multiple network interfaces are grouped into a single bonded network device on a Linux server.</p>
+</div>
+<div class="paragraph">
+<p>In any case, isolated networks are restricted by layer 3 routing or border firewalls and cannot connect to each other. For our purposes, an isolated network could be composed of multiple layer 2 networks that are interconnected in a larger layer 3 network, but that larger network is isolated from other layer 3 networks.</p>
+</div>
+<div class="paragraph">
+<p>if a server must run software which accesses multiple isolated networks, that server needs network interfaces attached to each of them and you assume those isolated networks do not conflict with each other, that is, they use disjoint IP address ranges.</p>
+</div>
+<div class="paragraph">
+<p>Typical designs of OpenStack clusters include isolated networks for OpenStack itself and its supporting infrastructure, such as external storage backends, and possibly multiple networks for application traffic. All of those isolated networks must be attached to OpenStack cluster nodes.</p>
+</div>
+<div class="paragraph">
+<p>Follows an example scenario of isolated networks, from the perspective of OpenStack only:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Control plane network</dt>
+<dd>
+<p>Connects an OpenStack control plane to its compute nodes. It is the network that OpenStack uses to manage compute nodes, at the operating system level, to deploy and configure the components of OpenStack services wich must run on compute nodes.</p>
+</dd>
+<dt class="hdlist1">Internal API network</dt>
+<dd>
+<p>Connects OpenStack components running on compute nodes to other components of the same service and also other OpenStack services running on the control plane. It is the network that OpenStack uses to manage application workloads.</p>
+</dd>
+<dt class="hdlist1">Tenant or Application network</dt>
+<dd>
+<p>Connects workloads running on compute nodes to each other. It is the network that tunnels traffic from all virtual tenant networks from Neutron.</p>
+</dd>
+<dt class="hdlist1">Storage network</dt>
+<dd>
+<p>Connects OpenStack compute nodes to storage back-ends, to store application data manged by  OpenStack services such as Cinder and Glance on behalf of applications.</p>
+</dd>
+<dt class="hdlist1">External network</dt>
+<dd>
+<p>Connects workloads running on compute nodes to end users and other applications running outside of their OpenStack cluster. It is a provider network on Neutron.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Data centers may partition their networks in different ways and include additional isolated networks, each with a specific purpose, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A storage management network, isolated from the storage data network, to manage storage arrays.</p>
+</li>
+<li>
+<p>An intranet network, which connects applications to internal users of an organization but not to external users such as customers and partnets.</p>
+</li>
+<li>
+<p>A server management network, which connects to BMC hardware on physical servers, for remote booting, power control, and installing an operating system.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Data centers may also include multiple isolated networks with similar purposes, for example: multiple storage networks, for different storage backeds; or multiple external networks, to connect selected applications to different classes of users.</p>
+</div>
+<div class="paragraph">
+<p>Whatever your network isolation scenario, Red Hat OpenStack Services on OpenShift provides an OpenStack Administrator with control over which networks attach to which OpenStack services and to which application workloads.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kubernetes_networking_basics"><a class="anchor" href="#_kubernetes_networking_basics"></a>Kubernetes Networking Basics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Kubernetes was designed for a very simple networking model, at least when compared to OpenStack: all pods attach to a single, flat virtual layer 3 network, which exists only inside a Kubernetes cluster.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of Kuberntes pod/service networks, SNAT, services, and ingress ]</p>
+</div>
+<div class="paragraph">
+<p>If a Pod must connect to something outside its Kubernetes cluster, its cluster node performs SNAT, and that something seels packets coming from the node.</p>
+</div>
+<div class="paragraph">
+<p>If something outside a Kubernetes cluster must connect to a Pod, there are a few alternatives:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Running Pods on the host network namespace, so those Pods connects directly to the same networks as their hosts.</p>
+</li>
+<li>
+<p>Create a Kubernetes a load balancer, which forwards packets from an external IP to Pods inside the cluster.</p>
+</li>
+<li>
+<p>Create a reverse HTTP proxy, which forwards HTTP requests from an external IP address to Pods inside the cluster</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Option (3) above is the most popular with cloud native applications, because it mixes well with API gateways and other cloud application design patters. It also eases network management, because a singe reverse proxy instance, thus a single external IP address, can be shared with many application instances.</p>
+</div>
+<div class="paragraph">
+<p>Option (1) is not encouraged because privileged Pods, running on host namespaces, increase the risk of security issues. It is typically reserved for infrastructure components which provide networking services for applications, for example: running reverse HTTP proxies as Pods.</p>
+</div>
+<div class="paragraph">
+<p>Finally, option (2) is not possible with standard Kubernetes outside of cloud providers.</p>
+</div>
+<div class="sect2">
+<h3 id="_limitations_of_kubernetes_networking"><a class="anchor" href="#_limitations_of_kubernetes_networking"></a>Limitations of Kubernetes Networking</h3>
+<div class="paragraph">
+<p>Upstream Kubernetes defines a number of API resource types which provide access to standard IT infrastructure but does not provide resource controllers for all those API resources in all kinds of IT infrastructure. For example, Kubernetes does not provide resource controllers for reverse HTTP proxies, and only provides resource controllers for internal load balancers and external cloud load balancers.</p>
+</div>
+<div class="paragraph">
+<p>In fact, Kubernetes was not originally designed to run any kind of workload and not for running over a pool of large physical servers: it was originally designed to run cloud-native applications on cloud provider instances. The open source community created extensions to make Kubernetes suitable for a wider variety of workloads and on different kinds of IT infrastructure, including traditional hypervisors and physical servers. Red Hat OpenShift comes with many of these extensions already bundled in.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kubernetes_with_isolated_networks"><a class="anchor" href="#_kubernetes_with_isolated_networks"></a>Kubernetes with Isolated Networks</h3>
+<div class="paragraph">
+<p>Kubernetes itself provides no features to deal with multiple isolated networks. Kubernetes clusters only use one network interface from each cluster node to tunnel packets from its internal network. That is the primary network of a Kubernetes cluster.</p>
+</div>
+<div class="paragraph">
+<p>Kubernetes also uses the primary network for traffic leaving a cluster, when it performs SNAT.</p>
+</div>
+<div class="paragraph">
+<p>Without extension components, a Kubernetes cluster has limited capacity of connecting to isolated networks, unless applications runs their Pods on the host network namespace. This is it is not a general-purpose solution for application workloads. Fortunately, Red Hat OpenShift comes with support for Multus secondary networks, which we present later in this section.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kubernetes_services"><a class="anchor" href="#_kubernetes_services"></a>Kubernetes Services</h3>
+<div class="paragraph">
+<p>Services are an essential concept of Kubernetes networks. It is assumed that Pods rarelly connect directly to each other, instead they connect to Services. Most applications which accepts network connections define a Kubernetes service and client applications applicatios connect to that service.</p>
+</div>
+<div class="paragraph">
+<p>Pods in Kubernetes are supposed to be ephemeral. If a Pod (or a container inside a pod) terminates, for whatever reason, it is not restarted. Instead, its resource controller creates a new Pod. And every new Pod gets a new IP address on the internal network.</p>
+</div>
+<div class="paragraph">
+<p>So Pods do not have a stable IP address which other Pods could use to connect to them. Services provide that stable IP address and, more than that, a stable DNS name, which is resolvable by all Pods inside the same Kubernetes cluster.</p>
+</div>
+<div class="paragraph">
+<p>A Kubernetes Service finds its Pods by means of a pod selector which matchs labels on Pods. Usually a Service uses the same labels than a workload controller, such as a Deployment, uses to match those pods. But it doesn&#8217;t have to use exactly the same labels, which enable sophisticated processes such as A/B application testing and canary deployments.</p>
+</div>
+<div class="paragraph">
+<p>Kubernetes Services are API resources which represent different kinds of load balancers. They could be either internal load balancers, which fronts Pods for traffic originating from other Pods in the same cluster, or external load balancers, which fronts Pods for traffic originating outside of their clusters.</p>
+</div>
+<div class="paragraph">
+<p>Services of the type <code>ClusterIP</code> are internal load balancers and type of Service almost all applications use. They get a DNS name of the format <code>service-name.namespace-name.svc.cluster.local</code>.</p>
+</div>
+<div class="paragraph">
+<p>Services of the type <code>LoadBalancer</code> are external load balancers, which on upstream Kubernetes only work within a cloud provider. Red Hat OpenShift provides the MetalLB add-on operator, which enables external load balancer services outside of cloud providers, on physical servers.</p>
+</div>
+<div class="paragraph">
+<p>Kuberentes external load balancers, that is, Services of type <code>LoadBalancer</code>, have both an internal IP, inside the virtual internal network, and an external IP, which connects the load balancer to outside of a cluster.</p>
+</div>
+<div class="paragraph">
+<p>There are other types of Kubernetes services, wich more narrow use cases, and that we do not need for Red Hat OpenStack Services on OpenShift.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kubernetes_ingress_and_openshift_routes"><a class="anchor" href="#_kubernetes_ingress_and_openshift_routes"></a>Kubernetes Ingress and OpenShift Routes</h3>
+<div class="paragraph">
+<p>OpenShift Route custom resources and Kubernetes Ingress resources serve similar purposes: both define a reverse HTTP proxy, which enables traffic from outside a cluster to reach Pods inside a Kubernetes cluster.</p>
+</div>
+<div class="paragraph">
+<p>Routes and Ingress resources are the preferred way of enabling connectivity from end users and external client applications, at least for applications which use HTTP-based protocols or TLS with SNI, which are the majority of cloud-native applications.</p>
+</div>
+<div class="paragraph">
+<p>Applications which use other layer 7 protocols, such as relational databases and AMQP messaging servers, cannot use Routes and Ingress. They either accept connections from only other Pods on the same Kubernetes cluster (preferred approach for cloud-native applications) or they must use other approaches, for example Services of type <code>LoadBalancer</code>.</p>
+</div>
+<div class="paragraph">
+<p>Routes and Ingress differ on sytntax and minor features, and OpenShift Routes are an older feature than Kuberntes Ingress, much makes it more common among OpenShift users.</p>
+</div>
+<div class="paragraph">
+<p>Upstream Kubernetes does not come with an Ingress controller, so you must integrate such a component into your cluster ti enable usage of use Ingress API resources. Red Hat OpenShift comes with an Ingress controller which is the same controller for Route custom resources.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openstack_usage_of_service_and_route_resources"><a class="anchor" href="#_openstack_usage_of_service_and_route_resources"></a>OpenStack Usage of Service and Route Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenStack Services on OpenShift uses the following Kubernetes API resources for connectivity to its OpenStack services:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OpenShift Route resources provide all public API entry points. All accesses from OpenStack clients outside the cluster, and to the Horizon dashboard, comes through OpenShift routes and are mediated by the OpenShift Ingress controller.</p>
+</li>
+<li>
+<p>Kubernetes Service provide external load balancers for private API entry points, which enables communication between Pods of different OpenStack services and between components of those services running on compute nodes and Pods inside an OpenShift cluster.</p>
+</li>
+<li>
+<p>Kubernetes Service resources also provide internal load balancers and internal DNS names for components of OpenStack services which require no access from outside an OpenShift cluster, and are acessed only by other Pods.</p>
+</li>
+<li>
+<p>Finally Kubernetes Service resources provide external load balancers for AMQP messaging, which enables communication between components of OpenStack services running on compute nodes with components running on the control plane.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The OpenShift Ingress controller can work only with the Kubernetes primary network, it cannot provide private API entry points for OpenStack services over a different network. That&#8217;s why Red Hat OpenStack Services on OpenShift must use external load balancers for these entry points. If an OpenStack Pod must invoke OpenStack APIs of other services on its OpenStack cluster, it uses the internal IP addres of the external load balancer.</p>
+</div>
+<div class="paragraph">
+<p>In addition to Services and Routes, Pods from Red Hat Services on OpenShift require connectivity to multiple isolated networks to start network connections to storage backends and SSH management of compute nodes, which are not possible with standard Kubernetes networking but are possible with Multus, included with Red Hat OpenShift.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift_extensions_to_kubernetes_networking"><a class="anchor" href="#_openshift_extensions_to_kubernetes_networking"></a>OpenShift Extensions to Kubernetes Networking</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>During the presentation of standard Kubernetes networking, we already mentioned two OpenShift extensions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Route custom resources, which offer an alternative to Kuberntes Ingress resources.</p>
+</li>
+<li>
+<p>MetalLB, an OpenShift add-on operator which enables Kubernetes Services to work as external load balancers on physical servers.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>While Routes and Ingress do not provide access to multiple isolated networks, MetalLB can be configured with virtual IPs of different networks, over multiple network devices on OpenShift cluster nodes.</p>
+</div>
+<div class="paragraph">
+<p>The MetalLB add-on operator solves the connectivity needs from OpenStack compute nodes to OpenStack Pods, but doesn&#8217;t solve the other way around, and it also does not solve the connectivity requirements from OpenStack Pods to multiple isolated networks. For that, Red Hat OpenStack Services on OpenShift uses two other features of OpenShift: Multus and NMState.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of Kubernetes pod/service networks, SNAT, services, and ingress + secondary networks and MetalLB ]</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Multus enables OpenShift to attach Pods to any number of secondary networks. Those networks are network devices on OpenShift cluster nodes, which must be preconfigured network interfaces on physical cluster nodes.</p>
+</li>
+<li>
+<p>NMState enables configuring physical network interfaces with VLANs, bondings, or whatever kind of hardware and layer 2 connectivity is desired. It also enables configuring a number of other Linux networking features such as virtual bridges, but this is beyond the scope of this course.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_multus_secondary_networks_and_pods"><a class="anchor" href="#_multus_secondary_networks_and_pods"></a>Multus Secondary Networks and Pods</h3>
+<div class="paragraph">
+<p>Multus is a Container Network Interface plugin (CNI) which enables attaching multiple virtual network interfaces to Pods. Multus enables many interesting features, by the use of a plug-in architecture and a JSON configuration syntax, which are beyond the scope of this course.</p>
+</div>
+<div class="paragraph">
+<p>Network Attachment Definition custom resources represents secondary networks. Once there is a Network Attachment Definition in a project, Pods use annotations to declare the secondary networks they attach to.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of kuberentes application resources + Multus and NMState resources ]</p>
+</div>
+<div class="paragraph">
+<p>Each secondary networks becomes an additional virtual network device inside all containers of a Pod. Any OpenShift Operator can create Pods that attach to any secondary network in the same project.</p>
+</div>
+<div class="paragraph">
+<p>Traffic to other Pods and to Kubernets Services still flow through the primary network interface from Kubernetes, but secondary networks enable Pods to both start and listen to network connections on those secondary networks, over any network protocol.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_network_interface_configuration_with_nmstate"><a class="anchor" href="#_network_interface_configuration_with_nmstate"></a>Network Interface Configuration with NMState</h3>
+<div class="paragraph">
+<p>NMState offers a declarative syntax for configuring Linux network interfaces using NetworkManager. The NMState add-on operator manages NMState configurations and applies them to OpenShift cluster nodes.</p>
+</div>
+<div class="paragraph">
+<p>Before NMState, OpenShift Administrators had to configure host networking with cumbersome approaches, such as using kernel arguments at RHEL CoreOS boot time, or using low-level Machine Configuration resources to feed OpenShift cluster nodes with Network Manager configuration files. With the NMState add-on operator the configuration syntax is simpler and changes do not require a node reboot.</p>
+</div>
+<div class="paragraph">
+<p>A Node Network Configuration Policy custom resource instance represents the network settings of possibly multiple network interfaces on many OpenShift cluster nodes. You do not need one instance for each cluster node, as long as a group of nodes have similar hardware, with the same device names and are attached to the same physical networks, and get their IP addresses from external means such as a DHCP server.</p>
+</div>
+<div class="paragraph">
+<p>But, if you need static IP addresses on each OpenShift cluster node, or those nodes have varying hardware configurations, you can create a Node Network Configuration Policy custom resource instance for only one node.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_openshift_network_cluster_operator"><a class="anchor" href="#_the_openshift_network_cluster_operator"></a>The OpenShift Network cluster operator</h3>
+<div class="paragraph">
+<p>The OpenShift Network Configuration custom resource (<code>network.cluster.openshift.io</code>) provides the IP address ranges of the pod and service networks. It has a single non-namespaced instance named <code>cluster</code> and you should query two attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>spec.clusterNetwork</code> for the IP ranges for Pods.</p>
+</li>
+<li>
+<p><code>spec.serviceNetwork</code> for the IP ranges for Services.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The default ranges, which could be changed at OpenShift installation time, are in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$ oc get network cluster -o jsonpath='{.spec.clusterNetwork}{"\n"}'
+[{"cidr":"10.128.0.0/14","hostPrefix":23}]
+$ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
+["172.30.0.0/16"]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is no easy way of finding the IP ranges of the Kuberntes primary network. You could just check the IP addresses of individual cluster nodes, from the Node Kubernetes resource type, and guess which is their subnet range, or ask an OpenShift Administator.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openstack_pods_and_secondary_networks"><a class="anchor" href="#_openstack_pods_and_secondary_networks"></a>OpenStack Pods and Secondary Networks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OpenShift Network cluster operator enables Multus alongside a primary CNI plugin based on OVN, the same virtual networking layer that Red Hat OpenStack Services on OpenShift uses for Neutron by means of the OpenStack OVN child operator.</p>
+</div>
+<div class="paragraph">
+<p>Those two OVN instances cannot mix with each other: one set of OVN pods manage Kubernetes networking, another set of OVN pods manage OpenStack networking. Each requires a dedicated network interface for tunneling traffic between cluster nodes.</p>
+</div>
+<div class="paragraph">
+<p>Not all OpenShift cluster nodes require connectivity to OpenStack networks: only the OpenShift cluster nodes which run OpenStack pods. Depending on the size of your OpenShift cluster and which other workloads it hosts, besides Red Hat OpenStack Services on OpenShift, it could really mean all OpenShift compute nodes, also called worker nodes.</p>
+</div>
+<div class="paragraph">
+<p>As you consider your isolated networks design for OpenStack clusters, remember to cosider the OpenShift cluster nodes network and also its internal Kubernetes primary network, to prevent IP address conflicts. Such conflicts would affect OpenStack Pods and be very hard to track.</p>
+</div>
+<div class="paragraph">
+<p>Also consider the isolated network design of you storage backends, which might require additional isolated networks conencted to either OpenShift or OpenStack cluster nodes, or maybe to both. As we will see in the next section, OpenShift and OpenStack clusters do not require connectivity to the same storage backends, but OpenStack Pods do require some connectivity to the same storage backeds as OpenStack compute nodes.</p>
+</div>
+<div class="sect2">
+<h3 id="_isolated_networks_and_vlans_with_openshift"><a class="anchor" href="#_isolated_networks_and_vlans_with_openshift"></a>Isolated Networks and VLANs with OpenShift</h3>
+<div class="paragraph">
+<p>An OpenShift cluster running Red Hat OpenStack Services on OpenShift requires at least two physical network interfaces: one for the Kubernetes primary network, and another for the OpenStack control plane network, because OpenShift and OpenStack each run their own set of OVN pods.</p>
+</div>
+<div class="paragraph">
+<p>[ Figure of openshift networks + openstack isolated networks ]</p>
+</div>
+<div class="paragraph">
+<p>Other OpenStack isolated networks, except for the OpenStack external, could be VLANs on the same physical interface you use for the control plane network. You cannot use a VLAN for the OpenStack control plane network because it is the network over which the Data Plane operator configures compute nodes for all other networks.</p>
+</div>
+<div class="paragraph">
+<p>Follows an expanded example scenario of isolated networks with both OpenShift and OpenStack networks:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Kubernetes primary network</dt>
+<dd>
+<p>Connects OpenShift cluster nodes to each other and to the outside world. This is the network that tunnels all traffic between Kuberentes Pods, in all namespaces, thanks to the OVN pods from OpenShift.</p>
+</dd>
+<dt class="hdlist1">Kubernetes cluster network</dt>
+<dd>
+<p>It is the virtual network, internal to an OpenShift cluster, which connects Pods. It includes two subnets ranges, one for Pods, and another for Services.</p>
+</dd>
+<dt class="hdlist1">OpenStack control plane network</dt>
+<dd>
+<p>Connects OpenShift worker nodes to OpenStack compute nodes for SSH connections.</p>
+</dd>
+<dt class="hdlist1">OpenStack internal API network</dt>
+<dd>
+<p>Connects OpenStack compute nodes to OpenShift worker nodes for access to internal OpenStack API endpoints and AMQP.</p>
+</dd>
+<dt class="hdlist1">OpenStack tenant or Application network</dt>
+<dd>
+<p>Connects workloads running on compute nodes to each other. This is the network that tunnels traffic between OpenStack server instances, thanks to the OVN pods from OpenStack.</p>
+</dd>
+<dt class="hdlist1">OpenStack storage network</dt>
+<dd>
+<p>Connects OpenStack compute nodes and OpenStack Pods to the storage back-ends of Cinder and Glance.</p>
+</dd>
+<dt class="hdlist1">OpenStack external network</dt>
+<dd>
+<p>Connects workloads running on compute nodes to anything outside their OpenStack cluster.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>All OpenStack isolated networks, except for the external network, and including the control plane network, must be configured on OpenShift as Multus secondary networks, with their network interfaces configured using NMState. Beware that these configurations must be consistent with the Network Configuration custom resource from the OpenStack Infrastructure add-on operator.</p>
+</div>
+<div class="paragraph">
+<p>It may seem strange configuring the OpenStack tenant network as a Multus secondary network, because it carries traffic between OpenStack server instances instead of between OpenStack service components, but there are OpenStack Pods which connect to that network, for example the internal DNSmasq server of the OpenStack cluster.</p>
+</div>
+<div class="paragraph">
+<p>Only the OpenStack internal API network requires MetalLB Virtual IP addresses for internal API endpoints and RabbitMQ. That network also requires a Multus secondary network, because OpenStack service components running as Pods may connect to components running on an OpenStack compute node.</p>
+</div>
+<div class="paragraph">
+<p>A common simplification, especially for smaller clusters, is using the Kubernetes primary network as the OpenStack external network. This works because individual Kubernetes cluser nodes require connectivity to the outside world and that traffic is not usually blocked by a firewall.</p>
+</div>
 </div>
 </div>
 </div>
