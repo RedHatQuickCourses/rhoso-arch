@@ -14,7 +14,11 @@ WARNING: Work In Progress
 
 The Red Hat OpenStack Services on OpenShift product is delivered as a top level add-on operator which manages a set of child add-on operators. Because it manages other add-on operators, it is called a meta operator.
 
+// Antora doesn't display the SVG file but Firefox and Chrome are happy with it
+//image::ch2-rhoso-s1-operators-lecture-fig-5.svg[]
+
 image::s1-operators-lecture-fig-1.png[]
+
 
 Most of these child add-on operators are dedicated to managing indidual OpenStack services, both user-facing (such as Nova and Keystone) and internal infrastrucutre (such as RabbitMQ and OVN). Among the child add-on operators, an OpenStack Administrator usually focus on these two: 
 
