@@ -8,7 +8,7 @@ Goal::
 
 Describe how OpenStack services run as Kubernetes workloads and pods.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == OpenStack Services as Containers
 

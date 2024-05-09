@@ -8,7 +8,7 @@ Goal::
 
 Describe the OpenStack meta-operator and its child operators.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == The OpenStack Meta-Operator
 

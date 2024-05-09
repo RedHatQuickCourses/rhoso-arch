@@ -8,7 +8,7 @@ Objective::
 
 Relate individual operators and custom resources from Red Hat OpenStack Services on OpenShift to their purpose.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 // Given that many new concepts, Im happy with memorization questions. The next quiz, on workloads will require more thought.
 

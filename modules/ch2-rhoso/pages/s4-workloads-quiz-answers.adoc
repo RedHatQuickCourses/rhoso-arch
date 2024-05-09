@@ -1,6 +1,6 @@
 = Answers to the Quiz
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == Quiz: OpenStack Services as OpenShift Workloads
 

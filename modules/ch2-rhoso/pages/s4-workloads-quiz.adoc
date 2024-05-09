@@ -8,7 +8,7 @@ Objective::
 
 Relate workloads and configurations of OpenStack services with the OpenShift and Kubernetes API resources that represent them.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 
 // I'm not finding easy justifications for running services such as nova-api and glance as stateful sets, not even the hack to use an inline PVC... and based on the inconsistency I cannot present neutron and keystone as good fits for deployments. :-(

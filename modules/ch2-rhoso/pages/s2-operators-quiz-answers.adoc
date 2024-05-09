@@ -1,6 +1,6 @@
 = Answers to the Quiz
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == Add-on Operators of Red Hat OpenStack Services on OpenShift
 
