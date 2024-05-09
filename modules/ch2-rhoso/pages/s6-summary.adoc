@@ -1,0 +1,23 @@
+= Summary
+
+In this chapter, you learned:
+
+* The OpenStack add-on operator relies on many child operators, some dedicated to manage individual user-facing and internal infrastructure services of OpenStack, some dedicated to manage networking and compute nodes.
+
+* The Operator Lifecycle Manager (OLM) from OpenShift manages add-on operators, such as the OpenStack operator, and other Kubenetes add-on operators which are required by Red Hat OpenStack Services on OpenShift, such as the MetalLB and NMState operators.
+
+* When you install a meta-operator, such as the OpenStack add-on operator, the OLM automatically installs all its child operators.
+
+* Kubernetes add-on operators can manage entities such as other containerized applications, hardware resources, and external services. They provide custom resource types for the Kubernetes API and Kubernetes Operator users manage those entities by creating and changing instances of those custom resources.
+
+* Deploying, manging, and assessing the health of OpenStack clusters require checking a number of custom resource instance from the OpenStack add-on operator and its child operators, and the main ones are the Control Plane, Network Configuration, Node Set, and Data Plane Deployment custom resources.
+
+* Each OpenStack service runs a number of components as containers in Kubernetes, and its add-on operator manages a number of Kubernetes application resources that represent each component, the main ones being Pods and workload controllers, besides configuration resources such as secrets and configmaps, and resources related to networking and storage.
+
+* A Kubernetes Pod is a group of containers which share selected namespaces, such as the network namespace, and each container of a pod also gets dedicated namespaces, such as the process and mount namespaces. Pods are not required to run with isolated namespaces and could run on the host namespaces, which enabled containerized applications, such as add-on operators, to manage the hardware and operating system of an OpenShift cluster node.
+
+* A Kubernetes workload controller manages Pods to ensure they run to completion, with retries, or run continuously, depending on the type of workload. Kubernetes provides the following types of workload controllers: Replica Set, Deployment, Cron Jobs, Jobs, and Stateful Set.
+
+* Similar to add-on operators, where one operator can manage another operator, a Kubernetes workload controller can manage other workload controllers. For example: Deployments manage Replica Sets, and Cron Jobs manage Jobs.
+
+* OpenStack services use different workload controlers, depending on the stateful or stateless nature of each component, and also to run Ansible playbooks which configure OpenStack compute nodes.
