@@ -1,0 +1,19 @@
+:time_estimate: 1
+
+= Quiz: Kubernetes Networking for OpenStack Services
+
+_Estimated reading time: *{time_estimate} minutes*._
+
+Objective:: 
+
+Relate connectivity requirements of OpenStack services with the OpenShift features which provide that connectivity.
+
+WARNING: Pending Review
+
+== Questions
+
+1. Question?
+
+* [ ] Answer 1
+* [ ] Answer 2
+

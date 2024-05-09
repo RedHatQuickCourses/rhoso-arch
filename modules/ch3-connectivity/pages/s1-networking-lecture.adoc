@@ -1,0 +1,15 @@
+:time_estimate: 5
+
+= Kubernetes Networking for OpenStack Services
+
+_Estimated reading time: *{time_estimate} minutes*._
+
+Objective::
+
+Describe how OpenStack services use OpenShift routes, Multus secondary networks, and MetalLB to enable connectivity with compute nodes.
+
+WARNING: Pending Review
+
+== Introduction to Kubernetes Networking
+
+WIP
