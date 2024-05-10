@@ -229,25 +229,27 @@ Work In Progress
 <h2 id="_openstack_with_isolated_networks"><a class="anchor" href="#_openstack_with_isolated_networks"></a>OpenStack With Isolated Networks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenStack clusters are usually deployed with multiple isolated networks. Isolated networks address data center performance, reliability, and security concerns. It is common to run OpenStack clusters with large physical servers that contains multiple network interfaces.</p>
+<p>OpenStack clusters are usually deployed with multiple isolated networks. Isolated networks address data center performance, reliability, and security concerns. It is common to run OpenStack clusters with large physical servers that contain multiple network interfaces.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="s3-networking-lecture-fig-1.png" alt="s3 networking lecture fig 1">
+</div>
 </div>
 <div class="paragraph">
-<p>[ Figure of a sample isolated networks scenario, only openstack ]</p>
+<p>Isolated networks can be either physical layer 2 networks, which map to independent network interfaces in a server, or virtual layer 2 networks (VLANs) which are trunked into a single network interface. Both could exist in the same scenario. In any case, each network becomes a network interface device on a Linux server.</p>
 </div>
 <div class="paragraph">
-<p>Isolated networks can be either physical layer 2 networks, which map to independent network interfaces in a server, or virtual layer 2 networks (VLANs) which are trunked into a single network interfae, or a mix of both. In both scenarios, each network becomes a network interface device on a Linux server.</p>
+<p>It is also possible to provide multiple paths, that is, multiple network interfaces, on the same server, which connect to the same layer 2 network. This enables high availability, in case on of the paths (cables and network gear) fails, and aggregating the capacity of all paths for increased bandwidth. In that case, multiple network interfaces are grouped into a single bonded network device on a Linux server.</p>
 </div>
 <div class="paragraph">
-<p>It is also possible to provide multiple paths, that is, multiple network interfaces, on the same server, that connect to the same layer 2 network. This enables high availability, in case on of the paths (cables and network gear) fails, and aggregating the capacity of all paths for increased bandwidth. In that case, multiple network interfaces are grouped into a single bonded network device on a Linux server.</p>
+<p>Isolated networks are restricted by layer 3 routing and border firewalls and cannot connect to each other. For our purposes, an isolated network could be composed of multiple layer 2 networks that are interconnected in a larger layer 3 network, but that larger network is isolated from other layer 3 networks.</p>
 </div>
 <div class="paragraph">
-<p>In any case, isolated networks are restricted by layer 3 routing or border firewalls and cannot connect to each other. For our purposes, an isolated network could be composed of multiple layer 2 networks that are interconnected in a larger layer 3 network, but that larger network is isolated from other layer 3 networks.</p>
+<p>If a server must run software which accesses multiple isolated networks, that server needs network interfaces attached to each of them and you assume those isolated networks do not conflict with each other, that is, they use disjoint IP address ranges.</p>
 </div>
 <div class="paragraph">
-<p>if a server must run software which accesses multiple isolated networks, that server needs network interfaces attached to each of them and you assume those isolated networks do not conflict with each other, that is, they use disjoint IP address ranges.</p>
-</div>
-<div class="paragraph">
-<p>Typical designs of OpenStack clusters include isolated networks for OpenStack itself and its supporting infrastructure, such as external storage backends, and possibly multiple networks for application traffic. All of those isolated networks must be attached to OpenStack cluster nodes.</p>
+<p>Typical designs of OpenStack clusters include isolated networks for OpenStack itself and its supporting infrastructure, such as external storage backends, and possibly multiple isolated networks dedicated to  application traffic. All of those isolated networks must be attached to OpenStack cluster nodes, icluding the OpenShift cluster nodes wich run an OpenStack control plane.</p>
 </div>
 <div class="paragraph">
 <p>Follows an example scenario of isolated networks, from the perspective of OpenStack only:</p>
@@ -260,7 +262,7 @@ Work In Progress
 </dd>
 <dt class="hdlist1">Internal API network</dt>
 <dd>
-<p>Connects OpenStack components running on compute nodes to other components of the same service and also other OpenStack services running on the control plane. It is the network that OpenStack uses to manage application workloads.</p>
+<p>Connects OpenStack components running on compute nodes to other components of the same service and also other OpenStack services running on the control plane. It is the network that OpenStack uses to manage applications.</p>
 </dd>
 <dt class="hdlist1">Tenant or Application network</dt>
 <dd>
@@ -268,16 +270,16 @@ Work In Progress
 </dd>
 <dt class="hdlist1">Storage network</dt>
 <dd>
-<p>Connects OpenStack compute nodes to storage back-ends, to store application data manged by  OpenStack services such as Cinder and Glance on behalf of applications.</p>
+<p>Connects OpenStack compute nodes to storage back-ends, to store application data manged by  OpenStack services, such as Cinder and Glance, on behalf of applications.</p>
 </dd>
 <dt class="hdlist1">External network</dt>
 <dd>
-<p>Connects workloads running on compute nodes to end users and other applications running outside of their OpenStack cluster. It is a provider network on Neutron.</p>
+<p>Connects applications running on compute nodes to end users and other applications running outside of their OpenStack cluster. It is a provider network on Neutron.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>Data centers may partition their networks in different ways and include additional isolated networks, each with a specific purpose, for example:</p>
+<p>Data centers may partition their networks in different ways and include additional isolated networks for different purposes, for example:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -288,12 +290,12 @@ Work In Progress
 <p>An intranet network, which connects applications to internal users of an organization but not to external users such as customers and partnets.</p>
 </li>
 <li>
-<p>A server management network, which connects to BMC hardware on physical servers, for remote booting, power control, and installing an operating system.</p>
+<p>A server management network, which connects to management boards hardware on physical servers, for remote booting, power control, and installing an operating system.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Data centers may also include multiple isolated networks with similar purposes, for example: multiple storage networks, for different storage backeds; or multiple external networks, to connect selected applications to different classes of users.</p>
+<p>Data centers might also include multiple isolated networks with similar purposes, for example: multiple storage networks, for different storage backeds; or multiple external networks, to connect selected applications to different classes of users.</p>
 </div>
 <div class="paragraph">
 <p>Whatever your network isolation scenario, Red Hat OpenStack Services on OpenShift provides an OpenStack Administrator with control over which networks attach to which OpenStack services and to which application workloads.</p>
