@@ -218,7 +218,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Pending Review
+Work In Progress
 </td>
 </tr>
 </table>
@@ -533,7 +533,10 @@ $ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
 </div>
 </div>
 <div class="paragraph">
-<p>There is no easy way of finding the IP ranges of the Kuberntes primary network. You could just check the IP addresses of individual cluster nodes, from the Node Kubernetes resource type, and guess which is their subnet range, or ask an OpenShift Administator.</p>
+<p>There is no easy way of finding the IP ranges of the Kubernetes primary network. You could just check the IP addresses of individual cluster nodes, from the Node resource intances, and guess which is their subnet range, or ask an OpenShift Administator.</p>
+</div>
+<div class="paragraph">
+<p>From the perspective of Kubernetes, its primary network does not need to be an isolated network. Kubernetes only requires IP connectivity between its cluster nodes over a wide range of TCP ports. There are additional latency consideration between Kubernetes control plane nodes, but they are beyond the scope of this course.</p>
 </div>
 </div>
 </div>
