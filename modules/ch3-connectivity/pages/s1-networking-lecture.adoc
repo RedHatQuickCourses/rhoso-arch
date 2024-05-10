@@ -15,10 +15,7 @@ WARNING: Work In Progress
 OpenStack clusters are usually deployed with multiple isolated networks. Isolated networks address data center performance, reliability, and security concerns. It is common to run OpenStack clusters with large physical servers that contain multiple network interfaces.
 
 
-// start with a different figure, of servers and networks?
-// or follow with a figure which describes which could be VLANs?
-
-image::s3-networking-lecture-fig-1.png[]
+[ Figure of multi-homed servers in an OpenStack cluster ]
 
 Isolated networks can be either physical layer 2 networks, which map to independent network interfaces in a server, or virtual layer 2 networks (VLANs) which are trunked into a single network interface. Both could exist in the same scenario. In any case, each network becomes a network interface device on a Linux server.
 
@@ -29,6 +26,8 @@ Isolated networks are restricted by layer 3 routing and border firewalls and can
 If a server must run software which accesses multiple isolated networks, that server needs network interfaces attached to each of them and you assume those isolated networks do not conflict with each other, that is, they use disjoint IP address ranges.
 
 Typical designs of OpenStack clusters include isolated networks for OpenStack itself and its supporting infrastructure, such as external storage backends, and possibly multiple isolated networks dedicated to  application traffic. All of those isolated networks must be attached to OpenStack cluster nodes, icluding the OpenShift cluster nodes wich run an OpenStack control plane.
+
+image::s1-networking-lecture-fig-2.png[]
 
 Follows an example scenario of isolated networks, from the perspective of OpenStack only:
 
@@ -229,9 +228,11 @@ Also consider the isolated network design of you storage backends, which might r
 
 An OpenShift cluster running Red Hat OpenStack Services on OpenShift requires at least two physical network interfaces: one for the Kubernetes primary network, and another for the OpenStack control plane network, because OpenShift and OpenStack each run their own set of OVN pods.
 
-[ Figure of openshift networks + openstack isolated networks ]
+[ Figure of openshift networks + openstack isolated networks from the server view]
 
 Other OpenStack isolated networks, except for the OpenStack external, could be VLANs on the same physical interface you use for the control plane network. You cannot use a VLAN for the OpenStack control plane network because it is the network over which the Data Plane operator configures compute nodes for all other networks.
+
+[ Figure of openshift networks + openstack isolated networks from the pods view]
 
 Follows an expanded example scenario of isolated networks with both OpenShift and OpenStack networks:
 
