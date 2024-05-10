@@ -8,7 +8,7 @@ Objective::
 
 Describe how OpenStack services use OpenShift routes, Multus secondary networks, and MetalLB to enable connectivity with compute nodes.
 
-WARNING: Pending Review
+WARNING: Work In Progress
 
 == OpenStack With Isolated Networks
 
@@ -205,7 +205,11 @@ $ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
 ["172.30.0.0/16"]
 --
 
-There is no easy way of finding the IP ranges of the Kuberntes primary network. You could just check the IP addresses of individual cluster nodes, from the Node Kubernetes resource type, and guess which is their subnet range, or ask an OpenShift Administator.
+There is no easy way of finding the IP ranges of the Kubernetes primary network. You could just check the IP addresses of individual cluster nodes, from the Node resource intances, and guess which is their subnet range, or ask an OpenShift Administator.
+
+// JFYI the web console lists "management address" for nodes, which is for BMC, not for the primary network
+
+From the perspective of Kubernetes, its primary network does not need to be an isolated network. Kubernetes only requires IP connectivity between its cluster nodes over a wide range of TCP ports. There are additional latency consideration between Kubernetes control plane nodes, but they are beyond the scope of this course.
 
 == OpenStack Pods and Secondary Networks
 

@@ -8,7 +8,7 @@ Objective::
 
 Relate connectivity requirements of OpenStack services with the OpenShift features which provide that connectivity.
 
-WARNING: Pending Review
+WARNING: Work In Progress
 
 == Questions
 
