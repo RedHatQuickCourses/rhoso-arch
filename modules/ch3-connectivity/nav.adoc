@@ -5,3 +5,4 @@
 ** xref:s3-storage-lecture.adoc[]
 ** xref:s4-storage-quiz.adoc[]
 *** xref:s4-storage-quiz-answers.adoc[]
+** xref:s5-connectivity-demo.adoc[]
