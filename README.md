@@ -9,7 +9,7 @@ The course design docs are available to Red Hat employees only:
 
 Figures on this course were designed using Google Slides, and are also avialble  to Red Hat employees only. Individual slides are exported to PNG files and those files are in the git repository.
 
-* ADD LINKS HERE
+* Diagrams from all chapters are [here](https://docs.google.com/presentation/d/1FyaMiLGAP3sBdJNbwy1JExXbUYGcV83LZGJnKJQO34A/edit#).
 
 Reading time estimation was done by running the reading-time.sh script on individual adoc files prior to commiting them, for example:
 
