@@ -16,7 +16,9 @@ OpenStack clusters are usually deployed with multiple isolated networks. Isolate
 
 The following figure illustrates a generic data center environment, just to provide context and invite you to consider how an OpenStack cluster might fit such environment.
 
-image::s1-networking-lecture-fig-1.png[]
+//image::s1-networking-lecture-fig-1.png[]
+//image::s1-networking-lecture-fig-1.svg[Name,opts=interactive,width=3072]
+image::s1-networking-lecture-fig-1.svg[]
 
 Isolated networks can be either physical layer 2 networks, which map to independent network interfaces in a server, or virtual layer 2 networks (VLANs) which are trunked into a single network interface. Both could exist in the data center. In any case, each network becomes a network interface device on a Linux server.
 
