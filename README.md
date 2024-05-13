@@ -7,9 +7,21 @@ The course design docs are available to Red Hat employees only:
 * [Initial course design](https://docs.google.com/document/d/1VHPTKWEnBc1McG6_dJR7645ozNQvnAt_AcVpb9JYvMs/edit#)
 * [OpenStack 18 Learning Journey](https://docs.google.com/presentation/d/1Zlyj21ZOp0wtMPqdS3P9auhDndaQ6_qs014q_0yPbo4/edit#slide=id.g29c770ffa7c_0_414)
 
-Figures on this course were designed using Google Slides, and are also avialble  to Red Hat employees only. Individual slides are exported to PNG files and those files are in the git repository.
+## Fixing Diagrams with Inkscape
+
+Figures on this course were designed using Google Slides, and are also avialble  to Red Hat employees only. Individual slides are exported to SVG files and those files are in the git repository.
 
 * Diagrams from all chapters are [here](https://docs.google.com/presentation/d/1FyaMiLGAP3sBdJNbwy1JExXbUYGcV83LZGJnKJQO34A/edit#).
+
+Antora is not happy with SVG files produced by Google Slides, though those files display standalone in web browsers. The following processes makes Antora happy:
+
+1. Export the google slide as SVG
+2. Open the SVG on inkspace
+3. File > Document Properties > Rezise page to drawing or selection
+4. File > Clean up document
+5. File > Save (overwriting the original SVG from google slides)
+
+## Calculating Per-Section Reading Time
 
 Reading time estimation was done by running the reading-time.sh script on individual adoc files prior to commiting them, for example:
 
