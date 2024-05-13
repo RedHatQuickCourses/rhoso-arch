@@ -271,8 +271,10 @@ Work In Progress
 <div class="paragraph">
 <p>Standard Kubernetes provides three API resource types related to persistent storage:</p>
 </div>
-<div class="paragraph">
-<p>[ Figure of PVC, PV, and storage classes ]</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s3-storage-lecture-fig-1.svg" alt="Kubernetes API storage resources &amp; dynamic storage components">
+</div>
 </div>
 <div class="dlist">
 <dl>
@@ -282,7 +284,7 @@ Work In Progress
 </dd>
 <dt class="hdlist1">Persistent Volumes (PVs)</dt>
 <dd>
-<p>Represent a volume on backend storage. They might be actial devices, such as LUNs from iSCSI and Fibre Storage arrays, or might be file shares in a neworked file system such as NFS and CephFS.</p>
+<p>Represent a volume on backend storage. They might be actual devices, such as LUNs from iSCSI and Fibre Storage arrays, or might be file shares in a neworked file system such as NFS and CephFS.</p>
 </dd>
 <dt class="hdlist1">Storage Classes</dt>
 <dd>
@@ -383,8 +385,10 @@ Most of Kubernetes access modes work at the cluster node level instead of the po
 <div class="paragraph">
 <p>Red Hat OpenStack Services on OpenShift was designed to only require Kubernetes storage for selected infrastructure service, and those services are designed to handle data resiliency by themselves, in a way that local storage from either the LSO or LVMS are sufficient and supported for production clusters.</p>
 </div>
-<div class="paragraph">
-<p>[ Figure of internal services with PVCs and user-facing services with direct access to remote storage ]</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s3-storage-lecture-fig-2.svg" alt="OpenStack services using Kubernetes storage or embedding storage clients">
+</div>
 </div>
 <div class="paragraph">
 <p>If you prefer using a remote storage solution with a CSI driver certified for Red Hat OpenShift, you can, but you do not require such solution. You&#8217;re recommended to use the same storage class for all internal services, for simplicity, and also because they share similar workload characteristics of transactional, high IOPS throughput. But you could use different storage classes for each of them.</p>
