@@ -21,6 +21,8 @@ Antora is not happy with SVG files produced by Google Slides, though those files
 4. File > Clean up document
 5. File > Save (overwriting the original SVG from google slides)
 
+Google Slides exports the entire contents of a slide as a single group in SVG, and also include a bounding box of the slide size. If you just "fix" the slide as above you may end up with an SVG that has lots of white space. If this bothers you, you can ungroup the slide and delete the bounding box rectangle between steps 2 and 3 above.
+
 ## Calculating Per-Section Reading Time
 
 Reading time estimation was done by running the reading-time.sh script on individual adoc files prior to commiting them, for example:
