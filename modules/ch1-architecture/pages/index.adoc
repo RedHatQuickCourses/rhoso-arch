@@ -8,8 +8,8 @@ WARNING: Work in Progress
 
 == Introduction
 
-This chapter reviews the high-level architecture of Red Hat OpenStack Services on OpenShift product and zooms into the generic internal architecture of individual OpenStack services, focusing the Red Hat OpenStack product uses OpenShift and Kubernetes to manage user-facing and internal infrastruture services of an OpenStack control plane.
+This chapter reviews the high-level architecture of Red Hat OpenStack Services on OpenShift product and zooms into the generic internal architecture of individual OpenStack services. It focuses on how the Red Hat OpenStack product uses OpenShift and Kubernetes to manage user-facing and internal infrastruture services of an OpenStack control plane.
 
-This chapter also reviews two OpenStack user personas: the *OpenStack Administrator*, which is the focus of this course, and the OpenStack Operator, so you understand which OpenShift skills are required from administrators of OpenStack clusters running Red Hat OpenStack Services on OpenShift.
+This chapter also reviews two OpenStack user personas: the *OpenStack Administrator*, which is the focus of this course, and the OpenStack Operator. This will help you understand which OpenShift skills are required from administrators of OpenStack clusters running Red Hat OpenStack Services on OpenShift.
 
-If this is your first exposure to Red Hat OpenStack Services on OpenShift and this way of characterising OpenStack Administrator and Operator personas, it is recommended that you review at least the beginning og chapter 1 of https://redhatquickcourses.github.io/rhoso-intro/rhoso-intro/1/ch1-intro/index.html[Introduction to Red Hat OpenStack Services on OpenShift] before proceeding.
+If this is your first exposure to Red Hat OpenStack Services on OpenShift and this way of characterising OpenStack Administrator and Operator personas, it is recommended that you review at least the beginning of Chapter 1 of https://redhatquickcourses.github.io/rhoso-intro/rhoso-intro/1/ch1-intro/index.html[Introduction to Red Hat OpenStack Services on OpenShift] before proceeding.

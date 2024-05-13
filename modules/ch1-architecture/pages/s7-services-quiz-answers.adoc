@@ -4,7 +4,7 @@ WARNING: Pending Review
 
 == OpenStack Internal Services on OpenShift
 
-1. Which of the following requires communication between containers inside an OPenShift cluster and processes outside of that OpenShift cluster?
+1. Which of the following requires communication between containers inside an OpenShift cluster and processes outside of that OpenShift cluster?
 
 * [ ] An OpenStack service invokes APIs of another OpenStack service. +
 _Incorrect: This is communication between containers inside an OpenShift cluster._
