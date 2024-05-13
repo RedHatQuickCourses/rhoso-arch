@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OpenStack User-Facing Services and Internal Services :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <link rel="prev" href="s5-openshift-demo.html">
+    <link rel="next" href="s7-services-quiz.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhoso-arch/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhoso-arch" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s1-components-lecture.html">Components of Red Hat OpenStack on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s2-components-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s3-tasks-lecture.html">OpenStack Administrator Tasks and Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s4-tasks-quiz.html">Quiz: OpenStack Administrator Tasks and Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s4-tasks-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s5-openshift-demo.html">Demo: OpenShift Web Console and Client</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s7-services-quiz.html">Quiz: OpenStack Internal Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s7-services-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s8-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/index.html">The OpenStack Operator by Red Hat</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s3-workloads-lecture.html">OpenStack Services as OpenShift Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz.html">Quiz: OpenStack Services as OpenShift Workloads</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s5-workloads-demo.html">Demo: OpenStack Pods and Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s6-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch3-connectivity/index.html">OpenShift Networking and Storage with OpenStack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch3-connectivity/s1-networking-lecture.html">Kubernetes Networking for OpenStack Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch3-connectivity/s2-networking-quiz.html">Quiz: Kubernetes Networking for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch3-connectivity/s2-networking-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenStack Services on OpenShift Architecture</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
+    <li><a href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a></li>
+    <li><a href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">OpenStack User-Facing Services and Internal Services</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Estimated reading time: <strong>13 minutes</strong>.</em></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Objective</dt>
+<dd>
+<p>Describe the generic internal architecture of OpenStack services and how they use Kubernetes networking and storage.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Pending Review
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_general_architecture_of_openstack_services"><a class="anchor" href="#_general_architecture_of_openstack_services"></a>General Architecture of OpenStack Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Up to this point, we presented OpenStack services such as Nova and Neutron as black boxes. We gave you hints that each of these services might have a more complex internal structure, because they have pieces running on the OpenStack control plane and pieces running on OpenStack compute nodes, and they also need support from other services such as database and messaging servers.</p>
+</div>
+<div class="paragraph">
+<p>Before you inspect the Kubernetes API resources which represent those OpenStack services, for example to troubleshoot performance and availability issues of those services, you must understand how their internal components relate to each other and to other OpenStack services.</p>
+</div>
+<div class="sect2">
+<h3 id="_an_example_openstack_nova"><a class="anchor" href="#_an_example_openstack_nova"></a>An Example: OpenStack Nova</h3>
+<div class="paragraph">
+<p>Let&#8217;s use OpenStack Nova as an example, not only because it is the most important, but because it also includes some complexity you may not see if we pick one of the simpler OpenStack services.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s6-services-lecture-fig-1.png" alt="s6 services lecture fig 1">
+</div>
+</div>
+<div class="paragraph">
+<p>The figure shows the external and internal views of the architecture of OpenStack Nova. From the external view, Nova interacts with other OpenStack services: Cinder, Glance, Neutron, and Placement. Additionally it interacts with Keystone, which every OpenStack service has to interact with.</p>
+</div>
+<div class="paragraph">
+<p>These interactions happen using HTTP, in fact they use the same OpenStack APIs that the OpenStack client and Horizon use to communicate with these OpenStack services. For our purposes, it doesn&#8217;t matter which of the internal components of Nova communicate with which OpenStack services: they all exist inside the black box of Nova.</p>
+</div>
+<div class="paragraph">
+<p>From the internal view, opening the black box, all components of Nova communicate with each other using AMQP message-passing, including components which run outside of OpenShift, on RHEL compute nodes. Components running on the OpenStack control plane can also communicate with a relational database server to store data from API resource instances.</p>
+</div>
+<div class="paragraph">
+<p>The following are the main components of OpenStack Nova. The OpenStack community documentation call them "Nova services" and you will see that "services" is a very overloaded term in both OpenStack and OpenShift, so be sure that you know to which kind of service you refer to, at any moment.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Nova API</dt>
+<dd>
+<p>Provides the API entry point for all OpenStack clients, services, and users which need to use services from Nova. No component external to Nova communicates with any component except the API entry point.</p>
+</dd>
+<dt class="hdlist1">Nova Scheduler</dt>
+<dd>
+<p>Selects a compute node to run new server instances, taking into account the availability of compute capacity, storage, and network connectivity.</p>
+</dd>
+<dt class="hdlist1">Nova Conductor</dt>
+<dd>
+<p>Mediates communication between Compute components running on individual compute nodes and the relational database server, which could easily become overloaded with too many connections from too many compute nodes.</p>
+</dd>
+<dt class="hdlist1">Nova Compute</dt>
+<dd>
+<p>Unlike other components, which run on an OpenStack control plane, that is, as containers on OpenShift, the Compute component runs on RHEL compute nodes. It is the component which interacts with the local KVM hypervisor to connect virtual machines and attach them to virtual network and storage resources.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>OpenStack Nova may include other components not shown in the figure, and Red Hat OpenStack Services on OpenShift runs a few of them. For example, there&#8217;s a component which mediates remote console sessions using the VNC protocol. We ommit these components for simplicity.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_internal_scalability_of_openstack_services"><a class="anchor" href="#_internal_scalability_of_openstack_services"></a>Internal Scalability of OpenStack Services</h3>
+<div class="paragraph">
+<p>The previous figure shows a single icon for each internal component of OpenStack Nova but there could be multiple instances of each component, which could run on different control plane servers. That is, there could be multiple containers on OpenShift for each of the components of Nova, potentialy running on different nodes of an OpenShift cluster. This enables Nova to handle a large number of compute nodes running an even larger number of virtual machines.</p>
+</div>
+<div class="paragraph">
+<p>The fact that each component of Nova can be scaled to multiple containers independently of other components enables OpenStack Administrators to efficiently handle different scenarios, for example: is the bottleneck caused by too many messages from too many Nova Compute instances, each on a compute node? Run more Nova Conductor instances! Is the bottleneck caused by a CI/CD system which provisions and tears down too many server instances in a short period of time? Scale the Nova API instances! Is the bottleneck caused by complex attributes of compute nodes, host aggregates, and a large number of server flavors? Scale the Nova Scheduler instances!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_openstack_user_facing_services"><a class="anchor" href="#_other_openstack_user_facing_services"></a>Other OpenStack User-Facing Services</h3>
+<div class="paragraph">
+<p>Other OpenStack services are expected to follow a similar architecture to Nova. They don&#8217;t have to, but by convention and by design best practices from the OpenStack community, it is expected that they do. Unless you are a developer working on the internal implementation of OpenStack services themselves, you do not need to care about eventual inconsistencies bentween different OpenStack services.</p>
+</div>
+<div class="paragraph">
+<p>So you expect that no service interacts with each other except by using their public APIs over HTTP. You also expect that internal components of any service interact with each other using AMQP messaging passing and all store API resources on a relational database. Finally, you expect that all OpenStack services could run multiple containers for scalability and high availability.</p>
+</div>
+<div class="paragraph">
+<p>Some OpenStack services may run entirely on the control plane, for example Swift, Glance, and Heat. A few services require a component running on compute nodes, for example Neutron and Cinder. Components running on compute nodes communicate with components running on the control plane by using AMQP message passing. If these componentes also need to interact with other OpenStack Services, they use HTTP.</p>
+</div>
+<div class="paragraph">
+<p>The services-oriented architecture of OpenStack does not force all its services into the same mold. Each service can make different architectural and implementation decisions, if they need to. This leads to occasional inconsistencies, but it is a small price to pay for increased flexibility and scalability.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_internal_services_of_openstack_clusters"><a class="anchor" href="#_internal_services_of_openstack_clusters"></a>Internal Services of OpenStack Clusters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some internal services of a Red Hat OpenStack Services on OpenShift cluster are shared by multiple OpenStack user-facing server. User-facing services do not need to share internal-infrastructure services, but it is simpler to manage fewer instances of each service.</p>
+</div>
+<div class="paragraph">
+<p>For example, you could have different database servers for each OpenStack service, but there is no reason to not share the same database server for all of them, at least until the database itself becomes overloaded with too many queries.</p>
+</div>
+<div class="paragraph">
+<p>In a similar vein, you could have Nova instances have their own RabbitMQ services for its cells, independent of RabbitMQ services for Neutron and Cinder cells, but you usually configure the same cells and use the same RabbitMQ cells for all services. The fact that you could do it differently does not mean you should do it.</p>
+</div>
+<div class="paragraph">
+<p>Other OpenStack services may require specialized internal services to fulfill their funcionality, for example: we already mentioned that Nova needs remote desktop protocol servers to enable access to server instance consoles. Neutron needs a software-defined networking layer. And a few OpenStack services need clients for networked file or block storage.</p>
+</div>
+<div class="sect2">
+<h3 id="_openstack_compute_cell_services"><a class="anchor" href="#_openstack_compute_cell_services"></a>OpenStack compute cell services</h3>
+<div class="paragraph">
+<p>Most user-facing OpenStack services included with Red Hat OpenStack Services on OpenShift require a relational database to store API resource instances and an AMQP message passing server. These two internal services define the scope of an OpenStack cluster compute cell and impact the scalability of the entire OpenStack control plane.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenStack Services includes the following internal infrastructure services to address the needs of relational database and AMQP messaging:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">MariaDB</dt>
+<dd>
+<p>It is an open source relational database based on the original codebase of MySQL.</p>
+</dd>
+<dt class="hdlist1">Galera</dt>
+<dd>
+<p>It clusters multiple MySQL and compatible databases in active-active mode with synchronous data replication.</p>
+</dd>
+<dt class="hdlist1">RabbitMQ</dt>
+<dd>
+<p>It is an AMQP messaging server which replicates messages between its instances, so no message is lost and message delivery is guaranteed.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>You can deploy proof-of-concept Red Hat OpenShift clusters running a single instance of RabbitMQ and a single instance of MariaDB, without using Galera. For production clusters, Red Hat recommends running multiple instances of each, configured as a database and as a messaging cluster. Good news is that the OpenStack add-on operator handles the clustered, multi-instance deployment of RabbitMQ and MariaDB for an OpenStack compute cell.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ovn_networking"><a class="anchor" href="#_ovn_networking"></a>OVN Networking</h3>
+<div class="paragraph">
+<p>Another key internal service of Red Hat OpenStack Services on OpenShift is the OVN networking layer, which runs components on both control plane and compute nodes. OVN creates virtual networks by tunneling packets between OpenStack compute nodes and enables strong network isolation between workloads running on OpenStack clusters, whithout the need of external networking gear.</p>
+</div>
+<div class="paragraph">
+<p>OVN distributes network flow databases between compute nodes, in a way that processing those packet flows is distributed among compute nodes, instead of overloading a few network control nodes. OVN handles itself the replication and high availability of these network flow databases, including running multiple instances of the main flow databases at the OpenStack control plane.</p>
+</div>
+<div class="paragraph">
+<p>OVN is so powerfull that more recent releases of Red Hat OpenShift also use OVN to implement Kubernetes networking and to extend it for more advanced use cases, which were not originally supported by standard Kubernetes. The OVN instances running on the OpensStack control plane are independent of the OVN instances running on the OpenShift control plane, that is: Kubernetes networking and OpenStack networking are completely independent of each other.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_child_operators_of_the_openstack_add_on_operator"><a class="anchor" href="#_child_operators_of_the_openstack_add_on_operator"></a>Child Operators of the OpenStack Add-On Operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you have a glimpse of the internal structure of OpenStack services, you realize that each individual service needs its own management, scaling, and configuration. The OpenStack add-on operator handles that by relying on a number of child add-on operators.</p>
+</div>
+<div class="paragraph">
+<p>In fact, Red Hat OpenStack Services on OpenShift includes specialized operators to manage each of the user-facing and internal infrastructure services: There is a Nova operator, a Neutron operator, a RabbitMQ operator, an OVN operator, and so on.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift add-on operators have the concept of meta-operator, which is an add-on operator that manages a set of child add-on operators. The OpenStack add-on operator is a meta-operator, and the External Data Plane Management add-on operator, which uses Ansible to manage OpenStack compute nodes, is also a child operator of the OpenStack add-on operator.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift_storage_and_networking_for_openstack_services"><a class="anchor" href="#_openshift_storage_and_networking_for_openstack_services"></a>OpenShift Storage and Networking for OpenStack Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The storage and networking services of OpenStack, such as Cinder and Neutron, provide capabilities for workloads running as VMs on OpenStack compute nodes. They do not provide such capabilities for other OpenStack services. OpenStack services, at least their components running on OpenShift, must use networking and storage capabilities from Kubernetes.</p>
+</div>
+<div class="sect2">
+<h3 id="_data_storage_requirements_of_openstack_services"><a class="anchor" href="#_data_storage_requirements_of_openstack_services"></a>Data Storage Requirements of OpenStack Services</h3>
+<div class="paragraph">
+<p>Kubernetes storage requirements from Red Hat OpenStack Services on OpenShift come mainly from internal infrastructure services. User-facing services focus on data storage for compute nodes, which run outside of OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>OpenStack services which require Kubernetes storage are expected to handle data consistency and availability by themselves, without requiring high-availability nor replication features from the storage backend. This mean you do not need OpenShift Data Foundation (ODF) nor other kind of enterprise storage backend for an OpenShift cluster which runs Red Hat OpenStack Services on OpenStack. The storage capabilies offered by the <a href="https://docs.openshift.com/container-platform/4.15/storage/persistent_storage/persistent_storage_local/persistent-storage-using-lvms.html">Local Volume Manager Storage (LVMS)</a> add-on operator, which enables access to local storage of OpenShift cluster nodes, is sufficient.</p>
+</div>
+<div class="paragraph">
+<p>OpenStack Administrators are not required to use the LVMS add-on operator: they could use any Container Storage Interface (CSI) driver which is certified for Red Hat OpenShift and use whatever backend storage that driver supports. They just have no need to deploy CSI driver and their add-on operators on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>Some OpenStack services may run remote storage client, for example Ceph librbd, from their own containers to manage or access data in the same storage backends that compute nodes do on behalf of their workloads. They do not use Kubernetes storage at all for managing Cinder volumes and Glance images. OpenStack workloads and OpenShift workloads do not require access to the same storage backends.</p>
+</div>
+<div class="paragraph">
+<p>Later in this course we will present the Kubernetes concepts and API resources required to manage storage for OpenStack services, as well as which OpenStack internal services require Kubernetes storage.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_network_connectivity_requirements_of_openstack_services"><a class="anchor" href="#_network_connectivity_requirements_of_openstack_services"></a>Network Connectivity Requirements of OpenStack Services</h3>
+<div class="paragraph">
+<p>Kuberentes networking requirements from Red Hat OpenStack Services on OpenShift come from the necessity of exposing OpenStack APIs over HTTP to OpenStack Operators and Administators, besides the necessity of exposing those APIs over HTTP and also exposing AMQP messaging (RabbitMQ) to compute plane nodes.</p>
+</div>
+<div class="paragraph">
+<p>Additional requirements come from the common data center design patterns of network isolation, which require that components of OpenStack services running on OpenShift and also compute nodes have connectivity to multiple isolated networks, something that standard Kubernetes alone cannot provide.</p>
+</div>
+<div class="paragraph">
+<p>To provide network connectivity capabilities beyond standard Kuberntes, OpenShift includes a cluster operator and two add-on operators:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Multus</dt>
+<dd>
+<p>Enables containers to attach to secondary networks, which maps to additional network interfaces on OpenShift cluster nodes. <a href="https://docs.openshift.com/container-platform/4.15/networking/multiple_networks/understanding-multiple-networks.html">Multus</a> enables the containers from OpenStack services to connect to the same isolated networks that compute nodes connect to, as long as the OpenShift cluster nodes are connected to these same networks.</p>
+</dd>
+<dt class="hdlist1">NMState</dt>
+<dd>
+<p>Enables declarative configuration of network devices on OpenShift cluster nodes, which may be easier than configuring all devices at OpenShift cluster deployment, especialy for more complex setups such as bonded interfaces. The <a href="https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html">NMState</a> add-on operator also enables day-2 changes of networking configurations of those nodes, for example to enable access to new VLANs over existing trunk interfaces.</p>
+</dd>
+<dt class="hdlist1">MetallB</dt>
+<dd>
+<p>Standard Kubernetes only enables external access to load balancers on cloud provider platforms. If Kubernetes is deployed on a physical server or a traditional hypervisor, them Kubernetes load-balancers only work inside a cluster. The <a href="https://docs.openshift.com/container-platform/4.15/networking/metallb/about-metallb.html">MetalLB</a> add-on operators adds a resource controller for Kubernetes load-balancers that enables external accesses on non-cloud platforms.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The use of the NMState add-on operator is not required by Red Hat OpenStack Services on OpenShift, but it is recommended most times. The Multus cluster operator and MetalLB add-on operator are required.</p>
+</div>
+<div class="paragraph">
+<p>Later in this course we will present the required Kubernetes APIs and concepts, including the custom resources from NMState, MetalLB, and Multus, that are required to manage network connectivity for OpenStack services, and how user-facing and internal services, use those Kubernetes API resources.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="s5-openshift-demo.html">Demo: OpenShift Web Console and Client</a></span>
+  <span class="next"><a href="s7-services-quiz.html">Quiz: OpenStack Internal Services on OpenShift</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
