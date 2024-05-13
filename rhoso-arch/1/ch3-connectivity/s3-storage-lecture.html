@@ -166,6 +166,9 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s5-connectivity-demo.html">Demo: OpenStack Networking and Storage</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -397,16 +400,19 @@ Most of Kubernetes access modes work at the cluster node level instead of the po
 </dd>
 <dt class="hdlist1">RabbitMQ</dt>
 <dd>
-<p>Each AMQP messaging server requires one PVC for storing in-flight messages between OpenStack service components and subscriber lists. Similar to MariaDB, it is recommended that you run RabbitMQ instances per OpenStack compute cell, but RabbitMQ manages data replication and load balancing by iself, without any external component such as Galera.</p>
+<p>Each AMQP messaging server requires one PVC for storing in-flight messages between OpenStack service components and subscriber lists. Similar to MariaDB, it is recommended that you run three RabbitMQ instances per OpenStack compute cell, but RabbitMQ manages data replication and load balancing by iself, without any external component such as Galera.</p>
 </dd>
 <dt class="hdlist1">OVN</dt>
 <dd>
-<p>The Open Virtual Network software-defined networking layer requires two network flow databases, the north bound and south bound, which could be recreated from scratch by Neutron but are stored on disks to ensure smooth perfromance or large OpenStack clusters.</p>
+<p>The Open Virtual Network software-defined networking layer requires two network flow databases, the north bound and south bound, which could be recreated from scratch by Neutron but are stored on disks to ensure smooth performance of large OpenStack clusters.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>Because MariaDB, RabbitMQ, and OVN handle data consistency and resilience by themselves, there is no need for local storage resiliency features, such as RAID, on OpenShift cluster nodes running OpenStack services. If you see value on such features, you can use them, just ensure and they are designed to avoid dataconsistency by using writethough caches or writeback caches with bateries.</p>
+<p>Because MariaDB, RabbitMQ, and OVN handle data consistency and resilience by themselves, there is no need for local storage resiliency features, such as RAID, on OpenShift cluster nodes running OpenStack services. If you see value on such features, you can use them, just ensure and they are designed to avoid data consistency issues by using writethough caches or writeback caches with bateries.</p>
+</div>
+<div class="paragraph">
+<p>Notice the recommendation for three instances of MariaDB abd RabbitMQ per cell. It is recommended that clustered systems run an even number of instances to avoid split brain scenarios, where a group of instances cannot connet to other group. You must ensure one group "wins" because it is the larger group. If you need more instances for scalability increase from three to five or seven. Or consider running more OpenStack compute cells, each with dedicated MariaDB and RabbitMQ instances, rather than larger database and AMQP servers.</p>
 </div>
 <div class="paragraph">
 <p>If you configure a proof-of-concept OpenStack cluster which uses Kubernetes storage for user-facing services such as Glance and Swift, be warned that those services are not designed for either scalability nor resiliency of storage by themselves. They are designed to work directly with backend storage which provide those features, but not to use that reliable backend as Kubernetes storage.</p>
