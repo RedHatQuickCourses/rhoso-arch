@@ -1,0 +1,19 @@
+:time_estimate: 1
+
+= Quiz: Kubernetes Storage for OpenStack Services
+
+_Estimated reading time: *{time_estimate} minutes*._
+
+Objective:: 
+
+Relate storage requirements of OpenStack services with the OpenShift features which provide that storage.
+
+WARNING: Work In Progress
+
+== Questions
+
+1. Question?
+
+* [ ] Answer 1
+* [ ] Answer 2
+

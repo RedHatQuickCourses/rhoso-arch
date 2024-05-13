@@ -1,0 +1,15 @@
+:time_estimate: 1
+
+= Answers to the Quiz
+
+WARNING: Work In Progress
+
+== Kubernetes Storage for OpenStack Services
+
+1. Question?
+
+* [x] *Answer 1* +
+_Correct: Explain_
+
+* [ ] Answer 2 +
+_Incorrect: Explain_

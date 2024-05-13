@@ -1,0 +1,26 @@
+:time_estimate: 5
+
+= Kubernetes Storage for OpenStack Services
+
+_Estimated reading time: *{time_estimate} minutes*._
+
+Objective::
+
+Describe how OpenStack services use Kubernetes PVCs, storage classes, and direct access to back-end storage for internal needs and to support application workloads.
+
+WARNING: Work In Progress
+
+== OpenStack and Kubernetes Storage
+
+Unlike networking, Red Hat OpenStack Services on OpenShift was designed to work with standard Kubernetes storage. In fact, local node storage services available with Red Hat OpenShift should be sufficient for most OpenStack clusters, and any network storage provider, for exemple OpenShift Data Foundation, can also be used.
+
+Red Hat OpenStack Services on OpenShift only uses Kubernetes storage for internal infrastructure services. User-facing services, such as Cinder and Glance, do not use Kubernetes storage. They connect directly to the storage backeds that compute nodes connect to provide storage for applications running as VMs, and for that they require access to the same storage networks that compute nodes do.
+
+Some OpenStack services, such as Glance and Swift, can run entirely on the control plane and use Kubernetes storage, but this is not recommended for production deployments. It is better that those services connect directly to storace backens without using Kubernetes, in the case of Glance, or that storage backends take over the object storage service, in the case of Swift.
+
+== Kubernetes API Storage Resources
+
+WIP
+
+[ Figure of PVC, PV, and storage classes ]
+
