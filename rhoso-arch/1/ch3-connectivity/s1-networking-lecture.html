@@ -201,7 +201,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Estimated reading time: <strong>20 minutes</strong>.</em></p>
+<p><em>Estimated reading time: <strong>21 minutes</strong>.</em></p>
 </div>
 <div class="dlist">
 <dl>
@@ -236,7 +236,7 @@ Work In Progress
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/s1-networking-lecture-fig-1.svg" alt="s1 networking lecture fig 1">
+<img src="_images/s1-networking-lecture-fig-1.svg" alt="Generic corporate datacenter with multiple networks">
 </div>
 </div>
 <div class="paragraph">
@@ -249,7 +249,7 @@ Work In Progress
 <p>Isolated networks are restricted by layer 3 routing and border firewalls and cannot connect to each other. For our purposes, an isolated network could be composed of multiple layer 2 networks that are interconnected in a larger layer 3 network, but that larger network is isolated from other layer 3 networks.</p>
 </div>
 <div class="paragraph">
-<p>If a server must run software which accesses multiple isolated networks, that server needs network interfaces attached to each of them. And, even if those networks have no routing between each other, if is best you design those isolated networks do not conflict with each other, that is, to use disjoint IP address ranges.</p>
+<p>If a server must run software which accesses multiple isolated networks, that server needs network interfaces attached to each of them. And, even if those networks have no routing between each other, it is best you design those isolated networks to not conflict with each other, for example by using disjoint IP address ranges.</p>
 </div>
 <div class="paragraph">
 <p>Data centers may partition their networks in different ways and include many isolated networks for different purposes, for example:</p>
@@ -280,7 +280,7 @@ Work In Progress
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/s1-networking-lecture-fig-2.png" alt="s1 networking lecture fig 2">
+<img src="_images/s1-networking-lecture-fig-2.svg" alt="Reference OpenStack network isolation scenario">
 </div>
 </div>
 <div class="paragraph">
@@ -288,7 +288,7 @@ Work In Progress
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/s1-networking-lecture-fig-3.png" alt="s1 networking lecture fig 3">
+<img src="_images/s1-networking-lecture-fig-3.svg" alt="Isolated networking with Red Hat OpenStack Services on OpenShift">
 </div>
 </div>
 <div class="paragraph">
@@ -332,7 +332,7 @@ Work In Progress
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/s1-networking-lecture-fig-4.png" alt="s1 networking lecture fig 4">
+<img src="_images/s1-networking-lecture-fig-4.svg" alt="Kubernetes and OpenShift networking basics">
 </div>
 </div>
 <div class="paragraph">
@@ -453,8 +453,10 @@ Work In Progress
 <div class="paragraph">
 <p>The MetalLB add-on operator solves the connectivity needs from OpenStack compute nodes to OpenStack Pods, but doesn&#8217;t solve the other way around, and it also does not solve the connectivity requirements from OpenStack Pods to multiple isolated networks. For that, Red Hat OpenStack Services on OpenShift uses two other features of OpenShift: Multus and NMState.</p>
 </div>
-<div class="paragraph">
-<p>[ Figure of Kubernetes pod/service networks, SNAT, services, and ingress + secondary networks and MetalLB ]</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s1-networking-lecture-fig-5.svg" alt="Multus secondary networks in OpenShift">
+</div>
 </div>
 <div class="ulist">
 <ul>
@@ -466,6 +468,9 @@ Work In Progress
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Traffic to other Pods and to Kubernets Services still flows through the primary network interface from Kubernetes, but secondary networks enable Pods to both start and listen to network connections on those secondary networks, over any network protocol.</p>
+</div>
 <div class="sect2">
 <h3 id="_multus_secondary_networks_and_pods"><a class="anchor" href="#_multus_secondary_networks_and_pods"></a>Multus Secondary Networks and Pods</h3>
 <div class="paragraph">
@@ -474,14 +479,13 @@ Work In Progress
 <div class="paragraph">
 <p>Network Attachment Definition custom resources represents secondary networks. Once there is a Network Attachment Definition in a project, Pods use annotations to declare the secondary networks they attach to.</p>
 </div>
-<div class="paragraph">
-<p>[ Figure of kuberentes application resources + Multus and NMState resources ]</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s1-networking-lecture-fig-6.svg" alt="Networking API resources from Multus and NMState">
+</div>
 </div>
 <div class="paragraph">
-<p>Each secondary networks becomes an additional virtual network device inside all containers of a Pod. Any OpenShift Operator can create Pods that attach to any secondary network in the same project.</p>
-</div>
-<div class="paragraph">
-<p>Traffic to other Pods and to Kubernets Services still flow through the primary network interface from Kubernetes, but secondary networks enable Pods to both start and listen to network connections on those secondary networks, over any network protocol.</p>
+<p>Each secondary network becomes an additional virtual network device inside all containers of a Pod. Any OpenShift Operator can create Pods that attach to any secondary network in the same project.</p>
 </div>
 </div>
 <div class="sect2">
@@ -540,16 +544,15 @@ $ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
 <div class="paragraph">
 <p>Red Hat OpenStack Services on OpenShift uses a mix of standard Kubernetes networking and OpenShift networking extensions to provide connectivity between OpenStack services and their components. The following sections describe how.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s1-networking-lecture-fig-7.svg" alt="Kubernetes and OpenShift networking with OpenStack">
 </div>
 </div>
-<div class="sect1">
-<h2 id="_openstack_usage_of_service_and_route_resources"><a class="anchor" href="#_openstack_usage_of_service_and_route_resources"></a>OpenStack Usage of Service and Route Resources</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_openstack_usage_of_service_and_route_resources"><a class="anchor" href="#_openstack_usage_of_service_and_route_resources"></a>OpenStack Usage of Service and Route Resources</h3>
 <div class="paragraph">
 <p>OpenStack enables connectivity from external clients and compute nodes to OpenStack services running as Pods using Services and Routes:</p>
-</div>
-<div class="paragraph">
-<p>[ Figure of openstack services with kubernets networking APIs ]</p>
 </div>
 <div class="ulist">
 <ul>
@@ -572,6 +575,7 @@ $ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
 </div>
 <div class="paragraph">
 <p>In addition to Services and Routes, Pods from Red Hat Services on OpenShift require connectivity to multiple isolated networks to start network connections to storage backends and SSH management of compute nodes, which are not possible with standard Kubernetes networking but are possible with Multus, included with Red Hat OpenShift.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_openstack_pods_and_isolated_networks"><a class="anchor" href="#_openstack_pods_and_isolated_networks"></a>OpenStack Pods and Isolated Networks</h3>
@@ -597,13 +601,15 @@ $ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
 <p>An OpenShift cluster running Red Hat OpenStack Services on OpenShift requires at least two physical network interfaces: one for the Kubernetes primary network, and another for the OpenStack control plane network, because OpenShift and OpenStack each run their own set of OVN pods.</p>
 </div>
 <div class="paragraph">
-<p>[ Figure of openshift networks + openstack isolated networks from the server view]</p>
+<p>OpenStack compute nodes also require two physical network interfaces: one for the OpenStack control plane network, and another for the external network. Mixing isolated networks and open networks such as the external network on the same trunk interface is considered bad practice.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s1-networking-lecture-fig-8.svg" alt="Reference network isolation scenario with OpenShift">
+</div>
 </div>
 <div class="paragraph">
 <p>Other OpenStack isolated networks, except for the OpenStack external, could be VLANs on the same physical interface you use for the control plane network. You cannot use a VLAN for the OpenStack control plane network because it is the network over which the Data Plane operator configures compute nodes for all other networks.</p>
-</div>
-<div class="paragraph">
-<p>[ Figure of openshift networks + openstack isolated networks from the pods view]</p>
 </div>
 <div class="paragraph">
 <p>Follows an expanded example scenario of isolated networks with both OpenShift and OpenStack networks:</p>
@@ -626,7 +632,7 @@ $ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
 <dd>
 <p>Connects OpenStack compute nodes to OpenShift worker nodes for access to internal OpenStack API endpoints and AMQP.</p>
 </dd>
-<dt class="hdlist1">OpenStack tenant or Application network</dt>
+<dt class="hdlist1">OpenStack tenant or application network</dt>
 <dd>
 <p>Connects workloads running on compute nodes to each other. This is the network that tunnels traffic between OpenStack server instances, thanks to the OVN pods from OpenStack.</p>
 </dd>
