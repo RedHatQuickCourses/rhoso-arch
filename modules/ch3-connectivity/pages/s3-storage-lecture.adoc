@@ -30,7 +30,7 @@ If a Pod uses persistent storage for a volume, it means the data stored on that 
 
 Standard Kubernetes provides three API resource types related to persistent storage:
 
-[ Figure of PVC, PV, and storage classes ]
+image::s3-storage-lecture-fig-1.svg[alt="Kubernetes API storage resources & dynamic storage components"]
 
 Persistent Volume Claims (PVCs)::
 
@@ -38,7 +38,7 @@ Represent a volume in application pods. It specifies desired characteristics of 
 
 Persistent Volumes (PVs)::
 
-Represent a volume on backend storage. They might be actial devices, such as LUNs from iSCSI and Fibre Storage arrays, or might be file shares in a neworked file system such as NFS and CephFS.
+Represent a volume on backend storage. They might be actual devices, such as LUNs from iSCSI and Fibre Storage arrays, or might be file shares in a neworked file system such as NFS and CephFS.
 
 Storage Classes::
 
@@ -98,7 +98,7 @@ But a class of applications, such as noSQL databases, are designed to replicate 
 
 Red Hat OpenStack Services on OpenShift was designed to only require Kubernetes storage for selected infrastructure service, and those services are designed to handle data resiliency by themselves, in a way that local storage from either the LSO or LVMS are sufficient and supported for production clusters.
 
-[ Figure of internal services with PVCs and user-facing services with direct access to remote storage ]
+image::s3-storage-lecture-fig-2.svg[alt="OpenStack services using Kubernetes storage or embedding storage clients"]
 
 If you prefer using a remote storage solution with a CSI driver certified for Red Hat OpenShift, you can, but you do not require such solution. You're recommended to use the same storage class for all internal services, for simplicity, and also because they share similar workload characteristics of transactional, high IOPS throughput. But you could use different storage classes for each of them.
 
