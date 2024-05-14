@@ -2,7 +2,7 @@
 
 = Answers to the Quiz
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == Kubernetes Networking for OpenStack Services
 

@@ -1,4 +1,4 @@
-:time_estimate: 1
+:time_estimate: 4
 
 = Quiz: Kubernetes Networking for OpenStack Services
 
@@ -8,7 +8,7 @@ Objective::
 
 Relate connectivity requirements of OpenStack services with the OpenShift features which provide that connectivity.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == Questions
 

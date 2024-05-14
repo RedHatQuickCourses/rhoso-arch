@@ -8,7 +8,7 @@ Objective::
 
 Describe how OpenStack services use Kubernetes PVCs, storage classes, and direct access to back-end storage for internal needs and to support application workloads.
 
-WARNING: Work In Progress
+WARNING: Pending Review
 
 == OpenStack and Kubernetes Storage
 
