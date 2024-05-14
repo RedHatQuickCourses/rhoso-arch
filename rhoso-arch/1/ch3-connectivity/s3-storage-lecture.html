@@ -244,7 +244,7 @@ Work In Progress
 <h2 id="_openstack_and_kubernetes_storage"><a class="anchor" href="#_openstack_and_kubernetes_storage"></a>OpenStack and Kubernetes Storage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Unlike networking, Red Hat OpenStack Services on OpenShift was designed to work with standard Kubernetes storage. In fact, local node storage services available with Red Hat OpenShift should be sufficient for most OpenStack clusters, and any network storage provider, for exemple OpenShift Data Foundation, can also be used.</p>
+<p>Unlike networking, Red Hat OpenStack Services on OpenShift was designed to work with standard Kubernetes storage. In fact, local node storage services available with Red Hat OpenShift should be sufficient for many OpenStack clusters, and any network storage provider, for exemple OpenShift Data Foundation, can also be used.</p>
 </div>
 <div class="paragraph">
 <p>Red Hat OpenStack Services on OpenShift only uses Kubernetes storage for internal infrastructure services. User-facing services, such as Cinder and Glance, do not use Kubernetes storage. They connect directly to the storage backeds that compute nodes connect to provide storage for applications running as VMs, and for that they require access to the same storage networks that compute nodes do.</p>
@@ -408,18 +408,18 @@ Most of Kubernetes access modes work at the cluster node level instead of the po
 </dd>
 <dt class="hdlist1">OVN</dt>
 <dd>
-<p>The Open Virtual Network software-defined networking layer requires two network flow databases, the north bound and south bound, which could be recreated from scratch by Neutron but are stored on disks to ensure smooth performance of large OpenStack clusters.</p>
+<p>The Open Virtual Network software-defined networking layer requires two network flow databases, the north bound and south bound, which could be recreated at a cost from by Neutron but are stored on disks and replicated between multiple OVN pods and their PVCs, using the RAFT protocol, to ensure smooth performance and resilience of large OpenStack clusters.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>Because MariaDB, RabbitMQ, and OVN handle data consistency and resilience by themselves, there is no need for local storage resiliency features, such as RAID, on OpenShift cluster nodes running OpenStack services. If you see value on such features, you can use them, just ensure and they are designed to avoid data consistency issues by using writethough caches or writeback caches with bateries.</p>
+<p>Because MariaDB, RabbitMQ, and OVN handle data consistency and resilience by themselves, there is no need for local storage high availability features, such as RAID, on OpenShift cluster nodes running OpenStack services. If you see value on such features and wish to useuse them, just ensure and they are designed to avoid data consistency issues by using writethough caches or writeback caches with bateries.</p>
 </div>
 <div class="paragraph">
-<p>Notice the recommendation for three instances of MariaDB abd RabbitMQ per cell. It is recommended that clustered systems run an even number of instances to avoid split brain scenarios, where a group of instances cannot connet to other group. You must ensure one group "wins" because it is the larger group. If you need more instances for scalability increase from three to five or seven. Or consider running more OpenStack compute cells, each with dedicated MariaDB and RabbitMQ instances, rather than larger database and AMQP servers.</p>
+<p>Notice the recommendation for three instances of MariaDB abd RabbitMQ per cell, and of each OVN database per cluster. It is recommended that clustered systems run an even number of instances to avoid split brain scenarios, where a group of instances cannot connet to other group. You must ensure one group "wins" because it is the larger group. If you need more instances, for scalability purposes, increase from three to five or seven. Or consider running more OpenStack compute cells, each with dedicated MariaDB and RabbitMQ instances, rather than larger database and AMQP clusters.</p>
 </div>
 <div class="paragraph">
-<p>If you configure a proof-of-concept OpenStack cluster which uses Kubernetes storage for user-facing services such as Glance and Swift, be warned that those services are not designed for either scalability nor resiliency of storage by themselves. They are designed to work directly with backend storage which provide those features, but not to use that reliable backend as Kubernetes storage.</p>
+<p>If you configure a proof-of-concept OpenStack cluster which uses Kubernetes storage for user-facing services such as Glance and Swift, be warned that those services are not tested for either scalability nor resiliency with Kuberbetes storage. They are designed to work directly with backend storage and to scale by themselves without depend on Kubernetes PVCs nor CSI drivers.</p>
 </div>
 </div>
 </div>

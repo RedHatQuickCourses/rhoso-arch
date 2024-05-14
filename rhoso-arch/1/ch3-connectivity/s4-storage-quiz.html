@@ -246,14 +246,86 @@ Work In Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Question?</p>
+<p>How does OpenStack user-facing services use Kubernetes storage capabilties, from OpenStack Pods and from OpenStack compute nodes?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Answer 1</p>
+<p><i class="fa fa-square-o"></i> They do not use Kubernetes storage at all. RHEL compute nodes and OpenStack pods connect directly to whatever storage backend servers OpenStack workloads.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2</p>
+<p><i class="fa fa-square-o"></i> OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Iterface (CSI) drivers on OpenShift.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> OpenStack Pods must connect to storage backends though Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Only OpenStack compute nodes connect to storage backlends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following Kubernetes API resource types and storage components require only project-level privileges?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Persistent Volume Claim (PVC)</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Persistent Volume (PV)</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Storage Class</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Dynamic Storage Provisioner</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Container Storage Interface (CSI) Driver</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Why is local storage, such as the LVMS add-on operator, considered sufficient for production deployments of Red Hat OpenStack Services on OpenShift, and many OpenStack clusters do not require any networked storage for the OpenShift cluster running their control plane Pods?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack Pods make no use of Kubernetes storage and always access storage backends directly.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack Pods only store in PVCs data that could be easily recreated from OpenStack API resource instances, that is, as data caches.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack Pods which use Kubernetes storage are designed to replicate persistent data by themselves.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack Pods delegates all storage access to RHEL compute nodes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following OpenStack services require Kubernetes persistent storage?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Glance</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Cinder</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Swift</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> MariaDB</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> RabbitMQ</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> OVN</p>
 </li>
 </ul>
 </div>

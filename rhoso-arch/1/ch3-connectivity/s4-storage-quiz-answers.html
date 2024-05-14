@@ -236,16 +236,105 @@ Work In Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Question?</p>
+<p>How does OpenStack user-facing services use Kubernetes storage capabilties, from OpenStack Pods and from OpenStack compute nodes?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-check-square-o"></i> <strong>Answer 1</strong><br>
-<em>Correct: Explain</em></p>
+<p><i class="fa fa-check-square-o"></i> <strong>They do not use Kubernetes storage at all. RHEL compute nodes and OpenStack pods connect directly to whatever storage backend servers OpenStack workloads.</strong><br>
+<em>Correct: OpenStack compute nodes connect to storage backends using storage clients on the host operating system clients and OpenStack Pods embed those clients on their containers.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2<br>
-<em>Incorrect: Explain</em></p>
+<p><i class="fa fa-square-o"></i> OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Iterface (CSI) drivers on OpenShift.<br>
+<em>Incorrect: OpenStack compute nodes do not require any Kubernetes storage capability or configuration.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> OpenStack Pods must connect to storage backends though Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.<br>
+<em>Incorrect: OpenStack Pods do not require any Kubernetes storage capability or configuration for user-facing OpenStack services. Some services might be configured to use Kubernetes storage for proof-of-concept scenarios, if those services require no access to backend storage from compute nodes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Only OpenStack compute nodes connect to storage backlends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.<br>
+<em>Incorrect: OpenStack services and their pods do require direct access to storage backends, for example to upload Glande images, or to create new LUNs for Cinder Volumes. They just do not use Kubernetes storage capabilities for that.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following Kubernetes API resource types and storage components require only project-level privileges?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Persistent Volume Claim (PVC)</strong><br>
+<em>Correct: OpenShift users require only the Edit role in a Project to manage PVC instances.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Persistent Volume (PV)<br>
+<em>Incorrect: OpenShift users require Cluster Admin privileges to manage PV instances, which are not  namespaced.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Storage Class<br>
+<em>Incorrect: OpenShift users require Cluster Admin privileges to manage Storage Class instances, which are not namespaced.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Dynamic Storage Provisioner
+<em>Incorrect: OpenShift users require Cluster Admin privileges to deploy dynamic storage provisioners, which run privileged Pods.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Container Storage Interface (CSI) Driver<br>
+<em>Incorrect: OpenShift users require Cluster Admin privileges to deploy CSI drivers, which run privileged Pods.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Why is local storage, such as the LVMS add-on operator, considered sufficient for production deployments of Red Hat OpenStack Services on OpenShift, and many OpenStack clusters do not require any networked storage for the OpenShift cluster running their control plane Pods?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack Pods make no use of Kubernetes storage and always access storage backends directly.<br>
+<em>Incorrect: Pods from OpenStack internal infrastructure services, such as RabbitMQ, do require Kubernetes storage.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack Pods only store in PVCs data that could be easily recreated from OpenStack API resource instances, that is, as data caches.<br>
+<em>Incorrect: OpenStack user-facing services store OpenStack API instances on the MariaDB relational database which does require Kubernetes storage.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Because OpenStack Pods which use Kubernetes storage are designed to replicate persistent data by themselves.</strong><br>
+<em>Correct: OpenStack internal infrastructure services, such as RabbitMQ, MariaDB, and OVN, replicate data among multiple Pods, and each Pod connects to its own PVC, ensuring there are multiple copies of persistent data.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack Pods delegates all storage access to RHEL compute nodes.<br>
+<em>Incorrect: Pods from OpenStack user-facing services to access directly, by embeding network storage clients on their containers.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following OpenStack services require Kubernetes persistent storage?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Glance<br>
+<em>Incorrect: Glance can use Kubernetes PVCs for proof-of-concept deployments, but it is tested for scale with direct access to storage backends.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Cinder<br>
+<em>Incorrect: Cinder cannot use Kubernetes PVCs for anything. It requires direct access to storage backends.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Swift<br>
+<em>Incorrect: Swift can use Kubernetes PVCs for proof-of-concept deployments, but it is recommended that you delegate object storage APIs to a scalable storage backend such as Red Hat Ceph Storage.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>MariaDB</strong><br>
+<em>Correct: MariaDB stores OpenStack API resource instances for all OpenStack user-facing services and requires Kubernetes PVCs.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>RabbitMQ</strong><br>
+<em>Correct: RabbitMQ stores AMQP messages for guaranteed delivery beween OpenStack service components and requires Kubernetes PVCs.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>OVN</strong><br>
+<em>Correct: OVN stores network flows on its noth bound and south bound databases, to support distributed network flow processing by OpenStack compute nodes, and requires Kubernetes PVCs.</em></p>
 </li>
 </ul>
 </div>
