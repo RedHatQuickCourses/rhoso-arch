@@ -12,8 +12,36 @@ WARNING: Work In Progress
 
 == Questions
 
-1. Question?
+1. How does OpenStack user-facing services use Kubernetes storage capabilties, from OpenStack Pods and from OpenStack compute nodes?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] They do not use Kubernetes storage at all. RHEL compute nodes and OpenStack pods connect directly to whatever storage backend servers OpenStack workloads.
 
+* [ ] OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Iterface (CSI) drivers on OpenShift.
+
+* [ ] OpenStack Pods must connect to storage backends though Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.
+
+* [ ] Only OpenStack compute nodes connect to storage backlends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.
+
+2. Which of the following Kubernetes API resource types and storage components require only project-level privileges?
+
+* [ ] Persistent Volume Claim (PVC)
+* [ ] Persistent Volume (PV)
+* [ ] Storage Class
+* [ ] Dynamic Storage Provisioner
+* [ ] Container Storage Interface (CSI) Driver
+
+3. Why is local storage, such as the LVMS add-on operator, considered sufficient for production deployments of Red Hat OpenStack Services on OpenShift, and many OpenStack clusters do not require any networked storage for the OpenShift cluster running their control plane Pods?
+
+* [ ] Because OpenStack Pods make no use of Kubernetes storage and always access storage backends directly.
+* [ ] Because OpenStack Pods only store in PVCs data that could be easily recreated from OpenStack API resource instances, that is, as data caches.
+* [ ] Because OpenStack Pods which use Kubernetes storage are designed to replicate persistent data by themselves.
+* [ ] Because OpenStack Pods delegates all storage access to RHEL compute nodes.
+
+4. Which of the following OpenStack services require Kubernetes persistent storage?
+
+* [ ] Glance
+* [ ] Cinder
+* [ ] Swift
+* [ ] MariaDB
+* [ ] RabbitMQ
+* [ ] OVN
