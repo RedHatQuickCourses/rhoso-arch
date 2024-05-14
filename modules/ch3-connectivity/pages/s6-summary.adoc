@@ -1,0 +1,25 @@
+= Summary
+
+In this chapter, you learned:
+
+* Kubernetes provides networking features designed for cloud-native applications over a single primary network and OpenShift includes Multus to connect pods to multple secondary networks.
+
+* Kubernetes enables all Pods to connect to outside their cluster (egress) by performing SNAT, and enables clients and users to connect from outside their customer (ingress) by using Ingress and external load balancer Services. OpenShift also includes Routes as an alternative to Ingress.
+
+* Kubernetes external load balancer services only work with cloud providers but OpenShift includes the MetalLB add-on operator to enable those services on physical services. MetalLB enables Kubernetes external load balancer Services to attach to VIPs from any network.
+
+* Red Hat OpenStack Services on OpenShift uses multiple Kubernetes and OpenShift networking features to enable connectivity with multiple isolated networks:
+
+** Routes for public API entry points
+** External load balancer Services for private API entrypoints and AMQP messaging
+** Multus secondary networks for communication from control plane Pods with RHEL compute nodes.
+
+* Kubernetes provides storage features designed for cloud-native applications and their persistence services, such as databases and message queues, and requires Container Storage Interface (CSI) Drivers for advanced features such as volume snapshots.
+
+* Kubernetes Pods attach to persistent storage volumes though Persistent Volume Claims (PVCs) and these refer to Storage Classes which map to different CSI Drivers.
+
+* OpenStack user-facing services do not require PVCs, they connect to backend storage directly, using network storage clients embedded into their own containers.
+
+* A few OpenStack internal infrastructure services: MariaDB, RabbitMQ, and OVN do require PVCs and, for production clusters, should be configured with multiple Pods for each service, and each Pod with its own PVC.
+
+* OpenStack internal infrastructure services handle data replication and consistency by themselves, without relying on backend storage features, and Red Hat supports using local storage from the LVMS add-on operator. This way, only OpenStack compute nodes and related user-facing services require access to an enterprise backend storage such as Red Hat Ceph Storage.
