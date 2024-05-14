@@ -246,14 +246,201 @@ Work In Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Question?</p>
+<p>Why does OpenStack clusters typically require multiple, isolated networks?</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Answer 1</p>
+<p><i class="fa fa-square-o"></i> Because OpenStack services cannot use Kubernetes networking features to connect to RHEL compute nodes.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Answer 2</p>
+<p><i class="fa fa-square-o"></i> Because multiple OpenStack services listen to the same TCP ports and each must bind to different IP addresses.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack services and other IT infrastructure present performance, reliability, and security concerns related to network traffic.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because Both OpenStack Neutron and OpenShift use the OVN software-defined networking layer and they conflict with each other.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The reference OpenStack network scenario contains five networks: ctlplane, internalapi, tenant, storage, and external. On which of those networks there is application traffic?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> ctlplane</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> internalapi</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> tenant</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> storage</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> external</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following are reasons for Pods in Kubernetes communicating with other Pods in the same cluster through Kubernetes Services instead of directly?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Pods do not have a stable IP address and Services provide such stable addresses.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Pods are ephemeral and might be replaced by new pods at any time.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Pods cannot connect directly to each other because of Kubernetes Network Policies.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Pods do not get DNS local names, while Services do.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Services perform load balancing among replica Pods from the same workload.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How do Kubernetes Pods connect to services and applications outside of their Kubernetes cluster?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> By connecting to an Egress Service created for the application namespace.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> By connecting to a secondary network attached to the Pod.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> By relying on Network Address Transation (NAT) performed by Kubernetes on all cluster nodes.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> By relying on a Network Gateway Router created for the application namespace.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A video processing application supports both web clients using HTTP and video devices using RTSP. Knowing that RTSP is not based on HTTP and is not compatible with TLS, which of the following Kubernetes API resource types can provide connectivity to clients of that video processing application?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Route</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Ingress</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Service of type Cluster IP</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Service of type Load Balancer</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Network Attachment Definition</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Network Node Configuration Policy</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specificed reference networks:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the Kubernetes primary network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the internalapi network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specificed reference networks:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the Kubernetes primary network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the internalapi network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specificed reference networks:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the Kubernetes primary network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the internalapi network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.</p>
 </li>
 </ul>
 </div>
