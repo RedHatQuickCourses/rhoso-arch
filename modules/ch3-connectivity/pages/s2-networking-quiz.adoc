@@ -12,8 +12,74 @@ WARNING: Work In Progress
 
 == Questions
 
-1. Question?
+1. Why does OpenStack clusters typically require multiple, isolated networks?
 
-* [ ] Answer 1
-* [ ] Answer 2
+* [ ] Because OpenStack services cannot use Kubernetes networking features to connect to RHEL compute nodes.
+* [ ] Because multiple OpenStack services listen to the same TCP ports and each must bind to different IP addresses.
+* [ ] Because OpenStack services and other IT infrastructure present performance, reliability, and security concerns related to network traffic.
+* [ ] Because Both OpenStack Neutron and OpenShift use the OVN software-defined networking layer and they conflict with each other.
 
+2. The reference OpenStack network scenario contains five networks: ctlplane, internalapi, tenant, storage, and external. On which of those networks there is application traffic?
+
+* [ ] ctlplane
+* [ ] internalapi
+* [ ] tenant
+* [ ] storage
+* [ ] external
+
+3. Which of the following are reasons for Pods in Kubernetes communicating with other Pods in the same cluster through Kubernetes Services instead of directly?
+
+* [ ] Pods do not have a stable IP address and Services provide such stable addresses.
+* [ ] Pods are ephemeral and might be replaced by new pods at any time.
+* [ ] Pods cannot connect directly to each other because of Kubernetes Network Policies.
+* [ ] Pods do not get DNS local names, while Services do.
+* [ ] Services perform load balancing among replica Pods from the same workload.
+
+4. How do Kubernetes Pods connect to services and applications outside of their Kubernetes cluster?
+
+* [ ] By connecting to an Egress Service created for the application namespace.
+* [ ] By connecting to a secondary network attached to the Pod.
+* [ ] By relying on Network Address Transation (NAT) performed by Kubernetes on all cluster nodes.
+* [ ] By relying on a Network Gateway Router created for the application namespace.
+
+5. A video processing application supports both web clients using HTTP and video devices using RTSP. Knowing that RTSP is not based on HTTP and is not compatible with TLS, which of the following Kubernetes API resource types can provide connectivity to clients of that video processing application?
+
+* [ ] Route
+* [ ] Ingress
+* [ ] Service of type Cluster IP
+* [ ] Service of type Load Balancer
+* [ ] Network Attachment Definition
+* [ ] Network Node Configuration Policy
+
+6. Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specificed reference networks:
+
+* [ ] Public API end points of OpenStack Services over the external network.
+* [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
+* [ ] Private API end points of OpenStack Services over the ctlplane network.
+* [ ] Private API end points of OpenStack Services over the internalapi network.
+* [ ] AMQP Messaging over the ctlplane network.
+* [ ] AMQP Messaging over the internalapi network.
+* [ ] SSH management of compute nodes over the ctlplane network.
+* [ ] SSH management of compute nodes over the internalapi network.
+
+7. Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specificed reference networks:
+
+* [ ] Public API end points of OpenStack Services over the external network.
+* [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
+* [ ] Private API end points of OpenStack Services over the ctlplane network.
+* [ ] Private API end points of OpenStack Services over the internalapi network.
+* [ ] AMQP Messaging over the ctlplane network.
+* [ ] AMQP Messaging over the internalapi network.
+* [ ] SSH management of compute nodes over the ctlplane network.
+* [ ] SSH management of compute nodes over the internalapi network.
+
+8. Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specificed reference networks:
+
+* [ ] Public API end points of OpenStack Services over the external network.
+* [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
+* [ ] Private API end points of OpenStack Services over the ctlplane network.
+* [ ] Private API end points of OpenStack Services over the internalapi network.
+* [ ] AMQP Messaging over the ctlplane network.
+* [ ] AMQP Messaging over the internalapi network.
+* [ ] SSH management of compute nodes over the ctlplane network.
+* [ ] SSH management of compute nodes over the internalapi network.
