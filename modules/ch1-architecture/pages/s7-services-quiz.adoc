@@ -16,7 +16,7 @@ WARNING: Pending Review
 
 == Questions
 
-1. Which of the following requires communication between containers inside an OPenShift cluster and processes outside of that OpenShift cluster?
+1. Which of the following requires communication between containers inside an OpenShift cluster and processes outside of that OpenShift cluster?
 
 * [ ] An OpenStack service invokes APIs of another OpenStack service.
 * [ ] An OpenStack service component on a compute node sends messages to another component of the same OpenStack service which runs on the control plane.

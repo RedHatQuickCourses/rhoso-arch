@@ -6,7 +6,7 @@ _Estimated reading time: *{time_estimate} minutes*._
 
 Objective:: 
 
-Identify tasks and Administrator of Red Hat OpenStack on OpenShift clusters performs and the required tools for each task.
+Identify the tasks performed by an Administrator of Red Hat OpenStack on OpenShift clusters and the required tools for each task.
 
 WARNING: Pending Review
 
