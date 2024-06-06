@@ -20,7 +20,7 @@ Before you inspect the Kubernetes API resources which represent those OpenStack 
 
 Let's use OpenStack Nova as an example, not only because it is the most important, but because it also includes some complexity you may not see if we pick one of the simpler OpenStack services.
 
-image::s6-services-lecture-fig-1.png[]
+image::s6-services-lecture-fig-1.svg[]
 
 The figure shows the external and internal views of the architecture of OpenStack Nova. From the external view, Nova interacts with other OpenStack services: Cinder, Glance, Neutron, and Placement. Additionally it interacts with Keystone, which every OpenStack service has to interact with.
 
