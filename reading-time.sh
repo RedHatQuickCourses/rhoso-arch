@@ -17,7 +17,9 @@ fi
 
 WORDS=$(wc -w $1 | awk '{print $1}')
 PNGS=$(grep -c '.png' $1)
+SVGS=$(grep -c '.svg' $1)
 
+let "PNGS = PNGS + SVGS"
 let "MINTXT = $WORDS / $SPEED"
 let "FRACTXT = $WORDS % $SPEED"
 let "HALFSPEED = $SPEED / 2"
