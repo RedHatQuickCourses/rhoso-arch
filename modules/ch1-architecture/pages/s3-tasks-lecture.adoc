@@ -14,7 +14,9 @@ WARNING: Pending Review
 
 An OpenStack Administrator concerns with the OpenStack cluster itself, instead of with the workloads running on the cluster. OpenStack Administrators deal with the security, reliability, and performance of an OpenStack cluster control plane and its compute nodes.
 
-image::s3-tasks-lecture-fig-1.png[]
+// copy from rhoso-intro ch1-intro s3-operations-lecture-fig-1.png
+
+image::s3-tasks-lecture-fig-1.svg[]
 
 To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs knowledge about Kubernetes API resources.
 

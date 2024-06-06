@@ -14,11 +14,7 @@ WARNING: Pending Review
 
 The Red Hat OpenStack Services on OpenShift product is delivered as a top-level add-on operator which manages a set of child add-on operators. As it manages other add-on operators, it is called a meta operator.
 
-// Antora doesn't display the SVG file but Firefox and Chrome are happy with it
-//image::s1-operators-lecture-fig-5.svg[]
-
-image::s1-operators-lecture-fig-1.png[]
-
+image::s1-operators-lecture-fig-1.svg[]
 
 Most of these child add-on operators are dedicated to managing indidual OpenStack services, both user-facing (such as Nova and Keystone) and internal infrastrucutre (such as RabbitMQ and OVN). Among the child add-on operators, an OpenStack Administrator usually focus on these two: 
 
@@ -56,7 +52,7 @@ Other Red Hat products which run on OpenShift are also architected as add-on ope
 
 A Kubernetes add-on operator is a containerized application which runs on Kubernetes and  provides custom resource types for the Kubenetes API. Instances of these custom API resources configure the add-on operator itself and the entity (other application, hardware, or external service) that the add-on operator manages.
 
-image::s1-operators-lecture-fig-2.png[]
+image::s1-operators-lecture-fig-2.svg[]
 
 No programming language runtime constrains the development of add-on operators: they could be programmed in any programming language. Their only requirement is invoking Kubernetes APIs to monitor and change Kubernetes API resource instances. 
 
@@ -98,7 +94,7 @@ Kubernetes add-on operators could be deployed in a Kubernetes cluster the same w
 
 Red Hat OpenShift provides a better way of deploying Kubernetes add-on operators, by using the Operator Lifecycle Manager (OLM). The OLM adds the concept of operator catalog, which is a container image containing only metadata about add-on operators. Using the metadata from operator catalogs and the metadata from add-on operator images themselves, the Operator Lifecycle Manager can track upgrades of an add-on operator and dependencies between multiple add-on operators.
 
-image::s1-operators-lecture-fig-3.png[]
+image::s1-operators-lecture-fig-3.svg[]
 
 Red Hat OpenShift also recognizes additional metadata which enables integration with the OpenShift web console and with OpenShift monitoring metrics and alert, enabling add-on operators to fully integrate with OpenShift cluster management.
 
@@ -110,7 +106,7 @@ Red Hat manages a number of operator catalogs, as part of the Red Hat Marketplac
 
 Not all add-on operators in Red Hat OpenShift are deployed and managed by the Operator Lifecycle Manager. A few, selected add-on operators are required by the OpenShift platform itself. They must be installed at OpenShift installation time and upgraded together to newer OpenShift product releases when you upgrade an OpenShift cluster.
 
-image::s1-operators-lecture-fig-4.png[]
+image::s1-operators-lecture-fig-4.svg[]
 
 These add-on operators are called cluster operators and managed by the Cluster Version Operator (CVO). In a sense, cluster operators provide the core of Red Hat OpenShift, while add-on operators provide optional features and additional layered products.
 
@@ -122,7 +118,7 @@ It may happen that an add-on operator release is not compatible with a specific 
 
 Back to the OpenStack add-on operator, an OpenStack Administrator is not expected to deal with most of its child add-on operators, other than for troubleshooting purposes, except for the Infrastructure and Data Plane add-on operators.
 
-image::s1-operators-lecture-fig-5.png[]
+image::s1-operators-lecture-fig-5.svg[]
 
 Once you start the installation of the OpenStack add-on operator in an OpenShift cluster, all child add-on operators are automatically installed by the OLM, but this only means that the Red Hat OpenStack Services on OpenShift software is available.
 
