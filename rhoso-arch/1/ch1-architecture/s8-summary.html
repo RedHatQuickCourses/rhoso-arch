@@ -222,7 +222,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>An OpenStack control plane is composed of multiple user-facing and internal infrastructure serviced which run as containers on Red Hat OpenShift.</p>
+<p>An OpenStack control plane is composed of multiple user-facing and internal infrastructure services which run as containers on Red Hat OpenShift.</p>
 </li>
 <li>
 <p>OpenStack user-facing services provide the usual OpenStack services and their APIs, such as Nova, Cinder, Neutron, Keystone, etc.</p>
@@ -237,7 +237,7 @@
 <p>Each OpenStack service may be composed of multiple components, which communicate with each other using AMQP, and store data (API Resource instances) on MariaDB. Components running on compute nodes never access MariaDB directly, but they access the HTTP APIs of other OpenStack services and the AMQP messages of other components of the same service.</p>
 </li>
 <li>
-<p>OpenStack Administrators must use Kubernetes APIs and custom resources the from OpenStack add-on operator to manage their OpenStack services, both user-facing and internal infrastructure, and for that they must use either the OpenShift client or the OpenShift web console.</p>
+<p>OpenStack Administrators must use Kubernetes APIs and custom resources from the OpenStack add-on operator to manage their OpenStack services, both user-facing and internal infrastructure, and for that they must use either the OpenShift client or the OpenShift web console.</p>
 </li>
 <li>
 <p>Components of OpenStack services which run on OpenShift must use Kubernetes storage and network capabilities, but they must also access external storage and network resources, not managed by Kubernetes, which are required by RHEL compute nodes.</p>

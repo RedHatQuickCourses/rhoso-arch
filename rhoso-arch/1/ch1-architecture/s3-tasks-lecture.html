@@ -258,10 +258,10 @@ Pending Review
 <p>To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs knowledge about Kubernetes API resources.</p>
 </div>
 <div class="paragraph">
-<p>If you were used to manage OpenStack cluster control planes running directly on RHEL, on either physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level, by making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.</p>
+<p>If you were used to managing OpenStack cluster control planes running directly on RHEL, whether on physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level. This involves making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.</p>
 </div>
 <div class="paragraph">
-<p>OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which run Ansible playbooks on OpenShift. As an OpenStack Administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.</p>
+<p>OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which run Ansible playbooks on OpenShift. As an OpenStack administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.</p>
 </div>
 <div class="sect2">
 <h3 id="_openstack_administrators_and_openshift_administrators"><a class="anchor" href="#_openstack_administrators_and_openshift_administrators"></a>OpenStack Administrators and OpenShift Administrators</h3>
@@ -291,15 +291,15 @@ Pending Review
 </dd>
 <dt class="hdlist1">The OpenShift web console</dt>
 <dd>
-<p>It is a web application which offers functionality for OpenShift Administrators, OpenShift Operators, and application developers. Besides the standard set of pages from the OpenShift web console, add-on operators may add custom pages and monitoring dashboards.</p>
+<p>It is a web application which offers functionality to OpenShift Administrators, OpenShift Operators, and application developers. Besides the standard set of pages from the OpenShift web console, add-on operators may add custom pages and monitoring dashboards.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>The OpenShift web console is richer, compared to the OpenStack Horizon web UI, to the point you can expect to be able to perform almost all OpenShift operations and administration tasks using it. But OpenShift Operators are also expected to be adept of GitOps practices, which require managing Kubernetes API resources directly from code, using YAML files and the OpenShift client.</p>
+<p>The OpenShift web console is richer, compared to the OpenStack Horizon web UI. To the point where you can expect to perform almost all OpenShift operations and administration tasks using it. However, OpenShift Operators are also expected to be adept of GitOps practices, which require managing Kubernetes API resources directly from code using YAML files and the OpenShift client.</p>
 </div>
 <div class="paragraph">
-<p>OpenStack Administrators also use the same tools OpenStack Operator uses, because some OpenStack administration tasks require managing OpenStack API resources such as provider networks and server flavors. These tasks are performed using the OpenStack client and Horizon. But, when OpenStack Administrators need to inspect or change the configuration of an OpenStack service, they must use Kubernetes APIs thus they must use OpenShift tools.</p>
+<p>OpenStack Administrators also use the same tools as OpenStack Operator, because some OpenStack administration tasks involve managing OpenStack API resources such as provider networks and server flavors. These tasks are performed using the OpenStack client and Horizon. However, when OpenStack Administrators need to inspect or change the configuration of an OpenStack service, they must use Kubernetes APIs thus they must use OpenShift tools.</p>
 </div>
 </div>
 </div>
@@ -329,7 +329,7 @@ Pending Review
 <div class="sect2">
 <h3 id="_general_syntax_of_openshift_client_commands"><a class="anchor" href="#_general_syntax_of_openshift_client_commands"></a>General Syntax of OpenShift Client Commands</h3>
 <div class="paragraph">
-<p>Follows the general syntax of the <code>oc</code> command. The dollar sign ($) represents an operating system shell prompt and is not part of the command.</p>
+<p>Following is the general syntax of the <code>oc</code> command. The dollar sign ($) represents an operating system shell prompt and is not part of the command.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -416,7 +416,7 @@ Pending Review
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>edit</code> command retrieves a resource instance and starts a local text editor, them replaces the resource instance in an OpenShift cluster with the definition from the text editor; The <code>apply</code> command replaces a resource instance with the complete definition in the YAML file; and finally, the <code>patch</code> command merges the partial resource definition from the YAML file with the resource instance in an OpenShift cluster.</p>
+<p>The <code>edit</code> command retrieves a resource instance and starts a local text editor, then replaces the resource instance in an OpenShift cluster with the definition from the text editor; The <code>apply</code> command replaces a resource instance with the complete definition in the YAML file; and finally, the <code>patch</code> command merges the partial resource definition from the YAML file with the resource instance in an OpenShift cluster.</p>
 </div>
 </div>
 <div class="sect2">
@@ -484,7 +484,7 @@ $ <strong>oc whoami</strong></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Follows examples of generic API resource management comands which the name of an API resource type, API resource instance, or a YAML file:</p>
+<p>Following are some examples of generic API resource management comands which include the name of an API resource type, an API resource instance, or a YAML file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -505,7 +505,7 @@ $ <strong>oc get svc</strong></code></pre>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Do not try these commands on your OpenShift cluster, unless you know which resource names to use and appropriate values for other arguments.
+Do not try these commands on your OpenShift cluster, unless you know which resource names to use and have appropriate values for other arguments.
 </td>
 </tr>
 </table>
@@ -551,7 +551,7 @@ $ <strong>oc create secret generic --help</strong></code></pre>
 <div class="sect2">
 <h3 id="_introspection_of_api_resources"><a class="anchor" href="#_introspection_of_api_resources"></a>Introspection of API Resources</h3>
 <div class="paragraph">
-<p>An OpenShift cluster can list all available API resource types, be they standard Kubernetes API resources or custom resources from add-on operators:</p>
+<p>An OpenShift cluster can list all available API resource types, whether they are standard Kubernetes API resources or custom resources from add-on operators:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -579,7 +579,7 @@ $ <strong>oc create secret generic --help</strong></code></pre>
 <p><code>route.route.openshift.io/v1</code></p>
 </div>
 <div class="paragraph">
-<p>If there are no other API resource types with the same name, you can ommit the API resource group, so the following two commands list instances of the same API resource type:</p>
+<p>If there are no other API resource types with the same name, you can omit the API resource group, so that the following two commands list instances of the same API resource type:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -588,7 +588,7 @@ $ <strong>oc get route.route.openshift.io</strong></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Notice that, when listing or referring to API resource instances you <strong>must</strong> ommit the API version.</p>
+<p>Notice that, when listing or referring to API resource instances you <strong>must</strong> omit the API version.</p>
 </div>
 <div class="paragraph">
 <p>The output of the <code>oc api-resources</code> command also shows that some API resource types have short names, which can save a bit of typing. For example, the following two commands lis the same API resource instances:</p>
@@ -632,7 +632,7 @@ $ <strong>oc explain oc explain route --api-version route.openshift.io/v1</stron
 <p>A menu bar at the top;</p>
 </li>
 <li>
-<p>A side menu the left;</p>
+<p>A side menu to the left;</p>
 </li>
 <li>
 <p>A page body at the center, which could include multiple tabs.</p>
@@ -640,7 +640,7 @@ $ <strong>oc explain oc explain route --api-version route.openshift.io/v1</stron
 </ol>
 </div>
 <div class="paragraph">
-<p>The following screen shot shows the appearance of the web console on first access of a newly installed OpenShift cluster. It displays the Cluster Overview dashboard.</p>
+<p>The following screen shot shows the appearance of the web console on the first access of a newly installed OpenShift cluster. It displays the Cluster Overview dashboard.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -648,7 +648,7 @@ $ <strong>oc explain oc explain route --api-version route.openshift.io/v1</stron
 </div>
 </div>
 <div class="paragraph">
-<p>It common to hide the "Getting started resources" pane, to give more room to the many information panes from the Cluster Overview dashboard.</p>
+<p>It is common to hide the "Getting started resources" pane, to give more room to the many information panes from the Cluster Overview dashboard.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -690,7 +690,7 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 </div>
 </div>
 <div class="paragraph">
-<p>The remaining items of the side menu can be collapsed and expand independently of each other. If the side menu is too tall, it displays a vertical scroll bar which is independent of the scroll bars of the page at the center.</p>
+<p>The remaining items of the side menu can be collapsed and expanded independently of each other. If the side menu is too tall, it displays a vertical scroll bar which is independent of the scroll bars of the page at the center.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -704,7 +704,7 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 <div class="sect2">
 <h3 id="_navigating_the_openshift_web_console"><a class="anchor" href="#_navigating_the_openshift_web_console"></a>Navigating the OpenShift Web Console</h3>
 <div class="paragraph">
-<p>The two-level path on the side menu, plus the name of the corrent tab of the center page, uniquely identifies a page in the OpenShift web console as a three-level path. For example, the Cluser Overview dashboard page from the first screen shot is <strong>Home &gt; Overview &gt; Cluster</strong>.</p>
+<p>The two-level path on the side menu, along with the name of the current tab of the center page, uniquely identifies a page in the OpenShift web console as a three-level path. For example, the Cluser Overview dashboard page from the first screen shot is <strong>Home &gt; Overview &gt; Cluster</strong>.</p>
 </div>
 <div class="paragraph">
 <p>OpenShift add-on operators can add menu items and pages to the web console, so the layout is not fixed: it depends on the add-on operators installed on your OpenShift cluster. Not all pages include tabs, and in that case the path to the page is only two levels.</p>

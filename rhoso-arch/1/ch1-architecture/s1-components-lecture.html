@@ -277,10 +277,10 @@ Pending Review
 </div>
 </div>
 <div class="paragraph">
-<p>The OpenStack community provides a number of user-facing services with different stages of maturity, a number alternatives for internal infrastructure services, and multiple ways of deploying those services together.</p>
+<p>The OpenStack community provides a number of user-facing services with different stages of maturity, a number of alternatives for internal infrastructure services, and multiple ways of deploying those services together.</p>
 </div>
 <div class="paragraph">
-<p>The Red Hat OpenStack Services on OpenShift product includes a selection of user-facing services and is very prescriptive on the way you deploy those services, using Red Hat OpenShit, and which internal infrastruture services they use, to provide a stable, reliable, and scalable Infrastructure-as-a-Service (IaaS) private cloud platform.</p>
+<p>The Red Hat OpenStack Services on OpenShift product includes a selection of user-facing services and is very prescriptive in the way you deploy those services, using Red Hat OpenShit, and which internal infrastruture services they use, to provide a stable, reliable, and scalable Infrastructure-as-a-Service (IaaS) private cloud platform.</p>
 </div>
 <div class="paragraph">
 <p>You should already know the user-facing services included with Red Hat OpenStack, and this course will not list and define each one of them. If you need a refresher, please review the <a href="https://redhatquickcourses.github.io/rhoso-intro/rhoso-intro/">OpenStack Operations learning journey</a>.</p>
@@ -328,10 +328,10 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <p>Nowadays, Kubernetes is firmly established as the preferred platform for running both service-oriented and microservices-based workloads. Even users of public clouds such as AWS prefer running these applications on Kubernetes instead of directly over cloud provider VMs, and the same reasons apply to running OpenStack services.</p>
 </div>
 <div class="paragraph">
-<p>Red Hat OpenShift is an application platform based on Kubernetes. It adds over Kubernetes container orchestration capabilities a number of features to build, deploy, and manage a variety application workloads. Those features are usually provided as Kubernetes <strong>add-on operators</strong>.</p>
+<p>Red Hat OpenShift is an application platform based on Kubernetes. It adds to Kubernetes' container orchestration capabilities a number of features for building, deploying, and managing a variety application workloads. Those features are usually provided as Kubernetes <strong>add-on operators</strong>.</p>
 </div>
 <div class="paragraph">
-<p>Kubernetes was designed for simplicity, originally supporting just microservices-based cloud-native applications. Add-on operators extends Kubernetes to support more advanced features and a larger variety of workloads. In fact, the standard feature set of Kubernetes would not be sufficient for OpenStack and Red Hat OpenStack Services on OpenShift relies on a number of other add-on operators which are part of Red Hat OpenShift. Later in this course we will present those add-on operators.</p>
+<p>Kubernetes was designed for simplicity, originally supporting just microservices-based cloud-native applications. Add-on operators extend Kubernetes to support more advanced features and a larger variety of workloads. In fact, the standard feature set of Kubernetes would not be sufficient for OpenStack, and Red Hat OpenStack Services on OpenShift rely on a number of other add-on operators which are part of Red Hat OpenShift. Later in this course, we will present those add-on operators.</p>
 </div>
 <div class="paragraph">
 <p>A Kubernetes add-on operator is itself an application running as a container on Kubernetes. Add-on operators can manage any aspect of a Kubernetes cluster, for example:</p>
@@ -350,7 +350,7 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 </ul>
 </div>
 <div class="paragraph">
-<p>It&#8217;s very common that add-on operators be designed to manage other software running on Kubernetes, for example a database server management operator. A basic database add-on operator would manage just the deployment of a database server and its continued availability. A more sopisticated database add-on operator wold also manage backups of database data, replication of such data from a read-write to multiple read-only replicas, and promotion of a read-only replica to a read-write one in case the the old read-write replica fails.</p>
+<p>It&#8217;s very common for add-on operators to be designed to manage other software running on Kubernetes, for example, a database server management operator. A basic database add-on operator would manage just the deployment of a database server and its continued availability. A more sopisticated database add-on operator would also manage backups of database data, replication of such data from a read-write to multiple read-only replicas, and promotion of a read-only replica to a read-write one in case the the old read-write replica fails.</p>
 </div>
 <div class="paragraph">
 <p>The purpose of an add-on operator is encoding and automating all operational knowledge necessary to manage an application or other piece of IT infrastructure, hence the name "operator" for this class of software.</p>
@@ -378,16 +378,16 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <h2 id="_openstack_administators_and_openshift"><a class="anchor" href="#_openstack_administators_and_openshift"></a>OpenStack Administators and OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenStack Administrators might either be OpenShift Administrators themselves or work close to a dedicated team of OpenShift Administrators. In any case, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be a capable OpenShift Operator, because OpenStack Administrators manage a very specific set of application workloads running on OpenShift: an OpenStack control plane.</p>
+<p>OpenStack Administrators might either be OpenShift Administrators themselves or work closely with a dedicated team of OpenShift Administrators. In any case, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be a capable OpenShift Operator, as OpenStack Administrators manage a very specific set of application workloads running on OpenShift: an OpenStack control plane.</p>
 </div>
 <div class="paragraph">
-<p>Kubernetes manages workloads as containers, while OpenStack manages workloads as virtual Machines (VMs). Kubernetes orchestrates running nmultiple containers over a cluster of compute nodes and provides these containers with basic storage and networking resources. What Kubernetes does for containers seems, on the surface, very similar to what OpenStack does for VMs.</p>
+<p>Kubernetes manages workloads as containers, while OpenStack manages workloads as Virtual Machines (VMs). Kubernetes orchestrates running nmultiple containers over a cluster of compute nodes and provides these containers with basic storage and networking resources. What Kubernetes does for containers seems, on the surface, very similar to what OpenStack does for VMs.</p>
 </div>
 <div class="paragraph">
-<p>The following table compares the Kubernetes and OpenStack from the point of view of their respective operator personas. It servers as a quick overview for experienced OpenStack Operators which are starting their journey to also become OpenShift Operators.</p>
+<p>The following table compares the Kubernetes and OpenStack from the point of view of their respective operator personas. It serves as a quick overview for experienced OpenStack Operators who are starting their journey to also become OpenShift Operators.</p>
 </div>
 <div class="paragraph">
-<p>Do not try to understand all terms of that table right, later during this course we introduce each of the Kubernetes concepts mentioned on it and we also introduce all features from OpenShift that are required by Red Hat OpenStack Services on OpenShift.</p>
+<p>Do not try to understand all terms of that table right now. Later in this course, we will introduce each of the Kubernetes concepts mentioned in it, as well as  all the features from OpenShift that are required by Red Hat OpenStack Services on OpenShift.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -426,7 +426,7 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Core features</p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set of independent services discoverable by Keystone. Compute, storage, and network functionality provided by independent OpenStack services.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set of Kubernetes API resources which includes basic compute, storage, and networking capabilities.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of Kubernetes API resources which include basic compute, storage, and networking capabilities.</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Extensibility</p></th>
@@ -455,7 +455,7 @@ The name "OpenStack Operator" can appear in two contexts, with different meaning
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">API verbs</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service defines its own API verbs and possibly different verbs for each API resources managed by the same service.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service defines its own API verbs and possibly different verbs for each API resource managed by the same service.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All add-on operators are constrained by the Kubernetes API verbs and optionally define subresources to offer a more varied set of operations.</p></td>
 </tr>
 <tr>
