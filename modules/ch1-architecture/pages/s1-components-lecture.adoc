@@ -18,7 +18,7 @@ Red Hat OpenStack Services on OpenShift runs OpenStack control planes as contain
 
 // It is possible to refer to figures from other courses directly, but for now this is a copy of rhoso-intro/modules/ch1-intro/images/s1-rhoso-lecture-fig-2.png
 
-image::s1-components-lecture-fig1.png[]
+image::s1-components-lecture-fig1.svg[]
 
 // Edit the previous figure to include an Ansible icon on the control plane?
 
@@ -32,7 +32,7 @@ An OpenStack control plane runs a number of user-facing and internal infrastruct
 
 // https://docs.google.com/presentation/d/1FyaMiLGAP3sBdJNbwy1JExXbUYGcV83LZGJnKJQO34A/edit?usp=sharing
 
-image::s1-components-lecture-fig2.png[]
+image::s1-components-lecture-fig2.svg[]
 
 The OpenStack community provides a number of user-facing services with different stages of maturity, a number of alternatives for internal infrastructure services, and multiple ways of deploying those services together.
 
