@@ -63,7 +63,7 @@ ____
 +
 [quote]
 ____
-When you create a Data Plane Deployment resource, the External Data Plane Mangement Operator runs one Ansible playbook for each Data Plane Service configured for each Node Set of the data plane, using a custom Ansible Execution Environment container image. Each playbook runs to completion, and when all playbooks finish, the data plane and all its compute nodes should be fully configured for their OpenStack cluster. To perform any change to compute nodes, an OpenStack Administrator must create a new Data Plane Deployment resource, which triggers a new execution of all Ansible playbooks.
+When you create a Data Plane Deployment resource, the External Data Plane Management Operator runs one Ansible playbook for each Data Plane Service configured for each Node Set of the data plane, using a custom Ansible Execution Environment container image. Each playbook runs to completion, and when all playbooks finish, the data plane and all its compute nodes should be fully configured for their OpenStack cluster. To perform any change to compute nodes, an OpenStack Administrator must create a new Data Plane Deployment resource, which triggers a new execution of all Ansible playbooks.
 ____
 
 * [ ] Replica Set
