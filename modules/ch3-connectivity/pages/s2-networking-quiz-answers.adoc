@@ -6,7 +6,7 @@ WARNING: Pending Review
 
 == Kubernetes Networking for OpenStack Services
 
-1. Why does OpenStack clusters typically require multiple, isolated networks?
+1. Why do OpenStack clusters typically require multiple, isolated networks?
 
 * [ ] Because OpenStack services cannot use Kubernetes networking features to connect to RHEL compute nodes. +
 _Incorrect: Kubernetes provides multiple mechanisms to enable connectivity between applications running as containers and applications outside of Kubernetes clusters._
@@ -17,7 +17,7 @@ _Incorrect: OpenStack services can be configured to use different TCP ports on t
 * [x] *Because OpenStack services and other IT infrastructure present performance, reliability, and security concerns related to network traffic.* +
 _Correct: General data center concerns about using network capacity and seggregating traffic drive isolated network designs. It is not anything required by OpenStack itself._
 
-* [ ] Because Both OpenStack Neutron and OpenShift use the OVN software-defined networking layer and they conflict with each other. +
+* [ ] Because both OpenStack Neutron and OpenShift use the OVN software-defined networking layer and they conflict with each other. +
 _Correct: While conflicts among the OVN instances from OpenShift and Openstack influence an isolated network design, it is not the main reason. OpenStack would still use multiple isolated networks without OpenShift and without OVN._
 
 2. The reference OpenStack network scenario contains five networks: ctlplane, internalapi, tenant, storage, and external. On which of those networks there is application traffic?

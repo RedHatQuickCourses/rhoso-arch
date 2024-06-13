@@ -2,7 +2,7 @@
 
 In this chapter, you learned:
 
-* Kubernetes provides networking features designed for cloud-native applications over a single primary network and OpenShift includes Multus to connect pods to multple secondary networks.
+* Kubernetes provides networking features designed for cloud-native applications over a single primary network and OpenShift includes Multus to connect pods to multiple secondary networks.
 
 * Kubernetes enables all Pods to connect to outside their cluster (egress) by performing SNAT, and enables clients and users to connect from outside their customer (ingress) by using Ingress and external load balancer Services. OpenShift also includes Routes as an alternative to Ingress.
 
@@ -10,8 +10,8 @@ In this chapter, you learned:
 
 * Red Hat OpenStack Services on OpenShift uses multiple Kubernetes and OpenShift networking features to enable connectivity with multiple isolated networks:
 
-** Routes for public API entry points
-** External load balancer Services for private API entrypoints and AMQP messaging
+** Routes for public API entry points.
+** External load balancer Services for private API entrypoints and AMQP messaging.
 ** Multus secondary networks for communication from control plane Pods with RHEL compute nodes.
 
 * Kubernetes provides storage features designed for cloud-native applications and their persistence services, such as databases and message queues, and requires Container Storage Interface (CSI) Drivers for advanced features such as volume snapshots.
