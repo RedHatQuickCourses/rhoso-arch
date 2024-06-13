@@ -7,7 +7,7 @@ WARNING: Pending Review
 1. Which of the following are internal infrastructure services of Red Hat OpenStack Services on OpenShift?
 
 * [ ] Nova +
-_Incorrect: Nova is a user-facing service of OpenStack_
+_Incorrect: Nova is a user-facing service of OpenStack._
 
 * [x] *OVN* +
 _Correct: OVN provides the software-defined networking layer behind OpenStack Neutron._
