@@ -37,7 +37,7 @@ WARNING: Pending Review
 
 4. How do Kubernetes Pods connect to services and applications outside of their Kubernetes cluster?
 
-* [ ] By connecting to an Egress Service created for the application namespace.
+* [ ] By connecting to an Ingress Service created for the application namespace.
 * [ ] By connecting to a secondary network attached to the Pod.
 * [ ] By relying on Network Address Transation (NAT) performed by Kubernetes on all cluster nodes.
 * [ ] By relying on a Network Gateway Router created for the application namespace.

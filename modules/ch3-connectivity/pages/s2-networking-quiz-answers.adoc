@@ -56,8 +56,8 @@ _Correct: Services load balance among all pods (or a subset of pods) of the same
 
 4. How do Kubernetes Pods connect to services and applications outside of their Kubernetes cluster?
 
-* [ ] By connecting to an Egress Service created for the application namespace. +
-_Incorrect: While OpenShift enables the use of Egress Services to provide well knwon virtual IP addresses to applications, they are not required and all Pods have network connectivity with outside their cluster._
+* [ ] By connecting to an Ingress Service created for the application namespace. +
+_Incorrect: While OpenShift enables the use of Ingress Services to provide well knwon virtual IP addresses to applications, they are not required and all Pods have network connectivity with outside their cluster._
 
 * [ ] By connecting to a secondary network attached to the Pod. +
 _Incorrect: While OpenShift enables the use secondary networks to provide connectivity to multiple isolated networks, they are not required and all Pods have network connectivity with outside their cluster, using the Kubernetes primary network._
@@ -66,7 +66,7 @@ _Incorrect: While OpenShift enables the use secondary networks to provide connec
 _Correct: Kubernetes cluster nodes perform Source Network Address Transation (SNAT) on all packets send by Pods to outside of the cluster, so those packets seem to originate from the node instead of from the Kubernetes cluster network._
 
 * [ ] By relying on a Network Gateway Router created for the application namespace. +
-_Incorrect: Contratry to most IaaS cloud platforms, including OpenStack, which require the configuration of Network Routers, NAT Gateways, and similar connectivity gateways between internal and external networks, Kubernetes performs NAT for all Pods._
+_Incorrect: Contrary to most IaaS cloud platforms, including OpenStack, which require the configuration of Network Routers, NAT Gateways, and similar connectivity gateways between internal and external networks, Kubernetes performs NAT for all Pods._
 
 5. A video processing application supports both web clients using HTTP and video devices using RTSP. Knowing that RTSP is not based on HTTP and is not compatible with TLS, which of the following Kubernetes API resource types can provide connectivity to clients of that video processing application?
 
@@ -77,7 +77,7 @@ _Correct: OpenShift Routes provide reverse HTTP proxying and support web cliente
 _Correct: Kubernetes Ingress provide reverse HTTP proxying and support web clientes of the video processing application._
 
 * [ ] Service of type Cluster IP +
-_Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide conenctivity with external web clientes nor external video devices._
+_Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide conenctivity with external web clients nor external video devices._
 
 * [x] *Service of type Load Balancer* +
 _Correct: Kubernetes Services of type Load Balancer enable ingress connections using any IP-based protocol and would support both external web clients and external video devices._
@@ -91,16 +91,16 @@ _Incorrect: NMState Network Node Configuration Policies only configure network i
 6. Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specificed reference networks:
 
 * [ ] Public API end points of OpenStack Services over the external network. +
-_Incorrect: The referente network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network._
+_Incorrect: The reference network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network._
 
 * [x] *Public API end points of OpenStack Services over the Kubernetes primary network.* +
 _Correct: Red Hat OpenStack Services on OpenShift uses OpenShift Routes to expose all public facing OpenStack APIs and only exposes them over the Kubernetes primary network._
 
 * [ ] Private API end points of OpenStack Services over the ctlplane network. +
-_Incorrect: The referente network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network._
+_Incorrect: The reference network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network._
 
 * [ ] Private API end points of OpenStack Services over the internalapi network. +
-_Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach tot he Kubernetes primary network._
+_Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach to the Kubernetes primary network._
 
 * [ ] AMQP Messaging over the ctlplane network. +
 _Incorrect: The reference network scenario uses the internalapi network for AMQP traffic. Anyway, OpenShift Routes cannot support non-HTTP protocols such as AMQP._
@@ -109,7 +109,7 @@ _Incorrect: The reference network scenario uses the internalapi network for AMQP
 _Incorrect: OpenShift Routes cannot support non-HTTP protocols such as AMQP._
 
 * [ ] SSH management of compute nodes over the ctlplane network. +
-_Incorrect: OpenShift Routes cannot support non-HTTP protocols such as SSH. Anmyway, Routes provides ingress traffic to Pods, while SSH connections are eggress connections from Pods to RHEL compute nodes._
+_Incorrect: OpenShift Routes cannot support non-HTTP protocols such as SSH. Anyway, Routes provides ingress traffic to Pods, while SSH connections are eggress connections from Pods to RHEL compute nodes._
 
 * [ ] SSH management of compute nodes over the internalapi network. +
 _Incorrect: OpenStack performs SSH management of compute nodes over the ctlplane network. Anyway, OpenShift Routes cannot support non-HTTP protocols such as SSH._
