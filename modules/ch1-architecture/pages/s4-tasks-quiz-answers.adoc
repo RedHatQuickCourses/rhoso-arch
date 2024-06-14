@@ -55,7 +55,7 @@ _Incorrect: An OpenStack Administrator does not require OpenShift Admistration p
 _Correct: An OpenStack Administrator might also be an OpenShift Administrator but only requires administration of the workloads which represent the OpenStack services._
 
 * [ ] View or monitoring permissions of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer. +
-_Incorrect: view or monitoring permissions are insufficient because they would not enable an OpenStack Administrator to make changes to instances of custom resources of the OpenStack add-on operator._
+_Incorrect: View or monitoring permissions are insufficient because they would not enable an OpenStack Administrator to make changes to instances of custom resources of the OpenStack add-on operator._
 
 * [ ] An OpenStack Administrator requires no permissions on the OpenShift cluster. +
 _Incorrect: An OpenStack Administrator requires permissions to make edits to instances of custom resouces of the OpenStack add-on operator to configure and manage OpenStack services and compute nodes._
