@@ -10,7 +10,7 @@ WARNING: Pending Review
 _Incorrect: OpenStack services, such as Nova and Heat, manage VMs running in OpenStack clusters._
 
 * [x] *It is a Kubernetes add-on operator that manages the control and data planes of OpenStack clusters.* +
-_Correct: Directly, or though its child add-on operators, the OpenStack add-on operator manages all of an OpenStack cluster._
+_Correct: Directly, or through its child add-on operators, the OpenStack add-on operator manages all of an OpenStack cluster._
 
 * [ ] It is an OpenShift cluster operator that enables running containerized applications on OpenStack clusters. +
 _Incorrect: The OpenStack add-on operator is NOT an OpenShift cluster operator._
