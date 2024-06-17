@@ -244,7 +244,7 @@ Work In Progress
 <h2 id="_recording"><a class="anchor" href="#_recording"></a>Recording</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This demonstration will be recorded and the video will be linked here, so learners can watch the video and optionally try to replicate it by themselves.</p>
+<p>This demonstration will be recorded and the video linked from here, so learners can watch the video and optionally try to replicate it by themselves.</p>
 </div>
 </div>
 </div>
@@ -252,7 +252,7 @@ Work In Progress
 <h2 id="_environment"><a class="anchor" href="#_environment"></a>Environment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully functional Red Hat OpenStack on OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.</p>
+<p>There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully funcitonal Red Hat OpenStack on OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.</p>
 </div>
 <div class="paragraph">
 <p>For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating ips, tenant networks, etc. That may not be fine for other demonstrations of this course.</p>
@@ -268,7 +268,7 @@ Work In Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If your cluster has any networking different than the sample scenario on this chapter, start by showing a diagram of it and highlighting how it differs. Then show the IP address ranges for each network in an annotated version of the same diagram, or an annotated version of the diagram frrm the first lecture of this chapter.</p>
+<p>If your cluster has any networking different than the sample scenario on this chapter, start by showing a diagram of it and highlighting how it differs. Then show the IP address ranges for each network in an annotated version of the same diagram, or an annotated version of the diagram form the first lecture of this chapter.</p>
 </li>
 <li>
 <p>Log in on OpenShift, using its web console. Ensure you&#8217;re in the Administrators perspective.</p>
@@ -280,7 +280,7 @@ Work In Progress
 <p>Enter the OpenStack project and show the nncp and net-attach-def resources on it, and explain how each maps to the networks presented initially.</p>
 </li>
 <li>
-<p>List routes and service resources, and relate to the services in the keystone catalog. Highlight the internal API and public API endpoints and which kind of service each uses.</p>
+<p>List routes and service resources, and relate to the services in the keystone catalog. Highlight the internal API and public API endpoints and which kind of service each users.</p>
 </li>
 <li>
 <p>Show that not all Kubernetes services are listed on Keystone and show that the ones which aren&#8217;t are ClusterIP services, while the listed ones are LoadBalancer services. Show that all LB services have external IPs on the internalapi network.</p>
@@ -292,13 +292,13 @@ Work In Progress
 <p>Oc exec into the same sample pod and list its network devices and do something to connect to one of the isolated networks. Could be a ping, ncat, or whatever.</p>
 </li>
 <li>
-<p>List all PVCs on the openstack project and their related PVs and and storage classes. It should be consistent, not like the current demo env that uses manually provisioned NFS PVs for Glance and ODF for everything else. For a production setup, you should see three mariadb and three rabbitmq for the same cell and each with a dedicated PVC.</p>
+<p>List all PVCs on the openstack project and their related PVs and and storage classes. It should be consistent, not like the current demo env that uses manually provisioned NFS PVs for Glance and ODF for everything else. For a production setup, you should see tree mariadb and three rabbitmq for the same cell and each with a dedicated PVC.</p>
 </li>
 <li>
 <p>If your OpenStack control plane is running with a non-production setup, for example with single instances of MariaDB or RabbitMQ per cell, do not hide it, and warn that it is not a production-level setup. You can show, in the control plane resource, where you would increase the number of instances of each to three.</p>
 </li>
 <li>
-<p>Show storage configuration in the control plane custom resource for cinder or glance, and show the raw configuration of a storage backend, constrasting with the configuration for mariadb and rabbitmq, which just references a kubernetes storage class (or inherit the global storage class for the control plane).</p>
+<p>Show storage configuration in the control plane custom resource for cinder or glance, and show the raw configuration of a storage backend, constrast with the configuration for mariadb and rabbitmq, which just referneces a kubernetes storage class (or inherit the global storage class for the control plane).</p>
 </li>
 <li>
 <p>Oc exec to a glance or cinder pod and use the local client (such as librbd) to conect to the storage backend of compute nodes.</p>

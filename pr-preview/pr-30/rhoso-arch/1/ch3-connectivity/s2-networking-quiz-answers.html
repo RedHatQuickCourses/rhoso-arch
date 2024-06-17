@@ -320,8 +320,8 @@ Pending Review
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> By connecting to an Ingress Service created for the application namespace.<br>
-<em>Incorrect: While OpenShift enables the use of Ingress Services to provide well knwon virtual IP addresses to applications, they are not required and all Pods have network connectivity with outside their cluster.</em></p>
+<p><i class="fa fa-square-o"></i> By connecting to an Egress Service created for the application namespace.<br>
+<em>Incorrect: While OpenShift enables the use of Egress Services to provide well knwon virtual IP addresses to applications, they are not required and all Pods have network connectivity with outside their cluster.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> By connecting to a secondary network attached to the Pod.<br>
@@ -333,7 +333,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> By relying on a Network Gateway Router created for the application namespace.<br>
-<em>Incorrect: Contrary to most IaaS cloud platforms, including OpenStack, which require the configuration of Network Routers, NAT Gateways, and similar connectivity gateways between internal and external networks, Kubernetes performs NAT for all Pods.</em></p>
+<em>Incorrect: Contratry to most IaaS cloud platforms, including OpenStack, which require the configuration of Network Routers, NAT Gateways, and similar connectivity gateways between internal and external networks, Kubernetes performs NAT for all Pods.</em></p>
 </li>
 </ul>
 </div>
@@ -352,7 +352,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Service of type Cluster IP<br>
-<em>Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide conenctivity with external web clients nor external video devices.</em></p>
+<em>Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide conenctivity with external web clientes nor external video devices.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Service of type Load Balancer</strong><br>
@@ -375,7 +375,7 @@ Pending Review
 <ul class="checklist">
 <li>
 <p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.<br>
-<em>Incorrect: The reference network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network.</em></p>
+<em>Incorrect: The referente network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Public API end points of OpenStack Services over the Kubernetes primary network.</strong><br>
@@ -383,11 +383,11 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.<br>
-<em>Incorrect: The reference network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network.</em></p>
+<em>Incorrect: The referente network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.<br>
-<em>Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach to the Kubernetes primary network.</em></p>
+<em>Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach tot he Kubernetes primary network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.<br>
@@ -399,7 +399,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.<br>
-<em>Incorrect: OpenShift Routes cannot support non-HTTP protocols such as SSH. Anyway, Routes provides ingress traffic to Pods, while SSH connections are eggress connections from Pods to RHEL compute nodes.</em></p>
+<em>Incorrect: OpenShift Routes cannot support non-HTTP protocols such as SSH. Anmyway, Routes provides ingress traffic to Pods, while SSH connections are eggress connections from Pods to RHEL compute nodes.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.<br>
