@@ -16,7 +16,7 @@ _Correct: OVN provides the software-defined networking layer behind OpenStack Ne
 _Incorrect: Kubernetes is the container orchestration platform which runs both user-facing and internal-infrastructure services of OpenStack._
 
 * [x] *RabbitMQ* +
-_Correct: RabbitMQ is the AMQP server which enables assynchronous message-passing between internal components of each OpenStack service._
+_Correct: RabbitMQ is the AMQP server which enables asynchronous message-passing between internal components of each OpenStack service._
 
 * [ ] Ansible +
 _Incorrect: Ansible is used by the External Data Plane Management add-on operator to manage RHEL compute nodes._
@@ -26,10 +26,10 @@ _Incorrect: Ansible is used by the External Data Plane Management add-on operato
 * [x] *Manage an OpenStack cluster, including all its user-facing and internal infrastructure services, and also its compute nodes.* +
 _Correct: The OpenStack add-on operator manages, either directly, or by means of a child add-on operator, all of an OpenStack cluster, including compute nodes outside of its OpenShift cluster._
 
-* [ ] Manage the user-facing services on the control plane of an Openstack cluster. +
+* [ ] Manage the user-facing services on the control plane of an OpenStack cluster. +
 _Incorrect: The OpenStack add-on operator also manages internal infrastructure services of an OpenStack cluster and its data plane (compute nodes)._
 
-* [ ] Manage the internal infrastructure services on the control plane of an Openstack cluster. +
+* [ ] Manage the internal infrastructure services on the control plane of an OpenStack cluster. +
 _Incorrect: The OpenStack add-on operator also manages user-facing services of an OpenStack cluster and its data plane (compute nodes)._
 
 * [ ] Manage the data plane, that is, the compute nodes of an OpenStack cluster. +

@@ -28,16 +28,16 @@ WARNING: Pending Review
 2. What is the purpose of the OpenStack add-on operator?
 
 * [ ] Manage an OpenStack cluster, including all its user-facing and internal infrastructure services, and also its compute nodes.
-* [ ] Manage the user-facing services on the control plane of an Openstack cluster.
-* [ ] Manage the internal infrastructure services on the control plane of an Openstack cluster.
+* [ ] Manage the user-facing services on the control plane of an OpenStack cluster.
+* [ ] Manage the internal infrastructure services on the control plane of an OpenStack cluster.
 * [ ] Manage the data plane, that is, the compute nodes of an OpenStack cluster.
 
 3. Which resources and APIs an OpenStack Administrator must use to configure OpenStack services with Red Hat OpenStack Services on OpenShift?
 
 * [ ] standard resources from the OpenStack APIs
 * [ ] standard resources from the Kubernetes APIs
-* [ ] Custom resoruces from the OpenStack add-on operator
-* [ ] Custom resoruces from the External Data Plane Management add-on operator
+* [ ] Custom resources from the OpenStack add-on operator
+* [ ] Custom resources from the External Data Plane Management add-on operator
 
 4. Is an OpenStack Operator also an OpenShift Operator?
 
