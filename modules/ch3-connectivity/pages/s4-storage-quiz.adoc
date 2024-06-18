@@ -16,11 +16,11 @@ WARNING: Pending Review
 
 * [ ] They do not use Kubernetes storage at all. RHEL compute nodes and OpenStack pods connect directly to whatever storage backend servers OpenStack workloads.
 
-* [ ] OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Iterface (CSI) drivers on OpenShift.
+* [ ] OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Interface (CSI) drivers on OpenShift.
 
-* [ ] OpenStack Pods must connect to storage backends though Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.
+* [ ] OpenStack Pods must connect to storage backends through Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.
 
-* [ ] Only OpenStack compute nodes connect to storage backlends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.
+* [ ] Only OpenStack compute nodes connect to storage backends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.
 
 2. Which of the following Kubernetes API resource types and storage components require only project-level privileges?
 

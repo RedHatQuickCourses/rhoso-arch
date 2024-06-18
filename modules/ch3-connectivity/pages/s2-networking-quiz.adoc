@@ -37,9 +37,9 @@ WARNING: Pending Review
 
 4. How do Kubernetes Pods connect to services and applications outside of their Kubernetes cluster?
 
-* [ ] By connecting to an Egress Service created for the application namespace.
+* [ ] By connecting to an Egress IP created for the application namespace.
 * [ ] By connecting to a secondary network attached to the Pod.
-* [ ] By relying on Network Address Transation (NAT) performed by Kubernetes on all cluster nodes.
+* [ ] By relying on Network Address Translation (NAT) performed by Kubernetes on all cluster nodes.
 * [ ] By relying on a Network Gateway Router created for the application namespace.
 
 5. A video processing application supports both web clients using HTTP and video devices using RTSP. Knowing that RTSP is not based on HTTP and is not compatible with TLS, which of the following Kubernetes API resource types can provide connectivity to clients of that video processing application?
@@ -51,7 +51,7 @@ WARNING: Pending Review
 * [ ] Network Attachment Definition
 * [ ] Network Node Configuration Policy
 
-6. Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specificed reference networks:
+6. Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specified reference networks:
 
 * [ ] Public API end points of OpenStack Services over the external network.
 * [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
@@ -62,7 +62,7 @@ WARNING: Pending Review
 * [ ] SSH management of compute nodes over the ctlplane network.
 * [ ] SSH management of compute nodes over the internalapi network.
 
-7. Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specificed reference networks:
+7. Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specified reference networks:
 
 * [ ] Public API end points of OpenStack Services over the external network.
 * [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
@@ -73,7 +73,7 @@ WARNING: Pending Review
 * [ ] SSH management of compute nodes over the ctlplane network.
 * [ ] SSH management of compute nodes over the internalapi network.
 
-8. Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specificed reference networks:
+8. Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specified reference networks:
 
 * [ ] Public API end points of OpenStack Services over the external network.
 * [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
