@@ -16,11 +16,11 @@ Unlike networking, Red Hat OpenStack Services on OpenShift was designed to work 
 
 Red Hat OpenStack Services on OpenShift only uses Kubernetes storage for internal infrastructure services. User-facing services, such as Cinder and Glance, do not use Kubernetes storage. They connect directly to the storage backends that compute nodes connect to provide storage for applications running as VMs, and for that they require access to the same storage networks that compute nodes do.
 
-Some OpenStack services, such as Glance and Swift, can run entirely on the control plane and use Kubernetes storage, but this is not recommended for production deployments. It is better that those services connect directly to storace backends without using Kubernetes, in the case of Glance, or that storage backends take over the object storage service, in the case of Swift.
+Some OpenStack services, such as Glance and Swift, can run entirely on the control plane and use Kubernetes storage, but this is not recommended for production deployments. It is better that those services connect directly to storage backends without using Kubernetes, in the case of Glance, or that storage backends take over the object storage service, in the case of Swift.
 
 == Kubernetes Storage Concepts
 
-Kubernetes Pods can mount volumes with multiple purposes, and individual containers on the same Pod can share volumes but have independent mount namespaces. Volumes can use configuration data from Configuration Maps and Secrets, or ephmeral storage, besides persistent storage.
+Kubernetes Pods can mount volumes with multiple purposes, and individual containers on the same Pod can share volumes but have independent mount namespaces. Volumes can use configuration data from Configuration Maps and Secrets, or ephemeral storage, besides persistent storage.
 
 All Pods use ephemeral storage by default, meaning that data stored on those volumes can be lost after a Pod terminates. Ephemeral storage may be backed by local storage form Kubernetes cluster nodes or by in-memory filesystems. Either way, ephemeral storage is local to a node and not resilient. 
 
@@ -36,7 +36,7 @@ Persistent Volume Claims (PVCs)::
 
 Represent a volume in application pods. It specifies desired characteristics of the volume, such as size and access modes, and Kubernetes tries to find a volume, or create a new volume, with the closest possible match.
 
-Persistent Volumes (PVs)::
+Persistent Volumes (PVs):
 
 Represent a volume on backend storage. They might be actual devices, such as LUNs from iSCSI and Fibre Storage arrays, or might be file shares in a networked file system such as NFS and CephFS.
 
@@ -44,7 +44,7 @@ Storage Classes::
 
 Represent a class of storage volumes with similar characteristics and technologies. Multiple classes could represent different tiers of price/performance on the same storage backend or completely different storage backends
 
-Kubernetes Operators create and manage PVCs together with other application resources, such as Deployments, Services, and Secrets. But Kuberentes Administrators cannot manage PVCs and storage classes, unless they are cluster administrators.
+Kubernetes Operators create and manage Persistent Volume Claims (PVCs) as well as other application resources, such as Deployments, Services, and Secrets. But Kubernetes Administrators cannot manage Persistent Volumes (PVs) and Storage Classes, unless they are cluster administrators.
 
 === Shareable Storage and Access Modes
 
@@ -76,9 +76,9 @@ Dynamic storage provisioners did not eliminate all the need for manually provisi
 
 Managing storage for production applications require capabilities absent from the PVC and PV API resource types. Over time, the Kubernetes defined new API resources for those capabilities, such as volume snapshots and copy-on-write volumes (also knows as "thin" volumes) and Kubernetes required a way of knowing if a given storage backend supports those capabilities or not.
 
-The https://kubernetes.io/docs/concepts/storage/volumes/#csi[Container Storage Interface (CSI)] provides both a standard way of deploying storage provisioners and of enmerating their capabilities. Nowadays you expect that all storage vendors provide CSI drivers for their products and that they support advanced capabilities such as snapshots.
+The https://kubernetes.io/docs/concepts/storage/volumes/#csi[Container Storage Interface (CSI)] provides both a standard way of deploying storage provisioners and of enumerating their capabilities. Nowadays you expect that all storage vendors provide CSI drivers for their products and that they support advanced capabilities such as snapshots.
 
-Software-defined storage solutions, such as Red Hat Ceph Storage, are exepcted to provide CSI drivers for Kubernetes too. In fact, https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation[Red Hat OpenShift Data Foundation] provides CSI drivers for either remote Ceph clusters or for running Ceph as containers inside an OpenShift cluster, backed by local disks on OpenShift cluster nodes.
+Software-defined storage solutions, such as Red Hat Ceph Storage, are expected to provide CSI drivers for Kubernetes too. In fact, https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation[Red Hat OpenShift Data Foundation] provides CSI drivers for either remote Ceph clusters or for running Ceph as containers inside an OpenShift cluster, backed by local disks on OpenShift cluster nodes.
 
 Red Hat also provides two add-on operators which provide CSI drivers using local storage from OpenShift cluster nodes:
 
@@ -92,7 +92,7 @@ Enables using the Linux Local Volume Manager (LVM) to dynamically creating new l
 
 It may be counter-intuitive using local storage to back PVCs and pin Pods to a Kubernetes cluster node: If that cluster node fails, all data on its volumes is lost and those Pods cannot be recreated on surviving cluster nodes.
 
-But a class of applications, such as noSQL databases, are designed to replicate and share data by themselves, and for them the speed, high throughput, and low latency of local devices may be advantageous compared to remote storage. If those applications are designed to run as multiple pods, each in a different cluster node, they may be able to recreate data from a failed instance by using the surving instances.
+But a class of applications, such as noSQL databases, are designed to replicate and share data by themselves, and for them the speed, high throughput, and low latency of local devices may be advantageous compared to remote storage. If those applications are designed to run as multiple pods, each in a different cluster node, they may be able to recreate data from a failed instance by using the surviving instances.
 
 == PVCs for OpenStack Internal Services
 
@@ -118,8 +118,8 @@ The Open Virtual Network software-defined networking layer requires two network 
 
 Because MariaDB, RabbitMQ, and OVN handle data consistency and resilience by themselves, there is no need for local storage high availability features, such as RAID, on OpenShift cluster nodes running OpenStack services. If you see value on such features and wish to reuse them, just ensure and they are designed to avoid data consistency issues by using writethrough caches or writeback caches with batteries.
 
-Notice the recommendation for three instances of MariaDB abd RabbitMQ per cell, and of each OVN database per cluster. It is recommended that clustered systems run an even number of instances to avoid split brain scenarios, where a group of instances cannot connect to other group. You must ensure one group "wins" because it is the larger group. If you need more instances, for scalability purposes, increase from three to five or seven. Or consider running more OpenStack compute cells, each with dedicated MariaDB and RabbitMQ instances, rather than larger database and AMQP clusters.
+Notice the recommendation for three instances of MariaDB and RabbitMQ per cell, and of each OVN database per cluster. It is recommended that clustered systems run an even number of instances to avoid split brain scenarios, where a group of instances cannot connect to other group. You must ensure one group "wins" because it is the larger group. If you need more instances, for scalability purposes, increase from three to five or seven. Or consider running more OpenStack compute cells, each with dedicated MariaDB and RabbitMQ instances, rather than larger database and AMQP clusters.
 
-If you configure a proof-of-concept OpenStack cluster which uses Kubernetes storage for user-facing services such as Glance and Swift, be warned that those services are not tested for either scalability nor resiliency with Kuberbetes storage. They are designed to work directly with backend storage and to scale by themselves without depending on Kubernetes PVCs nor CSI drivers.
+If you configure a proof-of-concept OpenStack cluster which uses Kubernetes storage for user-facing services such as Glance and Swift, be warned that those services are not tested for either scalability nor resiliency with Kubernetes storage. They are designed to work directly with backend storage and to scale by themselves without depending on Kubernetes PVCs nor CSI drivers.
 
 // Here learners would ask, but I have no info from the BU on the subject: how to backup and restore data from OpenStack control planes (just MariaDB?) for DR?
