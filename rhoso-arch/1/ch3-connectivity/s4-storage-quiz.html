@@ -256,13 +256,13 @@ Pending Review
 <p><i class="fa fa-square-o"></i> They do not use Kubernetes storage at all. RHEL compute nodes and OpenStack pods connect directly to whatever storage backend servers OpenStack workloads.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Iterface (CSI) drivers on OpenShift.</p>
+<p><i class="fa fa-square-o"></i> OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Interface (CSI) drivers on OpenShift.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> OpenStack Pods must connect to storage backends though Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.</p>
+<p><i class="fa fa-square-o"></i> OpenStack Pods must connect to storage backends through Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Only OpenStack compute nodes connect to storage backlends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.</p>
+<p><i class="fa fa-square-o"></i> Only OpenStack compute nodes connect to storage backends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.</p>
 </li>
 </ul>
 </div>

@@ -256,7 +256,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Because both OpenStack Neutron and OpenShift use the OVN software-defined networking layer and they conflict with each other.<br>
-<em>Correct: While conflicts among the OVN instances from OpenShift and Openstack influence an isolated network design, it is not the main reason. OpenStack would still use multiple isolated networks without OpenShift and without OVN.</em></p>
+<em>Correct: While conflicts among the OVN instances from OpenShift and OpenStack influence an isolated network design, it is not the main reason. OpenStack would still use multiple isolated networks without OpenShift and without OVN.</em></p>
 </li>
 </ul>
 </div>
@@ -320,20 +320,20 @@ Pending Review
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> By connecting to an Egress Service created for the application namespace.<br>
-<em>Incorrect: While OpenShift enables the use of Egress Services to provide well knwon virtual IP addresses to applications, they are not required and all Pods have network connectivity with outside their cluster.</em></p>
+<p><i class="fa fa-square-o"></i> By connecting to an Egress IP created for the application namespace.<br>
+<em>Incorrect: While OpenShift enables the use of Egress IPs to provide well known virtual IP addresses to applications, they are not required and all Pods have network connectivity with outside their cluster.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> By connecting to a secondary network attached to the Pod.<br>
 <em>Incorrect: While OpenShift enables the use secondary networks to provide connectivity to multiple isolated networks, they are not required and all Pods have network connectivity with outside their cluster, using the Kubernetes primary network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-check-square-o"></i> <strong>By relying on Network Address Transation (NAT) performed by Kubernetes on all cluster nodes.</strong><br>
-<em>Correct: Kubernetes cluster nodes perform Source Network Address Transation (SNAT) on all packets send by Pods to outside of the cluster, so those packets seem to originate from the node instead of from the Kubernetes cluster network.</em></p>
+<p><i class="fa fa-check-square-o"></i> <strong>By relying on Network Address Translation (NAT) performed by Kubernetes on all cluster nodes.</strong><br>
+<em>Correct: Kubernetes cluster nodes perform Source Network Address Translation (SNAT) on all packets send by Pods to outside of the cluster, so those packets seem to originate from the node instead of from the Kubernetes cluster network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> By relying on a Network Gateway Router created for the application namespace.<br>
-<em>Incorrect: Contratry to most IaaS cloud platforms, including OpenStack, which require the configuration of Network Routers, NAT Gateways, and similar connectivity gateways between internal and external networks, Kubernetes performs NAT for all Pods.</em></p>
+<em>Incorrect: Contrary to most IaaS cloud platforms, including OpenStack, which require the configuration of Network Routers, NAT Gateways, and similar connectivity gateways between internal and external networks, Kubernetes performs NAT for all Pods.</em></p>
 </li>
 </ul>
 </div>
@@ -344,15 +344,15 @@ Pending Review
 <ul class="checklist">
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Route</strong><br>
-<em>Correct: OpenShift Routes provide reverse HTTP proxying and support web clientes of the video processing application.</em></p>
+<em>Correct: OpenShift Routes provide reverse HTTP proxying and support web clients of the video processing application.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Ingress</strong><br>
-<em>Correct: Kubernetes Ingress provide reverse HTTP proxying and support web clientes of the video processing application.</em></p>
+<em>Correct: Kubernetes Ingress provide reverse HTTP proxying and support web clients of the video processing application.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Service of type Cluster IP<br>
-<em>Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide conenctivity with external web clientes nor external video devices.</em></p>
+<em>Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide connectivity with external web clients nor external video devices.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Service of type Load Balancer</strong><br>
@@ -360,7 +360,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Network Attachment Definition</strong><br>
-<em>Correct: Multus Network Attachment Definitions define secondaty networks to which any Pods of the same namespace can attach and enable bi-directional connections using any IP-based protocol and would support both external web clients and external video devices.</em></p>
+<em>Correct: Multus Network Attachment Definitions define secondary networks to which any Pods of the same namespace can attach and enable bi-directional connections using any IP-based protocol and would support both external web clients and external video devices.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Network Node Configuration Policy<br>
@@ -370,12 +370,12 @@ Pending Review
 </div>
 </li>
 <li>
-<p>Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specificed reference networks:</p>
+<p>Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specified reference networks:</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
 <p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.<br>
-<em>Incorrect: The referente network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network.</em></p>
+<em>Incorrect: The reference network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Public API end points of OpenStack Services over the Kubernetes primary network.</strong><br>
@@ -383,11 +383,11 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.<br>
-<em>Incorrect: The referente network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network.</em></p>
+<em>Incorrect: The reference network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.<br>
-<em>Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach tot he Kubernetes primary network.</em></p>
+<em>Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach to the Kubernetes primary network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.<br>
@@ -399,7 +399,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.<br>
-<em>Incorrect: OpenShift Routes cannot support non-HTTP protocols such as SSH. Anmyway, Routes provides ingress traffic to Pods, while SSH connections are eggress connections from Pods to RHEL compute nodes.</em></p>
+<em>Incorrect: OpenShift Routes cannot support non-HTTP protocols such as SSH. Anyway, Routes provides ingress traffic to Pods, while SSH connections are egress connections from Pods to RHEL compute nodes.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.<br>
@@ -409,12 +409,12 @@ Pending Review
 </div>
 </li>
 <li>
-<p>Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specificed reference networks:</p>
+<p>Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specified reference networks:</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
 <p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.<br>
-<em>Incorrect: The reference network scenario exposes public APIs on the kubernetes primary network. Anyway, OpenStack uses OpenShift Routes instead of Services.</em></p>
+<em>Incorrect: The reference network scenario exposes public APIs on the Kubernetes primary network. Anyway, OpenStack uses OpenShift Routes instead of Services.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the Kubernetes primary network.<br>
@@ -438,17 +438,17 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.<br>
-<em>Incorrect: Services provides ingress traffic to Pods, while SSH connections are eggress connections from Pods to RHEL compute nodes.</em></p>
+<em>Incorrect: Services provides ingress traffic to Pods, while SSH connections are egress connections from Pods to RHEL compute nodes.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.<br>
-<em>Incorrect: OpenStack performs SSH management of compute nodes over the ctlplane network. Anyway, Services provide only ingress traffic to Pods, while SSH connections are eggress traffic.</em></p>
+<em>Incorrect: OpenStack performs SSH management of compute nodes over the ctlplane network. Anyway, Services provide only ingress traffic to Pods, while SSH connections are egress traffic.</em></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specificed reference networks:</p>
+<p>Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specified reference networks:</p>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
@@ -461,19 +461,19 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.<br>
-<em>Incorrect: The reference network scenario uses the internalapi network for private API end points. Anyway, MetalLB does not require its VIPs to belong to networks also availabe as secondary networks to Pods.</em></p>
+<em>Incorrect: The reference network scenario uses the internalapi network for private API end points. Anyway, MetalLB does not require its VIPs to belong to networks also available as secondary networks to Pods.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.<br>
-<em>Incorrect: MetalLB can attach Kubernetes Services to virtual IPs on any network and does not require those networks to be availabe as secondary networks to Pods.</em></p>
+<em>Incorrect: MetalLB can attach Kubernetes Services to virtual IPs on any network and does not require those networks to be available as secondary networks to Pods.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.<br>
-<em>Incorrect: The reference network scenario uses the internalapi network AMQP messaging. Anyway, MetalLB does not require its VIPs to belong to networks also availabe as secondary networks to Pods.</em></p>
+<em>Incorrect: The reference network scenario uses the internalapi network AMQP messaging. Anyway, MetalLB does not require its VIPs to belong to networks also available as secondary networks to Pods.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> AMQP Messaging over the internalapi network.<br>
-<em>Incorrect: MetalLB can attach Kubernetes Services to virtual IPs on any network and does not require those networks to be availabe as secondary networks to Pods.</em></p>
+<em>Incorrect: MetalLB can attach Kubernetes Services to virtual IPs on any network and does not require those networks to be available as secondary networks to Pods.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>SSH management of compute nodes over the ctlplane network.</strong><br>

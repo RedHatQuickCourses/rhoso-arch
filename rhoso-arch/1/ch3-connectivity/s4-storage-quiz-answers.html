@@ -247,15 +247,15 @@ Pending Review
 <em>Correct: OpenStack compute nodes connect to storage backends using storage clients on the host operating system clients and OpenStack Pods embed those clients on their containers.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Iterface (CSI) drivers on OpenShift.<br>
+<p><i class="fa fa-square-o"></i> OpenStack Pods proxy network storage protocols from RHEL compute nodes to Kubernetes Persistent Volumes (PVs) and Container Storage Interface (CSI) drivers on OpenShift.<br>
 <em>Incorrect: OpenStack compute nodes do not require any Kubernetes storage capability or configuration.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> OpenStack Pods must connect to storage backends though Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.<br>
+<p><i class="fa fa-square-o"></i> OpenStack Pods must connect to storage backends through Persistent Volumes manually provisioned to attach to the same backend storage that RHEL compute nodes connect directly.<br>
 <em>Incorrect: OpenStack Pods do not require any Kubernetes storage capability or configuration for user-facing OpenStack services. Some services might be configured to use Kubernetes storage for proof-of-concept scenarios, if those services require no access to backend storage from compute nodes.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Only OpenStack compute nodes connect to storage backlends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.<br>
+<p><i class="fa fa-square-o"></i> Only OpenStack compute nodes connect to storage backends for Cinder volumes and Glance images, the OpenStack Pods running the public APIs of those services need no connectivity to storage backends.<br>
 <em>Incorrect: OpenStack services and their pods do require direct access to storage backends, for example to upload Glande images, or to create new LUNs for Cinder Volumes. They just do not use Kubernetes storage capabilities for that.</em></p>
 </li>
 </ul>
