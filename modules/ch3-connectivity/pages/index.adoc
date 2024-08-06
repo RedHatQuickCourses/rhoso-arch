@@ -4,8 +4,6 @@ Goal::
 
 Describe how Red Hat OpenStack Services on OpenShift uses networking and storage features from Kubernetes for OpenStack services themselves and to manage compute nodes.
 
-WARNING: Work In Progress
-
 == Introduction
 
 This chapter introduces the OpenShift and Kubernetes concepts required to manage networking and storage connectivity for application workloads and how Red Hat OpenStack Services on OpenShift uses these concepts to connect OpenStack control planes to networking and storage resources required by its compute nodes.

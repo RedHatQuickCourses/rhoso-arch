@@ -4,7 +4,7 @@ In this chapter, you learned:
 
 * Kubernetes provides networking features designed for cloud-native applications over a single primary network and OpenShift includes Multus to connect pods to multiple secondary networks.
 
-* Kubernetes enables all Pods to connect to outside their cluster (egress) by performing SNAT, and enables clients and users to connect from outside their customer (ingress) by using Ingress and external load balancer Services. OpenShift also includes Routes as an alternative to Ingress.
+* Kubernetes enables all Pods to connect outside their cluster (egress) by performing SNAT, and enables clients and users to connect from outside their customer (ingress) by using Ingress and external load balancer Services. OpenShift also includes Routes as an alternative to Ingress.
 
 * Kubernetes external load balancer services only work with cloud providers but OpenShift includes the MetalLB add-on operator to enable those services on physical services. MetalLB enables Kubernetes external load balancer Services to attach to VIPs from any network.
 
@@ -16,7 +16,7 @@ In this chapter, you learned:
 
 * Kubernetes provides storage features designed for cloud-native applications and their persistence services, such as databases and message queues, and requires Container Storage Interface (CSI) Drivers for advanced features such as volume snapshots.
 
-* Kubernetes Pods attach to persistent storage volumes though Persistent Volume Claims (PVCs) and these refer to Storage Classes which map to different CSI Drivers.
+* Kubernetes Pods attach to persistent storage volumes through Persistent Volume Claims (PVCs) and these refer to Storage Classes which map to different CSI Drivers.
 
 * OpenStack user-facing services do not require PVCs, they connect to backend storage directly, using network storage clients embedded into their own containers.
 
