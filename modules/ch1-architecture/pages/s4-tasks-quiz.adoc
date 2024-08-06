@@ -8,8 +8,6 @@ Objective::
 
 Identify the tasks performed by an Administrator of Red Hat OpenStack on OpenShift clusters and the required tools for each task.
 
-WARNING: Pending Review
-
 // Avoid memorization questions on the OpenShift CLI or web console, these are better reinforced by the demonstration than by a quiz.
 
 //Q1 and Q2 feel like memorization questions.
@@ -37,11 +35,11 @@ WARNING: Pending Review
 * [ ] Create Glance images for booting new server instances.
 * [ ] Create a new backend storage for Cinder volumes.
 * [ ] Configure a VLAN on OpenStack compute nodes for use as a Neutron provider network.
-* [ ] Configure an LDAP authentication backend for Keysone.
+* [ ] Configure an LDAP authentication backend for Keystone.
 
-4. Which access level, or permissions, does an OpenStack Administator require on the OpenShift cluster which runs an OpenStack control plane to perform his daily tasks?
+4. Which access level, or permissions, does an OpenStack Administrator require on the OpenShift cluster which runs an OpenStack control plane to perform his daily tasks?
 
 * [ ] Full administration of the OpenShift cluster, as an OpenShift Administrator.
 * [ ] Administration of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer.
-* [ ] View or monitoring permissions of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer.
+* [ ] View or monitor permissions of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer.
 * [ ] An OpenStack Administrator requires no permissions on the OpenShift cluster.

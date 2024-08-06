@@ -1,7 +1,5 @@
 = Answers to the Quiz
 
-WARNING: Pending Review
-
 == OpenStack Administrator Tasks and Tools
 
 1. How is an OpenStack Administrator expected to manage OpenStack services with Red Hat OpenStack Services on OpenShift?
@@ -21,7 +19,7 @@ _Correct: custom resources provide most, if not all, configurations of a Kuberne
 2. How is an OpenStack Administrator expected to manage RHEL compute nodes of an OpenStack cluster with Red Hat OpenStack Services on OpenShift?
 
 * [ ] By opening SSH sessions to OpenStack compute nodes to make edits to configuration files of OpenStack containers. +
-_Incorrect: Though an OpenStack Administrator can use SSH sessions to collect troubleshooting information from compute nodes, it is expected that day to day management is done using custom resources of the OpenStack add-on operator._
+_Incorrect: Though an OpenStack Administrator can use SSH sessions to collect troubleshooting information from compute nodes, it is expected that day-to-day management is done using custom resources of the OpenStack add-on operator._
 
 * [ ] By opening SSH sessions to OpenStack compute nodes to make edits to configuration files of Kubernetes add-on operators. +
 _Incorrect: OpenStack compute nodes do not run Kubernetes add-on operators nor any container managed by Kubernetes._
@@ -38,24 +36,24 @@ _Correct: Custom resources from the External Data Plane Management add-on operat
 _Incorrect: This is a task an OpenStack Operator performs using only OpenStack APIs._
 
 * [x] *Create a new backend storage for Cinder volumes.* +
-_Correct: Configuration of OpenStack services require using custom resources of the OPenStack add-on operator._
+_Correct: Configuration of OpenStack services requires using custom resources of the OpenStack add-on operator._
 
 * [x] *Configure a VLAN on OpenStack compute nodes for use as a Neutron provider network.* +
 _Correct: Configuration of OpenStack compute nodes uses custom resources of the OpenStack add-on operator, more specifically of the External Data Plane child add-on operator._
 
-* [x] *Configure an LDAP authentication backend for Keysone.* +
-_Correct: Configuration of OpenStack services require using custom resources of the OPenStack add-on operator._
+* [x] *Configure an LDAP authentication backend for Keystone.* +
+_Correct: Configuration of OpenStack services requires using custom resources of the OpenStack add-on operator._
 
-4. Which access level, or permissions, does an OpenStack Administator require on the OpenShift cluster which runs an OpenStack control plane to perform his daily tasks?
+4. Which access level, or permissions, does an OpenStack Administrator require on the OpenShift cluster which runs an OpenStack control plane to perform his daily tasks?
 
 * [ ] Full administration of the OpenShift cluster, as an OpenShift Administrator. +
-_Incorrect: An OpenStack Administrator does not require OpenShift Admistration permissions to manage OpenStack services running on OpenShift. They only require permissions on the workloads of the OpenStack services themselves._
+_Incorrect: An OpenStack Administrator does not require OpenShift Administration permissions to manage OpenStack services running on OpenShift. They only require permissions on the workloads of the OpenStack services themselves._
 
 * [x] *Administration of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer.* +
 _Correct: An OpenStack Administrator might also be an OpenShift Administrator but only requires administration of the workloads which represent the OpenStack services._
 
 * [ ] View or monitoring permissions of workloads on the OpenShift cluster, as an OpenShift Operator or an application developer. +
-_Incorrect: View or monitoring permissions are insufficient because they would not enable an OpenStack Administrator to make changes to instances of custom resources of the OpenStack add-on operator._
+_Incorrect: View or monitor permissions are insufficient because they would not enable an OpenStack Administrator to make changes to instances of custom resources of the OpenStack add-on operator._
 
 * [ ] An OpenStack Administrator requires no permissions on the OpenShift cluster. +
-_Incorrect: An OpenStack Administrator requires permissions to make edits to instances of custom resouces of the OpenStack add-on operator to configure and manage OpenStack services and compute nodes._
+_Incorrect: An OpenStack Administrator requires permission to make edits to instances of custom resources of the OpenStack add-on operator to configure and manage OpenStack services and compute nodes._
