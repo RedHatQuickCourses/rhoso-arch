@@ -8,11 +8,9 @@ Objective::
 
 Relate storage requirements of OpenStack services with the OpenShift features which provide that storage.
 
-WARNING: Pending Review
-
 == Questions
 
-1. How does OpenStack user-facing services use Kubernetes storage capabilties, from OpenStack Pods and from OpenStack compute nodes?
+1. How do OpenStack user-facing services use Kubernetes storage capabilities, from OpenStack Pods and from OpenStack compute nodes?
 
 * [ ] They do not use Kubernetes storage at all. RHEL compute nodes and OpenStack pods connect directly to whatever storage backend servers OpenStack workloads.
 
