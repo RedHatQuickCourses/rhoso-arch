@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Answers to the Quiz :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <link rel="prev" href="s2-networking-quiz.html">
+    <link rel="next" href="s3-storage-lecture.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhoso-arch/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhoso-arch" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/index.html">Architecture of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s1-components-lecture.html">Components of Red Hat OpenStack on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch1-architecture/s2-components-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s3-tasks-lecture.html">OpenStack Administrator Tasks and Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/s4-tasks-quiz.html">Quiz: OpenStack Administrator Tasks and Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch1-architecture/s4-tasks-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s5-openshift-demo.html">Demo: OpenShift Web Console and Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/s7-services-quiz.html">Quiz: OpenStack Internal Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch1-architecture/s7-services-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s8-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/index.html">The OpenStack Operator by Red Hat</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s3-workloads-lecture.html">OpenStack Services as OpenShift Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz.html">Quiz: OpenStack Services as OpenShift Workloads</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s5-workloads-demo.html">Demo: OpenStack Pods and Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s6-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">OpenShift Networking and Storage with OpenStack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s1-networking-lecture.html">Kubernetes Networking for OpenStack Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s2-networking-quiz.html">Quiz: Kubernetes Networking for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="s2-networking-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s3-storage-lecture.html">Kubernetes Storage for OpenStack Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s4-storage-quiz.html">Quiz: Kubernetes Storage for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s4-storage-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s5-connectivity-demo.html">Demo: OpenStack Networking and Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s6-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenStack Services on OpenShift Architecture</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
+    <li><a href="index.html">OpenShift Networking and Storage with OpenStack</a></li>
+    <li><a href="s2-networking-quiz.html">Quiz: Kubernetes Networking for OpenStack Services</a></li>
+    <li><a href="s2-networking-quiz-answers.html">Answers to the Quiz</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Answers to the Quiz</h1>
+<div class="sect1">
+<h2 id="_kubernetes_networking_for_openstack_services"><a class="anchor" href="#_kubernetes_networking_for_openstack_services"></a>Kubernetes Networking for OpenStack Services</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Why do OpenStack clusters typically require multiple, isolated networks?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Because OpenStack services cannot use Kubernetes networking features to connect to RHEL compute nodes.<br>
+<em>Incorrect: Kubernetes provides multiple mechanisms to enable connectivity between applications running as containers and applications outside of Kubernetes clusters.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because multiple OpenStack services listen to the same TCP ports and each must bind to different IP addresses.<br>
+<em>Incorrect: OpenStack services can be configured to use different TCP ports on the same IP addresses (or also different IP addresses, if you prefer) and Keystone enables clients and other services to discover those ports and addresses.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Because OpenStack services and other IT infrastructure present performance, reliability, and security concerns related to network traffic.</strong><br>
+<em>Correct: General data center concerns about using network capacity and segregating traffic drive isolated network designs. It is not anything required by OpenStack itself.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Because both OpenStack Neutron and OpenShift use the OVN software-defined networking layer and they conflict with each other.<br>
+<em>Correct: While conflicts among the OVN instances from OpenShift and OpenStack influence an isolated network design, it is not the main reason. OpenStack would still use multiple isolated networks without OpenShift and without OVN.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The reference OpenStack network scenario contains five networks: ctlplane, internalapi, tenant, storage, and external. On which of those networks there is application traffic?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> ctlplane<br>
+<em>Incorrect: The ctlplane network has traffic between components of OpenStack running in the control and data planes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> internalapi<br>
+<em>Incorrect: The ctlplane network has traffic between components of OpenStack running in the control and data planes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>tenant</strong><br>
+<em>Correct: The tenant network has traffic between applications running as VMs inside an OpenStack cluster.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>storage</strong><br>
+<em>Correct: The storage network has traffic between applications and storage backends.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>external</strong><br>
+<em>Correct: The external network has traffic between applications and their end users or applications inside and outside an OpenStack cluster.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which of the following are reasons for Pods in Kubernetes communications with other Pods through Kubernetes Services instead of directly?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Pods do not have a stable IP address and Services provide such stable addresses.</strong><br>
+<em>Correct: While the IP address of a pod does not change during the life of a Pod, pods are supposed to be short-lived, and replacement Pods created by a workload controller will get new IP addresses.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Pods are ephemeral and might be replaced by new pods at any time.</strong><br>
+<em>Correct: Kubernetes workload controllers do not try to keep a Pod running, nor try to restart terminated Pods. They just create new Pods to take the place of terminated Pods, and those new Pods get new IP addresses.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Pods cannot connect directly to each other because of Kubernetes Network Policies.<br>
+<em>Incorrect: It is true that you can block communication between Pods by using Network Policies, but then communication would be blocked from Services also.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Pods do not get DNS local names, while Services do</strong>.<br>
+<em>Correct: Kubernetes internal DNS does not assign names to individual Pods, but does assign names to individual services.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Services perform load balancing among replica Pods from the same workload.</strong><br>
+<em>Correct: Services load balance among all pods (or a subset of pods) of the same workload controller.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How do Kubernetes Pods connect to services and applications outside of their Kubernetes cluster?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> By connecting to an Egress IP created for the application namespace.<br>
+<em>Incorrect: While OpenShift enables the use of Egress IPs to provide well known virtual IP addresses to applications, they are not required and all Pods have network connectivity with outside their cluster.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> By connecting to a secondary network attached to the Pod.<br>
+<em>Incorrect: While OpenShift enables the use of secondary networks to provide connectivity to multiple isolated networks, they are not required and all Pods have network connectivity with outside their cluster, using the Kubernetes primary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>By relying on Network Address Translation (NAT) performed by Kubernetes on all cluster nodes.</strong><br>
+<em>Correct: Kubernetes cluster nodes perform Source Network Address Translation (SNAT) on all packets sent by Pods to outside of the cluster, so those packets seem to originate from the node instead of from the Kubernetes cluster network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> By relying on a Network Gateway Router created for the application namespace.<br>
+<em>Incorrect: Contrary to most IaaS cloud platforms, including OpenStack, which require the configuration of Network Routers, NAT Gateways, and similar connectivity gateways between internal and external networks, Kubernetes performs NAT for all Pods.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A video processing application supports both web clients using HTTP and video devices using RTSP. Knowing that RTSP is not based on HTTP and is not compatible with TLS, which of the following Kubernetes API resource types can provide connectivity to clients of that video processing application?</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Route</strong><br>
+<em>Correct: OpenShift Routes provide reverse HTTP proxying and support web clients of the video processing application.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Ingress</strong><br>
+<em>Correct: Kubernetes Ingress provides reverse HTTP proxying and supports web clients of the video processing application.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Service of type Cluster IP<br>
+<em>Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide connectivity with external web clients or external video devices.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Service of type Load Balancer</strong><br>
+<em>Correct: Kubernetes Services of type Load Balancer enable ingress connections using any IP-based protocol and would support both external web clients and external video devices.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Network Attachment Definition</strong><br>
+<em>Correct: Multus Network Attachment Definitions define secondary networks to which any Pods of the same namespace can attach and enable bi-directional connections using any IP-based protocol and would support both external web clients and external video devices.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Network Node Configuration Policy<br>
+<em>Incorrect: NMState Network Node Configuration Policies only configure network interfaces in OpenShift cluster nodes and do not attach those interfaces to Pods. You also need Multus Network Attachment Definitions to define secondary networks based on those interfaces.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specified reference networks:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the external network.<br>
+<em>Incorrect: The reference network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Public API endpoints of OpenStack Services over the Kubernetes primary network.</strong><br>
+<em>Correct: Red Hat OpenStack Services on OpenShift uses OpenShift Routes to expose all public facing OpenStack APIs and only exposes them over the Kubernetes primary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the ctlplane network.<br>
+<em>Incorrect: The reference network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the internalapi network.<br>
+<em>Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach to the Kubernetes primary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.<br>
+<em>Incorrect: The reference network scenario uses the internalapi network for AMQP traffic. Anyway, OpenShift Routes cannot support non-HTTP protocols such as AMQP.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the internalapi network.<br>
+<em>Incorrect: OpenShift Routes cannot support non-HTTP protocols such as AMQP.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.<br>
+<em>Incorrect: OpenShift Routes cannot support non-HTTP protocols such as SSH. Anyway, Routes provides ingress traffic to Pods, while SSH connections are egress connections from Pods to RHEL compute nodes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.<br>
+<em>Incorrect: OpenStack performs SSH management of compute nodes over the ctlplane network. Anyway, OpenShift Routes cannot support non-HTTP protocols such as SSH.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specified reference networks:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the external network.<br>
+<em>Incorrect: The reference network scenario exposes public APIs on the Kubernetes primary network. Anyway, OpenStack uses OpenShift Routes instead of Services.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the Kubernetes primary network.<br>
+<em>Incorrect: OpenStack uses OpenShift Routes as a better alternative than Services for exposing HTTP over the Kubernetes primary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the ctlplane network.<br>
+<em>Incorrect: The reference network scenario exposes private APIs on the internalapi network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>Private API endpoints of OpenStack Services over the internalapi network.</strong><br>
+<em>Correct: OpenStack uses Kubernetes Services as external load balancers for private APIs over HTTP because you cannot expose Routes or Ingress on secondary networks.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.<br>
+<em>Incorrect: The reference network scenario exposes AMQP messaging on the internalapi network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>AMQP Messaging over the internalapi network.</strong><br>
+<em>Correct: OpenStack uses Kubernetes Services as external load balancers for AMQP messaging and MetalLB enables exposing Services with VIPs on secondary networks.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the ctlplane network.<br>
+<em>Incorrect: Services provides ingress traffic to Pods, while SSH connections are egress connections from Pods to RHEL compute nodes.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.<br>
+<em>Incorrect: OpenStack performs SSH management of compute nodes over the ctlplane network. Anyway, Services provide only ingress traffic to Pods, while SSH connections are egress traffic.</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specified reference networks:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the external network.<br>
+<em>Incorrect: OpenStack uses Routes for public API endpoints, and only on the Kubernetes primary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the Kubernetes primary network.<br>
+<em>Incorrect: OpenStack uses Routes for public API endpoints and there is no need to configure Multus for the Kubernetes primary network because it is not a secondary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the ctlplane network.<br>
+<em>Incorrect: The reference network scenario uses the internalapi network for private API end points. Anyway, MetalLB does not require its VIPs to belong to networks also available as secondary networks to Pods.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the internalapi network.<br>
+<em>Incorrect: MetalLB can attach Kubernetes Services to virtual IPs on any network and does not require those networks to be available as secondary networks to Pods.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the ctlplane network.<br>
+<em>Incorrect: The reference network scenario uses the internalapi network AMQP messaging. Anyway, MetalLB does not require its VIPs to belong to networks also available as secondary networks to Pods.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> AMQP Messaging over the internalapi network.<br>
+<em>Incorrect: MetalLB can attach Kubernetes Services to virtual IPs on any network and does not require those networks to be available as secondary networks to Pods.</em></p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> <strong>SSH management of compute nodes over the ctlplane network.</strong><br>
+<em>Correct: Routes and Services would not be sufficient to provide egress connectivity with secondary networks, so Ansible pods must attach directly to the ctlplane network as a secondary network.</em></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SSH management of compute nodes over the internalapi network.<br>
+<em>Incorrect: The reference network scenario uses the ctlplane network to open SSH sessions to RHEL compute nodes.</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="s2-networking-quiz.html">Quiz: Kubernetes Networking for OpenStack Services</a></span>
+  <span class="next"><a href="s3-storage-lecture.html">Kubernetes Storage for OpenStack Services</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
