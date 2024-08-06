@@ -8,8 +8,6 @@ Objective::
 
 Relate workloads and configurations of OpenStack services with the OpenShift and Kubernetes API resources that represent them.
 
-WARNING: Pending Review
-
 
 // I'm not finding easy justifications for running services such as nova-api and glance as stateful sets, not even the hack to use an inline PVC... and based on the inconsistency I cannot present neutron and keystone as good fits for deployments. :-(
 
@@ -33,7 +31,7 @@ ____
 +
 [quote]
 ____
-RabbitMQ nodes and clusters store information that can be thought of schema, metadata or topology. These definitions are replicated across all cluster nodes.
+RabbitMQ nodes and clusters store information that can be thought of as schema, metadata, or topology. These definitions are replicated across all cluster nodes.
 
 Each node stores messages for the queues that have their leader replica hosted on that node. Messages can be replicated between nodes if a replicated queue type with multiple replicas is used.
 ____
