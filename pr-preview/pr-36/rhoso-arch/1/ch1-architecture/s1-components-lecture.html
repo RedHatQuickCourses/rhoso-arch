@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Components of Red Hat OpenStack on OpenShift :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="s2-components-quiz.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhoso-arch/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhoso-arch" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="s1-components-lecture.html">Components of Red Hat OpenStack on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s2-components-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s3-tasks-lecture.html">OpenStack Administrator Tasks and Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s4-tasks-quiz.html">Quiz: OpenStack Administrator Tasks and Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s4-tasks-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s5-openshift-demo.html">Demo: OpenShift Web Console and Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s7-services-quiz.html">Quiz: OpenStack Internal Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s7-services-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s8-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/index.html">The OpenStack Operator by Red Hat</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s3-workloads-lecture.html">OpenStack Services as OpenShift Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz.html">Quiz: OpenStack Services as OpenShift Workloads</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s5-workloads-demo.html">Demo: OpenStack Pods and Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s6-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch3-connectivity/index.html">OpenShift Networking and Storage with OpenStack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch3-connectivity/s1-networking-lecture.html">Kubernetes Networking for OpenStack Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch3-connectivity/s2-networking-quiz.html">Quiz: Kubernetes Networking for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch3-connectivity/s2-networking-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch3-connectivity/s3-storage-lecture.html">Kubernetes Storage for OpenStack Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch3-connectivity/s4-storage-quiz.html">Quiz: Kubernetes Storage for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch3-connectivity/s4-storage-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch3-connectivity/s5-connectivity-demo.html">Demo: OpenStack Networking and Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch3-connectivity/s6-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenStack Services on OpenShift Architecture</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
+    <li><a href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a></li>
+    <li><a href="s1-components-lecture.html">Components of Red Hat OpenStack on OpenShift</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Components of Red Hat OpenStack on OpenShift</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Estimated reading time: <strong>11 minutes</strong>.</em></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Objective</dt>
+<dd>
+<p>Describe the architecture of Red Hat OpenStack on OpenShift clusters and its control plane components running on OpenShift.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Pending Review
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_red_hat_openstack_services_on_openshift_product"><a class="anchor" href="#_the_red_hat_openstack_services_on_openshift_product"></a>The Red Hat OpenStack Services on OpenShift Product</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An OpenStack cluster is composed of a control plane, which runs many OpenStack services, and a data plane, which runs application workloads as virtual machines (VMs).</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenStack Services on OpenShift runs OpenStack control planes as containers on Red Hat OpenShift, and runs OpenStack data planes on compute nodes running Red Hat Enterprise Linux (RHEL). The control plane manages compute nodes using Ansible playbooks which also run as containers on OpenShift.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s1-components-lecture-fig1.svg" alt="s1 components lecture fig1">
+</div>
+</div>
+<div class="paragraph">
+<p>The use of Red Ceph Storage is fully supported but optional: any storage solution certified for Red Hat OpenStack could be used in its place. The use of RHEL, OVN, and KVM, as well as of OpenShift, are <strong>not</strong> optional: they are core to the way Red Hat builds, deploys, and supports Red Hat OpenStack Services on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>For now, we will not focus on data plane services, which are required on compute nodes to act on behalf of OpenStack services. These data plane services run as podman containers on RHEL compute nodes and are started as systemd units. Let&#8217;s focus on the control plane and how it runs on Red Hat OpenShift.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openstack_user_facing_and_internal_infrastructure_services"><a class="anchor" href="#_openstack_user_facing_and_internal_infrastructure_services"></a>OpenStack User-Facing and Internal Infrastructure Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An OpenStack control plane runs a number of user-facing and internal infrastructure services. The user-facing services provide the OpenStack APIs that OpenStack Operators are familiar with. The internal infrastructure services, on the other side, provide storage, connectivity, and other functionality required by the user-facing services.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s1-components-lecture-fig2.svg" alt="s1 components lecture fig2">
+</div>
+</div>
+<div class="paragraph">
+<p>The OpenStack community provides a number of user-facing services with different stages of maturity, a number of alternatives for internal infrastructure services, and multiple ways of deploying those services together.</p>
+</div>
+<div class="paragraph">
+<p>The Red Hat OpenStack Services on OpenShift product includes a selection of user-facing services and is very prescriptive in the way you deploy those services, using Red Hat OpenShit, and which internal infrastruture services they use, to provide a stable, reliable, and scalable Infrastructure-as-a-Service (IaaS) private cloud platform.</p>
+</div>
+<div class="paragraph">
+<p>You should already know the user-facing services included with Red Hat OpenStack, and this course will not list and define each one of them. If you need a refresher, please review the <a href="https://redhatquickcourses.github.io/rhoso-intro/">OpenStack Operations learning journey</a>.</p>
+</div>
+<div class="paragraph">
+<p>The main internal infrastructure services included with Red Hat OpenStack Services on OpenShift are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Galera</dt>
+<dd>
+<p>Manages a cluster of MariaDB relational database services. OpenStack services store persistent data on that database cluster.</p>
+</dd>
+<dt class="hdlist1">RabbitMQ</dt>
+<dd>
+<p>Manages message queues, which OpenStack services use to either broadcast events or for asynchrounous remote procedure calls (RPC) between internal components of a service, including both containers running on OpenShift and on RHEL compute nodes.</p>
+</dd>
+<dt class="hdlist1">OVN</dt>
+<dd>
+<p>Provides a software-defined networking layer which enables tenant networks and other features from Neutron without requiring special-purpose hardware.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>While OpenStack Operators can mostly ignore how their OpenStack services are deployed and managed, and focus solely on OpenStack APIs, an OpenStack Administrator must know those details to understand where to act to configure, monitor, and troubleshoot OpenStack services, while keeping their OpenStack clusters healthy and reliable.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The name "OpenStack Operator" can appear in two contexts, with different meanings: either as a job role performed by a human, or as a software designed for Kubernetes. The text so far refers to the <em>human</em> operator, while the previous figure refers to the <em>software</em> operator.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift_kubernetes_and_add_on_operators"><a class="anchor" href="#_openshift_kubernetes_and_add_on_operators"></a>OpenShift, Kubernetes, and Add-on Operators</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nowadays, Kubernetes is firmly established as the preferred platform for running both service-oriented and microservices-based workloads. Even users of public clouds such as AWS prefer running these applications on Kubernetes instead of directly over cloud provider VMs, and the same reasons apply to running OpenStack services.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift is an application platform based on Kubernetes. It adds to Kubernetes' container orchestration capabilities a number of features for building, deploying, and managing a variety application workloads. Those features are usually provided as Kubernetes <strong>add-on operators</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Kubernetes was designed for simplicity, originally supporting just microservices-based cloud-native applications. Add-on operators extend Kubernetes to support more advanced features and a larger variety of workloads. In fact, the standard feature set of Kubernetes would not be sufficient for OpenStack, and Red Hat OpenStack Services on OpenShift rely on a number of other add-on operators which are part of Red Hat OpenShift. Later in this course, we will present those add-on operators.</p>
+</div>
+<div class="paragraph">
+<p>A Kubernetes add-on operator is itself an application running as a container on Kubernetes. Add-on operators can manage any aspect of a Kubernetes cluster, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Interaction with cloud provider resources.</p>
+</li>
+<li>
+<p>Availability of special hardware such as GPUs.</p>
+</li>
+<li>
+<p>Application development services such as a CI/CD pipelines.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It&#8217;s very common for add-on operators to be designed to manage other software running on Kubernetes, for example, a database server management operator. A basic database add-on operator would manage just the deployment of a database server and its continued availability. A more sopisticated database add-on operator would also manage backups of database data, replication of such data from a read-write to multiple read-only replicas, and promotion of a read-only replica to a read-write one in case the the old read-write replica fails.</p>
+</div>
+<div class="paragraph">
+<p>The purpose of an add-on operator is encoding and automating all operational knowledge necessary to manage an application or other piece of IT infrastructure, hence the name "operator" for this class of software.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_openstack_add_on_operator"><a class="anchor" href="#_the_openstack_add_on_operator"></a>The OpenStack Add-On Operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenStack Services on OpenShift is itself a set of add-on operators for OpenShift, so you manage OpenStack clusters in a similar way that you would manage any other application or feature running on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>The main add-on operator from Red Hat OpenStack Services on OpenShift is the <strong>OpenStack Operator</strong>, which manages the deployment and configuration of both user-facing and internal infrastructure services of an OpenStack control plane.</p>
+</div>
+<div class="paragraph">
+<p>The OpenStack operator also manages a number of child operators, among then the <strong>External Data Plane Management Operator</strong> which runs Ansible playbooks to manage OpenStack compute nodes. OpenStack Administrators usually do not interact directly with the child operators of the OpenStack operator.</p>
+</div>
+<div class="paragraph">
+<p>Kubenetes add-on operators extend the Kubernetes API with <strong>custom resources</strong> and Red Hat OpenStack Services on OpenShift defines custom resources that represent OpenStack control planes and their data planes. OpenStack Administrators use Kubernetes APIs to manage OpenStack custom resources and that way they manage OpenStack services and OpenStack compute nodes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openstack_administators_and_openshift"><a class="anchor" href="#_openstack_administators_and_openshift"></a>OpenStack Administators and OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenStack Administrators might either be OpenShift Administrators themselves or work closely with a dedicated team of OpenShift Administrators. In any case, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must be a capable OpenShift Operator, as OpenStack Administrators manage a very specific set of application workloads running on OpenShift: an OpenStack control plane.</p>
+</div>
+<div class="paragraph">
+<p>Kubernetes manages workloads as containers, while OpenStack manages workloads as Virtual Machines (VMs). Kubernetes orchestrates running nmultiple containers over a cluster of compute nodes and provides these containers with basic storage and networking resources. What Kubernetes does for containers seems, on the surface, very similar to what OpenStack does for VMs.</p>
+</div>
+<div class="paragraph">
+<p>The following table compares the Kubernetes and OpenStack from the point of view of their respective operator personas. It serves as a quick overview for experienced OpenStack Operators who are starting their journey to also become OpenShift Operators.</p>
+</div>
+<div class="paragraph">
+<p>Do not try to understand all terms of that table right now. Later in this course, we will introduce each of the Kubernetes concepts mentioned in it, as well as  all the features from OpenShift that are required by Red Hat OpenStack Services on OpenShift.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 37.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Characteristic / Platform</th>
+<th class="tableblock halign-left valign-top">OpenStack</th>
+<th class="tableblock halign-left valign-top">OpenShift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">CLI</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenStack client</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">kubectl and the OpenShift client (oc)</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Web UI</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Horizon Dashboard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenShift Web Console</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Scheduling unit</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Virtual Machine</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pod (a group of containers)</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Application packaging</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cinder VM images, Heat templates.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OCI Container images, Helm charts, Add-on Operators.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Core features</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of independent services discoverable by Keystone. Compute, storage, and network functionality provided by independent OpenStack services.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of Kubernetes API resources which include basic compute, storage, and networking capabilities.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Extensibility</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New OpenStack services</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New Kubernetes custom resources</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API style</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imperative: API requests perform actions which change workloads directly but asynchronously.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declarative: API requests change the state of API resources and a resource controller later reconcilles workloads to match the new state.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API entry points</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service provides its own API server.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes provides a single API server that fronts all resource controllers and add-on operators.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">APIs resource types</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service defines its own API resource types.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each add-on operator optionally extends the Kubernetes API with custom resources that define new API resource types.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API resource identifiers</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUIDs and optional non-unique names. References to domains and projects are just regular attributes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique resource names scoped to either an entire Kubernetes cluster or to a single namespace. OpenShift adds projects for self-service namespace management.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">API verbs</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each OpenStack service defines its own API verbs and possibly different verbs for each API resource managed by the same service.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All add-on operators are constrained by the Kubernetes API verbs and optionally define subresources to offer a more varied set of operations.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Storage</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cinder Volumes, Cinder Volume Types.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persistent Volume Clains (PVCs), storage classes.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Internal Networking</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple isolated Neutron tenant networks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single, flat network for all containers. OpenShift adds secondary networks with Multus.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">External Networking</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple provider networks, routers, and Network Address Translation (NAT).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connect containers to host ports, cloud load balancers, or reverse HTTP proxies (ingress), and NAT. OpenShift adds load-balancer services for physical servers.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Authentication</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keystone local users and integration with external identity systems.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Valid signatures of OAuth tokens and TLS certificates. OpenShift adds an OAuth server to manage local users and integration with external identity systems.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Authorization</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each service defines its own policies based on user identity, domain, and roles from Keystone.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Kubernetes API server enforces Role-Based Access Control (RBAC) for all API requests and all API resource types.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As you can see from the previous table, Kubernetes is more monolithic than OpenStack, with its single API server fronting all add-on operators. The monolithic nature of Kubernetes enables more consistency in areas such as access control (authorization) to API resources and API requests and discoverability of available API resource types and their attribute schemas.</p>
+</div>
+<div class="paragraph">
+<p>On the other side, OpenStack provides more features for the management of multitenancy and quality of service (QoS) for storage, networking, and compute capacity. In fact, some organizations run OpenShift clusters for their end-user containerized workloads on VMs managed by OpenStack. That is: An OpenShift cluster runs OpenStack, which runs VM that in turn run "child" OpenShift clusters.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Architecture of Red Hat OpenStack Services on OpenShift</a></span>
+  <span class="next"><a href="s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

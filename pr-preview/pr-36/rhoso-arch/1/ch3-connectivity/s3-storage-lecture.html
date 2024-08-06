@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kubernetes Storage for OpenStack Services :: Red Hat OpenStack Services on OpenShift Architecture</title>
+    <link rel="prev" href="s2-networking-quiz-answers.html">
+    <link rel="next" href="s4-storage-quiz.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhoso-arch/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhoso-arch" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/index.html">Architecture of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s1-components-lecture.html">Components of Red Hat OpenStack on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/s2-components-quiz.html">Quiz: Components of Red Hat OpenStack on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch1-architecture/s2-components-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s3-tasks-lecture.html">OpenStack Administrator Tasks and Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/s4-tasks-quiz.html">Quiz: OpenStack Administrator Tasks and Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch1-architecture/s4-tasks-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s5-openshift-demo.html">Demo: OpenShift Web Console and Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s6-services-lecture.html">OpenStack User-Facing Services and Internal Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch1-architecture/s7-services-quiz.html">Quiz: OpenStack Internal Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch1-architecture/s7-services-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch1-architecture/s8-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/index.html">The OpenStack Operator by Red Hat</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s1-operators-lecture.html">Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz.html">Quiz: Add-on Operators of Red Hat OpenStack Services on OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s2-operators-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s3-workloads-lecture.html">OpenStack Services as OpenShift Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz.html">Quiz: OpenStack Services as OpenShift Workloads</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ch2-rhoso/s4-workloads-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s5-workloads-demo.html">Demo: OpenStack Pods and Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ch2-rhoso/s6-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">OpenShift Networking and Storage with OpenStack</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s1-networking-lecture.html">Kubernetes Networking for OpenStack Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s2-networking-quiz.html">Quiz: Kubernetes Networking for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s2-networking-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="s3-storage-lecture.html">Kubernetes Storage for OpenStack Services</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="s4-storage-quiz.html">Quiz: Kubernetes Storage for OpenStack Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s4-storage-quiz-answers.html">Answers to the Quiz</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s5-connectivity-demo.html">Demo: OpenStack Networking and Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="s6-summary.html">Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenStack Services on OpenShift Architecture</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenStack Services on OpenShift Architecture</a></li>
+    <li><a href="index.html">OpenShift Networking and Storage with OpenStack</a></li>
+    <li><a href="s3-storage-lecture.html">Kubernetes Storage for OpenStack Services</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Kubernetes Storage for OpenStack Services</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Estimated reading time: <strong>10 minutes</strong>.</em></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Objective</dt>
+<dd>
+<p>Describe how OpenStack services use Kubernetes PVCs, storage classes, and direct access to back-end storage for internal needs and to support application workloads.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Pending Review
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openstack_and_kubernetes_storage"><a class="anchor" href="#_openstack_and_kubernetes_storage"></a>OpenStack and Kubernetes Storage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unlike networking, Red Hat OpenStack Services on OpenShift was designed to work with standard Kubernetes storage. In fact, local node storage services available with Red Hat OpenShift should be sufficient for many OpenStack clusters, and any network storage provider, for example OpenShift Data Foundation, can also be used.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenStack Services on OpenShift only uses Kubernetes storage for internal infrastructure services. User-facing services, such as Cinder and Glance, do not use Kubernetes storage. They connect directly to the storage backends that compute nodes connect to provide storage for applications running as VMs, and for that they require access to the same storage networks that compute nodes do.</p>
+</div>
+<div class="paragraph">
+<p>Some OpenStack services, such as Glance and Swift, can run entirely on the control plane and use Kubernetes storage, but this is not recommended for production deployments. It is better that those services connect directly to storage backends without using Kubernetes, in the case of Glance, or that storage backends take over the object storage service, in the case of Swift.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kubernetes_storage_concepts"><a class="anchor" href="#_kubernetes_storage_concepts"></a>Kubernetes Storage Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Kubernetes Pods can mount volumes with multiple purposes, and individual containers on the same Pod can share volumes but have independent mount namespaces. Volumes can use configuration data from Configuration Maps and Secrets, or ephemeral storage, besides persistent storage.</p>
+</div>
+<div class="paragraph">
+<p>All Pods use ephemeral storage by default, meaning that data stored on those volumes can be lost after a Pod terminates. Ephemeral storage may be backed by local storage form Kubernetes cluster nodes or by in-memory filesystems. Either way, ephemeral storage is local to a node and not resilient.</p>
+</div>
+<div class="paragraph">
+<p>If a Pod uses persistent storage for a volume, it means the data stored on that volume is retained after a Pod terminates, and can be attached to a different Pod, possibly running on a different cluster node. Remember that Kubernetes workload controllers do not restart terminated pods, they create new pods to take their places, and the new pods require access to the same persistent storage volumes as the old pods.</p>
+</div>
+<div class="sect2">
+<h3 id="_kubernetes_api_resources_for_persistent_storage"><a class="anchor" href="#_kubernetes_api_resources_for_persistent_storage"></a>Kubernetes API Resources for Persistent Storage</h3>
+<div class="paragraph">
+<p>Standard Kubernetes provides three API resource types related to persistent storage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s3-storage-lecture-fig-1.svg" alt="Kubernetes API storage resources &amp; dynamic storage components">
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Persistent Volume Claims (PVCs)</dt>
+<dd>
+<p>Represent a volume in application pods. It specifies desired characteristics of the volume, such as size and access modes, and Kubernetes tries to find a volume, or create a new volume, with the closest possible match.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Persistent Volumes (PVs):</p>
+</div>
+<div class="paragraph">
+<p>Represent a volume on backend storage. They might be actual devices, such as LUNs from iSCSI and Fibre Storage arrays, or might be file shares in a networked file system such as NFS and CephFS.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Storage Classes</dt>
+<dd>
+<p>Represent a class of storage volumes with similar characteristics and technologies. Multiple classes could represent different tiers of price/performance on the same storage backend or completely different storage backends</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Kubernetes Operators create and manage Persistent Volume Claims (PVCs) as well as other application resources, such as Deployments, Services, and Secrets. But Kubernetes Administrators cannot manage Persistent Volumes (PVs) and Storage Classes, unless they are cluster administrators.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_shareable_storage_and_access_modes"><a class="anchor" href="#_shareable_storage_and_access_modes"></a>Shareable Storage and Access Modes</h3>
+<div class="paragraph">
+<p>The same PVC can be mounted in multiple Pods but Kubernetes itself does nothing to make shared storage safe. If applications and backend storage do not collaborate to prevent data consistency issues, data stored in shared storage may become corrupt.</p>
+</div>
+<div class="paragraph">
+<p>Some storage technologies, such as shared file systems, are designed to share storage volumes and files among multiple servers and provide advanced locking and caching features. Others, for example remote block devices, provide no features to help applications ensure data consistency other than locking devices for exclusive access. NFS and CephFS are examples of the first, while iSCSI ad Ceph RBD are examples of the later. But applications can still be designed to share remote block devices.</p>
+</div>
+<div class="paragraph">
+<p>Each Kubernetes PVCs and PVs define the <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">acess modes</a> they support, for example single-node read-write (RWO) or multiple node read-only (ROX).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Most of Kubernetes access modes work at the cluster node level instead of the pod level and do not work as an exclusive access gate. That means a single-node volume (RWO) can be shared by multiple pods running on the same cluster node. Do not rely on Kubernetes access modes alone to prevent data integrity issues.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The features which make sharing storage easier and safer may impact performance and reliability for applications which require high I/O throughput or transactional consistency, such as databases and messaging servers. Shareable storage from networked file systems is usually not recommended for such workloads.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manually_and_dynamically_provisioned_volumes"><a class="anchor" href="#_manually_and_dynamically_provisioned_volumes"></a>Manually and Dynamically Provisioned Volumes</h3>
+<div class="paragraph">
+<p>Kubernetes Administrators could precreate multiple PVs, each configured to different local or remote storage devices or file shares, and PVCs bind to those manually provisioned PVs on demand, as long as there are still PVs unbound. This is the only alternative for Kubernetes clusters with a dynamic storage provisioner, and standard Kubernetes provides no such component.</p>
+</div>
+<div class="paragraph">
+<p>Manually provisioned PVs take advantage of standard iSCSI and NFS clients embeded into a Linux kernel, and can take advantage of any other storage client installed on cluster nodes, but they require too much management overhead.</p>
+</div>
+<div class="paragraph">
+<p>Manually provisioned PVs can be assigned storage classes to group PVs backed by similar remote or local storage. PVCs can then specify the desired storage class and this way a Kubernetes operator has control of the type of remote storage accessed by their applications. If a PVC requests a storage class but there are no unbound volumes from that class, the PVC remains unbounded and any Pod which mounts that PVC as a volume cannot start. Both PVC and Pod remain in a pending state.</p>
+</div>
+<div class="paragraph">
+<p>Storage classes are more frequently used together with dynamic storage provisioners. If a provisioner detects a pending PVC which requests its storage class, it creates a new PV on demand and binds the PVC to it. The storage provisioner encapsulates the management API of the remote storage, which is most times proprietary to a storage vendor and product. Most standard remote storage protocols, such as iSCSI and NFS, do not define a management API.</p>
+</div>
+<div class="paragraph">
+<p>Standard Kubernetes provides no storage provisioners. There are a number of open source storage provisioners for standard protocols such as NFS but they are not considered production-grade.</p>
+</div>
+<div class="paragraph">
+<p>Dynamic storage provisioners did not eliminate all the need for manually provisioned PVs. For example, to share a remote filesystem with applications running outside a Kubernetes cluster.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_container_storage_interface_csi_drivers_with_red_hat_openshift"><a class="anchor" href="#_container_storage_interface_csi_drivers_with_red_hat_openshift"></a>Container Storage Interface (CSI) Drivers with Red Hat OpenShift</h3>
+<div class="paragraph">
+<p>Managing storage for production applications require capabilities absent from the PVC and PV API resource types. Over time, the Kubernetes defined new API resources for those capabilities, such as volume snapshots and copy-on-write volumes (also knows as "thin" volumes) and Kubernetes required a way of knowing if a given storage backend supports those capabilities or not.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://kubernetes.io/docs/concepts/storage/volumes/#csi">Container Storage Interface (CSI)</a> provides both a standard way of deploying storage provisioners and of enumerating their capabilities. Nowadays you expect that all storage vendors provide CSI drivers for their products and that they support advanced capabilities such as snapshots.</p>
+</div>
+<div class="paragraph">
+<p>Software-defined storage solutions, such as Red Hat Ceph Storage, are expected to provide CSI drivers for Kubernetes too. In fact, <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation">Red Hat OpenShift Data Foundation</a> provides CSI drivers for either remote Ceph clusters or for running Ceph as containers inside an OpenShift cluster, backed by local disks on OpenShift cluster nodes.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat also provides two add-on operators which provide CSI drivers using local storage from OpenShift cluster nodes:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Local Storage Operator (LSO)</dt>
+<dd>
+<p>Supports any directly-attached device on a node, and it usually exposes those devices as PVs to be consumed by a higher-level software-defined storage solution such as OpenShift Data Foundation.</p>
+</dd>
+<dt class="hdlist1">Local Volume Manager Storage Operator (LVMS)</dt>
+<dd>
+<p>Enables using the Linux Local Volume Manager (LVM) to dynamically creating new local volumes. It takes over a Volume Group (VG) and creates new Logical Volumes (LVs) for new PVs.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>It may be counter-intuitive using local storage to back PVCs and pin Pods to a Kubernetes cluster node: If that cluster node fails, all data on its volumes is lost and those Pods cannot be recreated on surviving cluster nodes.</p>
+</div>
+<div class="paragraph">
+<p>But a class of applications, such as noSQL databases, are designed to replicate and share data by themselves, and for them the speed, high throughput, and low latency of local devices may be advantageous compared to remote storage. If those applications are designed to run as multiple pods, each in a different cluster node, they may be able to recreate data from a failed instance by using the surviving instances.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pvcs_for_openstack_internal_services"><a class="anchor" href="#_pvcs_for_openstack_internal_services"></a>PVCs for OpenStack Internal Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenStack Services on OpenShift was designed to only require Kubernetes storage for selected infrastructure service, and those services are designed to handle data resiliency by themselves, in a way that local storage from either the LSO or LVMS are sufficient and supported for production clusters.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/s3-storage-lecture-fig-2.svg" alt="OpenStack services using Kubernetes storage or embedding storage clients">
+</div>
+</div>
+<div class="paragraph">
+<p>If you prefer using a remote storage solution with a CSI driver certified for Red Hat OpenShift, you can, but you do not require such solution. You&#8217;re recommended to use the same storage class for all internal services, for simplicity, and also because they share similar workload characteristics of transactional, high IOPS throughput. But you could use different storage classes for each of them.</p>
+</div>
+<div class="paragraph">
+<p>The following OpenStack services require Kubernetes storage:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">MariaDB</dt>
+<dd>
+<p>Each database instance requires one PVC for storing OpenStack API resource instances from all OpenStack user-facing services in the cluster or in a cell. It is recommended that you run three MariaDB instances per OpenStack compute cell, managed by a Galera instance, to ensure no data loss in case of an OpenShift node failure.</p>
+</dd>
+<dt class="hdlist1">RabbitMQ</dt>
+<dd>
+<p>Each AMQP messaging server requires one PVC for storing in-flight messages between OpenStack service components and subscriber lists. Similar to MariaDB, it is recommended that you run three RabbitMQ instances per OpenStack compute cell, but RabbitMQ manages data replication and load balancing by itself, without any external component such as Galera.</p>
+</dd>
+<dt class="hdlist1">OVN</dt>
+<dd>
+<p>The Open Virtual Network software-defined networking layer requires two network flow databases, the north bound and south bound, which could be recreated at a cost from by Neutron but are stored on disks and replicated between multiple OVN pods and their PVCs, using the RAFT protocol, to ensure smooth performance and resilience of large OpenStack clusters.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Because MariaDB, RabbitMQ, and OVN handle data consistency and resilience by themselves, there is no need for local storage high availability features, such as RAID, on OpenShift cluster nodes running OpenStack services. If you see value on such features and wish to reuse them, just ensure and they are designed to avoid data consistency issues by using writethrough caches or writeback caches with batteries.</p>
+</div>
+<div class="paragraph">
+<p>Notice the recommendation for three instances of MariaDB and RabbitMQ per cell, and of each OVN database per cluster. It is recommended that clustered systems run an even number of instances to avoid split brain scenarios, where a group of instances cannot connect to other group. You must ensure one group "wins" because it is the larger group. If you need more instances, for scalability purposes, increase from three to five or seven. Or consider running more OpenStack compute cells, each with dedicated MariaDB and RabbitMQ instances, rather than larger database and AMQP clusters.</p>
+</div>
+<div class="paragraph">
+<p>If you configure a proof-of-concept OpenStack cluster which uses Kubernetes storage for user-facing services such as Glance and Swift, be warned that those services are not tested for either scalability nor resiliency with Kubernetes storage. They are designed to work directly with backend storage and to scale by themselves without depending on Kubernetes PVCs nor CSI drivers.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="s2-networking-quiz-answers.html">Answers to the Quiz</a></span>
+  <span class="next"><a href="s4-storage-quiz.html">Quiz: Kubernetes Storage for OpenStack Services</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
