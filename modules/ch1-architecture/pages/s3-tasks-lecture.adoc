@@ -8,8 +8,6 @@ Objective::
 
 Describe the role and typical tasks performed by Red Hat OpenStack Administration personnel, how they interact with other IT Operations roles, and the tools they use.
 
-WARNING: Pending Review
-
 == OpenStack Administrator Tasks
 
 An OpenStack Administrator concerns with the OpenStack cluster itself, instead of with the workloads running on the cluster. OpenStack Administrators deal with the security, reliability, and performance of an OpenStack cluster control plane and its compute nodes.
@@ -20,47 +18,47 @@ image::s3-tasks-lecture-fig-1.svg[]
 
 To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs knowledge about Kubernetes API resources.
 
-If you were used to managing OpenStack cluster control planes running directly on RHEL, whether on physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level. This involves making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.
+If you were used to managing OpenStack cluster control planes running directly on RHEL, whether on physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level. This involves making edits to configuration files over SSH sessions and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.
 
-OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which run Ansible playbooks on OpenShift. As an OpenStack administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.
+OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which runs Ansible playbooks on OpenShift. As an OpenStack administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.
 
 === OpenStack Administrators and OpenShift Administrators
 
-OpenStack Administrators usually work close to other IT professionals dedicated to infrastructure management. Most of the times they have to work under the guidance and constraints imposed by network and storage administration teams.
+OpenStack Administrators usually work close to other IT professionals dedicated to infrastructure management. Most of the time they have to work under the guidance and constraints imposed by network and storage administration teams.
 
-OpenStack Administrators are frequently Linux System Administrator themselves and take full charge of managing RHEL compute nodes of their OpenStack clusters, but they could also work with a team of System Administrators who takes care of all physical servers in a data center.
+OpenStack Administrators are frequently Linux System Administrators themselves and take full charge of managing RHEL compute nodes of their OpenStack clusters, but they could also work with a team of System Administrators who take care of all physical servers in a data center.
 
-OpenStack Administrators must be OpenShift Operators, because they manage an application workload running as containers on OpenShift, which is the OpenStack add-on operator and its OpenStack services.
+OpenStack Administrators must be OpenShift Operators because they manage an application workload running as containers on OpenShift, which is the OpenStack add-on operator and its OpenStack services.
 
 They could use an OpenShift cluster which is dedicated to their OpenStack cluster and be the OpenShift Administrators of that OpenShift cluster or they could work close to an OpenShift Administration team, especially if the same OpenShift cluster which runs Red Hat OpenStack Services on OpenShift also runs other workloads and add-on operators, such as Ansible Automation Platform or OpenShift Pipelines. 
 
 === OpenStack Administrator Tools
 
-When working as an OpenShift Operator, to manage OpenStack services which run as containerized workloads on OpenShift, an OpenStack Administrator uses the following tools:
+When working as an OpenShift Operator, to manage OpenStack services that run as containerized workloads on OpenShift, an OpenStack Administrator uses the following tools:
 
 The OpenShift client::
 
-It is a command line tool which native ports for Linux, MacOS, and Windows. The *oc* command is an extension of the standard Kubernetes client *kubectl* which adds helpers for interacting with OpenShift addtitions, such as the OAuth server and projects.
+It is a command line tool with native ports for Linux, MacOS, and Windows. The *oc* command is an extension of the standard Kubernetes client *kubectl* which adds helpers for interacting with OpenShift additions, such as the OAuth server and projects.
 
 The OpenShift web console::
 
-It is a web application which offers functionality to OpenShift Administrators, OpenShift Operators, and application developers. Besides the standard set of pages from the OpenShift web console, add-on operators may add custom pages and monitoring dashboards.
+It is a web application that offers functionality to OpenShift Administrators, OpenShift Operators, and application developers. Besides the standard set of pages from the OpenShift web console, add-on operators may add custom pages and monitoring dashboards.
 
-The OpenShift web console is richer, compared to the OpenStack Horizon web UI. To the point where you can expect to perform almost all OpenShift operations and administration tasks using it. However, OpenShift Operators are also expected to be adept of GitOps practices, which require managing Kubernetes API resources directly from code using YAML files and the OpenShift client.
+The OpenShift web console is richer, compared to the OpenStack Horizon web UI. To the point where you can expect to perform almost all OpenShift operations and administration tasks using it. However, OpenShift Operators are also expected to be adept at GitOps practices, which require managing Kubernetes API resources directly from code using YAML files and the OpenShift client.
 
 OpenStack Administrators also use the same tools as OpenStack Operator, because some OpenStack administration tasks involve managing OpenStack API resources such as provider networks and server flavors. These tasks are performed using the OpenStack client and Horizon. However, when OpenStack Administrators need to inspect or change the configuration of an OpenStack service, they must use Kubernetes APIs thus they must use OpenShift tools.
 
 == Using The OpenShift Client
 
-The OpenShift client `oc` offers tree kinds of commands with full compatibility with the Kubernetes client `kubectl`:
+The OpenShift client `oc` offers three kinds of commands with full compatibility with the Kubernetes client `kubectl`:
 
-1. Generic commands for any API resource type and instance. Those commands work with the same syntax for all API resource types and support declarative style API resource management.
+1. Generic commands for any API resource type and instance. Those commands work with the same syntax for all API resource types and support declarative-style API resource management.
 
 2. Helper commands which perform common operations on frequently used API resource types. and support an imperative style of API resource management. Most times, these helper commands could be replaced with generic commands.
 
-3. Helper commands that enable usage of very specific features of the Kubernetes APIs and which would be very hard to use without a custom command. For example, forwarding local TCP ports to a container on a Kubernetes cluster, or starting a shell session inside a container on a Kubernetes cluster.
+3. Helper commands that enable usage of very specific features of the Kubernetes APIs which would be very hard to use without a custom command. For example, forwarding local TCP ports to a container on a Kubernetes cluster, or starting a shell session inside a container on a Kubernetes cluster.
 
-The OpenShift client `oc` adds commands (and sometimes subcommands) to the comand set from `kubectl`. These additional commands are either helpers for custom resources from OpenShift or helpers from other OpenShift features, such as its internal OAuth server.
+The OpenShift client `oc` adds commands (and sometimes subcommands) to the command set from `kubectl`. These additional commands are either helpers for custom resources from OpenShift or helpers from other OpenShift features, such as its internal OAuth server.
 
 === General Syntax of OpenShift Client Commands
 
@@ -77,7 +75,7 @@ Many OpenShift client commands follow a hierarchical structure where a command m
 * `create job`
 * `create secret generic`
 
-Most OpenShift client commands require, as arguments, either the name of an API resource type or an API resource instance. Sometimes a resource instance must be named together with its namespace, as a single argument: `_type/resource_`. Other times, the API resourse type and instance name must be provided as different arguments: `_type resource_`. Some commands may accept both formats and some will require one of them.
+Most OpenShift client commands require, as arguments, either the name of an API resource type or an API resource instance. Sometimes a resource instance must be named together with its namespace, as a single argument: `_type/resource_`. Other times, the API resource type and instance name must be provided as different arguments: `_type resource_`. Some commands may accept both formats and some will require one of them.
 
 Some commands can take the resource instance name from a YAML file and many commands require either a partial or a complete resource definition in an YAML file.
 
@@ -86,7 +84,7 @@ Sometimes a command argument may look similar to a subcommand, especially when t
 * `create job`
 * `get job`
 
-OpenShift client commands which require additional arguments beyond resource type or instance names usually take those arguments as GNU GetOpts options, which make them look like global options. A global option must come before the command, and a command argument must come after the command words, but the order of arguments doesn't matter.
+OpenShift client commands that require additional arguments beyond resource type or instance names usually take those arguments as GNU GetOpts options, which make them look like global options. A global option must come before the command, and a command argument must come after the command words, but the order of arguments doesn't matter.
 
 === Generic Commands For Declarative Kubernetes API Resource Management
 
@@ -99,7 +97,7 @@ The simplest of OpenShift client commands provide the basic operations of creati
 
 The `get` command can either retrieve an API resource instance by its name or list all instances of an API resource type in an OpenShift cluster.
 
-Multiple commands may perform similar operations, for example all: of the following commands make changes to Kubernetes API resource instances: 
+Multiple commands may perform similar operations, for example, all: of the following commands make changes to Kubernetes API resource instances: 
 
 * `edit`
 * `apply`
@@ -113,23 +111,23 @@ As examples of helper commands from the OpenShift client, the `create` command a
 
 NOTE: The examples in this section are not supposed to be complete command examples you could try. They are partial examples of the command syntax of the OpenShift client.
 
-These following commands create API resource instances with minimal required attributes which may not be good enough for production usage but enable quick experimentation:
+The following commands create API resource instances with minimal required attributes which may not be good enough for production usage but enable quick experimentation:
 
 * `create namespace`
 * `create job`
 * `create secret generic`
 
-Another example of helper command is the `set` command, which can set a subset of attributes from pods and workload controllers such as jobs and deployments.
+Another example of the helper command is the `set` command, which can set a subset of attributes from pods and workload controllers such as jobs and deployments.
 
 * `set env`
 * `set probe`
 * `set resources`
 
-Later in this course we will learn about pods and workload controllers. They are API resources that manage containers running on Kubernetes.
+Later in this course, we will learn about pods and workload controllers. They are API resources that manage containers running on Kubernetes.
 
 === OpenShift Client Examples
 
-Very few of the OpenShift client commands work with no arguments. Here are a couple examples:
+Very few of the OpenShift client commands work with no arguments. Here are a couple of  examples:
 
 [source,subs="verbatim,quotes"]
 --
@@ -137,7 +135,7 @@ $ *oc project*
 $ *oc whoami*
 --
 
-Following are some examples of generic API resource management comands which include the name of an API resource type, an API resource instance, or a YAML file:
+Following are some examples of generic API resource management commands which include the name of an API resource type, an API resource instance, or a YAML file:
 
 [source,subs="verbatim,quotes"]
 --
@@ -219,7 +217,7 @@ $ *oc get route.route.openshift.io*
 
 Notice that, when listing or referring to API resource instances you *must* omit the API version.
 
-The output of the `oc api-resources` command also shows that some API resource types have short names, which can save a bit of typing. For example, the following two commands lis the same API resource instances:
+The output of the `oc api-resources` command also shows that some API resource types have short names, which can save a bit of typing. For example, the following two commands list the same API resource instances:
 
 [source,subs="verbatim,quotes"]
 --
@@ -227,7 +225,7 @@ $ *oc get service*
 $ *oc get svc*
 --
 
-And most API resource types accept a plural form, so the following two commands again list the same API resource instances:
+Most API resource types accept a plural form, so the following two commands again list the same API resource instances:
 
 [source,subs="verbatim,quotes"]
 --
@@ -251,27 +249,27 @@ The OpenShift web console features a user interface divided into three areas:
 2. A side menu to the left;
 3. A page body at the center, which could include multiple tabs.
 
-The following screen shot shows the appearance of the web console on the first access of a newly installed OpenShift cluster. It displays the Cluster Overview dashboard.
+The following screenshot shows the appearance of the web console on the first access of a newly installed OpenShift cluster. It displays the Cluster Overview dashboard.
 
 image::s3-tasks-lecture-fig-2.png[]
 
 It is common to hide the "Getting started resources" pane, to give more room to the many information panes from the Cluster Overview dashboard.
 
-WARNING: These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to match the required Red Hat OpenShift release.
+WARNING: These screenshots may need updates  at Red Hat OpenStack on OpenShift GA to match the required Red Hat OpenShift release.
 
 === The Top Menu
 
-The horizontal menu at the top includes, to the right, icons for varying information functions such as notifications and help, and the name of the currently logged in user, which is "Administrator" in the previous screen shot. Click the user name to log out if you need to log in as a different user.
+The horizontal menu at the top includes, to the right, icons for varying information functions such as notifications and help, and the name of the currently logged-in user, which is "Administrator" in the previous screenshot. Click the user name to log out if you need to log in as a different user.
 
 image::s3-tasks-lecture-fig-3.png[]
 
-To the left of the top menu there is menu icon which hides and shows the side menu. Sometimes it may be convenient to hide the side menu to give more screen width to the page in the center.
+To the left of the top menu, there is a menu icon that hides and shows the side menu. Sometimes it may be convenient to hide the side menu to give more screen width to the page in the center.
 
 === The Side Menu
 
 The vertical menu to the left is the main navigation interface of the OpenShift web console.
 
-The item to the top of the side menu switches the web console perspectice between the *Developer* and *Administrator* perspectives. During the OpenStack administration learning journey we should stay in the Administrator perspective.
+The item at the top of the side menu switches the web console perspective between the *Developer* and *Administrator* perspectives. During the OpenStack administration learning journey, we should stay in the Administrator perspective.
 
 image::s3-tasks-lecture-fig-4.png[]
 
@@ -279,29 +277,29 @@ The remaining items of the side menu can be collapsed and expanded independently
 
 image::s3-tasks-lecture-fig-5.png[]
 
-During the OpenStack administration learning journey we will present the most frequently used pages of the OpenShift web console, at least from the perspective of an OpenStack Administrator managing an OpenStack cluster. For now, there is no need to explore and understand each and every page of the side menu.
+During the OpenStack administration learning journey, we will present the most frequently used pages of the OpenShift web console, at least from the perspective of an OpenStack Administrator managing an OpenStack cluster. For now, there is no need to explore and understand each and every page of the side menu.
 
 === Navigating the OpenShift Web Console
 
-The two-level path on the side menu, along with the name of the current tab of the center page, uniquely identifies a page in the OpenShift web console as a three-level path. For example, the Cluser Overview dashboard page from the first screen shot is *Home > Overview > Cluster*.
+The two-level path on the side menu, along with the name of the current tab of the center page, uniquely identifies a page in the OpenShift web console as a three-level path. For example, the Cluster Overview dashboard page from the first screenshot is *Home > Overview > Cluster*.
 
-OpenShift add-on operators can add menu items and pages to the web console, so the layout is not fixed: it depends on the add-on operators installed on your OpenShift cluster. Not all pages include tabs, and in that case the path to the page is only two levels.
+OpenShift add-on operators can add menu items and pages to the web console, so the layout is not fixed: it depends on the add-on operators installed on your OpenShift cluster. Not all pages include tabs, and in that case, the path to the page is only two levels.
 
 === Finding Kubernetes API resources
 
-Many pages display lists of Kubernetes resource instances of a single API resource type, such as the *Workloads > Deployments* page in the following screen shot. Those pages display, at the top, filters by project and resource instance name and, to the left, buttons to create new resource instances. 
+Many pages display lists of Kubernetes resource instances of a single API resource type, such as the *Workloads > Deployments* page in the following screenshot. Those pages display, at the top, filters by project and resource instance name and, to the left, buttons to create new resource instances. 
 
 image::s3-tasks-lecture-fig-6.png[]
 
 If there is no web console page dedicated to a given API resource type, you can use either the *Home > Search* or *Home > API Explorer* pages. None of those pages will display all API resources in a cluster because the list is quite large, even in "empty" clusters, because Red Hat OpenShift itself runs its internal components as containers on Kubernetes and uses custom resources to manage them.
 
-On the *Home > Search* you can choose one or more API resource types, and also add filters on resource instance name and labels. The following screen shot is an example of displaying all Deployment resources:
+On the *Home > Search* you can choose one or more API resource types, and also add filters on the resource instance names and labels. The following screenshot is an example of displaying all Deployment resources:
 
 image::s3-tasks-lecture-fig-7.png[]
 
 === The API Explorer
 
-The *Home > API Explorer* page lists all API resource types available on your cluster and can filter the list by API resource group and API version. The following screen shot shows the list of all Deployment resources:
+The *Home > API Explorer* page lists all API resource types available on your cluster and can filter the list by API resource group and API version. The following screenshot shows the list of all Deployment resources:
 
 image::s3-tasks-lecture-fig-8.png[]
 
