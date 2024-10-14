@@ -610,7 +610,7 @@ $ oc get network cluster -o jsonpath='{.spec.serviceNetwork}{"\n"}'
 <p>As you consider your isolated networks design for OpenStack clusters, remember to consider the OpenShift cluster nodes network and also its internal Kubernetes primary network, to prevent IP address conflicts. Such conflicts would affect OpenStack Pods and be very hard to track.</p>
 </div>
 <div class="paragraph">
-<p>Also consider the isolated network design of you storage backends, which might require additional isolated networks conencted to either OpenShift or OpenStack cluster nodes, or maybe to both. As we will see in the next section, OpenShift and OpenStack clusters do not require connectivity to the same storage backends, but OpenStack Pods do require some connectivity to the same storage backends as OpenStack compute nodes.</p>
+<p>Also consider the isolated network design of your storage backends, which might require additional isolated networks conencted to either OpenShift or OpenStack cluster nodes, or maybe to both. As we will see in the next section, OpenShift and OpenStack clusters do not require connectivity to the same storage backends, but OpenStack Pods do require some connectivity to the same storage backends as OpenStack compute nodes.</p>
 </div>
 </div>
 <div class="sect2">
