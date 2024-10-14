@@ -30,7 +30,7 @@ _Correct: RabbitMQ runs entirely on the OpenStack control plane and requires Kub
 _Correct: MariaDB runs entirely on the OpenStack control plane and requires Kubernetes persistent storage to store OpenStack API resource instances._
 
 * [x] *OVN* +
-_Correct: OVN runs on both the OpenStack control plane and on compute nodes. The OpenStack OVN pods require Kuberentes persistent storage to store network flow databases (RAFT) which it replicates with other OVN pods running on the OpenStack control plane._
+_Correct: OVN runs on both the OpenStack control plane and on compute nodes. The OpenStack OVN pods require Kubernetes persistent storage to store network flow databases (RAFT) which it replicates with other OVN pods running on the OpenStack control plane._
 
 3. Which of the following OpenStack services require ingress connectivity, from outside of an OpenShift cluster, using a protocol other than HTTP?
 
