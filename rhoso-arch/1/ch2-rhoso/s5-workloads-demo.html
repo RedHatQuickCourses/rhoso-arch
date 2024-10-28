@@ -226,18 +226,6 @@
 </dd>
 </dl>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Work In Progress
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -252,10 +240,10 @@ Work In Progress
 <h2 id="_environment"><a class="anchor" href="#_environment"></a>Environment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully functional Red Hat OpenStack on OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.</p>
+<p>There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully functional Red Hat OpenStack on the OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.</p>
 </div>
 <div class="paragraph">
-<p>For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating ips, tenant networks, etc. That may not be fine for other demonstrations of this course.</p>
+<p>For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating IPs, tenant networks, etc. That may not be fine for other demonstrations of this course.</p>
 </div>
 <div class="paragraph">
 <p>The demo environment must also provide a user workstation preconfigured with the OpenShift client and a web browser to access the OpenShift web console.</p>
@@ -268,28 +256,28 @@ Work In Progress
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Log in on OpenShift, using its web console. Ensure you&#8217;re in the Administrators perspective.</p>
+<p>Log in on OpenShift, using its web console. Ensure you&#8217;re in the administrator&#8217;s perspective.</p>
 </li>
 <li>
-<p>Enter the Installed Operators page, show the OpenStack operator, and its custom reosurce types. Show the instances of the control plane and node set resources.</p>
+<p>Enter the Installed Operators page, and show the OpenStack operator, and its custom resource types. Show the instances of the control plane and node-set resources.</p>
 </li>
 <li>
-<p>Show the detailed status of the control plane and node set resources and highlight the individual status conditions which relate to individual OpenStack services and dataplane services.</p>
+<p>Show the detailed status of the control plane and node-set resources and highlight the individual status conditions which relate to individual OpenStack services and data plane services.</p>
 </li>
 <li>
 <p>Enter the OpenStack projects on the Workloads page. Show illustrative examples of different workload types and explain how they make sense for the specific OpenStack service and component.</p>
 </li>
 <li>
-<p>Pick one pod (ideally an easily recognizable one) and show its logs. It should be a pod from one of the workloads used as example on the previous step.</p>
+<p>Pick one pod (ideally an easily recognizable one) and show its logs. It should be a pod from one of the workloads used as an example in the previous step.</p>
 </li>
 <li>
-<p>Pick a pod (same or different than previous step) and show that it mounts a configmap or secret. Enter the pod and show the resulting file inside the container&#8217;s mount namespace.</p>
+<p>Pick a pod (same or different than the previous step) and show that it mounts a configmap or secret. Enter the pod and show the resulting file inside the container&#8217;s mount namespace.</p>
 </li>
 <li>
 <p>Pick a pod with multiple containers and mention why that particular pod needs init containers and sidecar containers. May need different pods for each.</p>
 </li>
 <li>
-<p>Pick a job from an dataplane service and its pod. Relate it to the previous conditions of the node set resource. Show the logs of the pod with easily recognizable ansible playbook output.</p>
+<p>Pick a job from a dataplane service and its pod. Relate it to the previous conditions of the node set resource. Show the logs of the pod with easily recognizable Ansible playbook output.</p>
 </li>
 <li>
 <p>Repeat a subset of tasks already done using the web console, but using the CLI: show conditions from the control plane and node set resources. Also show sample workload controllers and their pods.</p>
