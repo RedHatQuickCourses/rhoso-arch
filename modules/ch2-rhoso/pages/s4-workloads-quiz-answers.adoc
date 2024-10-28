@@ -1,7 +1,5 @@
 = Answers to the Quiz
 
-WARNING: Pending Review
-
 == Quiz: OpenStack Services as OpenShift Workloads
 
 1. Given the following description of a component of an OpenStack service, which Kubernetes workload controller best fits its needs?
@@ -12,7 +10,7 @@ Each node in an OVN virtual network must run an OVN controller, which creates Ge
 ____
 
 * [ ] Replica Set +
-_Incorrect: replica sets are not constrained by number of hosts._
+_Incorrect: replica sets are not constrained by a number of hosts._
 
 * [ ] Deployment +
 _Incorrect: deployments are not constrained by number of hosts._
@@ -24,16 +22,16 @@ _Incorrect: jobs would run only one OVN controller for all hosts and only one ti
 _Incorrect: cron jobs would run only one OVN controller for all hosts, at regular intervals, instead of continuously._
 
 * [ ] Stateful Set +
-_Incorrect: stateful sets are not constrained by number of hosts._
+_Incorrect: stateful sets are not constrained by a number of hosts._
 
 * [x] *Daemon Set* +
-_Correct: Daemon Sets run one Pod per Kubernetes cluster node._
+_Correct: Daemon Sets runs one Pod per Kubernetes cluster node._
 
 2. Given the following description of a component of an OpenStack service, which Kubernetes workload controller best fits its needs?
 +
 [quote]
 ____
-RabbitMQ nodes and clusters store information that can be thought of schema, metadata or topology. These definitions are replicated across all cluster nodes.
+RabbitMQ nodes and clusters store information that can be thought of schema, metadata, or topology. These definitions are replicated across all cluster nodes.
 
 Each node stores messages for the queues that have their leader replica hosted on that node. Messages can be replicated between nodes if a replicated queue type with multiple replicas is used.
 ____
@@ -45,16 +43,16 @@ _Incorrect: RabbitMQ nodes are not stateless, each one must know for which queue
 _Incorrect: RabbitMQ nodes are not stateless, each one must know for which queues it is the leader replica, as it may contain copies of data for which it is not the replica leader._
 
 * [ ] Job +
-_Incorrect: As a messaging server, RabbitMQ must run continously instead of only once._
+_Incorrect: As a messaging server, RabbitMQ must run continuously instead of only once._
 
 * [ ] Cron Job +
-_Incorrect: As a messaging server, RabbitMQ must run continously instead of periodically._
+_Incorrect: As a messaging server, RabbitMQ must run continuously instead of periodically._
 
 * [x] *Stateful Set* +
 _Correct: A stateful set enables each RabbitMQ node to retain its identity and know if its the leader replica for any queues stored on their persistent storage._
 
 * [ ] Daemon Set +
-_Incorrect: There is no requirement of running one RabbitMQ instance per Kubernetes cluster node._
+_Incorrect: There is no requirement to run one RabbitMQ instance per Kubernetes cluster node._
 
 3. Given the following description of a component of an OpenStack service, which Kubernetes workload controller best fits its needs?
 +
@@ -95,13 +93,13 @@ _Incorrect: Data Plane Service playbooks are not a continuoulsy running applicat
 _Incorrect: Data Plane Service playbooks are not a continuoulsy running application._
 
 * [x] *Job* +
-_Correct: Data Plane Service playbooks runs only once. OpenStack Administrators must explicilty trigger new executions of those playbooks._
+_Correct: Data Plane Service playbooks runs only once. OpenStack Administrators must explicitly trigger new executions of those playbooks._
 
 * [ ] Cron Job +
-_Incorrect: Data Plane Service playbooks are not a recurring application. OpenStack Administrators must explicilty trigger each execution of all playbooks._
+_Incorrect: Data Plane Service playbooks are not a recurring application. OpenStack Administrators must explicitly trigger each execution of all playbooks._
 
 * [ ] Stateful Set +
-_Incorrect: Data Plane Service playbooks are not a continuoulsy running application._
+_Incorrect: Data Plane Service playbooks are not continuoulsy running applications._
 
 * [ ] Daemon Set
 _Incorrect: Data Plane Service playbooks do not need to run once per OpenShift cluster node, but once for each OpenStack cluster compute node. Ansible deals with that using its host inventory mechanism._

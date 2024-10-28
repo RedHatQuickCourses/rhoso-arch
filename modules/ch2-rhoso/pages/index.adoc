@@ -4,13 +4,11 @@ Goal::
 
 Describe the high-level architecture of Red Hat OpenStack Services on OpenShift operators and its Kubernetes workloads.
 
-WARNING: Work In Progress
-
 == Introduction
 
 This chapter introduces the OpenShift and Kubernetes concepts required to manage application workloads and how Red Hat OpenStack Services on OpenShift uses these concepts to represent OpenStack control and data planes.
 
-OpenShift and Kubernetes concepts are explaind in a top-down fashion, starting with add-on operators, passing through workload controllers, and ending up with containers.
+OpenShift and Kubernetes concepts are explained in a top-down fashion, starting with add-on operators, passing through workload controllers, and ending up with containers.
 
 This chapter also presents the custom resources of the OpenStack add-on operator and its child add-on operators, which contain all configurations of an OpenStack cluster.
 

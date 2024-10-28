@@ -4,17 +4,16 @@ Objective::
 
 Identify Kubernetes workloads managed by the OpenStack add-on operator and their application resources.
 
-WARNING: Work In Progress
-
 == Recording
 
 This demonstration will be recorded and the video linked from here, so learners can watch the video and optionally try to replicate it by themselves.
+// When will be the video linked here?
 
 == Environment
 
-There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully functional Red Hat OpenStack on OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.
+There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully functional Red Hat OpenStack on the OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.
 
-For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating ips, tenant networks, etc. That may not be fine for other demonstrations of this course.
+For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating IPs, tenant networks, etc. That may not be fine for other demonstrations of this course.
 
 The demo environment must also provide a user workstation preconfigured with the OpenShift client and a web browser to access the OpenShift web console.
 
@@ -22,21 +21,21 @@ The demo environment must also provide a user workstation preconfigured with the
 
 == Demonstration
 
-1. Log in on OpenShift, using its web console. Ensure you're in the Administrators perspective.
+1. Log in on OpenShift, using its web console. Ensure you're in the administrator's perspective.
 
-2. Enter the Installed Operators page, show the OpenStack operator, and its custom reosurce types. Show the instances of the control plane and node set resources.
+2. Enter the Installed Operators page, and show the OpenStack operator, and its custom resource types. Show the instances of the control plane and node-set resources.
 
-3. Show the detailed status of the control plane and node set resources and highlight the individual status conditions which relate to individual OpenStack services and dataplane services.
+3. Show the detailed status of the control plane and node-set resources and highlight the individual status conditions which relate to individual OpenStack services and data plane services.
 
 4. Enter the OpenStack projects on the Workloads page. Show illustrative examples of different workload types and explain how they make sense for the specific OpenStack service and component.
 
-5. Pick one pod (ideally an easily recognizable one) and show its logs. It should be a pod from one of the workloads used as example on the previous step.
+5. Pick one pod (ideally an easily recognizable one) and show its logs. It should be a pod from one of the workloads used as an example in the previous step.
 
-6. Pick a pod (same or different than previous step) and show that it mounts a configmap or secret. Enter the pod and show the resulting file inside the container's mount namespace.
+6. Pick a pod (same or different than the previous step) and show that it mounts a configmap or secret. Enter the pod and show the resulting file inside the container's mount namespace.
 
 7. Pick a pod with multiple containers and mention why that particular pod needs init containers and sidecar containers. May need different pods for each.
 
-8. Pick a job from an dataplane service and its pod. Relate it to the previous conditions of the node set resource. Show the logs of the pod with easily recognizable ansible playbook output.
+8. Pick a job from a dataplane service and its pod. Relate it to the previous conditions of the node set resource. Show the logs of the pod with easily recognizable Ansible playbook output.
 
 9. Repeat a subset of tasks already done using the web console, but using the CLI: show conditions from the control plane and node set resources. Also show sample workload controllers and their pods.
 
