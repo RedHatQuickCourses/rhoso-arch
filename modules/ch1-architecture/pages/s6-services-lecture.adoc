@@ -8,13 +8,11 @@ Objective::
 
 Describe the generic internal architecture of OpenStack services and how they use Kubernetes networking and storage.
 
-WARNING: Pending Review
-
 == General Architecture of OpenStack Services
 
 Up to this point, we presented OpenStack services such as Nova and Neutron as black boxes. We gave you hints that each of these services might have a more complex internal structure, because they have pieces running on the OpenStack control plane and pieces running on OpenStack compute nodes, and they also need support from other services such as database and messaging servers.
 
-Before you inspect the Kubernetes API resources which represent those OpenStack services, for example to troubleshoot performance and availability issues of those services, you must understand how their internal components relate to each other and to other OpenStack services. 
+Before you inspect the Kubernetes API resources that represent those OpenStack services, for example, to troubleshoot performance and availability issues of those services, you must understand how their internal components relate to each other and to other OpenStack services. 
 
 === An Example: OpenStack Nova
 
@@ -22,17 +20,17 @@ Let's use OpenStack Nova as an example, not only because it is the most importan
 
 image::s6-services-lecture-fig-1.svg[]
 
-The figure shows the external and internal views of the architecture of OpenStack Nova. From the external view, Nova interacts with other OpenStack services: Cinder, Glance, Neutron, and Placement. Additionally it interacts with Keystone, which every OpenStack service has to interact with.
+The figure shows the external and internal views of the architecture of OpenStack Nova. From the external view, Nova interacts with other OpenStack services: Cinder, Glance, Neutron, and Placement. Additionally, it interacts with Keystone, which every OpenStack service has to interact with.
 
-These interactions happen using HTTP, in fact they use the same OpenStack APIs that the OpenStack client and Horizon use to communicate with these OpenStack services. For our purposes, it doesn't matter which of the internal components of Nova communicate with which OpenStack services: they all exist inside the black box of Nova.
+These interactions happen using HTTP, in fact, they use the same OpenStack APIs that the OpenStack client and Horizon use to communicate with these OpenStack services. For our purposes, it doesn't matter which of the internal components of Nova communicate with which OpenStack services: they all exist inside the black box of Nova.
 
-From the internal view, opening the black box, all components of Nova communicate with each other using AMQP message-passing, including components which run outside of OpenShift, on RHEL compute nodes. Components running on the OpenStack control plane can also communicate with a relational database server to store data from API resource instances.
+From the internal view, opening the black box, all components of Nova communicate with each other using AMQP message-passing, including components that run outside of OpenShift, on RHEL compute nodes. Components running on the OpenStack control plane can also communicate with a relational database server to store data from API resource instances.
 
 The following are the main components of OpenStack Nova. The OpenStack community documentation call them "Nova services" and you will see that "services" is a very overloaded term in both OpenStack and OpenShift, so be sure that you know to which kind of service you refer to, at any moment.
 
 Nova API::
 
-Provides the API entry point for all OpenStack clients, services, and users which need to use services from Nova. No component external to Nova communicates with any component except the API entry point.
+Provides the API entry point for all OpenStack clients, services, and users that need to use services from Nova. No component external to Nova communicates with any component except the API entry point.
 
 Nova Scheduler::
 
@@ -46,35 +44,35 @@ Nova Compute::
 
 Unlike other components, which run on an OpenStack control plane, that is, as containers on OpenShift, the Compute component runs on RHEL compute nodes. It is the component which interacts with the local KVM hypervisor to connect virtual machines and attach them to virtual network and storage resources.
 
-OpenStack Nova may include other components not shown in the figure, and Red Hat OpenStack Services on OpenShift runs a few of them. For example, there's a component which mediates remote console sessions using the VNC protocol. We ommit these components for simplicity.
+OpenStack Nova may include other components not shown in the figure, and Red Hat OpenStack Services on OpenShift runs a few of them. For example, there's a component which mediates remote console sessions using the VNC protocol. We omit these components for simplicity.
 
 === Internal Scalability of OpenStack Services
 
-The previous figure shows a single icon for each internal component of OpenStack Nova but there could be multiple instances of each component, which could run on different control plane servers. That is, there could be multiple containers on OpenShift for each of the components of Nova, potentialy running on different nodes of an OpenShift cluster. This enables Nova to handle a large number of compute nodes running an even larger number of virtual machines.
+The previous figure shows a single icon for each internal component of OpenStack Nova but there could be multiple instances of each component, which could run on different control plane servers. That is, there could be multiple containers on OpenShift for each of the components of Nova, potentially running on different nodes of an OpenShift cluster. This enables Nova to handle a large number of compute nodes running an even larger number of virtual machines.
 
-The fact that each component of Nova can be scaled to multiple containers independently of other components enables OpenStack Administrators to efficiently handle different scenarios, for example: is the bottleneck caused by too many messages from too many Nova Compute instances, each on a compute node? Run more Nova Conductor instances! Is the bottleneck caused by a CI/CD system which provisions and tears down too many server instances in a short period of time? Scale the Nova API instances! Is the bottleneck caused by complex attributes of compute nodes, host aggregates, and a large number of server flavors? Scale the Nova Scheduler instances!
+The fact that each component of Nova can be scaled to multiple containers independently of other components enables OpenStack Administrators to efficiently handle different scenarios, for example: is the bottleneck caused by too many messages from too many Nova Compute instances, each on a compute node? Run more Nova Conductor instances! Is the bottleneck caused by a CI/CD system that provisions and tears down too many server instances in a short period of time? Scale the Nova API instances! Is the bottleneck caused by complex attributes of compute nodes, host aggregates, and a large number of server flavors? Scale the Nova Scheduler instances!
 
 === Other OpenStack User-Facing Services
 
-Other OpenStack services are expected to follow a similar architecture to Nova. They don't have to, but by convention and by design best practices from the OpenStack community, it is expected that they do. Unless you are a developer working on the internal implementation of OpenStack services themselves, you do not need to care about eventual inconsistencies bentween different OpenStack services.
+Other OpenStack services are expected to follow a similar architecture to Nova. They don't have to, but by convention and by design best practices from the OpenStack community, it is expected that they do. Unless you are a developer working on the internal implementation of OpenStack services themselves, you do not need to care about eventual inconsistencies between different OpenStack services.
 
 So you expect that no service interacts with each other except by using their public APIs over HTTP. You also expect that internal components of any service interact with each other using AMQP messaging passing and all store API resources on a relational database. Finally, you expect that all OpenStack services could run multiple containers for scalability and high availability.
 
-Some OpenStack services may run entirely on the control plane, for example Swift, Glance, and Heat. A few services require a component running on compute nodes, for example Neutron and Cinder. Components running on compute nodes communicate with components running on the control plane by using AMQP message passing. If these componentes also need to interact with other OpenStack Services, they use HTTP.
+Some OpenStack services may run entirely on the control plane, for example, Swift, Glance, and Heat. A few services require a component running on compute nodes, for example, Neutron and Cinder. Components running on compute nodes communicate with components running on the control plane by using AMQP message passing. If these components also need to interact with other OpenStack Services, they use HTTP.
 
 The services-oriented architecture of OpenStack does not force all its services into the same mold. Each service can make different architectural and implementation decisions, if they need to. This leads to occasional inconsistencies, but it is a small price to pay for increased flexibility and scalability.
 
 == Internal Services of OpenStack Clusters
 
-Some internal services of a Red Hat OpenStack Services on OpenShift cluster are shared by multiple OpenStack user-facing server. User-facing services do not need to share internal-infrastructure services, but it is simpler to manage fewer instances of each service.
+Some internal services of Red Hat OpenStack Services on the OpenShift cluster are shared by multiple OpenStack user-facing servers. User-facing services do not need to share internal-infrastructure services, but it is simpler to manage fewer instances of each service.
 
 For example, you could have different database servers for each OpenStack service, but there is no reason to not share the same database server for all of them, at least until the database itself becomes overloaded with too many queries.
 
 In a similar vein, you could have Nova instances have their own RabbitMQ services for its cells, independent of RabbitMQ services for Neutron and Cinder cells, but you usually configure the same cells and use the same RabbitMQ cells for all services. The fact that you could do it differently does not mean you should do it.
 
-Other OpenStack services may require specialized internal services to fulfill their funcionality, for example: we already mentioned that Nova needs remote desktop protocol servers to enable access to server instance consoles. Neutron needs a software-defined networking layer. And a few OpenStack services need clients for networked file or block storage.
+Other OpenStack services may require specialized internal services to fulfill their functionality, for example: we already mentioned that Nova needs remote desktop protocol servers to enable access to server instance consoles. Neutron needs a software-defined networking layer. A few OpenStack services need clients for networked files or block storage.
 
-=== OpenStack compute cell services
+=== OpenStack Compute Cell Services
 
 Most user-facing OpenStack services included with Red Hat OpenStack Services on OpenShift require a relational database to store API resource instances and an AMQP message passing server. These two internal services define the scope of an OpenStack cluster compute cell and impact the scalability of the entire OpenStack control plane.
 
@@ -92,15 +90,15 @@ RabbitMQ::
 
 It is an AMQP messaging server which replicates messages between its instances, so no message is lost and message delivery is guaranteed.
 
-You can deploy proof-of-concept Red Hat OpenShift clusters running a single instance of RabbitMQ and a single instance of MariaDB, without using Galera. For production clusters, Red Hat recommends running multiple instances of each, configured as a database and as a messaging cluster. Good news is that the OpenStack add-on operator handles the clustered, multi-instance deployment of RabbitMQ and MariaDB for an OpenStack compute cell.
+You can deploy proof-of-concept Red Hat OpenShift clusters running a single instance of RabbitMQ and a single instance of MariaDB, without using Galera. For production clusters, Red Hat recommends running multiple instances of each, configured as a database and as a messaging cluster. The good news is that the OpenStack add-on operator handles the clustered, multi-instance deployment of RabbitMQ and MariaDB for an OpenStack compute cell.
 
 === OVN Networking 
 
-Another key internal service of Red Hat OpenStack Services on OpenShift is the OVN networking layer, which runs components on both control plane and compute nodes. OVN creates virtual networks by tunneling packets between OpenStack compute nodes and enables strong network isolation between workloads running on OpenStack clusters, whithout the need of external networking gear.
+Another key internal service of Red Hat OpenStack Services on OpenShift is the OVN networking layer, which runs components on both the control plane and compute nodes. OVN creates virtual networks by tunneling packets between OpenStack compute nodes and enables strong network isolation between workloads running on OpenStack clusters, without the need for external networking gear.
 
-OVN distributes network flow databases between compute nodes, in a way that processing those packet flows is distributed among compute nodes, instead of overloading a few network control nodes. OVN handles itself the replication and high availability of these network flow databases, including running multiple instances of the main flow databases at the OpenStack control plane.
+OVN distributes network flow databases between compute nodes, in a way that processing those packet flows is distributed among compute nodes, instead of overloading a few network control nodes. OVN handles the replication and high availability of these network flow databases, including running multiple instances of the main flow databases at the OpenStack control plane.
 
-OVN is so powerfull that more recent releases of Red Hat OpenShift also use OVN to implement Kubernetes networking and to extend it for more advanced use cases, which were not originally supported by standard Kubernetes. The OVN instances running on the OpensStack control plane are independent of the OVN instances running on the OpenShift control plane, that is: Kubernetes networking and OpenStack networking are completely independent of each other.
+OVN is so powerful that more recent releases of Red Hat OpenShift also use OVN to implement Kubernetes networking and to extend it for more advanced use cases, which were not originally supported by standard Kubernetes. The OVN instances running on the OpenStack control plane are independent of the OVN instances running on the OpenShift control plane, that is: Kubernetes networking and OpenStack networking are completely independent of each other.
 
 == Child Operators of the OpenStack Add-On Operator
 
@@ -108,7 +106,7 @@ Now that you have a glimpse of the internal structure of OpenStack services, you
 
 In fact, Red Hat OpenStack Services on OpenShift includes specialized operators to manage each of the user-facing and internal infrastructure services: There is a Nova operator, a Neutron operator, a RabbitMQ operator, an OVN operator, and so on.
 
-OpenShift add-on operators have the concept of meta-operator, which is an add-on operator that manages a set of child add-on operators. The OpenStack add-on operator is a meta-operator, and the External Data Plane Management add-on operator, which uses Ansible to manage OpenStack compute nodes, is also a child operator of the OpenStack add-on operator.
+OpenShift add-on operators have the concept of a meta-operator, which is an add-on operator that manages a set of child add-on operators. The OpenStack add-on operator is a meta-operator, and the External Data Plane Management add-on operator, which uses Ansible to manage OpenStack compute nodes, is also a child operator of the OpenStack add-on operator.
 
 == OpenShift Storage and Networking for OpenStack Services
 
@@ -118,21 +116,22 @@ The storage and networking services of OpenStack, such as Cinder and Neutron, pr
 
 Kubernetes storage requirements from Red Hat OpenStack Services on OpenShift come mainly from internal infrastructure services. User-facing services focus on data storage for compute nodes, which run outside of OpenShift.
 
-OpenStack services which require Kubernetes storage are expected to handle data consistency and availability by themselves, without requiring high-availability nor replication features from the storage backend. This mean you do not need OpenShift Data Foundation (ODF) nor other kind of enterprise storage backend for an OpenShift cluster which runs Red Hat OpenStack Services on OpenStack. The storage capabilies offered by the https://docs.openshift.com/container-platform/4.15/storage/persistent_storage/persistent_storage_local/persistent-storage-using-lvms.html[Local Volume Manager Storage (LVMS)] add-on operator, which enables access to local storage of OpenShift cluster nodes, is sufficient.
+OpenStack services which require Kubernetes storage are expected to handle data consistency and availability by themselves, without requiring high-availability nor replication features from the storage backend. This means you do not need OpenShift Data Foundation (ODF) nor other kind of enterprise storage backend for an OpenShift cluster which runs Red Hat OpenStack Services on OpenStack. The storage capabilities offered by the https://docs.openshift.com/container-platform/4.15/storage/persistent_storage/persistent_storage_local/persistent-storage-using-lvms.html[Local Volume Manager Storage (LVMS)] add-on operator, which enables access to local storage of OpenShift cluster nodes, are sufficient.
 
-OpenStack Administrators are not required to use the LVMS add-on operator: they could use any Container Storage Interface (CSI) driver which is certified for Red Hat OpenShift and use whatever backend storage that driver supports. They just have no need to deploy CSI driver and their add-on operators on OpenShift.
+OpenStack Administrators are not required to use the LVMS add-on operator: they could use any Container Storage Interface (CSI) driver which is certified for Red Hat OpenShift and use whatever backend storage that driver supports. They just have no need to deploy the CSI driver and their add-on operators on OpenShift.
 
-Some OpenStack services may run remote storage client, for example Ceph librbd, from their own containers to manage or access data in the same storage backends that compute nodes do on behalf of their workloads. They do not use Kubernetes storage at all for managing Cinder volumes and Glance images. OpenStack workloads and OpenShift workloads do not require access to the same storage backends.
+Some OpenStack services may run remote storage client, for example, Ceph librbd, from their own containers to manage or access data in the same storage backends that compute nodes do on behalf of their workloads. They do not use Kubernetes storage at all for managing Cinder volumes and Glance images. OpenStack workloads and OpenShift workloads do not require access to the same storage backends.
+// Is librbd a correct word?
 
-Later in this course we will present the Kubernetes concepts and API resources required to manage storage for OpenStack services, as well as which OpenStack internal services require Kubernetes storage.
+Later in this course, we will present the Kubernetes concepts and API resources required to manage storage for OpenStack services, as well as which OpenStack internal services require Kubernetes storage.
 
 === Network Connectivity Requirements of OpenStack Services
 
-Kuberentes networking requirements from Red Hat OpenStack Services on OpenShift come from the necessity of exposing OpenStack APIs over HTTP to OpenStack Operators and Administators, besides the necessity of exposing those APIs over HTTP and also exposing AMQP messaging (RabbitMQ) to compute plane nodes.
+Kubernetes networking requirements from Red Hat OpenStack Services on OpenShift come from the necessity of exposing OpenStack APIs over HTTP to OpenStack Operators and Administrators, besides the necessity of exposing those APIs over HTTP and also exposing AMQP messaging (RabbitMQ) to compute plane nodes.
 
 Additional requirements come from the common data center design patterns of network isolation, which require that components of OpenStack services running on OpenShift and also compute nodes have connectivity to multiple isolated networks, something that standard Kubernetes alone cannot provide.
 
-To provide network connectivity capabilities beyond standard Kuberntes, OpenShift includes a cluster operator and two add-on operators:
+To provide network connectivity capabilities beyond standard Kubernetes, OpenShift includes a cluster operator and two add-on operators:
 
 Multus::
 
@@ -140,11 +139,11 @@ Enables containers to attach to secondary networks, which maps to additional net
 
 NMState::
 
-Enables declarative configuration of network devices on OpenShift cluster nodes, which may be easier than configuring all devices at OpenShift cluster deployment, especialy for more complex setups such as bonded interfaces. The https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html[NMState] add-on operator also enables day-2 changes of networking configurations of those nodes, for example to enable access to new VLANs over existing trunk interfaces.
+Enables declarative configuration of network devices on OpenShift cluster nodes, which may be easier than configuring all devices at OpenShift cluster deployment, especially for more complex setups such as bonded interfaces. The https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html[NMState] add-on operator also enables day-2 changes of networking configurations of those nodes, for example, to enable access to new VLANs over existing trunk interfaces.
 
-MetallB::
+MetalLB::
 
-Standard Kubernetes only enables external access to load balancers on cloud provider platforms. If Kubernetes is deployed on a physical server or a traditional hypervisor, them Kubernetes load-balancers only work inside a cluster. The https://docs.openshift.com/container-platform/4.15/networking/metallb/about-metallb.html[MetalLB] add-on operators adds a resource controller for Kubernetes load-balancers that enables external accesses on non-cloud platforms.
+Standard Kubernetes only enables external access to load balancers on cloud provider platforms. If Kubernetes is deployed on a physical server or a traditional hypervisor, then Kubernetes load-balancers only work inside a cluster. The https://docs.openshift.com/container-platform/4.15/networking/metallb/about-metallb.html[MetalLB] add-on operators add a resource controller for Kubernetes load-balancers that enables external accesses on non-cloud platforms.
 
 The use of the NMState add-on operator is not required by Red Hat OpenStack Services on OpenShift, but it is recommended most times. The Multus cluster operator and MetalLB add-on operator are required.
 

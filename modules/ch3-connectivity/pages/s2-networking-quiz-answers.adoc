@@ -1,4 +1,4 @@
-:time_estimate: 1
+:time_estimate: 11
 
 = Answers to the Quiz
 

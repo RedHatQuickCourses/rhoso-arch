@@ -3,9 +3,9 @@
 
 == Introduction
 
-This is the first course for IT professionals who are already experienced OpenStack Operators but are new to administration of Red Hat OpenStack Services on OpenShift. It requires no previous knowledge of Red Hat OpenShift, Kubernetes, and containers, but it requires familiarity with managing application workloads running as virtual machines (VM) on OpenStack, and managing associated resources such as storage volumes and tenant or provider networks.
+This is the first course for IT professionals who are already experienced OpenStack Operators but are new to the administration of Red Hat OpenStack Services on OpenShift. It requires no previous knowledge of Red Hat OpenShift, Kubernetes, and containers, but it requires familiarity with managing application workloads running as virtual machines (VM) on OpenStack and managing associated resources such as storage volumes and tenant or provider networks.
 
-This course helps both experienced OpenStack Administrators and OpenStack Operators who are growing into OpenStack Administrators understanding the Red Hat OpenStack Services on OpenShift product and how managing it may be different than managing other incarnations of Red Hat OpenStack Platform.
+This course helps both experienced OpenStack Administrators and OpenStack Operators who are growing into OpenStack Administrators understand the Red Hat OpenStack Services on OpenShift products and how managing it may be different than managing other incarnations of the Red Hat OpenStack Platform.
 
 == Course Objective
 
@@ -19,7 +19,7 @@ Platform Engineers, Cloud Administrators, and System Administrators interested i
 
 * Basic administration of RHEL: https://www.redhat.com/en/services/training/rh124-red-hat-system-administration-i[RH124]
 
-* Basic operation of OpenStack Services on OpenShift: https://redhatquickcourses.github.io/rhoso-intro/[OSP-Operations-I-1] and OSP-Operations-I-2, or the equivalent courses from prevuious releases of Red Hat OpenStack, such as https://www.redhat.com/en/services/training/cl110-red-hat-openstack-administration-i[CL110] and https://www.redhat.com/en/services/training/cl210-red-hat-openstack-administration-ii[CL210].
+* Basic operation of OpenStack Services on OpenShift: https://redhatquickcourses.github.io/rhoso-intro/[OSP-Operations-I-1] and OSP-Operations-I-2, or the equivalent courses from previous releases of Red Hat OpenStack, such as https://www.redhat.com/en/services/training/cl110-red-hat-openstack-administration-i[CL110] and https://www.redhat.com/en/services/training/cl210-red-hat-openstack-administration-ii[CL210].
 
 * Basic data center storage concepts: storage protocols, NAS, and SAN.
 
