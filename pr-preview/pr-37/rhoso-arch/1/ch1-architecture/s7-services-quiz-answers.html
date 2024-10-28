@@ -217,22 +217,6 @@
 </aside>
 <article class="doc">
 <h1 class="page">Answers to the Quiz</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Pending Review
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="_openstack_internal_services_on_openshift"><a class="anchor" href="#_openstack_internal_services_on_openshift"></a>OpenStack Internal Services on OpenShift</h2>
 <div class="sectionbody">
@@ -248,7 +232,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>An OpenStack service component on a compute node sends messages to another component of the same OpenStack service which runs on the control plane.</strong><br>
-<em>Correct: This is communication between something which runs outside an OpenShift cluster, on an OpenStack compute node, and a container of an OpenStack control plane which runs inside an OpenShift cluster.</em></p>
+<em>Correct: This is communication between something which runs outside an OpenShift cluster, on an OpenStack compute node, and a container of an OpenStack control plane that runs inside an OpenShift cluster.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> An OpenStack service component on the control plane sends messages to another component of the same OpenStack service which also runs on the control plane.
@@ -267,7 +251,7 @@ Pending Review
 <ul class="checklist">
 <li>
 <p><i class="fa fa-square-o"></i> Nova<br>
-<em>Incorrect: Nova, as most other user-facing services, only needs a relational database and an AMQP server on the OpenStack control plane.</em></p>
+<em>Incorrect: Nova, like most other user-facing services, only needs a relational database and an AMQP server on the OpenStack control plane.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>RabbitMQ</strong><br>
@@ -278,8 +262,8 @@ Pending Review
 <em>Correct: MariaDB runs entirely on the OpenStack control plane and requires Kubernetes persistent storage to store OpenStack API resource instances.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> OVN<br>
-<em>Incorrect: OVN stores network flow databases in memory and replicates the databases with other OVN instances running on compute nodes and the OpenStack control plane.</em></p>
+<p><i class="fa fa-check-square-o"></i> <strong>OVN</strong><br>
+<em>Correct: OVN runs on both the OpenStack control plane and on compute nodes. The OpenStack OVN pods require Kubernetes persistent storage to store network flow databases (RAFT) which it replicates with other OVN pods running on the OpenStack control plane.</em></p>
 </li>
 </ul>
 </div>
@@ -290,11 +274,11 @@ Pending Review
 <ul class="checklist">
 <li>
 <p><i class="fa fa-square-o"></i> Nova<br>
-<em>Incorrect: Nova itself requires only ingress HTTP for its own API and egress AMQP from its conducutor component on compute nodes.</em></p>
+<em>Incorrect: Nova itself requires only ingress HTTP for its own API and egress AMQP from its conductor component on compute nodes.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Swift<br>
-<em>Incorrect: all access to object storage, using either the Swift or S3 APIs, use the HTTP protocol.</em></p>
+<em>Incorrect: all access to object storage, using either the Swift or S3 APIs, uses the HTTP protocol.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>RabbitMQ</strong><br>
@@ -313,7 +297,7 @@ Pending Review
 <ul class="checklist">
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>SSH access to compute nodes by Ansible playbooks.</strong><br>
-<em>Correct: this is eggress from a container in OpenShift to an isolated network outside of OpenShift.</em></p>
+<em>Correct: this is egress from a container in OpenShift to an isolated network outside of OpenShift.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> AMQP access from compute nodes to RabbitMQ instances.<br>
@@ -325,7 +309,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> SSH access to server instances from a developer&#8217;s workstation.<br>
-<em>Incorrect: This is requires only OpenStack provider networks and routers, which are standard features of Neutron, and that network traffic goes directly from the developer&#8217;s workstation to the compute node, without passing through any container of an OpenStack control plane.</em></p>
+<em>Incorrect: This requires only OpenStack provider networks and routers, which are standard features of Neutron, and that network traffic goes directly from the developer&#8217;s workstation to the compute node, without passing through any container of an OpenStack control plane.</em></p>
 </li>
 </ul>
 </div>
