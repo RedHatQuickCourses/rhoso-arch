@@ -4,17 +4,16 @@ Objective::
 
 Navigate the OpenShift web console and OpenShift client to find the OpenStack add-on operator, its custom resources, and a sample of workloads from OpenStack services.
 
-WARNING: Work In Progress
-
 == Recording
 
 This demonstration will be recorded and the video linked from here, so learners can watch the video and optionally try to replicate it by themselves.
+// Is the video to be linked here?
 
 == Environment
 
-There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully functional Red Hat OpenStack on OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.
+There is no demo environment for now. Presenters must be able to provide their own environment, which should be an already configured and fully functional Red Hat OpenStack on the OpenShift cluster. It should be configured in a way that it is ready for an OpenStack Administrator, that is, including an OpenShift user with edit or admin roles in the OpenStack operator and workloads projects on OpenShift. Using an OpenShift cluster administrator user is fine for this demonstration but may not be for other demonstrations of this course.
 
-For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating ips, tenant networks, etc. That may not be fine for other demonstrations of this course.
+For this demonstration, an empty OpenStack cluster is fine: it will not deal with OpenStack domains, projects, server flavors, floating IPs, tenant networks, etc. That may not be fine for other demonstrations of this course.
 
 The demo environment must also provide a user workstation preconfigured with the OpenShift client and a web browser to access the OpenShift web console.
 
@@ -32,12 +31,12 @@ The demo environment must also provide a user workstation preconfigured with the
 
 5. Back to the Operators > Installed Operators page, enter the OpenStack operator and show its custom resource types. Show that there is only one instance of the control plane resource and only one of the data plane per cluster. Ignore node sets for now.
 
-6. Open a terminal and login using the CLI using the token workflow. Remark that, depending on the authentication settings of OpenShift, it might be possible to provide an OpenShift username and password directly on the CLI, but many authentication providers will require control of the user interface, for example to enfore MFA, and the token login is the only one that works every time.
+6. Open a terminal and log in using the CLI using the token workflow. Remark that, depending on the authentication settings of OpenShift, it might be possible to provide an OpenShift username and password directly on the CLI, but many authentication providers will require control of the user interface, for example to enforce MFA, and the token login is the only one that works every time.
 
-7. Show the API Resources types and identify on it the custom resources from the OpenStack operator and show its spec. Do not try to explain individual attributes.
+7. Show the API Resources types and identify it the custom resources from the OpenStack operator and show its spec. Do not try to explain individual attributes.
 
-8. Repeat a subset of tasks already done using the web console, but using the CLI: show the openstack operator is installed; sample workloads from user-facing and internal infrastructure OpenStack services; and custom resource instances from the OpenStack operator.
+8. Repeat a subset of tasks already done using the web console, but using the CLI: show the OpenStack operator is installed; sample workloads from user-facing and internal infrastructure OpenStack services; and custom resource instances from the OpenStack operator.
 
-9. Show the on-line help of the OpenShift CLI, list API resource types, filter to the OpenStack API group, and show the spec (oc explain) of the control plane custom resource.
+9. Show the online help of the OpenShift CLI, list API resource types, filter to the OpenStack API group, and show the spec (oc explain) of the control plane custom resource.
 
 This ends the demonstration.

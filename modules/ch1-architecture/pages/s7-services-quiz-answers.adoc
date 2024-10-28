@@ -1,7 +1,5 @@
 = Answers to the Quiz
 
-WARNING: Pending Review
-
 == OpenStack Internal Services on OpenShift
 
 1. Which of the following requires communication between containers inside an OpenShift cluster and processes outside of that OpenShift cluster?
@@ -10,7 +8,7 @@ WARNING: Pending Review
 _Incorrect: This is communication between containers inside an OpenShift cluster._
 
 * [x] *An OpenStack service component on a compute node sends messages to another component of the same OpenStack service which runs on the control plane.* +
-_Correct: This is communication between something which runs outside an OpenShift cluster, on an OpenStack compute node, and a container of an OpenStack control plane which runs inside an OpenShift cluster._
+_Correct: This is communication between something which runs outside an OpenShift cluster, on an OpenStack compute node, and a container of an OpenStack control plane that runs inside an OpenShift cluster._
 
 * [ ] An OpenStack service component on the control plane sends messages to another component of the same OpenStack service which also runs on the control plane.
 _Incorrect: This is communication between containers inside an OpenShift cluster._
@@ -21,7 +19,7 @@ _Incorrect: This is communication between containers inside an OpenShift cluster
 2. Which of the following OpenStack services require persistent storage managed by Kubernetes?
 
 * [ ] Nova +
-_Incorrect: Nova, as most other user-facing services, only needs a relational database and an AMQP server on the OpenStack control plane._
+_Incorrect: Nova, like most other user-facing services, only needs a relational database and an AMQP server on the OpenStack control plane._
 
 * [x] *RabbitMQ* +
 _Correct: RabbitMQ runs entirely on the OpenStack control plane and requires Kubernetes persistent storage to ensure guaranteed delivery of messages._
@@ -35,10 +33,10 @@ _Correct: OVN runs on both the OpenStack control plane and on compute nodes. The
 3. Which of the following OpenStack services require ingress connectivity, from outside of an OpenShift cluster, using a protocol other than HTTP?
 
 * [ ] Nova +
-_Incorrect: Nova itself requires only ingress HTTP for its own API and egress AMQP from its conducutor component on compute nodes._
+_Incorrect: Nova itself requires only ingress HTTP for its own API and egress AMQP from its conductor component on compute nodes._
 
 * [ ] Swift +
-_Incorrect: all access to object storage, using either the Swift or S3 APIs, use the HTTP protocol._
+_Incorrect: all access to object storage, using either the Swift or S3 APIs, uses the HTTP protocol._
 
 * [x] *RabbitMQ* +
 _Correct: RabbitMQ requires ingress using AMQP from compute nodes to its messaging server instances on the control plane._
@@ -49,7 +47,7 @@ _Incorrect: No OpenStack service component running on compute nodes should acces
 4. Which of the following requires that components of OpenStack services, running on the control node, attach to Multus secondary networks?
 
 * [x] *SSH access to compute nodes by Ansible playbooks.* +
-_Correct: this is eggress from a container in OpenShift to an isolated network outside of OpenShift._
+_Correct: this is egress from a container in OpenShift to an isolated network outside of OpenShift._
 
 * [ ] AMQP access from compute nodes to RabbitMQ instances. +
 _Incorrect: This is ingress from a compute node to a container in OpenShift, you use an external load balancer service_.
@@ -58,4 +56,4 @@ _Incorrect: This is ingress from a compute node to a container in OpenShift, you
 _Incorrect: This is communication inside an OpenShift cluster, from one container to another container, and uses internal cluster load balancers._
 
 * [ ] SSH access to server instances from a developer's workstation. +
-_Incorrect: This is requires only OpenStack provider networks and routers, which are standard features of Neutron, and that network traffic goes directly from the developer's workstation to the compute node, without passing through any container of an OpenStack control plane._
+_Incorrect: This requires only OpenStack provider networks and routers, which are standard features of Neutron, and that network traffic goes directly from the developer's workstation to the compute node, without passing through any container of an OpenStack control plane._
