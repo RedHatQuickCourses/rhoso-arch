@@ -229,18 +229,6 @@
 </dd>
 </dl>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Pending Review
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -258,21 +246,21 @@ Pending Review
 <p>To manage OpenStack services and an OpenStack cluster control plane, an OpenStack Administrator using Red Hat OpenStack Services on OpenShift must use OpenShift tools and needs knowledge about Kubernetes API resources.</p>
 </div>
 <div class="paragraph">
-<p>If you were used to managing OpenStack cluster control planes running directly on RHEL, whether on physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level. This involves making edits to configuration files over SSH sessions, and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.</p>
+<p>If you were used to managing OpenStack cluster control planes running directly on RHEL, whether on physical servers or virtual machines, you would configure its OpenStack services at the control plane host operating system level. This involves making edits to configuration files over SSH sessions and using RHEL commands to manage systemd units, file systems, and devices. All those settings now belong to custom resources from the OpenStack add-on operator, and you must manage them using Kubernetes APIs.</p>
 </div>
 <div class="paragraph">
-<p>OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which run Ansible playbooks on OpenShift. As an OpenStack administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.</p>
+<p>OpenStack compute nodes are still RHEL servers which you could manage directly using SSH sessions and host operating system commands. But these RHEL servers are also managed by the OpenStack control plane running on OpenShift, more specifically by its External Data Plane Management add-on operator, which runs Ansible playbooks on OpenShift. As an OpenStack administrator, you should use these playbooks and manage them using custom resources from the OpenStack add-on operator.</p>
 </div>
 <div class="sect2">
 <h3 id="_openstack_administrators_and_openshift_administrators"><a class="anchor" href="#_openstack_administrators_and_openshift_administrators"></a>OpenStack Administrators and OpenShift Administrators</h3>
 <div class="paragraph">
-<p>OpenStack Administrators usually work close to other IT professionals dedicated to infrastructure management. Most of the times they have to work under the guidance and constraints imposed by network and storage administration teams.</p>
+<p>OpenStack Administrators usually work close to other IT professionals dedicated to infrastructure management. Most of the time they have to work under the guidance and constraints imposed by network and storage administration teams.</p>
 </div>
 <div class="paragraph">
-<p>OpenStack Administrators are frequently Linux System Administrator themselves and take full charge of managing RHEL compute nodes of their OpenStack clusters, but they could also work with a team of System Administrators who takes care of all physical servers in a data center.</p>
+<p>OpenStack Administrators are frequently Linux System Administrators themselves and take full charge of managing RHEL compute nodes of their OpenStack clusters, but they could also work with a team of System Administrators who take care of all physical servers in a data center.</p>
 </div>
 <div class="paragraph">
-<p>OpenStack Administrators must be OpenShift Operators, because they manage an application workload running as containers on OpenShift, which is the OpenStack add-on operator and its OpenStack services.</p>
+<p>OpenStack Administrators must be OpenShift Operators because they manage an application workload running as containers on OpenShift, which is the OpenStack add-on operator and its OpenStack services.</p>
 </div>
 <div class="paragraph">
 <p>They could use an OpenShift cluster which is dedicated to their OpenStack cluster and be the OpenShift Administrators of that OpenShift cluster or they could work close to an OpenShift Administration team, especially if the same OpenShift cluster which runs Red Hat OpenStack Services on OpenShift also runs other workloads and add-on operators, such as Ansible Automation Platform or OpenShift Pipelines.</p>
@@ -281,22 +269,22 @@ Pending Review
 <div class="sect2">
 <h3 id="_openstack_administrator_tools"><a class="anchor" href="#_openstack_administrator_tools"></a>OpenStack Administrator Tools</h3>
 <div class="paragraph">
-<p>When working as an OpenShift Operator, to manage OpenStack services which run as containerized workloads on OpenShift, an OpenStack Administrator uses the following tools:</p>
+<p>When working as an OpenShift Operator, to manage OpenStack services that run as containerized workloads on OpenShift, an OpenStack Administrator uses the following tools:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">The OpenShift client</dt>
 <dd>
-<p>It is a command line tool which native ports for Linux, MacOS, and Windows. The <strong>oc</strong> command is an extension of the standard Kubernetes client <strong>kubectl</strong> which adds helpers for interacting with OpenShift addtitions, such as the OAuth server and projects.</p>
+<p>It is a command line tool with native ports for Linux, MacOS, and Windows. The <strong>oc</strong> command is an extension of the standard Kubernetes client <strong>kubectl</strong> which adds helpers for interacting with OpenShift additions, such as the OAuth server and projects.</p>
 </dd>
 <dt class="hdlist1">The OpenShift web console</dt>
 <dd>
-<p>It is a web application which offers functionality to OpenShift Administrators, OpenShift Operators, and application developers. Besides the standard set of pages from the OpenShift web console, add-on operators may add custom pages and monitoring dashboards.</p>
+<p>It is a web application that offers functionality to OpenShift Administrators, OpenShift Operators, and application developers. Besides the standard set of pages from the OpenShift web console, add-on operators may add custom pages and monitoring dashboards.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>The OpenShift web console is richer, compared to the OpenStack Horizon web UI. To the point where you can expect to perform almost all OpenShift operations and administration tasks using it. However, OpenShift Operators are also expected to be adept of GitOps practices, which require managing Kubernetes API resources directly from code using YAML files and the OpenShift client.</p>
+<p>The OpenShift web console is richer, compared to the OpenStack Horizon web UI. To the point where you can expect to perform almost all OpenShift operations and administration tasks using it. However, OpenShift Operators are also expected to be adept at GitOps practices, which require managing Kubernetes API resources directly from code using YAML files and the OpenShift client.</p>
 </div>
 <div class="paragraph">
 <p>OpenStack Administrators also use the same tools as OpenStack Operator, because some OpenStack administration tasks involve managing OpenStack API resources such as provider networks and server flavors. These tasks are performed using the OpenStack client and Horizon. However, when OpenStack Administrators need to inspect or change the configuration of an OpenStack service, they must use Kubernetes APIs thus they must use OpenShift tools.</p>
@@ -308,23 +296,23 @@ Pending Review
 <h2 id="_using_the_openshift_client"><a class="anchor" href="#_using_the_openshift_client"></a>Using The OpenShift Client</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The OpenShift client <code>oc</code> offers tree kinds of commands with full compatibility with the Kubernetes client <code>kubectl</code>:</p>
+<p>The OpenShift client <code>oc</code> offers three kinds of commands with full compatibility with the Kubernetes client <code>kubectl</code>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Generic commands for any API resource type and instance. Those commands work with the same syntax for all API resource types and support declarative style API resource management.</p>
+<p>Generic commands for any API resource type and instance. Those commands work with the same syntax for all API resource types and support declarative-style API resource management.</p>
 </li>
 <li>
 <p>Helper commands which perform common operations on frequently used API resource types. and support an imperative style of API resource management. Most times, these helper commands could be replaced with generic commands.</p>
 </li>
 <li>
-<p>Helper commands that enable usage of very specific features of the Kubernetes APIs and which would be very hard to use without a custom command. For example, forwarding local TCP ports to a container on a Kubernetes cluster, or starting a shell session inside a container on a Kubernetes cluster.</p>
+<p>Helper commands that enable usage of very specific features of the Kubernetes APIs which would be very hard to use without a custom command. For example, forwarding local TCP ports to a container on a Kubernetes cluster, or starting a shell session inside a container on a Kubernetes cluster.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The OpenShift client <code>oc</code> adds commands (and sometimes subcommands) to the comand set from <code>kubectl</code>. These additional commands are either helpers for custom resources from OpenShift or helpers from other OpenShift features, such as its internal OAuth server.</p>
+<p>The OpenShift client <code>oc</code> adds commands (and sometimes subcommands) to the command set from <code>kubectl</code>. These additional commands are either helpers for custom resources from OpenShift or helpers from other OpenShift features, such as its internal OAuth server.</p>
 </div>
 <div class="sect2">
 <h3 id="_general_syntax_of_openshift_client_commands"><a class="anchor" href="#_general_syntax_of_openshift_client_commands"></a>General Syntax of OpenShift Client Commands</h3>
@@ -353,7 +341,7 @@ Pending Review
 </ul>
 </div>
 <div class="paragraph">
-<p>Most OpenShift client commands require, as arguments, either the name of an API resource type or an API resource instance. Sometimes a resource instance must be named together with its namespace, as a single argument: <code><em>type/resource</em></code>. Other times, the API resourse type and instance name must be provided as different arguments: <code><em>type resource</em></code>. Some commands may accept both formats and some will require one of them.</p>
+<p>Most OpenShift client commands require, as arguments, either the name of an API resource type or an API resource instance. Sometimes a resource instance must be named together with its namespace, as a single argument: <code><em>type/resource</em></code>. Other times, the API resource type and instance name must be provided as different arguments: <code><em>type resource</em></code>. Some commands may accept both formats and some will require one of them.</p>
 </div>
 <div class="paragraph">
 <p>Some commands can take the resource instance name from a YAML file and many commands require either a partial or a complete resource definition in an YAML file.</p>
@@ -372,7 +360,7 @@ Pending Review
 </ul>
 </div>
 <div class="paragraph">
-<p>OpenShift client commands which require additional arguments beyond resource type or instance names usually take those arguments as GNU GetOpts options, which make them look like global options. A global option must come before the command, and a command argument must come after the command words, but the order of arguments doesn&#8217;t matter.</p>
+<p>OpenShift client commands that require additional arguments beyond resource type or instance names usually take those arguments as GNU GetOpts options, which make them look like global options. A global option must come before the command, and a command argument must come after the command words, but the order of arguments doesn&#8217;t matter.</p>
 </div>
 </div>
 <div class="sect2">
@@ -400,7 +388,7 @@ Pending Review
 <p>The <code>get</code> command can either retrieve an API resource instance by its name or list all instances of an API resource type in an OpenShift cluster.</p>
 </div>
 <div class="paragraph">
-<p>Multiple commands may perform similar operations, for example all: of the following commands make changes to Kubernetes API resource instances:</p>
+<p>Multiple commands may perform similar operations, for example, all: of the following commands make changes to Kubernetes API resource instances:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -437,7 +425,7 @@ The examples in this section are not supposed to be complete command examples yo
 </table>
 </div>
 <div class="paragraph">
-<p>These following commands create API resource instances with minimal required attributes which may not be good enough for production usage but enable quick experimentation:</p>
+<p>The following commands create API resource instances with minimal required attributes which may not be good enough for production usage but enable quick experimentation:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -453,7 +441,7 @@ The examples in this section are not supposed to be complete command examples yo
 </ul>
 </div>
 <div class="paragraph">
-<p>Another example of helper command is the <code>set</code> command, which can set a subset of attributes from pods and workload controllers such as jobs and deployments.</p>
+<p>Another example of the helper command is the <code>set</code> command, which can set a subset of attributes from pods and workload controllers such as jobs and deployments.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -469,13 +457,13 @@ The examples in this section are not supposed to be complete command examples yo
 </ul>
 </div>
 <div class="paragraph">
-<p>Later in this course we will learn about pods and workload controllers. They are API resources that manage containers running on Kubernetes.</p>
+<p>Later in this course, we will learn about pods and workload controllers. They are API resources that manage containers running on Kubernetes.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_openshift_client_examples"><a class="anchor" href="#_openshift_client_examples"></a>OpenShift Client Examples</h3>
 <div class="paragraph">
-<p>Very few of the OpenShift client commands work with no arguments. Here are a couple examples:</p>
+<p>Very few of the OpenShift client commands work with no arguments. Here are a couple of  examples:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -484,7 +472,7 @@ $ <strong>oc whoami</strong></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Following are some examples of generic API resource management comands which include the name of an API resource type, an API resource instance, or a YAML file:</p>
+<p>Following are some examples of generic API resource management commands which include the name of an API resource type, an API resource instance, or a YAML file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -591,7 +579,7 @@ $ <strong>oc get route.route.openshift.io</strong></code></pre>
 <p>Notice that, when listing or referring to API resource instances you <strong>must</strong> omit the API version.</p>
 </div>
 <div class="paragraph">
-<p>The output of the <code>oc api-resources</code> command also shows that some API resource types have short names, which can save a bit of typing. For example, the following two commands lis the same API resource instances:</p>
+<p>The output of the <code>oc api-resources</code> command also shows that some API resource types have short names, which can save a bit of typing. For example, the following two commands list the same API resource instances:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -600,7 +588,7 @@ $ <strong>oc get svc</strong></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And most API resource types accept a plural form, so the following two commands again list the same API resource instances:</p>
+<p>Most API resource types accept a plural form, so the following two commands again list the same API resource instances:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -640,7 +628,7 @@ $ <strong>oc explain oc explain route --api-version route.openshift.io/v1</stron
 </ol>
 </div>
 <div class="paragraph">
-<p>The following screen shot shows the appearance of the web console on the first access of a newly installed OpenShift cluster. It displays the Cluster Overview dashboard.</p>
+<p>The following screenshot shows the appearance of the web console on the first access of a newly installed OpenShift cluster. It displays the Cluster Overview dashboard.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -657,7 +645,7 @@ $ <strong>oc explain oc explain route --api-version route.openshift.io/v1</stron
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to match the required Red Hat OpenShift release.
+These screenshots may need updates  at Red Hat OpenStack on OpenShift GA to match the required Red Hat OpenShift release.
 </td>
 </tr>
 </table>
@@ -665,7 +653,7 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 <div class="sect2">
 <h3 id="_the_top_menu"><a class="anchor" href="#_the_top_menu"></a>The Top Menu</h3>
 <div class="paragraph">
-<p>The horizontal menu at the top includes, to the right, icons for varying information functions such as notifications and help, and the name of the currently logged in user, which is "Administrator" in the previous screen shot. Click the user name to log out if you need to log in as a different user.</p>
+<p>The horizontal menu at the top includes, to the right, icons for varying information functions such as notifications and help, and the name of the currently logged-in user, which is "Administrator" in the previous screenshot. Click the user name to log out if you need to log in as a different user.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -673,7 +661,7 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 </div>
 </div>
 <div class="paragraph">
-<p>To the left of the top menu there is menu icon which hides and shows the side menu. Sometimes it may be convenient to hide the side menu to give more screen width to the page in the center.</p>
+<p>To the left of the top menu, there is a menu icon that hides and shows the side menu. Sometimes it may be convenient to hide the side menu to give more screen width to the page in the center.</p>
 </div>
 </div>
 <div class="sect2">
@@ -682,7 +670,7 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 <p>The vertical menu to the left is the main navigation interface of the OpenShift web console.</p>
 </div>
 <div class="paragraph">
-<p>The item to the top of the side menu switches the web console perspectice between the <strong>Developer</strong> and <strong>Administrator</strong> perspectives. During the OpenStack administration learning journey we should stay in the Administrator perspective.</p>
+<p>The item at the top of the side menu switches the web console perspective between the <strong>Developer</strong> and <strong>Administrator</strong> perspectives. During the OpenStack administration learning journey, we should stay in the Administrator perspective.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -698,22 +686,22 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 </div>
 </div>
 <div class="paragraph">
-<p>During the OpenStack administration learning journey we will present the most frequently used pages of the OpenShift web console, at least from the perspective of an OpenStack Administrator managing an OpenStack cluster. For now, there is no need to explore and understand each and every page of the side menu.</p>
+<p>During the OpenStack administration learning journey, we will present the most frequently used pages of the OpenShift web console, at least from the perspective of an OpenStack Administrator managing an OpenStack cluster. For now, there is no need to explore and understand each and every page of the side menu.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_navigating_the_openshift_web_console"><a class="anchor" href="#_navigating_the_openshift_web_console"></a>Navigating the OpenShift Web Console</h3>
 <div class="paragraph">
-<p>The two-level path on the side menu, along with the name of the current tab of the center page, uniquely identifies a page in the OpenShift web console as a three-level path. For example, the Cluser Overview dashboard page from the first screen shot is <strong>Home &gt; Overview &gt; Cluster</strong>.</p>
+<p>The two-level path on the side menu, along with the name of the current tab of the center page, uniquely identifies a page in the OpenShift web console as a three-level path. For example, the Cluster Overview dashboard page from the first screenshot is <strong>Home &gt; Overview &gt; Cluster</strong>.</p>
 </div>
 <div class="paragraph">
-<p>OpenShift add-on operators can add menu items and pages to the web console, so the layout is not fixed: it depends on the add-on operators installed on your OpenShift cluster. Not all pages include tabs, and in that case the path to the page is only two levels.</p>
+<p>OpenShift add-on operators can add menu items and pages to the web console, so the layout is not fixed: it depends on the add-on operators installed on your OpenShift cluster. Not all pages include tabs, and in that case, the path to the page is only two levels.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_finding_kubernetes_api_resources"><a class="anchor" href="#_finding_kubernetes_api_resources"></a>Finding Kubernetes API resources</h3>
 <div class="paragraph">
-<p>Many pages display lists of Kubernetes resource instances of a single API resource type, such as the <strong>Workloads &gt; Deployments</strong> page in the following screen shot. Those pages display, at the top, filters by project and resource instance name and, to the left, buttons to create new resource instances.</p>
+<p>Many pages display lists of Kubernetes resource instances of a single API resource type, such as the <strong>Workloads &gt; Deployments</strong> page in the following screenshot. Those pages display, at the top, filters by project and resource instance name and, to the left, buttons to create new resource instances.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -724,7 +712,7 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 <p>If there is no web console page dedicated to a given API resource type, you can use either the <strong>Home &gt; Search</strong> or <strong>Home &gt; API Explorer</strong> pages. None of those pages will display all API resources in a cluster because the list is quite large, even in "empty" clusters, because Red Hat OpenShift itself runs its internal components as containers on Kubernetes and uses custom resources to manage them.</p>
 </div>
 <div class="paragraph">
-<p>On the <strong>Home &gt; Search</strong> you can choose one or more API resource types, and also add filters on resource instance name and labels. The following screen shot is an example of displaying all Deployment resources:</p>
+<p>On the <strong>Home &gt; Search</strong> you can choose one or more API resource types, and also add filters on the resource instance names and labels. The following screenshot is an example of displaying all Deployment resources:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -735,7 +723,7 @@ These screen shots may need updates  at Red Hat OpenStack on OpenShift GA to mat
 <div class="sect2">
 <h3 id="_the_api_explorer"><a class="anchor" href="#_the_api_explorer"></a>The API Explorer</h3>
 <div class="paragraph">
-<p>The <strong>Home &gt; API Explorer</strong> page lists all API resource types available on your cluster and can filter the list by API resource group and API version. The following screen shot shows the list of all Deployment resources:</p>
+<p>The <strong>Home &gt; API Explorer</strong> page lists all API resource types available on your cluster and can filter the list by API resource group and API version. The following screenshot shows the list of all Deployment resources:</p>
 </div>
 <div class="imageblock">
 <div class="content">
