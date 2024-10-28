@@ -8,8 +8,6 @@ Objective::
 
 Relate connectivity requirements of OpenStack services with the OpenShift features which provide that connectivity.
 
-WARNING: Pending Review
-
 == Questions
 
 1. Why do OpenStack clusters typically require multiple, isolated networks?
@@ -53,10 +51,10 @@ WARNING: Pending Review
 
 6. Red Hat OpenStack Services on OpenShift uses OpenShift Routes, enabled by the OpenShift Ingress cluster operator, for the following communication patterns on the specified reference networks:
 
-* [ ] Public API end points of OpenStack Services over the external network.
-* [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
-* [ ] Private API end points of OpenStack Services over the ctlplane network.
-* [ ] Private API end points of OpenStack Services over the internalapi network.
+* [ ] Public API endpoints of OpenStack Services over the external network.
+* [ ] Public API endpoints of OpenStack Services over the Kubernetes primary network.
+* [ ] Private API endpoints of OpenStack Services over the ctlplane network.
+* [ ] Private API endpoints of OpenStack Services over the internalapi network.
 * [ ] AMQP Messaging over the ctlplane network.
 * [ ] AMQP Messaging over the internalapi network.
 * [ ] SSH management of compute nodes over the ctlplane network.
@@ -64,10 +62,10 @@ WARNING: Pending Review
 
 7. Red Hat OpenStack Services on OpenShift uses Kubernetes Services of type Load Balancer, enabled by the MetalLB add-on operator, for the following communication patterns on the specified reference networks:
 
-* [ ] Public API end points of OpenStack Services over the external network.
-* [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
-* [ ] Private API end points of OpenStack Services over the ctlplane network.
-* [ ] Private API end points of OpenStack Services over the internalapi network.
+* [ ] Public API endpoints of OpenStack Services over the external network.
+* [ ] Public API endpoints of OpenStack Services over the Kubernetes primary network.
+* [ ] Private API endpoints of OpenStack Services over the ctlplane network.
+* [ ] Private API endpoints of OpenStack Services over the internalapi network.
 * [ ] AMQP Messaging over the ctlplane network.
 * [ ] AMQP Messaging over the internalapi network.
 * [ ] SSH management of compute nodes over the ctlplane network.
@@ -75,10 +73,10 @@ WARNING: Pending Review
 
 8. Red Hat OpenStack Services on OpenShift uses secondary networks, enabled by Multus, for the following communication patterns on the specified reference networks:
 
-* [ ] Public API end points of OpenStack Services over the external network.
-* [ ] Public API end points of OpenStack Services over the Kubernetes primary network.
-* [ ] Private API end points of OpenStack Services over the ctlplane network.
-* [ ] Private API end points of OpenStack Services over the internalapi network.
+* [ ] Public API endpoints of OpenStack Services over the external network.
+* [ ] Public API endpoints of OpenStack Services over the Kubernetes primary network.
+* [ ] Private API endpoints of OpenStack Services over the ctlplane network.
+* [ ] Private API endpoints of OpenStack Services over the internalapi network.
 * [ ] AMQP Messaging over the ctlplane network.
 * [ ] AMQP Messaging over the internalapi network.
 * [ ] SSH management of compute nodes over the ctlplane network.

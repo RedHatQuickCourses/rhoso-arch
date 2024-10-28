@@ -2,11 +2,9 @@
 
 = Answers to the Quiz
 
-WARNING: Pending Review
-
 == Kubernetes Storage for OpenStack Services
 
-1. How does OpenStack user-facing services use Kubernetes storage capabilties, from OpenStack Pods and from OpenStack compute nodes?
+1. How do OpenStack user-facing services use Kubernetes storage capabilities, from OpenStack Pods and from OpenStack compute nodes?
 
 * [x] *They do not use Kubernetes storage at all. RHEL compute nodes and OpenStack pods connect directly to whatever storage backend servers OpenStack workloads.* +
 _Correct: OpenStack compute nodes connect to storage backends using storage clients on the host operating system clients and OpenStack Pods embed those clients on their containers._
@@ -49,7 +47,7 @@ _Incorrect: OpenStack user-facing services store OpenStack API instances on the 
 _Correct: OpenStack internal infrastructure services, such as RabbitMQ, MariaDB, and OVN, replicate data among multiple Pods, and each Pod connects to its own PVC, ensuring there are multiple copies of persistent data._
 
 * [ ] Because OpenStack Pods delegates all storage access to RHEL compute nodes. +
-_Incorrect: Pods from OpenStack user-facing services to access directly, by embeding network storage clients on their containers._
+_Incorrect: Pods from OpenStack user-facing services to access directly, by embedding network storage clients on their containers._
 
 4. Which of the following OpenStack services require Kubernetes persistent storage?
 
@@ -66,7 +64,7 @@ _Incorrect: Swift can use Kubernetes PVCs for proof-of-concept deployments, but 
 _Correct: MariaDB stores OpenStack API resource instances for all OpenStack user-facing services and requires Kubernetes PVCs._
 
 * [x] *RabbitMQ* +
-_Correct: RabbitMQ stores AMQP messages for guaranteed delivery beween OpenStack service components and requires Kubernetes PVCs._
+_Correct: RabbitMQ stores AMQP messages for guaranteed delivery between OpenStack service components and requires Kubernetes PVCs._
 
 * [x] *OVN* +
-_Correct: OVN stores network flows on its noth bound and south bound databases, to support distributed network flow processing by OpenStack compute nodes, and requires Kubernetes PVCs._
+_Correct: OVN stores network flows on its north bound and south bound databases, to support distributed network flow processing by OpenStack compute nodes, and requires Kubernetes PVCs._
