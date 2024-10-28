@@ -217,22 +217,6 @@
 </aside>
 <article class="doc">
 <h1 class="page">Answers to the Quiz</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Pending Review
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="_kubernetes_networking_for_openstack_services"><a class="anchor" href="#_kubernetes_networking_for_openstack_services"></a>Kubernetes Networking for OpenStack Services</h2>
 <div class="sectionbody">
@@ -252,7 +236,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Because OpenStack services and other IT infrastructure present performance, reliability, and security concerns related to network traffic.</strong><br>
-<em>Correct: General data center concerns about using network capacity and seggregating traffic drive isolated network designs. It is not anything required by OpenStack itself.</em></p>
+<em>Correct: General data center concerns about using network capacity and segregating traffic drive isolated network designs. It is not anything required by OpenStack itself.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Because both OpenStack Neutron and OpenShift use the OVN software-defined networking layer and they conflict with each other.<br>
@@ -267,11 +251,11 @@ Pending Review
 <ul class="checklist">
 <li>
 <p><i class="fa fa-square-o"></i> ctlplane<br>
-<em>Incorrect: The ctlplane network has traffic between an components of OpenStack running in the control and data planes.</em></p>
+<em>Incorrect: The ctlplane network has traffic between components of OpenStack running in the control and data planes.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> internalapi<br>
-<em>Incorrect: The ctlplane network has traffic between an components of OpenStack running in the control and data planes.</em></p>
+<em>Incorrect: The ctlplane network has traffic between components of OpenStack running in the control and data planes.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>tenant</strong><br>
@@ -294,7 +278,7 @@ Pending Review
 <ul class="checklist">
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Pods do not have a stable IP address and Services provide such stable addresses.</strong><br>
-<em>Correct: While the IP address of a pod does not change during the life of a Pod, pods are supposed to be short-lived, and replacement Pods created by a workload controllers will get new IP addresses.</em></p>
+<em>Correct: While the IP address of a pod does not change during the life of a Pod, pods are supposed to be short-lived, and replacement Pods created by a workload controller will get new IP addresses.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Pods are ephemeral and might be replaced by new pods at any time.</strong><br>
@@ -302,7 +286,7 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Pods cannot connect directly to each other because of Kubernetes Network Policies.<br>
-<em>Incorrect: It is true that you can block communication between Pods by using Network Policies, but them communication would be blocked from Services also.</em></p>
+<em>Incorrect: It is true that you can block communication between Pods by using Network Policies, but then communication would be blocked from Services also.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Pods do not get DNS local names, while Services do</strong>.<br>
@@ -325,11 +309,11 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> By connecting to a secondary network attached to the Pod.<br>
-<em>Incorrect: While OpenShift enables the use secondary networks to provide connectivity to multiple isolated networks, they are not required and all Pods have network connectivity with outside their cluster, using the Kubernetes primary network.</em></p>
+<em>Incorrect: While OpenShift enables the use of secondary networks to provide connectivity to multiple isolated networks, they are not required and all Pods have network connectivity with outside their cluster, using the Kubernetes primary network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>By relying on Network Address Translation (NAT) performed by Kubernetes on all cluster nodes.</strong><br>
-<em>Correct: Kubernetes cluster nodes perform Source Network Address Translation (SNAT) on all packets send by Pods to outside of the cluster, so those packets seem to originate from the node instead of from the Kubernetes cluster network.</em></p>
+<em>Correct: Kubernetes cluster nodes perform Source Network Address Translation (SNAT) on all packets sent by Pods to outside of the cluster, so those packets seem to originate from the node instead of from the Kubernetes cluster network.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> By relying on a Network Gateway Router created for the application namespace.<br>
@@ -348,11 +332,11 @@ Pending Review
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Ingress</strong><br>
-<em>Correct: Kubernetes Ingress provide reverse HTTP proxying and support web clients of the video processing application.</em></p>
+<em>Correct: Kubernetes Ingress provides reverse HTTP proxying and supports web clients of the video processing application.</em></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Service of type Cluster IP<br>
-<em>Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide connectivity with external web clients nor external video devices.</em></p>
+<em>Incorrect: Kubernetes Services of type Cluster IP only provide connectivity with other Pods inside the same Kubernetes cluster and do not provide connectivity with external web clients or external video devices.</em></p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> <strong>Service of type Load Balancer</strong><br>
@@ -374,19 +358,19 @@ Pending Review
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.<br>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the external network.<br>
 <em>Incorrect: The reference network scenario exposes public OpenStack API endpoints on the Kubernetes primary network because OpenShift Routes can only work with that network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-check-square-o"></i> <strong>Public API end points of OpenStack Services over the Kubernetes primary network.</strong><br>
+<p><i class="fa fa-check-square-o"></i> <strong>Public API endpoints of OpenStack Services over the Kubernetes primary network.</strong><br>
 <em>Correct: Red Hat OpenStack Services on OpenShift uses OpenShift Routes to expose all public facing OpenStack APIs and only exposes them over the Kubernetes primary network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.<br>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the ctlplane network.<br>
 <em>Incorrect: The reference network scenario exposes private OpenStack API endpoints on the internalapi network. Anyway, Routes would not work because they can only attach to the Kubernetes primary network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.<br>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the internalapi network.<br>
 <em>Incorrect: Routes would not work for private API endpoints because the reference network scenario uses the internalapi network and routes can only attach to the Kubernetes primary network.</em></p>
 </li>
 <li>
@@ -413,19 +397,19 @@ Pending Review
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.<br>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the external network.<br>
 <em>Incorrect: The reference network scenario exposes public APIs on the Kubernetes primary network. Anyway, OpenStack uses OpenShift Routes instead of Services.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the Kubernetes primary network.<br>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the Kubernetes primary network.<br>
 <em>Incorrect: OpenStack uses OpenShift Routes as a better alternative than Services for exposing HTTP over the Kubernetes primary network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.<br>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the ctlplane network.<br>
 <em>Incorrect: The reference network scenario exposes private APIs on the internalapi network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-check-square-o"></i> <strong>Private API end points of OpenStack Services over the internalapi network.</strong><br>
+<p><i class="fa fa-check-square-o"></i> <strong>Private API endpoints of OpenStack Services over the internalapi network.</strong><br>
 <em>Correct: OpenStack uses Kubernetes Services as external load balancers for private APIs over HTTP because you cannot expose Routes or Ingress on secondary networks.</em></p>
 </li>
 <li>
@@ -452,19 +436,19 @@ Pending Review
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the external network.<br>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the external network.<br>
 <em>Incorrect: OpenStack uses Routes for public API endpoints, and only on the Kubernetes primary network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Public API end points of OpenStack Services over the Kubernetes primary network.<br>
+<p><i class="fa fa-square-o"></i> Public API endpoints of OpenStack Services over the Kubernetes primary network.<br>
 <em>Incorrect: OpenStack uses Routes for public API endpoints and there is no need to configure Multus for the Kubernetes primary network because it is not a secondary network.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the ctlplane network.<br>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the ctlplane network.<br>
 <em>Incorrect: The reference network scenario uses the internalapi network for private API end points. Anyway, MetalLB does not require its VIPs to belong to networks also available as secondary networks to Pods.</em></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Private API end points of OpenStack Services over the internalapi network.<br>
+<p><i class="fa fa-square-o"></i> Private API endpoints of OpenStack Services over the internalapi network.<br>
 <em>Incorrect: MetalLB can attach Kubernetes Services to virtual IPs on any network and does not require those networks to be available as secondary networks to Pods.</em></p>
 </li>
 <li>
