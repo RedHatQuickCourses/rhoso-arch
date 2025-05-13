@@ -34,7 +34,7 @@ image::s1-components-lecture-fig2.svg[]
 
 The OpenStack community provides a number of user-facing services with different stages of maturity, a number of alternatives for internal infrastructure services, and multiple ways of deploying those services together.
 
-The Red Hat OpenStack Services on OpenShift product includes a selection of user-facing services and is very prescriptive in the way you deploy those services, using Red Hat OpenShit, and which internal infrastructure services they use, to provide a stable, reliable, and scalable Infrastructure-as-a-Service (IaaS) private cloud platform.
+The Red Hat OpenStack Services on OpenShift product includes a selection of user-facing services and is very prescriptive in the way you deploy those services, using Red Hat OpenShift, and which internal infrastructure services they use, to provide a stable, reliable, and scalable Infrastructure-as-a-Service (IaaS) private cloud platform.
 
 You should already know the user-facing services included with Red Hat OpenStack, and this course will not list and define each one of them. If you need a refresher, please review the https://redhatquickcourses.github.io/rhoso-intro/[OpenStack Operations learning journey].
 // This link doesn't direct me to the correct page. Can you please check it?
